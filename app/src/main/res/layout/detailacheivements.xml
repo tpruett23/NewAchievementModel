@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:weightSum="20"
+    android:orientation="vertical"
+    android:background="@drawable/orange"
+    android:layout_height="match_parent"
+    tools:context=".AchievementDetails">
+
+    <TextView
+        android:id="@+id/detailtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="text"
+        android:textSize="40sp"
+        android:textColor="@color/darkbluegrey"
+        android:gravity="center_horizontal"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:layout_weight="4">
+
+        <ImageView
+
+            android:id="@+id/detailimage1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="5">
+
+    <TextView
+        android:id="@+id/detailtextview1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="text"
+        android:textColor="@color/darkbluegrey"
+        android:textSize="30sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="6">
+
+        <TextView
+            android:id="@+id/pointtextview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="text"
+            android:textColor="@color/darkbluegrey"
+            android:textSize="30sp"/>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="6">
+
+        <TextView
+            android:id="@+id/distancetextview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="text"
+            android:textColor="@color/darkbluegrey"
+            android:textSize="30sp"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

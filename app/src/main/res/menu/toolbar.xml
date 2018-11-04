@@ -1,0 +1,37 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainMenu"
+    android:id="@+id/toolbar1"
+
+    >
+
+
+
+<item android:id = "@+id/action_rib"
+        android:title = "ribbon"
+        android:orderInCategory = "4"
+        android:icon="@drawable/achievement_ribbon"
+    app:showAsAction="always" />
+
+    <item android:id = "@+id/Settings"
+        android:title = "Settings"
+        android:orderInCategory = "1"
+        android:icon="@android:drawable/ic_menu_preferences"
+        app:showAsAction="always" />
+
+
+    <item
+        android:id="@+id/completed"
+        android:icon="@drawable/completed"
+        android:orderInCategory="1"
+        android:title="completed"
+        app:showAsAction="always" />
+
+    <item android:id = "@+id/action_cam"
+        android:title = "Camera"
+        android:orderInCategory = "2"
+        android:icon="@android:drawable/ic_menu_camera"
+        app:showAsAction="always" />
+
+
+    </menu>

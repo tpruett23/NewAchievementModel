@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="85dp"
+    android:background="@drawable/texture"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:weightSum="10">
+
+
+    <LinearLayout
+        android:layout_width="25dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:gravity="left">
+
+
+        <ImageView
+            android:id="@+id/ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/trophylist">
+
+        </ImageView>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="0dp"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:layout_weight="9"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="2dp"
+        android:text="Achievement Name"
+        android:textColor="@color/oldgold"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>
