@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 
 public class ListViewAchv extends AppCompatActivity {
-    private static ArrayList<Achievements> achievements;
-    private static ArrayList<Achievements> completed;
+    Achievements ach = new Achievements();
+    private static ArrayList<AchievementDescriptor> achievements;
     private ListView lv;
-    AchievementFactory AF;
-    ArrayAdapter<Achievements> adapter;
 
+
+    ArrayAdapter<AchievementDescriptor> adapter;
 
 
     @Override
@@ -29,87 +29,44 @@ public class ListViewAchv extends AppCompatActivity {
         setContentView(R.layout.activity_achievements);
 
 
-
         lv = (ListView) findViewById(R.id.list);
 
-        achievements = new ArrayList<Achievements>();
-
-        completed = UserInfo.completed;
-
-        AF = new AchievementFactory();
+        AchievementFactory AF = new AchievementFactory();
+        achievements = Achievements.getAllAchievements();
 
 
-        adapter = new CustomListAdapter(this,R.layout.list_item,R.layout.activity_list_view,achievements);
+
+
+        adapter = new CustomListAdapter(this, R.layout.list_item, R.layout.activity_list_view, achievements);
 
         lv.setAdapter(adapter);
 
 
-        lv.setOnItemClickListener(new OnItemClickListener()
-        {
+        lv.setOnItemClickListener(new OnItemClickListener() {
             // argument position gives the index of item which is clicked
             @Override
-            public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
-            {
+            public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3) {
                 String selectedAch = achievements.get(position).getName();
 
 
-                Intent myIntent = new Intent(v.getContext(),AchievementDetails.class);
+                Intent myIntent = new Intent(v.getContext(), AchievementDetails.class);
 
-                myIntent.putExtra("name",selectedAch);
 
-                 if(position == 0) {
-                     Intent data = new Intent(v.getContext(),AchievementDetails.class);
-                     data.putExtra("pic", "mile5");
-                     data.putExtra("title", "1 Mile Achievement");
-                     data.putExtra("text", "You have traveled 1 Mile on the WCU Trail System, Congrats!");
-                     data.putExtra("points", "Points: 10");
-                     data.putExtra("distance", "Distance: 1 Mile");
-                     startActivity(data);
-                 }
-                 if(position == 1){
-                     Intent data = new Intent(v.getContext(),AchievementDetails.class);
-                     data.putExtra("pic", "mile");
-                     data.putExtra("title", "5 Mile Achievement");
-                     data.putExtra("text", "You have traveled 5 Miles on the WCU Trail System, Congrats!");
-                     data.putExtra("points", "Points: 15");
-                     data.putExtra("distance", "Distance: 5 Miles");
-                     startActivity(data);
-                 }
-                if(position == 2){
-                    Intent data = new Intent(v.getContext(),AchievementDetails.class);
-                    data.putExtra("picflower", "flowerach");
-                    data.putExtra("title","Flower Achievement");
-                    data.putExtra("text", "You have found the correct flower on the trail, Congrats!");
-                    data.putExtra("points", "Points: 5");
-                    data.putExtra("distance", "Distance: 0 Miles");
-                    startActivity(data);
-                }
-                if(position == 3){
-                    Intent data = new Intent(v.getContext(),AchievementDetails.class);
-                    data.putExtra("pic", "hourach");
-                    data.putExtra("title", "1 Hour Achievement");
-                    data.putExtra("text", "You have been traveling on the WCU Trail System for 1 Hour, Congrats!");
-                    data.putExtra("points", "Points: 20");
-                    data.putExtra("distance", "Distance: 0 Miles");
-                    startActivity(data);
-                }
+                Intent data = new Intent(v.getContext(), AchievementDetails.class);
 
-                setResult(RESULT_OK,myIntent);
+                data.putExtra("points", achievements.get(position).getPoints());
+                data.putExtra("title", achievements.get(position).getName());
+                data.putExtra("text", achievements.get(position).getDescription());
+                data.putExtra("distance", achievements.get(position).getDistance());
+                startActivity(data);
 
-                Toast.makeText(getApplicationContext(), "Achievement Selected : " + selectedAch,   Toast.LENGTH_LONG).show();
+                setResult(RESULT_OK, myIntent);
+
+                Toast.makeText(getApplicationContext(), "Achievement Selected : " + selectedAch, Toast.LENGTH_LONG).show();
 
             }
 
         });
-        //lv.setOnItemClickListener(this);
 
     }
-
-
-
-    public static void addAch(Achievements ach){
-        achievements.add(ach);
-    }
-
-
 }

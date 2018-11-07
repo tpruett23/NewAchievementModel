@@ -9,27 +9,24 @@ import java.util.ArrayList;
 
 public class UserCompleted extends AppCompatActivity {
     private ListView lv;
-    public static int trails;
-    public static int questionsCorrect;
-    public static int questionsIncorrect;
-    public static int achievementsWon;
+    private int trails = 4;
+    private int questionsCorrect = 11;
+    private int questionsIncorrect = 2;
+    private int achievementsWon = 3;
+    private int challenges = 4;
+
+    ArrayList<AchievementDescriptor> completed = UserInfo.getCompleted();
 
 
-    ArrayAdapter<Achievements> adapter;
-    ArrayList<Achievements> completed = UserInfo.completed;
-
-    public UserCompleted(){
-        trails = 0;
-        questionsCorrect = 0;
-        questionsIncorrect = 0;
-        achievementsWon = 0;
+    ArrayAdapter<AchievementDescriptor> adapter;
 
 
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
 
         setContentView(R.layout.usertrophycabinet);
@@ -42,35 +39,33 @@ public class UserCompleted extends AppCompatActivity {
     }
 
 
-    public static int getTrails(){
-        return trails;
+    public  int getTrails(){
+        return this.trails;
     }
 
-    public static int getQuestionsCorrect() {
+    public  int getChallenges(){
+        return challenges;
+    }
+
+    public  int getQuestionsCorrect() {
         return questionsCorrect;
     }
 
-    public static int getQuestionsIncorrect(){
+    public  int getQuestionsIncorrect(){
         return questionsIncorrect;
     }
 
-    public static int getAchievementsWon() {
+    public  int getAchievementsWon() {
         return achievementsWon;
     }
 
-    public void setTrails(int trail){
-        trails = trail;
-    }
-
-    public static void setAchievementsWon(int achievements) {
-        achievementsWon = achievements;
-    }
-
-    public static void setQuestionsCorrect(int correct){
-        questionsCorrect = correct;
-    }
-
-    public void setQuestionsIncorrect(int incorrect){
-        questionsIncorrect = incorrect;
+    public ArrayList<AchievementDescriptor> getCompleted(){
+    return this.completed;
     }
 }
+
+
+
+
+
+

@@ -4,48 +4,47 @@ import java.util.ArrayList;
 
 public class UserInfo {
 
-   public static ArrayList<Achievements> completed = new ArrayList<>();
-   public static int totalPoints;
-   public static double totalDistance;
-   public static double timePlayed;
+   public int totalPoints;
+   public static double totalDistance = 6;
+   public static double timePlayed = 7.0;
+   public static int speed = 0;
+   public static int steps = 400;
+    static ArrayList<AchievementDescriptor> completed = new ArrayList<>();
+
 
 
     public void UserInfo(){
-        totalPoints = 0;
-        totalDistance = 0;
-        timePlayed = 0.0;
+
+        totalDistance = 6;
+        timePlayed = 7.0;
+        speed = 0;
+        steps = 200;
 
     }
 
-    public static ArrayList<Achievements> getCompleted(){
-        return completed;
-    }
 
 
-    public static void addCompleted(Achievements ach){
-            completed.add(ach);
-        }
-
-        public static void setTotalPoints(int points){ totalPoints = points;}
-
-        public static void setTotalDistance(int distance){ totalDistance = distance; }
-
-         public static int getTotalPoints(){
-            return totalPoints;
+         public int getTotalPoints(){
+            return this.totalPoints;
             }
 
-        public static double getTotalDistance(){
-            return totalDistance;
-        }
+        public static double getTotalDistance(){ return totalDistance; }
 
         public static double getTimePlayed(){
             return timePlayed;
         }
 
-        public static void setTimePlayed(double time){
-            timePlayed = time;
-        }
+        public static int getSpeed(){ return speed; }
+
+        public static int getSteps(){
+        return steps;
+    }
 
 
+
+
+public static ArrayList<AchievementDescriptor> getCompleted(){
+    return completed;
+}
 }
 

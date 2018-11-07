@@ -30,12 +30,15 @@ public class AchievementDetails extends Activity {
 
     public void setImage(){
 
+
+
+
         Bundle extras = getIntent().getExtras();
-        String image = extras.getString("pic");
-        String imageFlower = extras.getString("picflower");
+        //String image = extras.getString("pic");
+        //String imageFlower = extras.getString("picflower");
 
 
-
+        /*
         if(image != null) {
             int pic = getResources().getIdentifier(image + ".png","drawable",getPackageName());
 
@@ -46,7 +49,7 @@ public class AchievementDetails extends Activity {
             int flowerPic = getResources().getIdentifier(imageFlower + ".jpg", "drawable", getPackageName());
             achvImage.setImageResource(flowerPic);
             achvImage.setVisibility(View.VISIBLE);
-        }
+        }*/
 
         String text = extras.getString("text");
         achvDetails.setText(text);
@@ -54,11 +57,12 @@ public class AchievementDetails extends Activity {
         String title = extras.getString("title");
         achvTitle.setText(title);
 
-        String points1 = extras.getString("points");
-        points.setText(points1);
+        int points1 = extras.getInt("points");
+        points.setText("Points: " + points1);
 
-        String distance1 = extras.getString("distance");
-        distance.setText(distance1);
+        double distance1 = extras.getDouble("distance");
+        distance.setText("Distance: " + distance1);
+
     }
 
 }

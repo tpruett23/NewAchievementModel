@@ -10,15 +10,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class CustomListAdapter extends ArrayAdapter<Achievements> {
-    private ArrayList<Achievements> achievements;
+public class CustomListAdapter extends ArrayAdapter<AchievementDescriptor> {
+    private ArrayList<AchievementDescriptor> achievements;
     private Context context;
 
     int viewSource;
     int viewSource2;
 
 
-    public CustomListAdapter(Context context, int tvri, int tvri2, ArrayList<Achievements> achievements){
+    public CustomListAdapter(Context context, int tvri, int tvri2, ArrayList<AchievementDescriptor> achievements){
         super(context,tvri,achievements);
         this.context = context;
         this.achievements = achievements;
@@ -42,10 +42,7 @@ public class CustomListAdapter extends ArrayAdapter<Achievements> {
         TextView bTitle = (TextView) v.findViewById(R.id.txtTitle);
         ImageView iButton = (ImageView)	v.findViewById(R.id.ImageButton);
 
-        //set the drawable on the image button.
 
-        //iButton.setImageDrawable();//##CHANGE
-       // iButton.setBackgroundDrawable(null);
 
         //Set texts on views
         bTitle.setText(achievements.get(position).getName());

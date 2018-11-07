@@ -2,15 +2,20 @@ package com.example.toripruett.newachievementmodel;
 
 public abstract class AchievementDescriptor {
     String name;
+    int points;
+    double distance;
+    String description;
+    Achievements ach;
 
 
 
 
-    public String getName(){
-        return this.name;
-    }
 
-    public void setName(String name){
-        this.name = name;
-    }
+    public abstract boolean checkCompleted(double num);
+    public abstract String getName();
+    public abstract int getPoints();
+    public abstract double getDistance();
+    public abstract String getDescription();
+
+
 }

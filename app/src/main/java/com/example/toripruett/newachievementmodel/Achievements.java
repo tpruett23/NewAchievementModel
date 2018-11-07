@@ -1,51 +1,47 @@
 package com.example.toripruett.newachievementmodel;
 
 
+import java.util.ArrayList;
+
 public class Achievements {
-    private String name;
-    private static int points;
-    private static double distance;
-
-
-    public Achievements(String achName, int pointTotal, double distanceTrav){
-        this.name = achName;
-        points = pointTotal;
-        distance = distanceTrav;
-
-    }
+   static ArrayList<AchievementDescriptor> allAchievements;
+    AchievementDescriptor steps = new Steps();
+    AchievementDescriptor trails = new Trails();
+    AchievementDescriptor question = new Question();
+    AchievementDescriptor challenges = new Challenges();
+    AchievementDescriptor distance = new Distance();
+    AchievementDescriptor time = new Time();
+    AchievementDescriptor speed = new Speed();
+    boolean see = false;
 
     public Achievements(){
-        this("",0,0.0);
+        allAchievements = new ArrayList<>();
+        if(!see) {
+            add();
+        }
 
     }
 
 
-    public String getName(){
-        return this.name;
-    }
 
-    public static int getPoints(){
-        return points;
-    }
+    public void add(){
 
-    public static double getDistance(){
-        return distance;
-    }
 
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public void setPoints(int points){
-        this.points = points;
-    }
-
-    public void setDistance(double traveled){
-        this.distance = traveled;
+        allAchievements.add(steps);
+        allAchievements.add(trails);
+        allAchievements.add(question);
+        allAchievements.add(challenges);
+        allAchievements.add(distance);
+        allAchievements.add(time);
+        allAchievements.add(speed);
+        see = true;
     }
 
 
 
+    public static ArrayList<AchievementDescriptor> getAllAchievements(){
+    return allAchievements;
+}
 
 
 }

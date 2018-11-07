@@ -1,66 +1,58 @@
 package com.example.toripruett.newachievementmodel;
 
+import java.util.ArrayList;
+
 public class AchievementFactory {
-     static Achievements one ;
-    static Achievements five;
-    static Achievements flower;
-    static Achievements hour;
-    static boolean checked = false;
+   UserInfo UI = new UserInfo();
+   UserCompleted UC = new UserCompleted();
+   boolean checked = false;
+
+
+    static Steps steps = new Steps();
+    static Trails trails = new Trails();
+    static Question question = new Question();
+    static Challenges challenges = new Challenges();
+    static Distance distance = new Distance();
+    static Time time = new Time();
+    static Speed speed = new Speed();
 
 
 
+    public AchievementFactory() {
+        if(checked == false) {
+            addCompleted();
+        }
+    }
 
-
-
-  public AchievementFactory(){
-
-      one = new Achievements("1 Mile", 10,1.0);
-      five = new Achievements("5 Miles", 15, 5.0);
-      flower = new Achievements("Found Flower", 5, 0);
-      hour = new Achievements("1 Hour", 15, 0);
-
-
-      add();
-
-  }
-
-  public  static void add() {
-      ListViewAchv.addAch(one);
-      ListViewAchv.addAch(five);
-      ListViewAchv.addAch(flower);
-      ListViewAchv.addAch(hour);
-
-      UserInfo.setTotalDistance(7);
-      UserInfo.setTimePlayed(5);
-
-      if (!checked) {
-          checkAch();
+  public void addCompleted(){
+       boolean see = trails.checkCompleted(UC.getTrails());
+     if(trails.checkCompleted(UC.getTrails())){
+         UI.completed.add(trails);
       }
-  }
-
-  public static void checkAch(){
-      double num = UserInfo.getTotalDistance();
-
-      if(UserInfo.getTotalDistance() > 1 && UserInfo.getTotalDistance() < 5){
-          UserInfo.addCompleted(one);
+      if(speed.checkCompleted(UserInfo.getSpeed())){
+          UI.completed.add(speed);
+      }
+      if(steps.checkCompleted(UserInfo.getSteps())){
+         UI.completed.add(steps);
+      }
+      if(question.checkCompleted(UC.getQuestionsCorrect())){
+         UI.completed.add(question);
       }
 
-      if(num > 5){
-          UserInfo.addCompleted(five);
-          UserInfo.addCompleted(one);
-
+      if(distance.checkCompleted(UserInfo.getTotalDistance())){
+          UI.completed.add(distance);
       }
-
-      /*else if(foundFlower() == true){
-          UserInfo.addCompleted(flower);
-      }*/
-      if(UserInfo.getTimePlayed() >= 1.0);
-      UserInfo.addCompleted(hour);
-
+      if(challenges.checkCompleted(UC.getChallenges())){
+          UI.completed.add(challenges);
+      }
+      if(time.checkCompleted(UserInfo.getTimePlayed())){
+          UI.completed.add(time);
+      }
       checked = true;
 
-  }
+        }
 
 
 
-}
+    }
+
