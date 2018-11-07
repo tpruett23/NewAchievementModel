@@ -1,4 +1,4 @@
-package com.example.toripruett.newachievementmodel;
+package achievements;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,15 +10,31 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.toripruett.newachievementmodel.R;
+
 import java.util.ArrayList;
 
+import achievements.AchievementDescriptor;
+import achievements.AchievementFactory;
+import achievements.Achievements;
+import achievements.CustomListAdapter;
 
+
+/**
+ * The type List view achv.
+ */
 public class ListViewAchv extends AppCompatActivity {
+    /**
+     * The Ach.
+     */
     Achievements ach = new Achievements();
     private static ArrayList<AchievementDescriptor> achievements;
     private ListView lv;
 
 
+    /**
+     * The Adapter.
+     */
     ArrayAdapter<AchievementDescriptor> adapter;
 
 
@@ -49,10 +65,10 @@ public class ListViewAchv extends AppCompatActivity {
                 String selectedAch = achievements.get(position).getName();
 
 
-                Intent myIntent = new Intent(v.getContext(), AchievementDetails.class);
+                Intent myIntent = new Intent(v.getContext(), Achievements.AchievementDetails.class);
 
 
-                Intent data = new Intent(v.getContext(), AchievementDetails.class);
+                Intent data = new Intent(v.getContext(), Achievements.AchievementDetails.class);
 
                 data.putExtra("points", achievements.get(position).getPoints());
                 data.putExtra("title", achievements.get(position).getName());

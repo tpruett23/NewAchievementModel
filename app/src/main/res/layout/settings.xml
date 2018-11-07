@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/lt_grey"
     android:weightSum="20"
-    tools:context=".Settings">
+    tools:context="achievements.Settings">
 
 
     <LinearLayout

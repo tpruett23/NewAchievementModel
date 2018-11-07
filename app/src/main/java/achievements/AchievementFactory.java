@@ -1,6 +1,4 @@
-package com.example.toripruett.newachievementmodel;
-
-import java.util.ArrayList;
+package achievements;
 
 public class AchievementFactory {
    UserInfo UI = new UserInfo();

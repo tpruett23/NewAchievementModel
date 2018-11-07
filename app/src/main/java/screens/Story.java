@@ -1,7 +1,9 @@
-package com.example.toripruett.newachievementmodel;
+package screens;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.example.toripruett.newachievementmodel.R;
 
 public class Story extends Activity {
 

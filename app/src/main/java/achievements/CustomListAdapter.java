@@ -1,4 +1,4 @@
-package com.example.toripruett.newachievementmodel;
+package achievements;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.toripruett.newachievementmodel.R;
+
 import java.util.ArrayList;
+
+import achievements.AchievementDescriptor;
 
 public class CustomListAdapter extends ArrayAdapter<AchievementDescriptor> {
     private ArrayList<AchievementDescriptor> achievements;

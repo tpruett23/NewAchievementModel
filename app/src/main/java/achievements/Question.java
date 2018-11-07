@@ -1,4 +1,6 @@
-package com.example.toripruett.newachievementmodel;
+package achievements;
+
+import achievements.AchievementDescriptor;
 
 public class Question extends AchievementDescriptor {
     String name;

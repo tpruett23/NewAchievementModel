@@ -1,32 +1,30 @@
-package com.example.toripruett.newachievementmodel;
+package achievements;
 
-public class Trails extends AchievementDescriptor {
+import achievements.AchievementDescriptor;
 
+public class Speed extends AchievementDescriptor {
     String name;
     int points;
-    String description;
     double distance;
-    Achievements ach;
+    String description;
 
-    public Trails(){
-
-       name = "Trail Achievement";
-       points = 20;
-       distance = 0;
-       description = "This is the number of trails you have completed.";
-
+    public Speed(){
+        name = "Speed Achievement";
+        points = 15;
+        distance = 0;
+        description = "This is how long it took to complete the course.";
 
     }
-
     @Override
     public boolean checkCompleted(double num) {
-        boolean check =  false;
-        if(num > 3){
+        boolean check = false;
+        if(num > 10){
             check = true;
         }
         return check;
     }
 
+    @Override
     public String getName() {
         return this.name;
     }
@@ -45,5 +43,6 @@ public class Trails extends AchievementDescriptor {
     public String getDescription() {
         return this.description;
     }
+
 
 }

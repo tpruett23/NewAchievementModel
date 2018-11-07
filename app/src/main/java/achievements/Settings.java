@@ -1,4 +1,4 @@
-package com.example.toripruett.newachievementmodel;
+package achievements;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.Toast;
+
+import com.example.toripruett.newachievementmodel.R;
+
+import screens.MainMenu;
 
 public class Settings extends AppCompatActivity implements OnClickListener {
     CheckBox sound;
@@ -57,7 +61,7 @@ public class Settings extends AppCompatActivity implements OnClickListener {
     public void onClick(View v){
         Intent i = null;
         if(v.getId() ==  R.id.backb){
-            i = new Intent(this,MainMenu.class);
+            i = new Intent(this, MainMenu.class);
             startActivity(i);
 
         }else if(v.getId() ==  R.id.loadb){

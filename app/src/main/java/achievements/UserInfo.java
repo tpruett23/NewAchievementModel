@@ -1,6 +1,8 @@
-package com.example.toripruett.newachievementmodel;
+package achievements;
 
 import java.util.ArrayList;
+
+import achievements.AchievementDescriptor;
 
 public class UserInfo {
 

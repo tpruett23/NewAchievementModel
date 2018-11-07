@@ -1,9 +1,11 @@
-package com.example.toripruett.newachievementmodel;
+package achievements;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.example.toripruett.newachievementmodel.R;
 
 import java.util.ArrayList;
 

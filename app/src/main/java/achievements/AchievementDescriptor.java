@@ -1,4 +1,4 @@
-package com.example.toripruett.newachievementmodel;
+package achievements;
 
 public abstract class AchievementDescriptor {
     String name;

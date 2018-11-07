@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/hiking_apps_shutterstock_grid"
-    tools:context=".Story">
+    tools:context="screens.Story">
 
 
 

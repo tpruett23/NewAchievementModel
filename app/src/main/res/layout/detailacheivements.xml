@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@drawable/orange"
     android:layout_height="match_parent"
-    tools:context=".AchievementDetails">
+    tools:context="achievements.Achievements$AchievementDetails">
 
     <TextView
         android:id="@+id/detailtitle"

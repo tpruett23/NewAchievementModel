@@ -26,11 +26,11 @@
     <string name="minigames">Mini Game</string>
 
 
-
     <string-array name="values_array">
 
 
-
     </string-array>
+    <string name="title_activity_screen_to_map">ScreenToMap</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
