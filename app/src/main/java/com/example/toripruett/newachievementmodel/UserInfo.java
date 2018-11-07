@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class UserInfo {
 
    public int totalPoints;
-   public static double totalDistance = 6;
-   public static double timePlayed = 7.0;
-   public static int speed = 0;
-   public static int steps = 400;
+   public static double totalDistance;
+   public static double timePlayed;
+   public static int speed;
+   public static int steps;
     static ArrayList<AchievementDescriptor> completed = new ArrayList<>();
 
 
@@ -19,10 +19,7 @@ public class UserInfo {
         timePlayed = 7.0;
         speed = 0;
         steps = 200;
-
     }
-
-
 
          public int getTotalPoints(){
             return this.totalPoints;

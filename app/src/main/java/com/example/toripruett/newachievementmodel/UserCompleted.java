@@ -17,17 +17,12 @@ public class UserCompleted extends AppCompatActivity {
 
     ArrayList<AchievementDescriptor> completed = UserInfo.getCompleted();
 
-
     ArrayAdapter<AchievementDescriptor> adapter;
-
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
 
         setContentView(R.layout.usertrophycabinet);
 
