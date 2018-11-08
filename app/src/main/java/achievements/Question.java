@@ -40,8 +40,8 @@ public class Question extends AchievementDescriptor {
      * @param num The value to be checked.
      * @return true if met false if not met.
      */
-    //@Override
-    public static boolean checkCompleted(double num) {
+    @Override
+    public boolean checkCompleted(double num) {
         boolean check = false;
         if (num > 10) {
             check = true;

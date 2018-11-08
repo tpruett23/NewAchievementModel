@@ -40,54 +40,14 @@ public class Distance extends AchievementDescriptor {
      * @param num The value to be checked.
      * @return true if met false if not met.
      */
-    //@Override
-    public static boolean checkCompleted(double num) {
+    @Override
+    public boolean checkCompleted(double num) {
         boolean check = false;
         if (num > 5) {
 
             check = true;
         }
         return check;
-    }
-
-    /**
-     * Gets the name of the achievement.
-     *
-     * @return The name of the achievement.
-     */
-    @Override
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * Gets the points of the achievement.
-     *
-     * @return The points of the achievement.
-     */
-    @Override
-    public int getPoints() {
-        return this.points;
-    }
-
-    /**
-     * Gets the distance of the achievement.
-     *
-     * @return The distance.
-     */
-    @Override
-    public double getDistance() {
-        return this.distance;
-    }
-
-    /**
-     * Gets the description of the achievement.
-     *
-     * @return The description of the achievement.
-     */
-    @Override
-    public String getDescription() {
-        return this.description;
     }
 
 }

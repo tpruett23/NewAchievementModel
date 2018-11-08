@@ -28,7 +28,7 @@ public abstract class AchievementDescriptor {
      * @param num The value to be checked.
      * @return true if met false if not met.
      */
-    public static boolean checkCompleted(double num){
+    public boolean checkCompleted(double num){
        return true;
     }
 
@@ -37,28 +37,36 @@ public abstract class AchievementDescriptor {
      *
      * @return Name of the achievement.
      */
-    public abstract String getName();
+    public String getName(){
+        return this.name;
+    }
 
     /**
      * Gets the points of the achievement.
      *
      * @return The points of the achievement.
      */
-    public abstract int getPoints();
+    public int getPoints(){
+        return this.points;
+    }
 
     /**
      * Gets the distance associated with the achievement.
      *
      * @return The distance of the achievement.
      */
-    public abstract double getDistance();
+    public double getDistance(){
+        return this.distance;
+    }
 
     /**
      * Gets the description of the achievement.
      *
      * @return The description.
      */
-    public abstract String getDescription();
+    public String getDescription(){
+        return this.description;
+    }
 
 
 }
