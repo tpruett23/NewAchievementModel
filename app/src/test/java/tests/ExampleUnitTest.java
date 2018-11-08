@@ -1,4 +1,4 @@
-package com.example.toripruett.newachievementmodel;
+package tests;
 
 import org.junit.Test;
 
