@@ -14,14 +14,39 @@ import java.util.ArrayList;
 
 import achievements.AchievementDescriptor;
 
+/**
+ * The class is the adapter to display the arraylist of achievement descriptors in the listview.
+ * @author Tori Pruett
+ * @version 1.0
+ */
 public class CustomListAdapter extends ArrayAdapter<AchievementDescriptor> {
+    /**
+     * The arraylist of achievements.
+     **/
     private ArrayList<AchievementDescriptor> achievements;
+
+    /**
+     * The context needed for the adapter.
+     **/
     private Context context;
 
+    /**
+     * The viewsource needed for the adapter.
+     **/
     int viewSource;
+
+    /**
+     * The second viewsource needed for the adapter.
+     **/
     int viewSource2;
 
-
+    /**
+     * Constructor for the CustomListAdapter.
+     * @param context
+     * @param tvri
+     * @param tvri2
+     * @param achievements
+     */
     public CustomListAdapter(Context context, int tvri, int tvri2, ArrayList<AchievementDescriptor> achievements){
         super(context,tvri,achievements);
         this.context = context;
@@ -30,6 +55,14 @@ public class CustomListAdapter extends ArrayAdapter<AchievementDescriptor> {
         viewSource2 = tvri2;
 
     }
+
+    /**
+     * Inflates the arraylist into the listview.
+     * @param position The position in the listview.
+     * @param listItemView The listview.
+     * @param parent The parent used to inflate.
+     * @return The View.
+     */
     public View getView(int position, View listItemView, ViewGroup parent){
 
         View v = listItemView;

@@ -16,12 +16,34 @@ import com.example.toripruett.newachievementmodel.R;
 
 import screens.MainMenu;
 
+/**
+ * The class represents the settings screen and the values associated with it.
+ * @author Tori Pruett
+ */
 public class Settings extends AppCompatActivity implements OnClickListener {
+    /**
+     * The checkbox to turn the sound on and off.
+     */
     CheckBox sound;
+    /**
+     * The seekbar to adjust the volume.
+     */
     SeekBar bar;
+
+    /**
+     * The volume the sound is at.
+     */
     int volume;
+
+    /**
+     * The buttons to save, load, and go back to the previous screen.
+     */
     Button load,save,back;
 
+    /**
+     * The method is called to create the activity and to build the activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +80,11 @@ public class Settings extends AppCompatActivity implements OnClickListener {
     });
         loadPrefs();
     }
+
+    /**
+     * The method that is called when one of the buttons is clicked.
+     * @param v The button that is clicked.
+     */
     public void onClick(View v){
         Intent i = null;
         if(v.getId() ==  R.id.backb){
@@ -77,6 +104,10 @@ public class Settings extends AppCompatActivity implements OnClickListener {
         }
 
     }
+
+    /**
+     * Loads the preferences put in by the user after being saved.
+     */
     public void loadPrefs(){
         SharedPreferences settings = getPreferences(Context.MODE_PRIVATE);
         int att = settings.getInt("sound", 1);
@@ -95,6 +126,10 @@ public class Settings extends AppCompatActivity implements OnClickListener {
 
 
     }
+
+    /**
+     * Saves the preferences entered by the user.
+     */
 
     public void savePrefs(){
         SharedPreferences.Editor settings =   getPreferences(MODE_PRIVATE).edit();

@@ -21,13 +21,19 @@ import achievements.UserCompleted;
  * @version 1.0
  */
 public class MainMenu extends AppCompatActivity implements OnClickListener{
-    /* This button takes the user to the story mode screen.*/
+    /**
+     * This button takes the user to the story mode screen.
+     **/
     Button storyButton;
 
-    /* This button takes the user to the mini game screen.*/
+    /**
+     * This button takes the user to the mini game screen.
+     **/
     Button miniGameButton;
 
-    /* This represents the toolbar that is displayed on the main menu.*/
+    /**
+     * This represents the toolbar that is displayed on the main menu.
+     **/
     Toolbar toolbar;
 
     /**

@@ -9,9 +9,21 @@ import android.widget.Button;
 import trailsystem.MapsActivity;
 import com.example.toripruett.newachievementmodel.R;
 
+/**
+ * The class represents a map.
+ * @author Melchor & Tori.
+ * @version 1.0
+ */
 public class ScreenToMap extends AppCompatActivity implements View.OnClickListener {
+    /**
+     * The button that sends the user to the map when clicked.
+     */
     Button mapButton;
 
+    /**
+     * The method is called to start and build the activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +36,10 @@ public class ScreenToMap extends AppCompatActivity implements View.OnClickListen
 
     }
 
+    /**
+     * Called when the button is clicked.
+     * @param view The button that is clicked.
+     */
     @Override
     public void onClick(View view) {
         if(view  == mapButton){

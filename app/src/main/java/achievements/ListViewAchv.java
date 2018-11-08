@@ -21,23 +21,36 @@ import achievements.CustomListAdapter;
 
 
 /**
- * The type List view achv.
+ * The class puts the arraylist of all of the achievements into the listview to be displayed.
+ * @author Tori Pruett
+ * @version 1.0
  */
 public class ListViewAchv extends AppCompatActivity {
     /**
-     * The Ach.
-     */
+     * Instance of the achievement class.
+     **/
     Achievements ach = new Achievements();
+
+    /**
+     * the arraylist of all achievements.
+     **/
     private static ArrayList<AchievementDescriptor> achievements;
+
+    /**
+     * The listview to display all of the achievements
+     **/
     private ListView lv;
 
 
     /**
-     * The Adapter.
+     * The adapter to put the arraylist in the listview.
      */
     ArrayAdapter<AchievementDescriptor> adapter;
 
-
+    /**
+     * The oncreate that is called to build and start the activity.
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
