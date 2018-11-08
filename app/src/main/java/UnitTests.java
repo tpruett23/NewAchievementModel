@@ -21,4 +21,9 @@ public class UnitTests {
 
 }
 
+    @Test
+    public void wayPoint(){
+
+    }
+
 }
