@@ -4,6 +4,7 @@ import achievements.AchievementDescriptor;
 
 /**
  * The class models the Challenges achievement.
+ *
  * @author Tori Pruett
  * @version 1.0
  */
@@ -45,8 +46,8 @@ public class Challenges extends AchievementDescriptor {
      * @param num The value to be checked.
      * @return true if met false if not met.
      */
-    @Override
-    public boolean checkCompleted(double num) {
+    //@Override
+    public static boolean checkCompleted(double num) {
         boolean check = false;
         if (num > 3.0) {
             check = true;

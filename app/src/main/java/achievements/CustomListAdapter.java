@@ -16,6 +16,7 @@ import achievements.AchievementDescriptor;
 
 /**
  * The class is the adapter to display the arraylist of achievement descriptors in the listview.
+ *
  * @author Tori Pruett
  * @version 1.0
  */
@@ -42,13 +43,14 @@ public class CustomListAdapter extends ArrayAdapter<AchievementDescriptor> {
 
     /**
      * Constructor for the CustomListAdapter.
+     *
      * @param context
      * @param tvri
      * @param tvri2
      * @param achievements
      */
-    public CustomListAdapter(Context context, int tvri, int tvri2, ArrayList<AchievementDescriptor> achievements){
-        super(context,tvri,achievements);
+    public CustomListAdapter(Context context, int tvri, int tvri2, ArrayList<AchievementDescriptor> achievements) {
+        super(context, tvri, achievements);
         this.context = context;
         this.achievements = achievements;
         viewSource = tvri;
@@ -58,27 +60,27 @@ public class CustomListAdapter extends ArrayAdapter<AchievementDescriptor> {
 
     /**
      * Inflates the arraylist into the listview.
-     * @param position The position in the listview.
+     *
+     * @param position     The position in the listview.
      * @param listItemView The listview.
-     * @param parent The parent used to inflate.
+     * @param parent       The parent used to inflate.
      * @return The View.
      */
-    public View getView(int position, View listItemView, ViewGroup parent){
+    public View getView(int position, View listItemView, ViewGroup parent) {
 
         View v = listItemView;
 
         if (v == null)//Only create if null - recycling a good idea
         {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(viewSource, parent,false);
+            v = inflater.inflate(viewSource, parent, false);
 
         }
 
 
         //Get the views from the list item XML
         TextView bTitle = (TextView) v.findViewById(R.id.txtTitle);
-        ImageView iButton = (ImageView)	v.findViewById(R.id.ImageButton);
-
+        ImageView iButton = (ImageView) v.findViewById(R.id.ImageButton);
 
 
         //Set texts on views

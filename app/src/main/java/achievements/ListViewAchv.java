@@ -18,6 +18,7 @@ import achievements.AchievementDescriptor;
 import achievements.AchievementFactory;
 import achievements.Achievements;
 import achievements.CustomListAdapter;
+import screens.AchievementDetails;
 
 
 /**
@@ -49,6 +50,7 @@ public class ListViewAchv extends AppCompatActivity {
 
     /**
      * The oncreate that is called to build and start the activity.
+     *
      * @param savedInstanceState
      */
     @Override
@@ -64,8 +66,6 @@ public class ListViewAchv extends AppCompatActivity {
         achievements = Achievements.getAllAchievements();
 
 
-
-
         adapter = new CustomListAdapter(this, R.layout.list_item, R.layout.activity_list_view, achievements);
 
         lv.setAdapter(adapter);
@@ -78,10 +78,10 @@ public class ListViewAchv extends AppCompatActivity {
                 String selectedAch = achievements.get(position).getName();
 
 
-                Intent myIntent = new Intent(v.getContext(), Achievements.AchievementDetails.class);
+                Intent myIntent = new Intent(v.getContext(), AchievementDetails.class);
 
 
-                Intent data = new Intent(v.getContext(), Achievements.AchievementDetails.class);
+                Intent data = new Intent(v.getContext(), AchievementDetails.class);
 
                 data.putExtra("points", achievements.get(position).getPoints());
                 data.putExtra("title", achievements.get(position).getName());
