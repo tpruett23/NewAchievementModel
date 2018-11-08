@@ -15,7 +15,9 @@ public class UserCompleted extends AppCompatActivity {
      */
     private ListView lv;
 
-    /** The number of trails that have been completed by the user.*/
+    /**
+     * The number of trails that have been completed by the user.
+     */
     private int trails = 4;
 
     /**
@@ -50,6 +52,7 @@ public class UserCompleted extends AppCompatActivity {
 
     /**
      * The method that is called to start and build the activity.
+     *
      * @param savedInstanceState
      */
     @Override
@@ -67,50 +70,56 @@ public class UserCompleted extends AppCompatActivity {
 
     /**
      * Gets the number of trails completed.
+     *
      * @return The number of trails.
      */
-    public  int getTrails(){
+    public int getTrails() {
         return this.trails;
     }
 
     /**
      * Gets the number of challenges completed.
+     *
      * @return Number of challenges.
      */
-    public  int getChallenges(){
+    public int getChallenges() {
         return challenges;
     }
 
     /**
      * Gets the number of questions answered correctly.
+     *
      * @return The questions answered correctly.
      */
-    public  int getQuestionsCorrect() {
+    public int getQuestionsCorrect() {
         return questionsCorrect;
     }
 
     /**
      * Gets the number of questions answered incorrectly.
+     *
      * @return The number of questions answered incorrectly.
      */
-    public  int getQuestionsIncorrect(){
+    public int getQuestionsIncorrect() {
         return questionsIncorrect;
     }
 
     /**
      * Gets the amount of achievements won.
+     *
      * @return The amount of achievements won.
      */
-    public  int getAchievementsWon() {
+    public int getAchievementsWon() {
         return achievementsWon;
     }
 
     /**
      * Gets the arraylist of completed achievements.
+     *
      * @return the arraylist of completed achievements.
      */
-    public ArrayList<AchievementDescriptor> getCompleted(){
-    return this.completed;
+    public ArrayList<AchievementDescriptor> getCompleted() {
+        return this.completed;
     }
 }
 

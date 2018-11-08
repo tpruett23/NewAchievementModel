@@ -28,25 +28,26 @@ public class Trails extends AchievementDescriptor {
     /**
      * The constructor for the Trails achievement.
      */
-    public Trails(){
+    public Trails() {
 
-       name = "Trail Achievement";
-       points = 20;
-       distance = 0;
-       description = "This is the number of trails you have completed.";
+        name = "Trail Achievement";
+        points = 20;
+        distance = 0;
+        description = "This is the number of trails you have completed.";
 
 
     }
 
     /**
      * The method to check to see if the achievement has been met.
+     *
      * @param num The value to be checked.
      * @return true if met false if not met.
      */
-    @Override
-    public boolean checkCompleted(double num) {
-        boolean check =  false;
-        if(num > 3){
+
+    public static boolean checkCompleted(double num) {
+        boolean check = false;
+        if (num > 3) {
             check = true;
         }
         return check;
@@ -54,6 +55,7 @@ public class Trails extends AchievementDescriptor {
 
     /**
      * Gets the name of the achievement.
+     *
      * @return The name of the achievement.
      */
     @Override
@@ -63,6 +65,7 @@ public class Trails extends AchievementDescriptor {
 
     /**
      * Gets the points of the achievement.
+     *
      * @return The points of the achievement.
      */
     @Override
@@ -72,6 +75,7 @@ public class Trails extends AchievementDescriptor {
 
     /**
      * Gets the distance of the achievement.
+     *
      * @return The distance.
      */
     @Override
@@ -81,6 +85,7 @@ public class Trails extends AchievementDescriptor {
 
     /**
      * Gets the description of the achievement.
+     *
      * @return The description of the achievement.
      */
     @Override
