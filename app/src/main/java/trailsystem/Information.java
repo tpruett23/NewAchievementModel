@@ -11,6 +11,8 @@ public class Information extends PointOfInterest {
     /** Information to be displayed */
     private String info;
 
+    //TODO: add a picture that may correlate to the information
+
 
     /**
      * Constructor that will automatically set the information
