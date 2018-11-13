@@ -79,6 +79,8 @@ public class AchievementDetails extends Activity {
                 achvImage.setVisibility(View.VISIBLE);
             }*/
 
+        achvImage.setImageResource(R.drawable.unknown);
+
 
         String text = extras.getString("text");
         achvDetails.setText(text);

@@ -1,6 +1,7 @@
 package trailsystem;
 
 
+
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class WayPoint {
 
     /** Latitude and Longitude points for the point */
     private LatLng point;
+
 
     /** Collection of events for different game-modes
      * -- This may later be changed into a key-value pair -- */

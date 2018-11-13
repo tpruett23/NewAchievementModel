@@ -1,5 +1,8 @@
 package tests;
 
+
+import com.google.android.gms.maps.model.LatLng;
+
 import org.junit.Test;
 
 import achievements.Challenges;
@@ -10,11 +13,15 @@ import achievements.Time;
 import achievements.Trails;
 import trailsystem.Information;
 import trailsystem.Question;
+import trailsystem.WayPoint;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+
 
 public class UnitTests {
+    LatLng point;
+    WayPoint wp = new WayPoint(point);
     Information info = new Information();
     Trails trails = new Trails();
     Speed speed = new Speed();
@@ -43,16 +50,18 @@ public class UnitTests {
 
     @Test
     public void question(){
-        ques.addChoice();
-
-
-
 
         ques.setQuestion("What is your name?");
         String question = ques.getQuestion();
 
         assertEquals(question,"What is your name?");
     }
+
+    @Test
+    public void wayPoint(){
+
+    }
+
 
 
 

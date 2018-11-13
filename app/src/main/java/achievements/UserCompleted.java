@@ -1,5 +1,6 @@
 package achievements;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
@@ -9,7 +10,7 @@ import com.example.toripruett.newachievementmodel.R;
 
 import java.util.ArrayList;
 
-public class UserCompleted extends AppCompatActivity {
+public class UserCompleted extends Activity {
     /**
      * The Listview that displays the completed achievements.
      */
@@ -40,15 +41,16 @@ public class UserCompleted extends AppCompatActivity {
      */
     private int challenges = 4;
 
+
     /**
-     * The arraylist to hold all of the completed achievements.
+     * The arraylist to hold the completed achievements for the user.
      */
-    ArrayList<AchievementDescriptor> completed = UserInfo.getCompleted();
+     ArrayList<Achievements> completed = new ArrayList<>();
 
     /**
      * The adapter to display the arraylist.
      */
-    ArrayAdapter<AchievementDescriptor> adapter;
+    ArrayAdapter<Achievements> adapter;
 
     /**
      * The method that is called to start and build the activity.
@@ -118,9 +120,11 @@ public class UserCompleted extends AppCompatActivity {
      *
      * @return the arraylist of completed achievements.
      */
-    public ArrayList<AchievementDescriptor> getCompleted() {
+    public  ArrayList<Achievements> getCompleted() {
         return this.completed;
     }
+
+
 }
 
 

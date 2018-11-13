@@ -24,6 +24,24 @@ public class Achievements {
     static ArrayList<AchievementDescriptor> allAchievements;
 
     /**
+     * Name of the achievement read in by xml.
+     */
+    private static String name;
+    /**
+     * Description of the achievement read in by xml.
+     */
+    private static String description;
+    /**
+     * Points of the achievement being read in by XML.
+     */
+    private static int points;
+
+    /**
+     * The value to check to see if the achievement has been completed.
+     */
+    private static int checkValue;
+
+    /**
      * The step achievement to be added to the List.
      **/
     AchievementDescriptor steps = new Steps();
@@ -58,6 +76,8 @@ public class Achievements {
      **/
     AchievementDescriptor speed = new Speed();
 
+
+
     /**
      * The boolean value so that the achievements are only added to the list once.
      **/
@@ -71,6 +91,7 @@ public class Achievements {
         if (!see) {
             add();
         }
+
 
     }
 
@@ -97,5 +118,38 @@ public class Achievements {
      */
     public static ArrayList<AchievementDescriptor> getAllAchievements() {
         return allAchievements;
+    }
+
+
+    public static String getName(){
+        return name;
+    }
+
+    public static String getDescription() {
+        return description;
+    }
+
+    public static int getPoints() {
+        return points;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
+    }
+
+    public void setPoints(int points){
+        this.points = points;
+    }
+
+    public int getChackValue(){
+        return this.checkValue;
+    }
+
+    public void setCheckValue(int checkValue){
+        this.checkValue = checkValue;
     }
 }

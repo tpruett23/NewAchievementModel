@@ -20,11 +20,11 @@ import achievements.AchievementDescriptor;
  * @author Tori Pruett
  * @version 1.0
  */
-public class CustomListAdapter extends ArrayAdapter<Achievements> {
+public class CustomListAdapter2 extends ArrayAdapter<AchievementDescriptor> {
     /**
      * The arraylist of achievements.
      **/
-    private ArrayList<Achievements> achievements;
+    private ArrayList<AchievementDescriptor> achievements;
 
     /**
      * The context needed for the adapter.
@@ -49,7 +49,7 @@ public class CustomListAdapter extends ArrayAdapter<Achievements> {
      * @param tvri2
      * @param achievements
      */
-    public CustomListAdapter(Context context, int tvri, int tvri2, ArrayList<Achievements> achievements) {
+    public CustomListAdapter2(Context context, int tvri, int tvri2, ArrayList<AchievementDescriptor> achievements) {
         super(context, tvri, achievements);
         this.context = context;
         this.achievements = achievements;
@@ -84,7 +84,7 @@ public class CustomListAdapter extends ArrayAdapter<Achievements> {
 
 
         //Set texts on views
-        bTitle.setText(achievements.get(position).getClass().getName());
+        bTitle.setText(achievements.get(position).getName());
 
         return (v);//Return the layout view populated with data.
 
@@ -92,4 +92,3 @@ public class CustomListAdapter extends ArrayAdapter<Achievements> {
 
 
 }
-

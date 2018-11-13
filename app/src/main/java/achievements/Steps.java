@@ -26,11 +26,15 @@ public class Steps extends AchievementDescriptor {
     /**
      * The constructor for the Steps achievement.
      */
-    public Steps() {
-        name = "Step Achievement";
-        points = 20;
-        distance = 0;
-        description = "This is for the number of steps you have taken.";
+    public Steps(String name, int points, double distance, String description) {
+        this.name = name;
+        this.points = points;
+        this.distance = distance;
+        this.description = description;
+
+    }
+
+    public Steps(){
 
     }
 
@@ -41,12 +45,55 @@ public class Steps extends AchievementDescriptor {
      * @return true if met false if not met.
      */
     @Override
-    public boolean checkCompleted(double num) {
+    public boolean checkCompleted(double num, double numCheck) {
         boolean check = false;
-        if (num > 300) {
+        if (num > numCheck) {
             check = true;
         }
         return check;
     }
 
+    /**
+     * Gets the name of the achievement.
+     *
+     * @return The name of the achievement.
+     */
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Gets the points of the achievement.
+     *
+     * @return The points of the achievement.
+     */
+    @Override
+    public int getPoints() {
+        return this.points;
+    }
+
+    /**
+     * Gets the distance of the achievement.
+     *
+     * @return The distance.
+     */
+    @Override
+    public double getDistance() {
+        return this.distance;
+    }
+
+    /**
+     * Gets the description of the achievement.
+     *
+     * @return The description of the achievement.
+     */
+    @Override
+    public String getDescription() {
+        return this.description;
+    }
+
+
 }
+
+

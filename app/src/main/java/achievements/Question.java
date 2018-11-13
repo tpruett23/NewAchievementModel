@@ -26,11 +26,15 @@ public class Question extends AchievementDescriptor {
     /**
      * The constructor for the Question achievement.
      */
-    public Question() {
-        name = "Question Achievement";
-        points = 20;
-        distance = 0;
-        description = "You have answered 10 questions completely.";
+    public Question(String name, int points, double distance, String description) {
+        this.name = name;
+        this.points = points;
+        this.distance = distance;
+        this.description = description;
+
+    }
+
+    public Question(){
 
     }
 
@@ -41,7 +45,7 @@ public class Question extends AchievementDescriptor {
      * @return true if met false if not met.
      */
     @Override
-    public boolean checkCompleted(double num) {
+    public boolean checkCompleted(double num, double checkNum) {
         boolean check = false;
         if (num > 10) {
             check = true;

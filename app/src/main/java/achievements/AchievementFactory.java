@@ -12,6 +12,7 @@ public class AchievementFactory {
      **/
     UserInfo UI = new UserInfo();
 
+
     /**
      * The usercompleted instance to access values held in the class.
      **/
@@ -55,15 +56,18 @@ public class AchievementFactory {
     /**
      * The Speed achievement to be added to the completed arraylist if met.
      **/
-    static Speed speed = new Speed();
+    static Achievements speed = new Achievements();
 
 
     /**
      * The constructor for an Achievement Factory.
      */
     public AchievementFactory() {
-        if (checked == false) {
-            addCompleted();
+
+        if (!checked) {
+            //addCompleted();
+        }else{
+
         }
     }
 
@@ -71,34 +75,35 @@ public class AchievementFactory {
      * Calls the method in the abstract AchievementDescriptor class to check to see if the
      * achievement has been met.
      */
-    public void addCompleted() {
-        boolean see = trails.checkCompleted(UC.getTrails());
-        if (trails.checkCompleted(UC.getTrails())) {
-            UI.completed.add(trails);
+   /* public void addCompleted() {
+        this.checked = true;
+        boolean see = trails.checkCompleted(UC.getTrails(),0);
+        if (trails.checkCompleted(UC.getTrails(),0)) {
+            UC.completed.add(trails);
         }
-        if (speed.checkCompleted(UserInfo.getSpeed())) {
-            UI.completed.add(speed);
+        if (speed.checkCompleted(UI.getSpeed(),0)) {
+            UC.completed.add(speed);
         }
-        if (steps.checkCompleted(UserInfo.getSteps())) {
-            UI.completed.add(steps);
+        if (steps.checkCompleted(UserInfo.getSteps(),0)) {
+            UC.completed.add(steps);
         }
-        if (question.checkCompleted(UC.getQuestionsCorrect())) {
-            UI.completed.add(question);
+        if (question.checkCompleted(UC.getQuestionsCorrect(),0)) {
+            UC.completed.add(question);
         }
 
-        if (distance.checkCompleted(UserInfo.getTotalDistance())) {
-            UI.completed.add(distance);
+        if (distance.checkCompleted(UserInfo.getTotalDistance(),0)) {
+            UC.completed.add(distance);
         }
-        if (challenges.checkCompleted(UC.getChallenges())) {
-            UI.completed.add(challenges);
+        if (challenges.checkCompleted(UC.getChallenges(),0)) {
+            UC.completed.add(challenges);
         }
-        if (time.checkCompleted(UserInfo.getTimePlayed())) {
-            UI.completed.add(time);
+        if (time.checkCompleted(UserInfo.getTimePlayed(),0)) {
+            UC.completed.add(time);
         }
-        checked = true;
+
 
     }
-
+*/
 
 }
 

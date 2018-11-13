@@ -19,7 +19,7 @@ import achievements.AchievementFactory;
 import achievements.Achievements;
 import achievements.CustomListAdapter;
 import screens.AchievementDetails;
-
+/******* This class takes Achievement Descriptors changed to test.
 
 /**
  * The class puts the arraylist of all of the achievements into the listview to be displayed.
@@ -27,15 +27,20 @@ import screens.AchievementDetails;
  * @version 1.0
  */
 public class ListViewAchv extends AppCompatActivity {
+
+   // SAXParserReader spr = new SAXParserReader();
+
     /**
      * Instance of the achievement class.
      **/
-    Achievements ach = new Achievements();
+    //Achievements ach = new Achievements();
+
+    //AchievementFactory AF = new AchievementFactory();
 
     /**
      * the arraylist of all achievements.
      **/
-    private static ArrayList<AchievementDescriptor> achievements;
+    private static ArrayList<Achievements> achievements;
 
     /**
      * The listview to display all of the achievements
@@ -46,7 +51,7 @@ public class ListViewAchv extends AppCompatActivity {
     /**
      * The adapter to put the arraylist in the listview.
      */
-    ArrayAdapter<AchievementDescriptor> adapter;
+    ArrayAdapter<Achievements> adapter;
 
     /**
      * The oncreate that is called to build and start the activity.
@@ -62,8 +67,12 @@ public class ListViewAchv extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.list);
 
-        AchievementFactory AF = new AchievementFactory();
-        achievements = Achievements.getAllAchievements();
+        SAXParserReader saxParserReader = new SAXParserReader();
+        saxParserReader.parseXML();
+
+
+
+        achievements = AchievementXMLHandler.getAchievements();
 
 
         adapter = new CustomListAdapter(this, R.layout.list_item, R.layout.activity_list_view, achievements);
@@ -86,7 +95,7 @@ public class ListViewAchv extends AppCompatActivity {
                 data.putExtra("points", achievements.get(position).getPoints());
                 data.putExtra("title", achievements.get(position).getName());
                 data.putExtra("text", achievements.get(position).getDescription());
-                data.putExtra("distance", achievements.get(position).getDistance());
+                //data.putExtra("distance", achievements.get(position).getDistance());
                 startActivity(data);
 
                 setResult(RESULT_OK, myIntent);

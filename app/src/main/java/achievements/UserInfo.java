@@ -10,6 +10,12 @@ import achievements.AchievementDescriptor;
  * @author Tori Pruett
  */
 public class UserInfo {
+
+    /**
+     * Instance of UserCompleted class to access values.
+     */
+    UserCompleted UC = new UserCompleted();
+
     /**
      * The total amount of points the user has won.
      */
@@ -36,9 +42,9 @@ public class UserInfo {
     public static int steps;
 
     /**
-     * The arraylist to hold the completed achievements for the user.
+     * The arraylist to hold all of the completed achievements.
      */
-    static ArrayList<AchievementDescriptor> completed = new ArrayList<>();
+    ArrayList<Achievements> completed = UC.getCompleted();
 
 
     /**
@@ -99,13 +105,6 @@ public class UserInfo {
     }
 
 
-    /**
-     * Getter method for the completed arraylist.
-     *
-     * @return The completed arraylist.
-     */
-    public static ArrayList<AchievementDescriptor> getCompleted() {
-        return completed;
-    }
+
 }
 
