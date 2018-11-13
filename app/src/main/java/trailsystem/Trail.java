@@ -53,6 +53,14 @@ public class Trail {
     }//end removePoint()
 
     /**
+     * Sets the new start location for the trail
+     * @param add - the new start location
+     */
+    public void setStart(WayPoint add){
+        start = add;
+    }
+
+    /**
      * Get the first point of the trail
      * @return - first location of the trail
      */
