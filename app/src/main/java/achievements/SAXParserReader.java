@@ -3,6 +3,8 @@ package achievements;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.support.v4.app.FragmentActivity;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.toripruett.newachievementmodel.R;
@@ -28,18 +30,20 @@ import achievements.AchievementXMLHandler;
 import achievements.Achievements;
 
 
-public class SAXParserReader extends Application {
+public class SAXParserReader extends FragmentActivity{
 
 
 
     private static String filename = "achxmltester";
     private static ArrayList<Achievements> achieve;
 
+    Context context;
 
 
-    @Override
+
     public void onCreate(){
-        super.onCreate();
+
+        context = getApplicationContext();
 
         achieve = AchievementXMLHandler.getAchievements();
 
@@ -65,7 +69,8 @@ public class SAXParserReader extends Application {
 
             // inStream.setCharacterStream(new StringReader(rawXML));
 
-            Context context = getApplicationContext();
+
+            //Context context = getApplicationContext();
             InputStream inStream = context.getResources().openRawResource(R.raw.achxmltester);
             InputSource inStream2 = new InputSource(inStream);
             xmlreader.parse(inStream2);

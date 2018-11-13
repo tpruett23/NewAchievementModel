@@ -31,6 +31,7 @@
         <activity android:name="screens.QRScan" />
         <activity android:name="screens.MiniGame" />
         <activity android:name="achievements.ListViewAchv" />
+        <activity android:name="achievements.ListViewAch" />
         <activity android:name="screens.AchievementDetails" />
         <activity android:name="achievements.UserCompleted" />
         <activity
@@ -47,11 +48,11 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyBYkhwqZrX7lhja1XijcJzy_XVlt8e0bug" />
 
         <activity
-            android:name="trailsystem.MapsActivity"
+            android:name="examples.MapExample"
             android:label="@string/title_activity_maps"></activity>
-    </application>
 
+    </application>
 </manifest>
