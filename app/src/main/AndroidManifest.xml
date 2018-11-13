@@ -31,7 +31,6 @@
         <activity android:name="screens.QRScan" />
         <activity android:name="screens.MiniGame" />
         <activity android:name="achievements.ListViewAchv" />
-        <activity android:name="achievements.ListViewAch" />
         <activity android:name="screens.AchievementDetails" />
         <activity android:name="achievements.UserCompleted" />
         <activity

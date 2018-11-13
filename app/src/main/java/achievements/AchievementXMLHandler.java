@@ -59,12 +59,12 @@ public class AchievementXMLHandler extends DefaultHandler {
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes)  throws SAXException {
 
-        if( qName.equals("person")) {//When marker found new tag is reached.
+        if( qName.equals("achievement")) {//When marker found new tag is reached.
             temp = new Achievements();
             //Re-initialize for next item
             tmpName = "";
             tmpDesc = "";
-            tmpPoints="";
+            tmpPoints = "";
         }
         else if(qName.equals("name")){
             currentElement = tmpName;
@@ -74,9 +74,8 @@ public class AchievementXMLHandler extends DefaultHandler {
         }
         else if(qName.equals("points")) {
             currentElement = tmpPoints;
-        }
-        else
-            currentElement = null;
+        }else
+            currentElement = "100";
 
     }//end startElement========================================================
 
@@ -107,7 +106,7 @@ public class AchievementXMLHandler extends DefaultHandler {
 
         }
         else if(qName.equals("points")){
-            temp.setPoints( Integer.parseInt(currentElement));
+            temp.setPoints(Integer.parseInt(currentElement));
         }
 
         if( qName.equals("achievement") && temp != null) {//When person is found  again the person is complete

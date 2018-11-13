@@ -67,7 +67,7 @@ public class ListViewAchv extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.list);
 
-        SAXParserReader saxParserReader = new SAXParserReader();
+        SAXParserReader saxParserReader = new SAXParserReader(this);
         saxParserReader.parseXML();
 
 

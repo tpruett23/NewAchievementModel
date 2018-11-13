@@ -2,12 +2,12 @@
 <acheivements>
     <achievement>
         <name>Walked a Mile</name>
-        <points> 10</points>
-        <description>1.0m</description>
+        <points>10</points>
+        <description>1</description>
     </achievement>
     <achievement>
         <name>Walked 5 Miles</name>
         <points>25</points>
-        <discription>5.0m</discription>
+        <discription>5</discription>
     </achievement>
 </acheivements>

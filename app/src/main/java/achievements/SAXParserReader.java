@@ -39,12 +39,12 @@ public class SAXParserReader extends FragmentActivity{
 
     Context context;
 
+    public SAXParserReader(Context context){
+        onCreate(context);
+    }//end constructor
 
-
-    public void onCreate(){
-
-        context = getApplicationContext();
-
+    public void onCreate(Context context){
+        this.context = context;
         achieve = AchievementXMLHandler.getAchievements();
 
     }//end onCreate
@@ -69,8 +69,6 @@ public class SAXParserReader extends FragmentActivity{
 
             // inStream.setCharacterStream(new StringReader(rawXML));
 
-
-            //Context context = getApplicationContext();
             InputStream inStream = context.getResources().openRawResource(R.raw.achxmltester);
             InputSource inStream2 = new InputSource(inStream);
             xmlreader.parse(inStream2);
