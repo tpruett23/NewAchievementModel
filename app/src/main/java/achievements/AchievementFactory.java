@@ -56,7 +56,7 @@ public class AchievementFactory {
     /**
      * The Speed achievement to be added to the completed arraylist if met.
      **/
-    static Achievements speed = new Achievements();
+    //static Achievements speed = new Achievements();
 
 
     /**

@@ -28,7 +28,7 @@ import screens.AchievementDetails;
  */
 public class ListViewAchv extends AppCompatActivity {
 
-   // SAXParserReader spr = new SAXParserReader();
+
 
     /**
      * Instance of the achievement class.
@@ -36,6 +36,7 @@ public class ListViewAchv extends AppCompatActivity {
     //Achievements ach = new Achievements();
 
     //AchievementFactory AF = new AchievementFactory();
+
 
     /**
      * the arraylist of all achievements.
@@ -72,6 +73,7 @@ public class ListViewAchv extends AppCompatActivity {
 
 
 
+
         achievements = AchievementXMLHandler.getAchievements();
 
 
@@ -95,7 +97,7 @@ public class ListViewAchv extends AppCompatActivity {
                 data.putExtra("points", achievements.get(position).getPoints());
                 data.putExtra("title", achievements.get(position).getName());
                 data.putExtra("text", achievements.get(position).getDescription());
-                //data.putExtra("distance", achievements.get(position).getDistance());
+
                 startActivity(data);
 
                 setResult(RESULT_OK, myIntent);

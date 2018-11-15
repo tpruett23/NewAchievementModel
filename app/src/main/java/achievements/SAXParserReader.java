@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
 import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -34,8 +35,11 @@ public class SAXParserReader extends FragmentActivity{
 
 
 
-    private static String filename = "achxmltester";
-    private static ArrayList<Achievements> achieve;
+    private static String filename = "achxmltester.xml";
+
+    ArrayList<Achievements> achievements = new ArrayList<>();
+
+
 
     Context context;
 
@@ -45,7 +49,7 @@ public class SAXParserReader extends FragmentActivity{
 
     public void onCreate(Context context){
         this.context = context;
-        achieve = AchievementXMLHandler.getAchievements();
+
 
     }//end onCreate
 
@@ -63,20 +67,11 @@ public class SAXParserReader extends FragmentActivity{
             xmlreader.setContentHandler(handler);
 
 
-            //ClassLoader classLoader = getClass().getClassLoader();
-            //File file = new File(classLoader.getResource("achxmltester").getFile());
 
-
-            // inStream.setCharacterStream(new StringReader(rawXML));
-
-            InputStream inStream = context.getResources().openRawResource(R.raw.achxmltester);
+           InputStream inStream = context.getResources().openRawResource(R.raw.achxmltester);
             InputSource inStream2 = new InputSource(inStream);
             xmlreader.parse(inStream2);
 
-            //xmlreader.parse(getResources().openRawResource(R.raw.achxmltester), xmlreader.Encoding.UTF_8, root.getContentHandler());
-
-            //Parse the input stream.
-            //xmlreader.parse(file);
         } catch (ParserConfigurationException e) {
             Toast.makeText(this, "Error reading xml file.", Toast.LENGTH_LONG).show();
             e.printStackTrace();

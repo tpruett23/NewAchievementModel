@@ -14,7 +14,7 @@ import achievements.Achievements;
 public class AchievementXMLHandler extends DefaultHandler {
 
     /**A global list of map markers**/
-    private  static ArrayList<Achievements> achievements;
+    private  static ArrayList<Achievements> achievements1;
 
     /**A temp map marker built to get each marker element**/
    Achievements temp;
@@ -32,7 +32,7 @@ public class AchievementXMLHandler extends DefaultHandler {
      */
     //=========================================================================
     public AchievementXMLHandler() {
-        achievements = new ArrayList<Achievements>();
+        achievements1 = new ArrayList<Achievements>();
 
     }//========================================================================
 
@@ -43,7 +43,7 @@ public class AchievementXMLHandler extends DefaultHandler {
      */
     //=========================================================================
     public static ArrayList<Achievements> getAchievements(){
-        return achievements;
+        return achievements1;
     }//========================================================================
 
     //=========================================================================
@@ -59,7 +59,7 @@ public class AchievementXMLHandler extends DefaultHandler {
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes)  throws SAXException {
 
-        if( qName.equals("achievement")) {//When marker found new tag is reached.
+        if(qName.equals("achievement") ) {//When marker found new tag is reached.
             temp = new Achievements();
             //Re-initialize for next item
             tmpName = "";
@@ -68,6 +68,7 @@ public class AchievementXMLHandler extends DefaultHandler {
         }
         else if(qName.equals("name")){
             currentElement = tmpName;
+
         }
         else if(qName.equals("description")) {
             currentElement = tmpDesc;
@@ -75,7 +76,7 @@ public class AchievementXMLHandler extends DefaultHandler {
         else if(qName.equals("points")) {
             currentElement = tmpPoints;
         }else
-            currentElement = "100";
+            currentElement = null;
 
     }//end startElement========================================================
 
@@ -109,8 +110,8 @@ public class AchievementXMLHandler extends DefaultHandler {
             temp.setPoints(Integer.parseInt(currentElement));
         }
 
-        if( qName.equals("achievement") && temp != null) {//When person is found  again the person is complete
-            achievements.add(temp);
+        if( qName.equals("achievement") && temp != null) {
+            achievements1.add(temp);
             temp = null;//</achievement> is found set to null.
         }
 

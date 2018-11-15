@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<acheivements>
+<achievements>
     <achievement>
         <name>Walked a Mile</name>
         <points>10</points>
-        <description>1</description>
+        <description>You have walked one mile on the Trail System.</description>
     </achievement>
+
     <achievement>
         <name>Walked 5 Miles</name>
         <points>25</points>
-        <discription>5</discription>
+        <description>You have walked 5 miles on the Trail System.</description>
     </achievement>
-</acheivements>
+
+</achievements>

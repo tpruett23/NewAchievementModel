@@ -26,15 +26,15 @@ public class Achievements {
     /**
      * Name of the achievement read in by xml.
      */
-    private static String name;
+    static String name;
     /**
      * Description of the achievement read in by xml.
      */
-    private static String description;
+     static String description;
     /**
      * Points of the achievement being read in by XML.
      */
-    private static int points;
+     static int points;
 
     /**
      * The value to check to see if the achievement has been completed.
@@ -89,7 +89,7 @@ public class Achievements {
     public Achievements() {
         allAchievements = new ArrayList<>();
         if (!see) {
-            add();
+           // add();
         }
 
 
