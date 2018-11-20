@@ -28,7 +28,7 @@ public abstract class AchievementDescriptor {
      * @param num The value to be checked.
      * @return true if met false if not met.
      */
-    public boolean checkCompleted(double num, double checkNum){
+    public static boolean checkCompleted(double num, double checkNum){
        return true;
     }
 

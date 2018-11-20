@@ -23,14 +23,22 @@ public class Question extends AchievementDescriptor {
      **/
     double distance;
 
+
+    /**
+     * The number of questions answered correctly to receive this achievement.
+     */
+    int questionsCorrect;
+
+
     /**
      * The constructor for the Question achievement.
      */
-    public Question(String name, int points, double distance, String description) {
+    public Question(String name, int points, double distance, String description, int questionsCorrect) {
         this.name = name;
         this.points = points;
         this.distance = distance;
         this.description = description;
+        this.questionsCorrect = questionsCorrect;
 
     }
 
@@ -44,8 +52,8 @@ public class Question extends AchievementDescriptor {
      * @param num The value to be checked.
      * @return true if met false if not met.
      */
-    @Override
-    public boolean checkCompleted(double num, double checkNum) {
+    //@Override
+    public static boolean checkCompleted(double num, double checkNum) {
         boolean check = false;
         if (num > 10) {
             check = true;

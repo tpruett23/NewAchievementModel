@@ -26,14 +26,20 @@ public class Trails extends AchievementDescriptor {
     double distance;
 
     /**
+     * The number of trails completed to earn this achievement.
+     */
+    int numTrails;
+
+    /**
      * The constructor for the Trails achievement.
      */
-    public Trails(String name, int points, double distance, String description) {
+    public Trails(String name, int points, double distance, String description, int numTrails) {
 
         this.name = name;
         this.points = points;
         this.distance = distance;
         this.description = description;
+        this.numTrails = numTrails;
 
     }
 
@@ -47,8 +53,8 @@ public class Trails extends AchievementDescriptor {
      * @param num The value to be checked.
      * @return true if met false if not met.
      */
-    @Override
-    public boolean checkCompleted(double num, double numCheck) {
+    //@Override
+    public static boolean checkCompleted(double num, double numCheck) {
         boolean check = false;
         if (num > numCheck) {
             check = true;

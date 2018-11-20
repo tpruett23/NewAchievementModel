@@ -1,5 +1,7 @@
 package achievements;
 
+import android.widget.ListView;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -16,6 +18,9 @@ public class AchievementXMLHandler extends DefaultHandler {
     /**A global list of map markers**/
     private  static ArrayList<Achievements> achievements1;
 
+
+
+
     /**A temp map marker built to get each marker element**/
    Achievements temp;
 
@@ -26,13 +31,16 @@ public class AchievementXMLHandler extends DefaultHandler {
     private String currentElement;
 
 
+
+
     //=========================================================================
     /**
      *  Handle XML and store the result in the arrayList.
      */
     //=========================================================================
     public AchievementXMLHandler() {
-        achievements1 = new ArrayList<Achievements>();
+        achievements1 = new ArrayList<>();
+
 
     }//========================================================================
 
@@ -46,7 +54,7 @@ public class AchievementXMLHandler extends DefaultHandler {
         return achievements1;
     }//========================================================================
 
-    //=========================================================================
+
     /**
      * Called when a start element is found
      * @param uri The xml name space uri
@@ -93,29 +101,33 @@ public class AchievementXMLHandler extends DefaultHandler {
     public void endElement(String uri, String localName, String qName)
             throws SAXException {
 
-        //Create  new Person. If tmp is null we must be at a new record because
-        //when </person is found it is set to null.
-        if (temp == null)
-             temp = new Achievements();
 
-        /** set value */
-        if(qName.equals("name")){//when title is found close
-            temp.setName(currentElement);
-        }
-        else if(qName.equals("description")){
-            temp.setDescription(currentElement);
 
-        }
-        else if(qName.equals("points")){
-            temp.setPoints(Integer.parseInt(currentElement));
-        }
+            //Create  new Person. If tmp is null we must be at a new record because
+            //when </person is found it is set to null.
+            if (temp == null)
+                temp = new Achievements();
 
-        if( qName.equals("achievement") && temp != null) {
-            achievements1.add(temp);
-            temp = null;//</achievement> is found set to null.
-        }
 
-        currentElement = null;
+            /** set value */
+            if (qName.equals("name")) {//when title is found close
+                temp.setName(currentElement);
+
+            } else if (qName.equals("description")) {
+                temp.setDescription(currentElement);
+
+            } else if (qName.equals("points")) {
+                temp.setPoints(Integer.parseInt(currentElement));
+            }
+
+            if (qName.equals("achievement") && temp != null) {
+                achievements1.add(temp);
+                temp = null;//</achievement> is found set to null.
+            }
+
+            currentElement = null;
+
+
     }//========================================================================
 
     //=========================================================================

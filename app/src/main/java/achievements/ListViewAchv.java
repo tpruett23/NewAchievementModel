@@ -35,13 +35,15 @@ public class ListViewAchv extends AppCompatActivity {
      **/
     //Achievements ach = new Achievements();
 
-    //AchievementFactory AF = new AchievementFactory();
+   // AchievementFactory AF = new AchievementFactory();
 
 
     /**
      * the arraylist of all achievements.
      **/
     private static ArrayList<Achievements> achievements;
+
+
 
     /**
      * The listview to display all of the achievements
@@ -53,6 +55,9 @@ public class ListViewAchv extends AppCompatActivity {
      * The adapter to put the arraylist in the listview.
      */
     ArrayAdapter<Achievements> adapter;
+
+
+
 
     /**
      * The oncreate that is called to build and start the activity.
@@ -67,10 +72,6 @@ public class ListViewAchv extends AppCompatActivity {
 
 
         lv = (ListView) findViewById(R.id.list);
-
-        SAXParserReader saxParserReader = new SAXParserReader(this);
-        saxParserReader.parseXML();
-
 
 
 
@@ -94,9 +95,13 @@ public class ListViewAchv extends AppCompatActivity {
 
                 Intent data = new Intent(v.getContext(), AchievementDetails.class);
 
+                //Achievements pos = achievements.get(position);
+
+
                 data.putExtra("points", achievements.get(position).getPoints());
                 data.putExtra("title", achievements.get(position).getName());
                 data.putExtra("text", achievements.get(position).getDescription());
+
 
                 startActivity(data);
 

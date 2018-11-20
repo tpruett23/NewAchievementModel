@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import com.example.toripruett.newachievementmodel.R;
 
+import achievements.Achievements;
+
 /**
  * The class displays the details of the Achievement when clicked.
  * @author Tori Pruett

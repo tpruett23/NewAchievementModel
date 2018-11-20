@@ -44,37 +44,37 @@ public class Achievements {
     /**
      * The step achievement to be added to the List.
      **/
-    AchievementDescriptor steps = new Steps();
+   // AchievementDescriptor steps = new Steps();
 
     /**
      * The trail achievement to be added to the List.
      **/
-    AchievementDescriptor trails = new Trails();
+    //AchievementDescriptor trails = new Trails();
 
     /**
      * The question achievement to be added to the List.
      **/
-    AchievementDescriptor question = new Question();
+    //AchievementDescriptor question = new Question();
 
     /**
      * The challenge achievement to be added to the List.
      **/
-    AchievementDescriptor challenges = new Challenges();
+    //AchievementDescriptor challenges = new Challenges();
 
     /**
      * The distance achievement to be added to the List.
      **/
-    AchievementDescriptor distance = new Distance();
+    //AchievementDescriptor distance = new Distance();
 
     /**
      * The time achievement to be added to the List.
      **/
-    AchievementDescriptor time = new Time();
+    //AchievementDescriptor time = new Time();
 
     /**
      * The speed achievement to be added to the List.
      **/
-    AchievementDescriptor speed = new Speed();
+    //AchievementDescriptor speed = new Speed();
 
 
 
@@ -92,13 +92,13 @@ public class Achievements {
            // add();
         }
 
-
     }
 
 
     /**
      * Adds all of the achievements to the arraylist to be displayed.
      */
+    /*
     public void add() {
 
         allAchievements.add(steps);
@@ -109,7 +109,7 @@ public class Achievements {
         allAchievements.add(time);
         allAchievements.add(speed);
         see = true;
-    }
+    }*/
 
     /**
      * The getter method to get the achievements arraylist.
@@ -133,23 +133,23 @@ public class Achievements {
         return points;
     }
 
-    public void setName(String name){
-        this.name = name;
+    public static void setName(String name1){
+        name = name1;
     }
 
-    public void setDescription(String description){
-        this.description = description;
+    public static void setDescription(String description1){
+        description = description1;
     }
 
-    public void setPoints(int points){
-        this.points = points;
+    public static void setPoints(int points1){
+        points = points1;
     }
 
     public int getChackValue(){
         return this.checkValue;
     }
 
-    public void setCheckValue(int checkValue){
-        this.checkValue = checkValue;
+    public void setCheckValue(int checkValue1){
+        this.checkValue = checkValue1;
     }
 }

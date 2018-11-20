@@ -12,6 +12,8 @@ import android.widget.Button;
 
 import achievements.ListViewAchv;
 import com.example.toripruett.newachievementmodel.R;
+
+import achievements.SAXParserReader;
 import achievements.Settings;
 import achievements.UserCompleted;
 
@@ -50,6 +52,9 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
         toolbar = (Toolbar) findViewById(R.id.toolbar1);
         storyButton.setOnClickListener(this);
         miniGameButton.setOnClickListener(this);
+
+        SAXParserReader saxParserReader = new SAXParserReader(this);
+        saxParserReader.parseXML();
 
     }//==========================================================
 
