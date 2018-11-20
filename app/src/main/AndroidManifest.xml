@@ -49,12 +49,14 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBYkhwqZrX7lhja1XijcJzy_XVlt8e0bug" />
+            android:value="AIzaSyCoIuD2uZkLQEP1URsWtl9NXIxrW5TmKvU" />
 
         <activity
             android:name="screens.TrailMap"
             android:label="@string/title_activity_maps">
             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
