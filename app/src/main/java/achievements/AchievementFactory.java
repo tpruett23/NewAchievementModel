@@ -1,5 +1,7 @@
 package achievements;
 
+import trailsystem.Trail;
+
 /**
  * The class checks the achievements and if met adds it to the appropriate arraylist.
  *
@@ -19,44 +21,10 @@ public class AchievementFactory {
     UserCompleted UC = new UserCompleted();
 
     /**
-     * The boolen value to make sure they are only added once.
+     * The boolean value to make sure they are only added once.
      **/
     boolean checked = false;
 
-    /**
-     * The Steps achievement to be added to the completed arraylist if met.
-     **/
-    static Steps steps = new Steps();
-
-    /**
-     * The Trails achievement to be added to the completed arraylist if met.
-     **/
-    static Trails trails = new Trails();
-
-    /**
-     * The Question achievement to be added to the completed arraylist if met.
-     **/
-    static Question question = new Question();
-
-    /**
-     * The Challenges achievement to be added to the completed arraylist if met.
-     **/
-    static Challenges challenges = new Challenges();
-
-    /**
-     * The Distance achievement to be added to the completed arraylist if met.
-     **/
-    static Distance distance = new Distance();
-
-    /**
-     * The Time achievement to be added to the completed arraylist if met.
-     **/
-    static Time time = new Time();
-
-    /**
-     * The Speed achievement to be added to the completed arraylist if met.
-     **/
-    //static Achievements speed = new Achievements();
 
 
     /**
@@ -75,35 +43,20 @@ public class AchievementFactory {
      * Calls the method in the abstract AchievementDescriptor class to check to see if the
      * achievement has been met.
      */
-   /* public void addCompleted() {
+   public void addCompleted(Achievements ach) {
+
         this.checked = true;
-        boolean see = trails.checkCompleted(UC.getTrails(),0);
-        if (trails.checkCompleted(UC.getTrails(),0)) {
-            UC.completed.add(trails);
-        }
-        if (speed.checkCompleted(UI.getSpeed(),0)) {
-            UC.completed.add(speed);
-        }
-        if (steps.checkCompleted(UserInfo.getSteps(),0)) {
-            UC.completed.add(steps);
-        }
-        if (question.checkCompleted(UC.getQuestionsCorrect(),0)) {
-            UC.completed.add(question);
+
+        if(Steps.checkCompleted(UserInfo.getSteps(),ach.getChackValue())){
+            UC.getCompleted().add(ach);
+
         }
 
-        if (distance.checkCompleted(UserInfo.getTotalDistance(),0)) {
-            UC.completed.add(distance);
-        }
-        if (challenges.checkCompleted(UC.getChallenges(),0)) {
-            UC.completed.add(challenges);
-        }
-        if (time.checkCompleted(UserInfo.getTimePlayed(),0)) {
-            UC.completed.add(time);
-        }
+
 
 
     }
-*/
+
 
 }
 

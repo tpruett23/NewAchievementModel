@@ -32,13 +32,20 @@ public class Challenges extends AchievementDescriptor {
     double distance;
 
     /**
+     * The amount of challenges completed.
+     */
+
+    int challengeNum;
+
+    /**
      * The constructor for the Challenges achievement.
      */
-    public Challenges(String name, int points, double distance, String description) {
+    public Challenges(String name, int points, double distance, String description, int challengeNum) {
         this.name = name;
         this.points = points;
         this.distance = distance;
         this.description = description;
+        this.challengeNum = challengeNum;
     }
 
     public Challenges(){
@@ -51,8 +58,8 @@ public class Challenges extends AchievementDescriptor {
      * @param num The value to be checked.
      * @return true if met false if not met.
      */
-    @Override
-    public boolean checkCompleted(double num, double numCheck) {
+   // @Override
+    public static boolean checkCompleted(double num, double numCheck) {
         boolean check = false;
         if (num > numCheck) {
             check = true;

@@ -54,8 +54,6 @@ public class SAXParserReader extends FragmentActivity{
     }//end onCreate
 
 
-
-
     public void parseXML() {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         try {
@@ -65,7 +63,6 @@ public class SAXParserReader extends FragmentActivity{
 
             AchievementXMLHandler handler = new AchievementXMLHandler();
             xmlreader.setContentHandler(handler);
-
 
 
            InputStream inStream = context.getResources().openRawResource(R.raw.achxmltester);
@@ -134,7 +131,6 @@ public class SAXParserReader extends FragmentActivity{
             StringBuilder text = new StringBuilder();
 
 
-
             try {
 
                 BufferedReader br = new BufferedReader(new FileReader(extDir));
@@ -157,7 +153,7 @@ public class SAXParserReader extends FragmentActivity{
             }//end catch
 
 
-            //Set the data from the file content and conver it to a String
+            //Set the data from the file content and convert it to a String
             String data = new String(text);
 
             //Safety first Parse data if available.

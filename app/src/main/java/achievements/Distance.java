@@ -44,8 +44,8 @@ public class Distance extends AchievementDescriptor {
      * @param num The value to be checked.
      * @return true if met false if not met.
      */
-    @Override
-    public boolean checkCompleted(double num, double checkNum) {
+    //@Override
+    public static boolean checkCompleted(double num, double checkNum) {
         boolean check = false;
         if (num > checkNum) {
 
