@@ -1,6 +1,7 @@
 package screens;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -70,14 +71,17 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     /** location marker for the current location*/
     private Marker locationMarker;
 
+
+
     public static final int PERMISSIONS_REQUEST_LOCATION = 99;
 
     private Polyline line;
 
-    @Override
+    //@Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment != null)
@@ -268,7 +272,10 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             XMLTrailParser trailParser;
             XmlPullParserFactory parserFactory = XmlPullParserFactory.newInstance();
             XmlPullParser parser = parserFactory.newPullParser();
-            InputStream is = getAssets().open("wcu_trail_system.xml");
+          //  InputStream is = getAssets().open("wcu_trail_system");
+           // trailParser = new XMLTrailParser(is);
+
+            InputStream is = getResources().openRawResource(R.raw.wcu_trail_system);
             trailParser = new XMLTrailParser(is);
 
             PolylineOptions path = new PolylineOptions();
