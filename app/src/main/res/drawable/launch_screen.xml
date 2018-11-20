@@ -11,7 +11,7 @@ black as your theme transition. -->
     <item>
 
         <bitmap
-            android:src="@drawable/SplashScreen"
+            android:src="@drawable/splash"
             android:gravity="center"/>
 
     </item>

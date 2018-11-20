@@ -50,8 +50,12 @@
             android:value="AIzaSyBYkhwqZrX7lhja1XijcJzy_XVlt8e0bug" />
 
         <activity
-            android:name="examples.MapExample"
-            android:label="@string/title_activity_maps"></activity>
+            android:name="screens.TrailMap"
+            android:label="@string/title_activity_maps">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
 
     </application>
 </manifest>

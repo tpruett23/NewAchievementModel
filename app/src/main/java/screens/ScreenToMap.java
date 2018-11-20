@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import trailsystem.MapsActivity;
 import com.example.toripruett.newachievementmodel.R;
 
 /**
@@ -43,7 +42,7 @@ public class ScreenToMap extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         if(view  == mapButton){
-            Intent i = new Intent(this, MapsActivity.class);
+            Intent i = new Intent(this, TrailMap.class);
             startActivity(i);
         }
 

@@ -1,5 +1,6 @@
 package trailsystem;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -22,7 +23,7 @@ public class TrailSystem {
      * and no name assigned
      */
     public TrailSystem(){
-        trails = null;
+        trails = new ArrayList<>();
         name = "No name yet assigned";
     }//end constructor
 
@@ -69,4 +70,19 @@ public class TrailSystem {
     public String getName(){
         return name;
     }//end getName()
+
+    public void addTrail(Trail trail){
+
+        trails.add(trail);
+
+    /* end addTrail()*/
+    }
+
+    /**
+     * Returns the collections of trails contained
+     * within the trail system
+     */
+    public Collection<Trail> getTrails(){
+        return trails;
+    }
 }
