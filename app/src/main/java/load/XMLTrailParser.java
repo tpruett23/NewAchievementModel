@@ -1,6 +1,9 @@
 package load;
 
 
+import android.content.res.AssetManager;
+
+import com.example.toripruett.newachievementmodel.R;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.w3c.dom.Document;
@@ -11,6 +14,7 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -30,7 +34,7 @@ public class XMLTrailParser {
 
     private TrailSystem trailSystem;
 
-    private static final String TRAIL_SYSTEM_FILE = "res/raw/wcu_trail_system.xml";
+    private static final String TRAIL_SYSTEM_FILE = "wcu_trail_system.xml";
 
     public XMLTrailParser(){
 
@@ -53,6 +57,21 @@ public class XMLTrailParser {
         }
     /* End Constructor */
     }
+
+    public XMLTrailParser(InputStream inputStream){
+        try{
+            docFactory = DocumentBuilderFactory.newInstance();
+            docFactory.setNamespaceAware(false);
+            docFactory.setValidating(false);
+            docBuilder = docFactory.newDocumentBuilder();
+            document = docBuilder.parse(inputStream);
+
+            parseFile();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * Helper method to parse through the entire file creating a trail system

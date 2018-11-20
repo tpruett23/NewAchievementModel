@@ -34,6 +34,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -260,18 +264,26 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      * Create the entire polyline for the trail system
      */
     private void createLine(){
-        XMLTrailParser trailParser;
-        trailParser = new XMLTrailParser();
+        try {
+            XMLTrailParser trailParser;
+            XmlPullParserFactory parserFactory = XmlPullParserFactory.newInstance();
+            XmlPullParser parser = parserFactory.newPullParser();
+            InputStream is = getAssets().open("wcu_trail_system.xml");
+            trailParser = new XMLTrailParser(is);
 
-        PolylineOptions path = new PolylineOptions();
-        TrailSystem trailSystem = trailParser.getTrailSystem();
-        Collection<Trail> trails = trailSystem.getTrails();
-        for(Trail trail: trails){
-            addTrailToLine(path, trail, R.color.dk_pink);
-        }//end for
-        path.width(6);
+            PolylineOptions path = new PolylineOptions();
+            TrailSystem trailSystem = trailParser.getTrailSystem();
+            Collection<Trail> trails = trailSystem.getTrails();
+            for (Trail trail : trails) {
+                addTrailToLine(path, trail, R.color.dk_pink);
+            }//end for
+            path.width(6);
 
-        line = mGoogleMap.addPolyline(path);
+            line = mGoogleMap.addPolyline(path);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     /* end createLine()*/
     }
