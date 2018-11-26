@@ -30,12 +30,22 @@ import javax.xml.parsers.SAXParserFactory;
 import achievements.AchievementXMLHandler;
 import achievements.Achievements;
 
-
+/**
+ * The class parses through an XML document.
+ * @author Andrew Scott & Tori Pruett
+ * @version 1.0
+ */
 public class SAXParserReader extends FragmentActivity{
 
 
-
+    /**
+     * The name of the XML file we are reading.
+     */
     private static String filename = "achxmltester.xml";
+
+    /**
+     * The arraylist to hold all the achievements.
+     */
 
     ArrayList<Achievements> achievements = new ArrayList<>();
 
@@ -53,7 +63,9 @@ public class SAXParserReader extends FragmentActivity{
 
     }//end onCreate
 
-
+    /**
+     * Opens the XML file and calls the methods to parse it.
+     */
     public void parseXML() {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         try {
@@ -80,11 +92,15 @@ public class SAXParserReader extends FragmentActivity{
         }
     }
 
-    public String toXML() {
+    /**
+     * The method turns the object into an xml file.
+     * @return The XML String.
+     */
+    public String toXML(Achievements a ) {
         return "<achievement>\n" +
-                "\t<name>" + Achievements.getName()+ "</name>" +
-                "\t<points>" + Achievements.getPoints() + "</points>" +
-                "\t<description>" + Achievements.getDescription() + "</description>" +
+                "\t<name>" + a.getName()+ "</name>" +
+                "\t<points>" + a.getPoints() + "</points>" +
+                "\t<description>" + a.getDescription() + "</description>" +
                 "</achievement>";
     }
 
@@ -94,7 +110,7 @@ public class SAXParserReader extends FragmentActivity{
      */
     public void save() {
 
-        String xml_data = toXML();
+        String xml_data = "Test123"; // = toXML();  TODO: FIX THIS
 
         //Create a file if its not already on disk
         File file = new File(this.getFilesDir(), filename);
@@ -121,7 +137,9 @@ public class SAXParserReader extends FragmentActivity{
         }
     }
 
-
+    /**
+     * Loads the achievements from internal storage.
+     */
         public void load() {
 
             //Create a file if its not already on disk

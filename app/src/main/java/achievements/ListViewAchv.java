@@ -29,15 +29,6 @@ import screens.AchievementDetails;
 public class ListViewAchv extends AppCompatActivity {
 
 
-
-    /**
-     * Instance of the achievement class.
-     **/
-    //Achievements ach = new Achievements();
-
-   // AchievementFactory AF = new AchievementFactory();
-
-
     /**
      * the arraylist of all achievements.
      **/
@@ -57,10 +48,8 @@ public class ListViewAchv extends AppCompatActivity {
     ArrayAdapter<Achievements> adapter;
 
 
-
-
     /**
-     * The oncreate that is called to build and start the activity.
+     * The onCreate that is called to build and start the activity.
      *
      * @param savedInstanceState
      */
@@ -73,7 +62,8 @@ public class ListViewAchv extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.list);
 
-
+        SAXParserReader saxParserReader = new SAXParserReader(this);
+        saxParserReader.parseXML();
 
         achievements = AchievementXMLHandler.getAchievements();
 

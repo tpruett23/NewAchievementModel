@@ -15,22 +15,17 @@ import achievements.Achievements;
  */
 public class AchievementXMLHandler extends DefaultHandler {
 
-    /**A global list of map markers**/
+    /** A global list of achievements **/
     private  static ArrayList<Achievements> achievements1;
 
-
-
-
-    /**A temp map marker built to get each marker element**/
+    /** A temp achievement built to get each marker element**/
    Achievements temp;
 
-    /**The current element being read by the XML parser**/
-    String tmpName, tmpDesc, tmpPoints;
+    /** The current element being read by the XML parser**/
+    String tmpName, tmpDesc, tmpPoints,tmpADPoints;
 
-    /**The current element being read off**/
+    /** The current element being read off**/
     private String currentElement;
-
-
 
 
     //=========================================================================
@@ -46,7 +41,7 @@ public class AchievementXMLHandler extends DefaultHandler {
 
     //=========================================================================
     /**
-     * Return the array list of completed map markers.
+     * Return the array list achievements.
      * @return
      */
     //=========================================================================
@@ -83,6 +78,24 @@ public class AchievementXMLHandler extends DefaultHandler {
         }
         else if(qName.equals("points")) {
             currentElement = tmpPoints;
+
+        }else if(qName.equals("time")){
+            currentElement = tmpADPoints;
+
+        }else if(qName.equals("distance")){
+            currentElement = tmpADPoints;
+
+        }else if(qName.equals("trails")){
+            currentElement = tmpADPoints;
+
+        }else if(qName.equals("steps")){
+            currentElement = tmpADPoints;
+        }else if(qName.equals("speed")){
+            currentElement = tmpADPoints;
+
+        }else if(qName.equals("challenges")){
+            currentElement = tmpADPoints;
+
         }else
             currentElement = null;
 
@@ -102,9 +115,6 @@ public class AchievementXMLHandler extends DefaultHandler {
             throws SAXException {
 
 
-
-            //Create  new Person. If tmp is null we must be at a new record because
-            //when </person is found it is set to null.
             if (temp == null)
                 temp = new Achievements();
 
@@ -118,14 +128,52 @@ public class AchievementXMLHandler extends DefaultHandler {
 
             } else if (qName.equals("points")) {
                 temp.setPoints(Integer.parseInt(currentElement));
+
+            }else if(qName.equals("time")){
+                AchievementDescriptor TimeAch = new Time();
+                TimeAch.setPoints(Integer.parseInt(currentElement));
+                temp.getAllAchievements().add(TimeAch);
+
+            }else if(qName.equals("distance")){
+                AchievementDescriptor disAch = new Distance();
+                disAch.setPoints(Integer.parseInt(currentElement));
+                temp.getAllAchievements().add(disAch);
+
+            }else if(qName.equals("trails")){
+                AchievementDescriptor trailAch = new Trails();
+                trailAch.setPoints(Integer.parseInt(currentElement));
+                temp.getAllAchievements().add(trailAch);
+
+            }else if(qName.equals("steps")){
+             AchievementDescriptor stepAch = new Steps();
+             stepAch.setPoints(Integer.parseInt(currentElement));
+             temp.getAllAchievements().add(stepAch);
+
+            }else if(qName.equals("speed")){
+                AchievementDescriptor speedAch = new Speed();
+                speedAch.setPoints(Integer.parseInt(currentElement));
+                temp.getAllAchievements().add(speedAch);
+
+            }else if(qName.equals("challenges")){
+             AchievementDescriptor challAch = new Challenges();
+             challAch.setPoints(Integer.parseInt(currentElement));
+             temp.getAllAchievements().add(challAch);
+
             }
 
             if (qName.equals("achievement") && temp != null) {
+                System.out.println(temp);
                 achievements1.add(temp);
                 temp = null;//</achievement> is found set to null.
+
+
+                System.out.println(achievements1);
             }
 
             currentElement = null;
+
+
+
 
 
     }//========================================================================

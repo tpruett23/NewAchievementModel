@@ -74,6 +74,16 @@ public class Distance extends AchievementDescriptor {
     }
 
     /**
+     * Sets the points of the achievement.
+     *
+     * @return The points of the achievement.
+     */
+    public void setPoints(int points){
+        this.points = points;
+    }
+
+
+    /**
      * Gets the distance of the achievement.
      *
      * @return The distance.

@@ -21,20 +21,22 @@ public class Achievements {
     /**
      * The arraylist to hold all of the achievements.
      **/
-    static ArrayList<AchievementDescriptor> allAchievements;
+    private ArrayList<AchievementDescriptor> allAchievements;
 
     /**
      * Name of the achievement read in by xml.
      */
-    static String name;
+    private String name;
+
     /**
      * Description of the achievement read in by xml.
      */
-     static String description;
+     private String description;
+
     /**
      * Points of the achievement being read in by XML.
      */
-     static int points;
+     private int points;
 
     /**
      * The value to check to see if the achievement has been completed.
@@ -81,7 +83,15 @@ public class Achievements {
     /**
      * The boolean value so that the achievements are only added to the list once.
      **/
-    boolean see = false;
+    private boolean see = false;
+
+
+    @Override
+    public String toString() {
+        return "Achievements{" +
+                "see=" + see +
+                '}';
+    }
 
     /**
      * Constructor for the Achievements class.
@@ -116,32 +126,32 @@ public class Achievements {
      *
      * @return The arraylist of achievements.
      */
-    public static ArrayList<AchievementDescriptor> getAllAchievements() {
-        return allAchievements;
+    public ArrayList<AchievementDescriptor> getAllAchievements() {
+        return this.allAchievements;
     }
 
 
-    public static String getName(){
+    public  String getName(){
         return name;
     }
 
-    public static String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public static int getPoints() {
+    public int getPoints() {
         return points;
     }
 
-    public static void setName(String name1){
+    public void setName(String name1){
         name = name1;
     }
 
-    public static void setDescription(String description1){
+    public void setDescription(String description1){
         description = description1;
     }
 
-    public static void setPoints(int points1){
+    public void setPoints(int points1){
         points = points1;
     }
 

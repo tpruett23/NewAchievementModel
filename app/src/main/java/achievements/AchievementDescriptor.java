@@ -50,6 +50,17 @@ public abstract class AchievementDescriptor {
         return this.points;
     }
 
+
+    /**
+     * Sets the points of the achievement.
+     *
+     * @return The points of the achievement.
+     */
+    public void setPoints(int points){
+        this.points = points;
+    }
+
+
     /**
      * Gets the distance associated with the achievement.
      *

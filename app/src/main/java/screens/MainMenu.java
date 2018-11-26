@@ -53,8 +53,7 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
         storyButton.setOnClickListener(this);
         miniGameButton.setOnClickListener(this);
 
-        SAXParserReader saxParserReader = new SAXParserReader(this);
-        saxParserReader.parseXML();
+
 
     }//==========================================================
 
@@ -93,6 +92,10 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
                 return true;
             case R.id.Settings:
                 i = new Intent(this, Settings.class);
+                startActivity(i);
+                return true;
+            case R.id.toMap:
+                i = new Intent(this, TrailMap.class);
                 startActivity(i);
                 return true;
         }

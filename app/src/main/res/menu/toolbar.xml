@@ -33,5 +33,12 @@
         android:icon="@android:drawable/ic_menu_camera"
         app:showAsAction="always" />
 
+    <item android:id = "@+id/toMap"
+        android:title = "Map"
+        android:orderInCategory = "2"
+        android:icon="@android:drawable/ic_dialog_map"
+        app:showAsAction="always" />
 
-    </menu>
+
+
+</menu>
