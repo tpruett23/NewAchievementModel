@@ -21,6 +21,10 @@ public class AchievementXMLHandler extends DefaultHandler {
     /** A temp achievement built to get each marker element**/
    Achievements temp;
 
+   boolean types  =  false;
+
+   AchievementDescriptor achievementDescriptor;
+
     /** The current element being read by the XML parser**/
     String tmpName, tmpDesc, tmpPoints,tmpADPoints;
 
@@ -68,16 +72,22 @@ public class AchievementXMLHandler extends DefaultHandler {
             tmpName = "";
             tmpDesc = "";
             tmpPoints = "";
+            tmpADPoints = "";
+            types = false;
         }
         else if(qName.equals("name")){
             currentElement = tmpName;
 
         }
+
         else if(qName.equals("description")) {
             currentElement = tmpDesc;
-        }
-        else if(qName.equals("points")) {
+
+        }else if(qName.equals("points")) {
             currentElement = tmpPoints;
+
+        }else if(qName.equals("type")){
+                types = true;
 
         }else if(qName.equals("time")){
             currentElement = tmpADPoints;
@@ -129,15 +139,17 @@ public class AchievementXMLHandler extends DefaultHandler {
             } else if (qName.equals("points")) {
                 temp.setPoints(Integer.parseInt(currentElement));
 
-            }else if(qName.equals("time")){
-                AchievementDescriptor TimeAch = new Time();
-                TimeAch.setPoints(Integer.parseInt(currentElement));
-                temp.getAllAchievements().add(TimeAch);
 
+            }else if(types == true){
+                if(qName.equals("time")) {
+                    AchievementDescriptor TimeAch = new Time();
+                    TimeAch.setPoints(Integer.parseInt(currentElement));
+                    temp.getAllAchievements().add(TimeAch);
+                }
             }else if(qName.equals("distance")){
-                AchievementDescriptor disAch = new Distance();
-                disAch.setPoints(Integer.parseInt(currentElement));
-                temp.getAllAchievements().add(disAch);
+                achievementDescriptor = new Distance();
+                achievementDescriptor.setPoints(Integer.parseInt(currentElement));
+                temp.getAllAchievements().add(achievementDescriptor);
 
             }else if(qName.equals("trails")){
                 AchievementDescriptor trailAch = new Trails();

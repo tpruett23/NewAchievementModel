@@ -34,7 +34,7 @@ public class ListViewAchv extends AppCompatActivity {
      **/
     private static ArrayList<Achievements> achievements;
 
-
+    Achievements ach = new Achievements();
 
     /**
      * The listview to display all of the achievements
@@ -45,7 +45,7 @@ public class ListViewAchv extends AppCompatActivity {
     /**
      * The adapter to put the arraylist in the listview.
      */
-    ArrayAdapter<Achievements> adapter;
+    ArrayAdapter<AchievementDescriptor> adapter;
 
 
     /**
@@ -68,7 +68,7 @@ public class ListViewAchv extends AppCompatActivity {
         achievements = AchievementXMLHandler.getAchievements();
 
 
-        adapter = new CustomListAdapter(this, R.layout.list_item, R.layout.activity_list_view, achievements);
+        adapter = new CustomListAdapter2(this, R.layout.list_item, R.layout.activity_list_view, ach.getAllAchievements());
 
         lv.setAdapter(adapter);
 

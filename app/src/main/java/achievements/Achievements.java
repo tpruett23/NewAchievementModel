@@ -83,13 +83,13 @@ public class Achievements {
     /**
      * The boolean value so that the achievements are only added to the list once.
      **/
-    private boolean see = false;
+    //private boolean see = false;
 
 
     @Override
     public String toString() {
         return "Achievements{" +
-                "see=" + see +
+               // "see=" + see +
                 '}';
     }
 
@@ -98,9 +98,9 @@ public class Achievements {
      */
     public Achievements() {
         allAchievements = new ArrayList<>();
-        if (!see) {
+        //if (!see) {
            // add();
-        }
+        //}
 
     }
 

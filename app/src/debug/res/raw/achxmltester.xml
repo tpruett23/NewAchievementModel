@@ -14,8 +14,10 @@
         <points>25</points>
         <description>You have walked 5 miles on the Trail System.</description>
         <type>
-            <distance>5</distance>
+            <distance>1</distance>
         </type>
+
+
     </achievement>
 
     <achievement>
@@ -23,8 +25,9 @@
         <points>30</points>
         <description>You have walked 1 hour on the Trail System.</description>
         <type>
-            <time>3</time>
+            <time>1</time>
         </type>
+
     </achievement>
 
 </achievements>
