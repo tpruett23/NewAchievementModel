@@ -36,27 +36,6 @@ public class XMLTrailParser {
 
     private static final String TRAIL_SYSTEM_FILE = "wcu_trail_system.xml";
 
-    public XMLTrailParser(){
-
-        File trailFile = new File(TRAIL_SYSTEM_FILE);
-        docFactory = DocumentBuilderFactory.newInstance();
-        try {
-            docBuilder = docFactory.newDocumentBuilder();
-            document = docBuilder.parse(trailFile);
-
-            document.getDocumentElement().normalize();
-
-            parseFile();
-
-        }catch(ParserConfigurationException e){
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch(SAXException e){
-            e.printStackTrace();
-        }
-    /* End Constructor */
-    }
 
     public XMLTrailParser(InputStream inputStream){
         try{

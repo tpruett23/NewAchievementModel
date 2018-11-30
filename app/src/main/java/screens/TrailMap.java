@@ -35,6 +35,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -77,11 +80,14 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
     private Polyline line;
 
+    /**
+     * onCreate will create the entire trailsystem on a google map
+     * @param savedInstanceState - current instance to reference
+     */
     //@Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment != null)
@@ -337,5 +343,61 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     public void onProviderDisabled(String provider){
 
     }
+
+    DefaultHandler handler = new DefaultHandler(){
+
+        /** Boolean variables to check the current element in
+         * the xml file */
+        boolean trailsystem = false;
+        boolean name = false;
+        boolean waypoint = false;
+        boolean latitude = false;
+        boolean longitude = false;
+
+        /**
+         * Receive notification of the start of an element.
+         * @param uri - The Namespace URI, or the empty string if the
+         *            element has no Namespace URI or if Namespace
+         *            processing is not being performed.
+         * @param localName - The local name (without prefix), or the
+         *                  empty string if Namespace processing is not
+         *                  being performed
+         * @param qName - The qualified name (with prefix), or the empty
+         *              string if qualified names are not available
+         * @param attributes - The attributes attched to the element. If
+         *                   there are not attributes, it shall be an
+         *                   empty Attributes object.
+         * @throws SAXException - Any SAX exception, possibly wrapping
+         *                      another exception
+         */
+        public void startElement(String uri, String localName,
+                                 String qName, Attributes attributes)
+            throws SAXException {
+
+            //check for which element is being started
+            if(qName.equalsIgnoreCase("trailsystem")){
+                trailsystem = true;
+            }else if(qName.equalsIgnoreCase("name")){
+                name = true;
+            }else if(qName.equalsIgnoreCase("waypoint")){
+                waypoint = true;
+            }else if(qName.equalsIgnoreCase("latitude")){
+                latitude = true;
+            }else if(qName.equalsIgnoreCase("longitude")){
+                longitude = true;
+            }//end if-else
+
+        /* End startElement method*/
+        }
+
+        public void endElement(String uri, String localName,
+                               String qName) throws SAXException{
+
+        }
+
+        public void characters(char ch[], int start, int length){
+
+        }
+    };
 }
 
