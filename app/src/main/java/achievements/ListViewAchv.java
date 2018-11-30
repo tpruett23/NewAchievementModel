@@ -34,7 +34,7 @@ public class ListViewAchv extends AppCompatActivity {
      **/
     private static ArrayList<Achievements> achievements;
 
-    Achievements ach = new Achievements();
+    AchievementXMLHandler ach = new AchievementXMLHandler();
 
     /**
      * The listview to display all of the achievements
@@ -45,7 +45,7 @@ public class ListViewAchv extends AppCompatActivity {
     /**
      * The adapter to put the arraylist in the listview.
      */
-    ArrayAdapter<AchievementDescriptor> adapter;
+    ArrayAdapter<Achievements> adapter;
 
 
     /**
@@ -64,11 +64,12 @@ public class ListViewAchv extends AppCompatActivity {
 
         SAXParserReader saxParserReader = new SAXParserReader(this);
         saxParserReader.parseXML();
+        saxParserReader.save();
+        //saxParserReader.load();
 
         achievements = AchievementXMLHandler.getAchievements();
 
-
-        adapter = new CustomListAdapter2(this, R.layout.list_item, R.layout.activity_list_view, ach.getAllAchievements());
+        adapter = new CustomListAdapter(this, R.layout.list_item, R.layout.activity_list_view, achievements);
 
         lv.setAdapter(adapter);
 
@@ -91,11 +92,16 @@ public class ListViewAchv extends AppCompatActivity {
                 data.putExtra("points", achievements.get(position).getPoints());
                 data.putExtra("title", achievements.get(position).getName());
                 data.putExtra("text", achievements.get(position).getDescription());
+                data.putExtra("achDesA",achievements.get(position).getDescriptorA().getName());
+
 
 
                 startActivity(data);
 
                 setResult(RESULT_OK, myIntent);
+
+                //SAXParserReader.save();
+                //SAXParserReader.load();
 
                 Toast.makeText(getApplicationContext(), "Achievement Selected : " + selectedAch, Toast.LENGTH_LONG).show();
 

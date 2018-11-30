@@ -14,7 +14,7 @@ public class UserInfo {
     /**
      * Instance of UserCompleted class to access values.
      */
-    UserCompleted UC = new UserCompleted();
+    //UserCompleted UC = new UserCompleted();
 
     /**
      * The total amount of points the user has won.
@@ -24,27 +24,27 @@ public class UserInfo {
     /**
      * The total distance the user has traveled.
      */
-    public static double totalDistance;
+    public  double totalDistance;
 
     /**
      * How long the user has been playing.
      */
-    public static double timePlayed;
+    public  double timePlayed;
 
     /**
      * How fast the user is traveling.
      */
-    public static int speed;
+    public  int speed;
 
     /**
      * The number of steps the user has taken.
      */
-    public static int steps;
+    public  int steps;
 
     /**
      * The arraylist to hold all of the completed achievements.
      */
-    ArrayList<Achievements> completed = UC.getCompleted();
+    //ArrayList<Achievements> completed = UC.getCompleted();
 
 
     /**
@@ -54,7 +54,7 @@ public class UserInfo {
 
         totalDistance = 6;
         timePlayed = 7.0;
-        speed = 0;
+        speed = 9;
         steps = 200;
     }
 
@@ -73,8 +73,8 @@ public class UserInfo {
      * @return Total distance the user has traveled.
      */
 
-    public static double getTotalDistance() {
-        return totalDistance;
+    public  double getTotalDistance() {
+        return this.totalDistance;
     }
 
     /**
@@ -82,8 +82,8 @@ public class UserInfo {
      *
      * @return total amount of time the user has played.
      */
-    public static double getTimePlayed() {
-        return timePlayed;
+    public  double getTimePlayed() {
+        return this.timePlayed;
     }
 
     /**
@@ -91,8 +91,8 @@ public class UserInfo {
      *
      * @return How fast the user is traveling.
      */
-    public static int getSpeed() {
-        return speed;
+    public  int getSpeed() {
+        return this.speed;
     }
 
     /**
@@ -100,8 +100,8 @@ public class UserInfo {
      *
      * @return number of steps the user has taken.
      */
-    public static int getSteps() {
-        return steps;
+    public int getSteps() {
+        return this.steps;
     }
 
 

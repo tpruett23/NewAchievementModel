@@ -6,28 +6,28 @@ public class Steps extends AchievementDescriptor {
     /**
      * The name of the achievement
      **/
-    String name;
+    private String name;
 
     /**
      * How many points for the achievement.
      **/
-    int points;
+    private int points;
 
     /**
      * The description of the achievement.
      **/
-    String description;
+    private String description;
 
     /**
      * The distance associated with the achievement.
      **/
-    double distance;
+    private double distance;
 
 
     /**
      * The steps taken to complete this achievement.
      */
-    int steps;
+    private int steps;
 
     /**
      * The constructor for the Steps achievement.
@@ -68,6 +68,16 @@ public class Steps extends AchievementDescriptor {
     @Override
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Gets the points of the achievement.
+     *
+     * @return The points of the achievement.
+     */
+
+    public int getSteps() {
+        return this.steps;
     }
 
     /**

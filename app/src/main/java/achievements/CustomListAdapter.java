@@ -84,7 +84,7 @@ public class CustomListAdapter extends ArrayAdapter<Achievements> {
 
 
         //Set texts on views
-        bTitle.setText(achievements.get(position).getClass().getName());
+        bTitle.setText(achievements.get(position).getName());
 
         return (v);//Return the layout view populated with data.
 

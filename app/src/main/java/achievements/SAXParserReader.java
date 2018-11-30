@@ -1,9 +1,11 @@
 package achievements;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
 
@@ -35,19 +38,22 @@ import achievements.Achievements;
  * @author Andrew Scott & Tori Pruett
  * @version 1.0
  */
-public class SAXParserReader extends FragmentActivity{
+public class SAXParserReader extends FragmentActivity {
 
+    private static SAXParserReader instance;
 
     /**
      * The name of the XML file we are reading.
      */
-    private static String filename = "achxmltester.xml";
+    private static String filename;
 
     /**
      * The arraylist to hold all the achievements.
      */
 
     ArrayList<Achievements> achievements = new ArrayList<>();
+
+    //Achievements ach = new Achievements();
 
 
 
@@ -57,9 +63,15 @@ public class SAXParserReader extends FragmentActivity{
         onCreate(context);
     }//end constructor
 
-    public void onCreate(Context context){
-        this.context = context;
+    public SAXParserReader(){
 
+    }
+
+    public void onCreate(Context context){
+
+        this.context = context;
+        this.instance = this;
+        filename = "achsavefile";
 
     }//end onCreate
 
@@ -82,10 +94,10 @@ public class SAXParserReader extends FragmentActivity{
             xmlreader.parse(inStream2);
 
         } catch (ParserConfigurationException e) {
-            Toast.makeText(this, "Error reading xml file.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.context, "Error reading xml file.", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         } catch (SAXException e) {
-            Toast.makeText(this, "Error reading xml file.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.context, "Error reading xml file.", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -96,11 +108,20 @@ public class SAXParserReader extends FragmentActivity{
      * The method turns the object into an xml file.
      * @return The XML String.
      */
-    public String toXML(Achievements a ) {
+    public String toXML() {
+        /*return "<achievement>\n" +
+                "\t<name>" + ach.getName()+ "</name>" +
+                "\t<points>" + ach.getPoints() + "</points>" +
+                "\t<description>" + ach.getDescription() + "</description>" +
+                "\t<type>" + ach.getDescriptorA() + "</type>" +
+                "</achievement>";
+                */
+
         return "<achievement>\n" +
-                "\t<name>" + a.getName()+ "</name>" +
-                "\t<points>" + a.getPoints() + "</points>" +
-                "\t<description>" + a.getDescription() + "</description>" +
+                "\t<name>" + "name"+ "</name>" +
+                "\t<points>" + "points" + "</points>" +
+                "\t<description>" + "des" + "</description>" +
+                "\t<type>" + "type" + "</type>" +
                 "</achievement>";
     }
 
@@ -110,10 +131,10 @@ public class SAXParserReader extends FragmentActivity{
      */
     public void save() {
 
-        String xml_data = "Test123"; // = toXML();  TODO: FIX THIS
+        String xml_data  = toXML();  //TODO: FIX THIS
 
         //Create a file if its not already on disk
-        File file = new File(this.getFilesDir(), filename);
+        File file = new File(this.context.getFilesDir(), filename);
 
 
         //String string = "";
@@ -121,18 +142,25 @@ public class SAXParserReader extends FragmentActivity{
         FileOutputStream outputStream;//declare FOS
 
         try {  //to do this
+            /*
             outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
             outputStream.write(xml_data.getBytes());
             outputStream.close();
-            Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show();
+            */
+
+            outputStream = openFileOutput("achsavefile", Context.MODE_APPEND);
+            outputStream.write(xml_data.getBytes());
+            outputStream.close();
+
+            Toast.makeText(this.context, "Saved", Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
-            Toast.makeText(this, "Error saving file", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.context, "Error saving file", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         } catch (IOException e) {
-            Toast.makeText(this, "Error saving file", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.context, "Error saving file", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         } catch (Exception e) {//else if failed trying do this
-            Toast.makeText(this, "Error saving file", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.context, "Error saving file", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
     }
@@ -143,33 +171,34 @@ public class SAXParserReader extends FragmentActivity{
         public void load() {
 
             //Create a file if its not already on disk
-            File extDir = new File(this.getFilesDir(), filename);
+            File extDir = new File(context.getFilesDir(), filename);
 
             //Read text from file
             StringBuilder text = new StringBuilder();
 
-
             try {
 
                 BufferedReader br = new BufferedReader(new FileReader(extDir));
+                if(extDir != null){
+                    Log.v("File Error","File is not null");
+                }
                 String line;
 
                 while ((line = br.readLine()) != null) {
                     text.append(line);
                     text.append('\n');
-                }//end while
+                }
 
-                br.close();//Close the buffer
+                br.close();
             }//end try
             catch (FileNotFoundException e) {//If file not found on disk here.
-                Toast.makeText(this, "There was no data to load", Toast.LENGTH_LONG).show();
+                Toast.makeText(this.context, "There was no data to load", Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             } catch (IOException e)//If io Exception here
             {
-                Toast.makeText(this, "Error loading file", Toast.LENGTH_LONG).show();
+                Toast.makeText(this.context, "Error loading file", Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }//end catch
-
 
             //Set the data from the file content and convert it to a String
             String data = new String(text);
@@ -178,7 +207,7 @@ public class SAXParserReader extends FragmentActivity{
             if (data.length() > 0) {
                 parseXML();
             } else
-                Toast.makeText(this, "There is no data to display", Toast.LENGTH_LONG).show();
+                Toast.makeText(this.context, "There is no data to display", Toast.LENGTH_LONG).show();
         }//end LOAD
 
 

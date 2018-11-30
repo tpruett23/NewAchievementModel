@@ -47,9 +47,46 @@ tools:context="screens.MainMenu" >
             android:textSize="35sp"
             android:background="@color/darkbluegrey" />
 
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1">
+
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/savebutton"
+            android:textSize="35sp"
+            android:background="@color/darkbluegrey" />
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1">
+
+
+        <Button
+            android:id="@+id/loadButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/loadbutton"
+            android:textSize="35sp"
+            android:background="@color/darkbluegrey" />
+
+    </LinearLayout>
+
+
 
 
 

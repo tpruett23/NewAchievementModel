@@ -16,6 +16,8 @@ public class UserCompleted extends Activity {
      */
     private ListView lv;
 
+    AchievementXMLHandler ach = new AchievementXMLHandler();
+
     /**
      * The number of trails that have been completed by the user.
      */
@@ -45,7 +47,7 @@ public class UserCompleted extends Activity {
     /**
      * The arraylist to hold the completed achievements for the user.
      */
-     ArrayList<Achievements> completed = new ArrayList<>();
+     private ArrayList<Achievements> completed = new ArrayList<>();
 
     /**
      * The adapter to display the arraylist.

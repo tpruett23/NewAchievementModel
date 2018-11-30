@@ -21,7 +21,7 @@ public class Achievements {
     /**
      * The arraylist to hold all of the achievements.
      **/
-    private ArrayList<AchievementDescriptor> allAchievements;
+    private ArrayList<AchievementDescriptor> allAchievements = new ArrayList<>();
 
     /**
      * Name of the achievement read in by xml.
@@ -38,88 +38,25 @@ public class Achievements {
      */
      private int points;
 
-    /**
-     * The value to check to see if the achievement has been completed.
-     */
-    private static int checkValue;
-
-    /**
-     * The step achievement to be added to the List.
-     **/
-   // AchievementDescriptor steps = new Steps();
-
-    /**
-     * The trail achievement to be added to the List.
-     **/
-    //AchievementDescriptor trails = new Trails();
-
-    /**
-     * The question achievement to be added to the List.
-     **/
-    //AchievementDescriptor question = new Question();
-
-    /**
-     * The challenge achievement to be added to the List.
-     **/
-    //AchievementDescriptor challenges = new Challenges();
-
-    /**
-     * The distance achievement to be added to the List.
-     **/
-    //AchievementDescriptor distance = new Distance();
-
-    /**
-     * The time achievement to be added to the List.
-     **/
-    //AchievementDescriptor time = new Time();
-
-    /**
-     * The speed achievement to be added to the List.
-     **/
-    //AchievementDescriptor speed = new Speed();
+    AchievementDescriptor a;
 
 
 
-    /**
-     * The boolean value so that the achievements are only added to the list once.
-     **/
-    //private boolean see = false;
 
-
-    @Override
-    public String toString() {
-        return "Achievements{" +
-               // "see=" + see +
-                '}';
-    }
 
     /**
      * Constructor for the Achievements class.
      */
     public Achievements() {
-        allAchievements = new ArrayList<>();
-        //if (!see) {
-           // add();
-        //}
+        //allAchievements = new ArrayList<>();
+
 
     }
 
+    public Achievements(AchievementDescriptor a, AchievementDescriptor b){
 
-    /**
-     * Adds all of the achievements to the arraylist to be displayed.
-     */
-    /*
-    public void add() {
+    }
 
-        allAchievements.add(steps);
-        allAchievements.add(trails);
-        allAchievements.add(question);
-        allAchievements.add(challenges);
-        allAchievements.add(distance);
-        allAchievements.add(time);
-        allAchievements.add(speed);
-        see = true;
-    }*/
 
     /**
      * The getter method to get the achievements arraylist.
@@ -132,7 +69,7 @@ public class Achievements {
 
 
     public  String getName(){
-        return name;
+        return this.name;
     }
 
     public String getDescription() {
@@ -155,11 +92,20 @@ public class Achievements {
         points = points1;
     }
 
-    public int getChackValue(){
-        return this.checkValue;
+
+    public void setDescriptors(AchievementDescriptor a){
+        this.a = a;
+    }
+    public void setDescriptor(AchievementDescriptor a){
+        this.a = a;
+
     }
 
-    public void setCheckValue(int checkValue1){
-        this.checkValue = checkValue1;
+    public AchievementDescriptor getDescriptorA(){
+        return this.a;
+
     }
+
+
+
 }
