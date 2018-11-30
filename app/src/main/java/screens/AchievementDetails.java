@@ -37,6 +37,9 @@ public class AchievementDetails extends Activity {
      */
     TextView distance;
 
+    TextView des1;
+    TextView des2;
+
     /**
      * The method is called to build and start the activity.
      * @param savedInstanceState
@@ -51,6 +54,8 @@ public class AchievementDetails extends Activity {
         achvTitle = (TextView)findViewById(R.id.detailtitle);
         points = (TextView)findViewById(R.id.pointtextview);
         distance = (TextView)findViewById(R.id.distancetextview);
+        des1 = (TextView)findViewById(R.id.des1);
+        des2 = (TextView)findViewById(R.id.des2);
 
         setImage();
     }
@@ -95,6 +100,12 @@ public class AchievementDetails extends Activity {
 
         double distance1 = extras.getDouble("distance");
         distance.setText("Distance: " + distance1);
+
+        String desText1 = extras.getString("achDesA");
+        des1.setText(desText1);
+
+
+
 
     }
 

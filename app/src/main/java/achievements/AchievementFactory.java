@@ -12,13 +12,13 @@ public class AchievementFactory {
     /**
      * The userinfo instance to access the completed arraylist.
      **/
-    UserInfo UI = new UserInfo();
+    static UserInfo UI = new UserInfo();
 
 
     /**
      * The usercompleted instance to access values held in the class.
      **/
-    UserCompleted UC = new UserCompleted();
+    static UserCompleted UC = new UserCompleted();
 
     /**
      * The boolean value to make sure they are only added once.
@@ -33,7 +33,7 @@ public class AchievementFactory {
     public AchievementFactory() {
 
         if (!checked) {
-            //addCompleted();
+            ///addCompleted();
         }else{
 
         }
@@ -43,13 +43,19 @@ public class AchievementFactory {
      * Calls the method in the abstract AchievementDescriptor class to check to see if the
      * achievement has been met.
      */
-   public void addCompleted(Achievements ach) {
+   public static void addCompleted(Achievements ach) {
 
-        this.checked = true;
+        //this.checked = true;
 
-        if(Steps.checkCompleted(UserInfo.getSteps(),ach.getChackValue())){
+        if(UI.getTotalDistance() >= ach.getDescriptorA().getDistance()){
             UC.getCompleted().add(ach);
 
+        }
+        if(UI.getSpeed() >= ach.getDescriptorA().getSpeed()){
+            UC.getCompleted().add(ach);
+        }
+        if(UI.getSteps() >= ach.getDescriptorA().getSteps()){
+            UC.getCompleted().add(ach);
         }
 
 

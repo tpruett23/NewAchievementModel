@@ -30,4 +30,17 @@
 
     </achievement>
 
+
+    <achievement>
+        <name>Walked 5 Miles in minutes</name>
+        <points>25</points>
+        <description>You have walked 5 miles on the Trail System in 2 minutes.</description>
+        <type>
+            <distance>5</distance>
+            <time>2</time>
+        </type>
+
+
+    </achievement>
+
 </achievements>

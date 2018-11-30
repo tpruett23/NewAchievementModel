@@ -24,6 +24,9 @@
     <string name="ach1hrDes">You have been on the trail 1 hour Congratulations!</string>
     <string name="ach1hrTitle">1 Hour Achievement</string>
     <string name="minigames">Mini Game</string>
+    <string name="savebutton">Save</string>
+    <string name="loadbutton">Load</string>
+
 
 
     <string-array name="values_array">

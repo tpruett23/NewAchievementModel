@@ -4,17 +4,22 @@ public abstract class AchievementDescriptor {
     /**
      * The name of the Achievement.
      **/
-    String name;
+    private String name;
 
     /**
      * How many points the achievement is worth.
      **/
-    int points;
+    private int points;
 
     /**
      * The distance associated with the achievement.
      **/
-    double distance;
+    private double distance;
+
+
+    private int speed;
+
+    private int steps;
 
     /**
      * The description of the achievement.
@@ -78,6 +83,28 @@ public abstract class AchievementDescriptor {
     public String getDescription(){
         return this.description;
     }
+
+    /**
+     * Gets the distance of the achievement.
+     *
+     * @return The distance.
+     */
+
+    public int getSpeed() {
+        return this.speed;
+    }
+
+    /**
+     * Gets the distance of the achievement.
+     *
+     * @return The distance.
+     */
+
+    public int getSteps() {
+        return this.steps;
+    }
+
+
 
 
 }

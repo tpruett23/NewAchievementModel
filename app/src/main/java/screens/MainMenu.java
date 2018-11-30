@@ -1,5 +1,6 @@
 package screens;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +39,13 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
      **/
     Toolbar toolbar;
 
+
+    Button saveButton;
+
+    Button loadButton;
+
+    SAXParserReader sax = new SAXParserReader();
+
     /**
      * The method is called whenever this activity is created to assign values and build.
      * @param savedInstanceState
@@ -49,9 +57,14 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
         setContentView(R.layout.activity_main);
         storyButton = (Button)findViewById(R.id.storyButton);
         miniGameButton = (Button)findViewById(R.id.miniButton);
+        saveButton = (Button)findViewById(R.id.saveButton);
+        loadButton = (Button)findViewById(R.id.loadButton);
         toolbar = (Toolbar) findViewById(R.id.toolbar1);
         storyButton.setOnClickListener(this);
         miniGameButton.setOnClickListener(this);
+        saveButton.setOnClickListener(this);
+        loadButton.setOnClickListener(this);
+
 
 
 
@@ -114,10 +127,13 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
         if(v.getId() == storyButton.getId()){
             i = new Intent(this,Story.class);
             startActivity(i);
-        }else if(v.getId() == miniGameButton.getId()){
-            i = new Intent(this,MiniGame.class);
+        }else if(v.getId() == miniGameButton.getId()) {
+            i = new Intent(this, MiniGame.class);
             startActivity(i);
-
+        }else if(v.getId() == saveButton.getId()){
+            //sax.save();
+        }else if(v.getId() == loadButton.getId()){
+            //sax.load();
         }
 
     }

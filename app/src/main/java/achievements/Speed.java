@@ -6,30 +6,35 @@ public class Speed extends AchievementDescriptor {
     /**
      * The name of the achievement
      **/
-    String name;
+    private String name;
 
     /**
      * How many points for the achievement.
      **/
-    int points;
+    private int points;
 
     /**
      * The description of the achievement.
      **/
-    String description;
+    private String description;
 
     /**
      * The distance associated with the achievement.
      **/
-    double distance;
+    private double distance;
 
+
+
+
+   private int speed;
     /**
      * The constructor for the Speed Achievement.
      */
-    public Speed(String name, int points, double distance, String description) {
+    public Speed(String name, int points, double distance,int speed, String description) {
         this.name = name;
         this.points = points;
         this.distance = distance;
+        this.speed = speed;
         this.description = description;
 
     }
@@ -92,6 +97,16 @@ public class Speed extends AchievementDescriptor {
     @Override
     public double getDistance() {
         return this.distance;
+    }
+
+    /**
+     * Gets the distance of the achievement.
+     *
+     * @return The distance.
+     */
+
+    public int getSpeed() {
+        return this.speed;
     }
 
     /**
