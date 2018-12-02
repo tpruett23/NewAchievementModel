@@ -2,6 +2,7 @@ package screens;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -69,11 +70,11 @@ public class AchievementDetails extends Activity {
 
 
         Bundle extras = getIntent().getExtras();
-        //String image = extras.getString("pic");
-        //String imageFlower = extras.getString("picflower");
+        String image = extras.getString("pic");
+        String imageFlower = extras.getString("picflower");
 
 
-            /*
+
             if(image != null) {
                 int pic = getResources().getIdentifier(image + ".png","drawable",getPackageName());
 
@@ -84,7 +85,7 @@ public class AchievementDetails extends Activity {
                 int flowerPic = getResources().getIdentifier(imageFlower + ".jpg", "drawable", getPackageName());
                 achvImage.setImageResource(flowerPic);
                 achvImage.setVisibility(View.VISIBLE);
-            }*/
+            }
 
         achvImage.setImageResource(R.drawable.unknown);
 

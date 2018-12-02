@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:text="@string/Achievements"
             android:textSize="40sp"
-            android:textColor="@color/darkbluegrey" />
+            android:textColor="@color/gold" />
     </LinearLayout>
 
 

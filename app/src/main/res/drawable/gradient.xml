@@ -3,10 +3,10 @@
         <item>
             <shape>
                 <gradient
-                    android:centerColor="@color/purple"
-                    android:endColor="@color/ltpurple"
-                    android:gradientRadius="500"
-                    android:startColor="@color/white"
+                    android:centerColor="@color/gold"
+                    android:endColor="@color/purple"
+                    android:gradientRadius="700"
+                    android:startColor="@color/ltpurple"
                     android:type="radial"/>
             </shape>
         </item>
