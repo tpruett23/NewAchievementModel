@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="black">#000000</color>
     <color name="blue">#222266</color>
     <color name="lt_blue">#4444cc</color>
     <color name="dk_blue">#111133</color>
@@ -24,9 +20,18 @@
     <color name="dk_grey">#444444</color>
     <color name="orange">#dd8822</color>
     <color name="brown">#774422</color>
-    <color name="purple">#6644CC</color>
+    <color name="ltpurple">#6644CC</color>
     <color name="bluish">#53a5fc</color>
     <color name="oldgold">#CFB53B</color>
     <color name="lightgreen">#1ABC9C</color>
     <color name="darkbluegrey">#056d55</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name ="purple">#592c88</color>
+    <color name ="black">#000000</color>
+    <color name="gold">#C1A875</color>
+    <color name="cream">#c4b79d</color>
+    <color name="light_grey">#83817f</color>
+    <color name="dark_purp">#40115b</color>
 </resources>

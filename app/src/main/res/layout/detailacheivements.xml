@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:weightSum="29"
+    android:weightSum="30"
     android:orientation="vertical"
-    android:background="@drawable/orange"
+    android:background="@drawable/gradient"
     android:layout_height="match_parent"
     tools:context="achievements.Achievements$AchievementDetails">
 
@@ -15,14 +15,13 @@
         android:layout_height="wrap_content"
         android:text="text"
         android:textSize="40sp"
-        android:textColor="@color/darkbluegrey"
+        android:textColor="@color/white"
         android:gravity="center_horizontal"
         />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:layout_weight="4">
+        android:layout_weight="3">
 
         <ImageView
 
@@ -37,14 +36,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="5">
+        android:layout_weight="7">
 
     <TextView
         android:id="@+id/detailtextview1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="text"
-        android:textColor="@color/darkbluegrey"
+        android:textColor="@color/white"
         android:textSize="30sp"/>
 
     </LinearLayout>
@@ -59,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="text"
-            android:textColor="@color/darkbluegrey"
+            android:textColor="@color/white"
             android:textSize="30sp"/>
 
 
@@ -76,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="text"
-            android:textColor="@color/darkbluegrey"
+            android:textColor="@color/white"
             android:textSize="30sp"/>
 
     </LinearLayout>
@@ -93,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="text"
-            android:textColor="@color/darkbluegrey"
+            android:textColor="@color/white"
             android:textSize="30sp"/>
 
     </LinearLayout>
@@ -107,8 +106,8 @@
             android:id="@+id/des2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text=""
-            android:textColor="@color/darkbluegrey"
+            android:text="text"
+            android:textColor="@color/white"
             android:textSize="30sp"/>
 
     </LinearLayout>
