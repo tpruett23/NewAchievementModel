@@ -26,71 +26,26 @@ import trailsystem.Trail;
 import trailsystem.TrailSystem;
 import trailsystem.WayPoint;
 
+/**
+ * Uniform Class to hold constants after receiving information
+ * from an xml class holding trails
+ * @author Melchor Dominguez
+ * @version 1.1
+ */
 public class XMLTrailParser {
-
-    private DocumentBuilderFactory docFactory;
-    private DocumentBuilder docBuilder;
-    private Document document;
 
     private TrailSystem trailSystem;
 
     private static final String TRAIL_SYSTEM_FILE = "wcu_trail_system.xml";
 
-
-    public XMLTrailParser(InputStream inputStream){
-        try{
-            docFactory = DocumentBuilderFactory.newInstance();
-            docFactory.setNamespaceAware(false);
-            docFactory.setValidating(false);
-            docBuilder = docFactory.newDocumentBuilder();
-            document = docBuilder.parse(inputStream);
-
-            parseFile();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+    public XMLTrailParser(){
+        trailSystem = new TrailSystem();
+    /* end constructor */
     }
 
+    public void setTrailSystemName
 
     /**
-     * Helper method to parse through the entire file creating a trail system
-     */
-    private void parseFile(){
-        //gather the trail system from the xml
-        NodeList tsList = document.getElementsByTagName("trail_system");
-        //Create the trail system
-        trailSystem = new TrailSystem(( (Element) tsList.item(0)).getAttribute("name"));
-
-        //gather the list of trails
-        NodeList trailList = document.getElementsByTagName("trail");
-
-        //parse through the trails
-        for(int temp = 0; temp < trailList.getLength(); temp++){
-            Node trailNode = trailList.item(temp);
-            //create a trail
-            Trail trail = new Trail();
-            if(trailNode.getNodeType() == Node.ELEMENT_NODE){
-                Element eElement = (Element) trailNode;
-
-                //set the name of the trail
-                trail.setName(eElement.getElementsByTagName("name").item(0).toString());
-
-                NodeList waypointList = eElement.getElementsByTagName("waypoint");
-
-                //add each waypoint to trail
-                Collection<WayPoint> wayPoints = parseWayPoints(waypointList);
-                for(WayPoint wayPoint: wayPoints){
-                    trail.addPoint(wayPoint);
-                }//end for
-
-            }//end if
-            trailSystem.addTrail(trail);
-        }//end for
-
-    /* end parseFile*/
-    }
-
-    /***
      * parse through all the waypoints listed under the xml file
      * @param wayPointList - list which contains latitude and longitude points
      * @return - collection of waypoints

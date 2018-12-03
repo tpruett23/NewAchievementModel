@@ -4,7 +4,7 @@
     <name>WCU Trail System</name>
 
     <trail>
-        <name> HHS Connector </name>
+        <trail_name> HHS Connector </trail_name>
         <waypoint>
             <latitude>35.30476</latitude>
             <longitude>-83.2038</longitude>

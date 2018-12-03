@@ -74,6 +74,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     /** location marker for the current location*/
     private Marker locationMarker;
 
+    private XMLTrailParser trailParser;
+
 
 
     public static final int PERMISSIONS_REQUEST_LOCATION = 99;
@@ -88,6 +90,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        trailParser = new XMLTrailParser();
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment != null)
@@ -282,7 +285,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
            // trailParser = new XMLTrailParser(is);
 
             InputStream is = getResources().openRawResource(R.raw.wcu_trail_system);
-            trailParser = new XMLTrailParser(is);
+            trailParser = new XMLTrailParse();
 
             PolylineOptions path = new PolylineOptions();
             TrailSystem trailSystem = trailParser.getTrailSystem();
@@ -349,6 +352,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         /** Boolean variables to check the current element in
          * the xml file */
         boolean trailsystem = false;
+        boolean trail = true;
+        boolean trailName = true;
         boolean name = false;
         boolean waypoint = false;
         boolean latitude = false;
@@ -385,6 +390,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
                 latitude = true;
             }else if(qName.equalsIgnoreCase("longitude")){
                 longitude = true;
+            }else if(qName.equalsIgnoreCase("trail_name")) {
+                trailName = true;
             }//end if-else
 
         /* End startElement method*/
