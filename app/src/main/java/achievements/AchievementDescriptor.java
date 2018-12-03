@@ -35,7 +35,9 @@ public abstract class AchievementDescriptor {
      */
     public static boolean checkCompleted(double num, double checkNum){
        return true;
-    }
+    };
+
+    public static boolean checkCompleted(int num){return true;};
 
     /**
      * Gets the name of the achievement.
