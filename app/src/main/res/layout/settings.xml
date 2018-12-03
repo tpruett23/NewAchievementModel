@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/lt_grey"
+    android:background="@color/gold"
     android:weightSum="20"
     tools:context="achievements.Settings">
 
@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/settings"
-            android:textColor="@color/black"
+            android:textColor="@color/purple"
             android:textSize="40sp">
         </TextView>
 
@@ -38,6 +38,7 @@
         <CheckBox
             android:id="@+id/soundcheck"
             android:layout_width="wrap_content"
+            android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:text="@string/sound"
             android:textSize="30sp"/>
@@ -78,7 +79,7 @@
             android:id="@+id/seekbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/darkbluegrey"
+            android:background="@color/dark_purp"
             android:max="100"
             android:progress="20"
             />
@@ -109,7 +110,7 @@
                 android:layout_height="match_parent"
                 android:onClick="onClick"
                 android:layout_marginRight="10dp"
-                android:background="@color/black"
+                style="@style/buttonssquare"
                 android:textColor="@color/white"
                 android:text="@string/Back"/>
 
@@ -127,7 +128,8 @@
                 android:textColor="@color/white"
                 android:layout_marginRight="10dp"
                 android:onClick="onClick"
-                android:background="@color/black"
+                style="@style/buttonssquare"
+
                 android:text="@string/Load"/>
         </LinearLayout>
 
@@ -141,7 +143,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="onClick"
-                android:background="@color/black"
+                style="@style/buttonssquare"
                 android:textColor="@color/white"
                 android:text="@string/Save"/>
 
