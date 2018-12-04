@@ -2,6 +2,7 @@ package load;
 
 
 import android.content.res.AssetManager;
+import android.location.Location;
 
 import com.example.toripruett.newachievementmodel.R;
 import com.google.android.gms.maps.model.LatLng;
@@ -30,46 +31,84 @@ import trailsystem.WayPoint;
  * Uniform Class to hold constants after receiving information
  * from an xml class holding trails
  * @author Melchor Dominguez
- * @version 1.1
+ * @version 1.2
  */
 public class XMLTrailParser {
 
+    /** trail system for the application*/
     private TrailSystem trailSystem;
 
-    private static final String TRAIL_SYSTEM_FILE = "wcu_trail_system.xml";
-
+    /**
+     * Constructor which will initialize a new trail system
+     */
     public XMLTrailParser(){
         trailSystem = new TrailSystem();
     /* end constructor */
     }
 
-    public void setTrailSystemName
-
     /**
-     * parse through all the waypoints listed under the xml file
-     * @param wayPointList - list which contains latitude and longitude points
-     * @return - collection of waypoints
+     * Sets/change the name for the trail system
+     * @param trailSystemName - Name for the trail system
      */
-    private Collection<WayPoint> parseWayPoints(NodeList wayPointList){
-        ArrayList<WayPoint> wayPoints = new ArrayList<>();
-        for(int temp = 0; temp < wayPointList.getLength(); temp++){
-            Node wayPointNode = wayPointList.item(temp);
-
-            if(wayPointNode.getNodeType() == Node.ELEMENT_NODE){
-                Element eElement = (Element) wayPointNode;
-
-                Float latitude = Float.parseFloat(eElement.getElementsByTagName("latitude").item(0).toString());
-                Float longitude = Float.parseFloat(eElement.getElementsByTagName("longitude").item(0).toString());
-                wayPoints.add(new WayPoint(new LatLng(latitude, longitude)));
-            }//end if
-        }//end for
-        return wayPoints;
-    /* end parseWayPoints*/
+    public void setTrailSystemName(String trailSystemName){
+        trailSystem.setName(trailSystemName);
+    /* end setTrailSystemName()*/
     }
 
+    /**
+     * Add a trail to the trail system
+     * @param trail - predefined trail
+     */
+    public void addTrail(Trail trail){
+        trailSystem.addTrail(trail);
+    /* end addTrail()*/
+    }
 
+    /**
+     * Add an empty trail to the trail system
+     * @param trailName - name of the empty trail
+     */
+    public void addTrail(String trailName){
+        Trail trail = new Trail(trailName);
+        addTrail(trail);
+    /* end addTrail()*/
+    }
+
+    /**
+     * add point to a specific trail on the trail system
+     * @param name - name of the trail
+     * @param latlng - coordinates of the point
+     */
+    public void addPoint(String name, LatLng latlng){
+        trailSystem.addPoint(name, latlng);
+    /* end addPoint*/
+    }
+
+    /**
+     * add point to the current trail on the trail system
+     * @param latLng - coordinates to add to the trail
+     */
+    public void addPoint(LatLng latLng){
+        trailSystem.addPoint(latLng);
+    /* end addPoint()*/
+    }
+
+    /**
+     * return the trail system that has been created
+     * @return - uniform trail system
+     */
     public TrailSystem getTrailSystem(){
         return trailSystem;
+    /* end getTrailSystem */
+    }
+
+    /**
+     * Method to forward a new location from the user to check against the trail
+     * @param location - location received from the google map
+     */
+    public Collection<LatLng> updateLocation(Location location){
+        return trailSystem.updateLocation(location);
+    /* end updateLocation() */
     }
 
 }

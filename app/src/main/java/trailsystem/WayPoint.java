@@ -1,14 +1,12 @@
 package trailsystem;
 
-
-
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Waypoint class for every location of a trail
+ * WayPoint class for every location of a trail
  * @author - Melchor Dominguez
  * @version - 1.0
  */

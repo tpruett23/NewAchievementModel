@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Build;
@@ -15,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.toripruett.newachievementmodel.R;
@@ -38,12 +38,13 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import load.XMLTrailParser;
 import trailsystem.Trail;
@@ -53,7 +54,7 @@ import trailsystem.WayPoint;
 /**
  * Screen which will show all of the trail systems on a specific trail
  * @author - Melchor Dominguez
- * @version - 1.0
+ * @version - 1.2
  */
 public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
@@ -61,7 +62,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
     /** Google map which will display the trail system*/
     private GoogleMap mGoogleMap;
-    /** SupportMapFrament to achieve the proper display*/
+    /** SupportMapFragment to achieve the proper display*/
     private SupportMapFragment mapFragment;
     /** LocationRequest to handle location requests for the application*/
     private LocationRequest locationRequest;
@@ -74,19 +75,24 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     /** location marker for the current location*/
     private Marker locationMarker;
 
+    /** trail parser which will input all information for the trail system*/
     private XMLTrailParser trailParser;
-
-
 
     public static final int PERMISSIONS_REQUEST_LOCATION = 99;
 
+    /** Polyline which will show the trail*/
+    //TODO: change this to a collection of Polylines
     private Polyline line;
 
     /**
-     * onCreate will create the entire trailsystem on a google map
+     * Called when the activity is starting. This is where most initialization
+     * should go: calling setContentView(int) to inflate the activity's UI, using
+     * findViewById(int) to programmatically interact with widgets in the UI, calling
+     * managedQuery(android.net.Uri, String[], String, String[], String) to
+     * retrieve cursors for data being displayed, etc.
      * @param savedInstanceState - current instance to reference
      */
-    //@Override
+    @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
@@ -95,11 +101,14 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment != null)
             mapFragment.getMapAsync(this);
-
-        createLine();
     /* end onCreate*/
     }
 
+    /**
+     * Called as part of the activity lifecycle when an activity
+     * is going into the background, but has not (yet) been killed.
+     * The counterpart to onResume().
+     */
     @Override
     public void onPause(){
         super.onPause();
@@ -111,18 +120,24 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     /* end onPause()*/
     }
 
+    /**
+     * Called when the map is ready to be used
+     * @param googleMap - A non-null instance of a GoogleMap
+     *                  associated with the MapFragment or MapView
+     *                  that defines the callback
+     */
     @Override
     public void onMapReady(GoogleMap googleMap){
 
         mGoogleMap = googleMap;
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        //Initialize Google Play Services
+        /* Initialize Google Play Services */
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if(ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION) ==
                     PackageManager.PERMISSION_GRANTED){
-                //Location Permission already ganted
+                //Location Permission already granted
                 buildGoogleApiClient();
                 mGoogleMap.setMyLocationEnabled(true);
             }else{
@@ -134,10 +149,22 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             mGoogleMap.setMyLocationEnabled(true);
         }//end if-else
 
+        LatLng hhs = new LatLng(35.306631, -83.201796);
+        mGoogleMap.addMarker(new MarkerOptions().position(hhs).title("Health and Human Sciences Building"));
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(hhs));
+        mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+
+
+        createLine();
+
     /* end onMapReady*/
     }
 
-    protected  synchronized void buildGoogleApiClient(){
+    /**
+     * Create the Google APi Client with accesss to
+     * Plus and Games
+     */
+    protected synchronized void buildGoogleApiClient(){
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).addApi(LocationServices.API)
@@ -147,6 +174,12 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     /* end buildGoogleApiClient*/
     }
 
+    /**
+     * Called when the location has changed.
+     * There are no restrictions on the use of the supplied
+     * Location object.
+     * @param location - The new location, as a Location object
+     */
     @Override
     public void onLocationChanged(Location location){
         lastLocation = location;
@@ -168,9 +201,35 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
 
+        Collection<LatLng> progress = trailParser.updateLocation(location);
+        if (progress != null){
+            drawProgress(progress);
+        }//end if
+
     /* end onLocationChanged*/
     }
 
+    /**
+     * Draw a polyline to signify progress achieved throughout the trail
+     * @param progress - LatLng collection containing points progressed during update
+     *                 of location
+     */
+    private void drawProgress(Collection<LatLng> progress){
+
+    /* end drawProgress()*/
+    }
+
+    /**
+     * After calling connect(), this method will be invoked
+     * asynchronously when the connect request has successfully
+     * completed. After this callback, the application can make
+     * requests on other methods provided by the client and expect
+     * that no user intervention is required to call methods that
+     * use account and scopes provided to the client constructor
+     * @param bundle - Bundle of data provided to clients by Google
+     *               Play services. May be null is no content is provided
+     *               by service.
+     */
     @Override
     public void onConnected(@Nullable Bundle bundle){
         locationRequest = LocationRequest.create();
@@ -204,6 +263,11 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     /* end onConnected() */
     }
 
+
+    /**
+     * Method to perform operations to check if location permissions
+     * have been granted by the user
+     */
     private void checkLocationPermission(){
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED){
@@ -228,7 +292,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
                             }
                         })
                         .create()
-                        .show();;
+                        .show();
 
             }else{
 
@@ -243,9 +307,20 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     /* end checkLocationPermission()*/
     }
 
+    /**
+     * Callback for the result from requesting permissions.
+     * This method is invoked for every call on
+     * requestPermissions(android.app.Activity, String[], int).
+     * @param requestCode - the request code passed in
+     *                    requestPermissions(android.app.Activity, String[], int)
+     * @param permissions - The requested permissions. Never null.
+     * @param grantResults - The grant results for the corresponding permissions
+     *                     which is either PERMISSION_GRANTED or PERMISSION_DENIED.
+     *                     Never null.
+     */
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[],
-                                          int[] grantResults){
+    public void onRequestPermissionsResult(int requestCode, @NonNull  String permissions[],
+                                          @NonNull int[] grantResults){
 
         switch (requestCode) {
             case PERMISSIONS_REQUEST_LOCATION: {
@@ -263,11 +338,9 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
                     } else {
                         //permission denied
                         Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
-                        ;
                     }//end if-else
-                    return;
                 }
-                //other 'case' lines to check for other permissions
+                // other 'case' lines to check for other permissions
                 // app might need
             }
         }
@@ -277,6 +350,31 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      * Create the entire polyline for the trail system
      */
     private void createLine(){
+        Log.v("createLine", "Begin createLine");
+        try {
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            SAXParser saxParser = factory.newSAXParser();
+            Context context = getApplicationContext();
+            InputStream is = context.getResources().openRawResource(R.raw.wcu_trail_system);
+            saxParser.parse(is, handler);
+
+
+            PolylineOptions path = new PolylineOptions();
+            TrailSystem trailSystem = trailParser.getTrailSystem();
+            Collection<Trail> trails =  trailSystem.getTrails();
+
+            for (Trail trail : trails) {
+                addTrailToLine(path, trail, R.color.dk_pink);
+            }//end for
+            path.width(6);
+
+            line = mGoogleMap.addPolyline(path);
+            Log.v("createLine", "finished polyline");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        /*
         try {
             XMLTrailParser trailParser;
             XmlPullParserFactory parserFactory = XmlPullParserFactory.newInstance();
@@ -285,7 +383,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
            // trailParser = new XMLTrailParser(is);
 
             InputStream is = getResources().openRawResource(R.raw.wcu_trail_system);
-            trailParser = new XMLTrailParse();
+            trailParser = new XMLTrailParser();
 
             PolylineOptions path = new PolylineOptions();
             TrailSystem trailSystem = trailParser.getTrailSystem();
@@ -299,7 +397,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
         }catch (Exception e){
             e.printStackTrace();
-        }
+        } */
 
     /* end createLine()*/
     }
@@ -311,37 +409,89 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      * @param color - int value of color
      */
     private void addTrailToLine(PolylineOptions path, Trail trail, int color){
+        Log.v("addTrailToLine", "begin addTrailToLine");
         Collection<WayPoint> waypoints = trail.getPath();
         ArrayList<LatLng> latLngs = new ArrayList<>();
 
         for(WayPoint wayPoint: waypoints){
             latLngs.add(wayPoint.getPoint());
+            Log.v("addTrailToLine", String.valueOf(wayPoint.getPoint().latitude));
         }//end for
+        path.addAll(latLngs);
         path.color(color);
 
     /* end addTrailToLine()*/
     }
 
+    /**
+     * Called when the client is temporarily in a disconnected state.
+     * This can happen if there is a problem with the remote service
+     * (e.g. a crash or resource problem causes it to be killed by
+     * the system). When called, all requests have been canceled and no
+     * outstanding listeners will be executed. GoogleApiClient will automatically
+     * attempt to restore the connection. Applications should disable UI
+     * components that require the service and wait for a call to
+     * onConnected(Bundle) to re-enable them
+     * @param cause - The reason for the disconnection. Defined by constants
+     *          CAUSE_*
+     */
     @Override
-    public void onConnectionSuspended(int i){
+    public void onConnectionSuspended(int cause){
 
     }
 
+    /**
+     * Called when there was an error connecting the
+     * client to the service.
+     * @param connectionResult - A connectionResult that can be
+     *                         used for resolving the error, and deciding
+     *                         what sort of error occurred. To resolve the error,
+     *                         the resolution must be started from an activity with
+     *                         a non-negative requestCode passed to
+     *                         startResolutionForResult(Activity, int). Applications should
+     *                         implement onActivityResult in their Activity to call connect()
+     *                         again if the user has resolved the issue(resultCode is RESULT_OK).
+     */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult){
 
     }
 
+    /**
+     * Called when the provider status changes. This method is called
+     * when a provider is unable to fetch a location or if the provider has
+     * recently become available after a period of unavailability.
+     * @param provider - The name of the location provider associated with this update
+     * @param status - LocationProvider.OUT_OF_SERVICE if the provider is out of service,
+     *               and this is not expected to change in the near future;
+     *               LocationProvider.TEMPORARILY_UNAVAILABLE if the provider is temporarily
+     *               unavailable but is expected to be available shortly; and
+     *               LocationProvider.AVAILABLE if the provider is currently available
+     * @param extras - an optional Bundle which will contain prover specific status variables.
+     *
+     */
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras){
 
     }
 
+    /**
+     * Called when the provider is enabled by the user.
+     * @param provider - The name of the location provider associated
+     *                 with this update.
+     */
     @Override
     public void onProviderEnabled(String provider){
 
     }
 
+    /**
+     * Called when the provider is disabled by the user. If
+     * requestLocationUpdates is called on an already disabled provider,
+     * this method is called immediately.
+     * @param provider - The name of the location provider associated with
+     *                 this update.
+     */
     @Override
     public void onProviderDisabled(String provider){
 
@@ -358,6 +508,9 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         boolean waypoint = false;
         boolean latitude = false;
         boolean longitude = false;
+
+        double curLat;
+        double curLon;
 
         /**
          * Receive notification of the start of an element.
@@ -392,18 +545,71 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
                 longitude = true;
             }else if(qName.equalsIgnoreCase("trail_name")) {
                 trailName = true;
+            }else if(trail){
+                trail = false;
             }//end if-else
 
         /* End startElement method*/
         }
 
+        /**
+         * Receive notification of the end of an element
+         * By default, do nothing. Application writers may override
+         * this method in a subclass to take specific actions at the
+         * end of each element (such as finalising a tree node or writing
+         * output to a file).
+         * @param uri - The Namespace URI, or the empty string if the
+         *            element has no Namespace URI or if Napmespace
+         *            processing is not being performed
+         * @param localName - The local name (without prefix), or the empty
+         *                  string if Namespace processing is not being
+         *                  performed
+         * @param qName - The qualified name (with prefix), or the empty
+         *              string if qualified names are not available.
+         * @throws SAXException - Any SAX exception, possibly wrapping another
+         *                      exception
+         */
         public void endElement(String uri, String localName,
                                String qName) throws SAXException{
 
+        /* end endElement()*/
         }
 
-        public void characters(char ch[], int start, int length){
-
+        /**
+         * Receive notification of character data inside an element.
+         * By default, do nothing Application writers may override this
+         * method to take specific actions for each chunk of character
+         * data (such as adding the data to a node or buffer, or printing
+         * it to a file).
+         * @param ch - The characters.
+         * @param start - The start position in the character array.
+         * @param length - The number of characters to use from the character
+         *               array
+         * @throws SAXException - Any SAX exception, possibly wrapping another
+         *                      exception.
+         */
+        public void characters(char ch[], int start, int length) throws
+        SAXException{
+            if(name){
+                trailParser.setTrailSystemName(new String(ch, start, length));
+                name = false;
+            }else if(trailsystem){
+                trailsystem = false;
+            }else if(waypoint){
+                waypoint = false;
+            }else if(latitude){
+                curLat = Double.parseDouble(new String(ch, start, length));
+                latitude = false;
+            }else if(longitude){
+                curLon = Double.parseDouble(new String(ch, start, length));
+                LatLng latLng = new LatLng(curLat, curLon);
+                trailParser.addPoint(latLng);
+                longitude = false;
+            }else if(trailName){
+                trailParser.addTrail(new String(ch, start, length));
+                Log.v("check", new String(ch, start, length));
+            }//end if-else
+        /* end characters()*/
         }
     };
 }

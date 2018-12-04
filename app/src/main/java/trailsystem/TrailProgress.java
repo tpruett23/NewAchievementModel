@@ -23,9 +23,13 @@ public class TrailProgress {
     /**
      * Add a WayPoint to the progress
      */
-    public void addPoint(WayPoint point){
-        if(!progress.contains(point))
+    public Collection<WayPoint> addPoint(WayPoint point){
+        if(!progress.contains(point)) {
             progress.add(point);
-    }//end addPoint()
+        }//end if
+
+        return progress;
+    /* end addPoint */
+    }
 
 }//end TrailProgress

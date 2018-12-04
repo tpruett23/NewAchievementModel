@@ -1,12 +1,16 @@
 package trailsystem;
 
+import android.location.Location;
+
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
 /**
  * Trail class which will model a specific trail
  * @author - Melchor Dominguez
- * @version - 1.0
+ * @version - 1.1
  */
 public class Trail {
 
@@ -21,13 +25,27 @@ public class Trail {
     /** The progress achieved of the trail*/
     private TrailProgress progress;
 
+    /**
+     * Initialize a completely empty trail
+     */
     public Trail(){
         path = new ArrayList<>();
         name = "";
         start = null;
         end = null;
         progress = new TrailProgress();
-    }//end Trail
+    /* end constructor*/
+    }
+
+    /**
+     * initialize a trail with a specified name
+     * @param name
+     */
+    public Trail(String name){
+        this();
+        setName(name);
+    /* end constructor*/
+    }
 
     /**
      * Add a specific WayPoint to the path if not already added
@@ -38,6 +56,23 @@ public class Trail {
             path.add(add);
         }//end if
     }//end addPoint()
+
+    /**
+     * add a point for the trail system
+     * @param add - the latitude and longitude points to be added
+     */
+    public void addPoint(LatLng add){
+        // Check if there is a point with the same coordinates
+        for (WayPoint wayPoint: path){
+            if (wayPoint.getPoint().equals(add)){
+                return;
+            }//end if
+        }//end for
+
+        WayPoint wayPoint = new WayPoint(add);
+        path.add(wayPoint);
+    /* end addPoint()*/
+    }
 
     /**
      * Remove a specific WayPoint from the path
@@ -94,7 +129,7 @@ public class Trail {
 
     /**
      * Set a new name for the trail
-     * @param - new name for the trail
+     * @param name - new name for the trail
      */
     public void setName(String name){
         this.name = name;
@@ -107,4 +142,31 @@ public class Trail {
     public String getName(){
         return name;
     }//end getName()
+
+    /**
+     * check the progress against the current trail
+     * @param location - location to be compared with
+     */
+    public Collection<WayPoint> checkProgress(Location location){
+
+        //check if the location accessed is in the trail
+        for(WayPoint wayPoint: path){
+            LatLng latLng = wayPoint.getPoint();
+            double curLng = location.getLongitude();
+            double curLat = location.getLatitude();
+            boolean longitude,latitude;
+
+            longitude = Double.compare(latLng.longitude, curLng) == 0;
+
+            latitude = Double.compare(latLng.latitude, curLat) == 0;
+
+            if(longitude & latitude) {
+                return progress.addPoint(wayPoint);
+            }//end if
+
+        }//end for
+        return null;
+    /* end checkProgress */
+    }
+/* end Trail class */
 }
