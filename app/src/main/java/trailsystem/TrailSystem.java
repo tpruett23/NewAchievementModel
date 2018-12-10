@@ -89,6 +89,8 @@ public class TrailSystem {
      * @param trail - new trail to be added
      */
     public void addTrail(Trail trail){
+        if(trail == null)
+            return;
         if(!trails.contains(trail))
             trails.add(trail);
         currentTrail = trail;
@@ -167,11 +169,12 @@ public class TrailSystem {
         for(Trail trail: trails){
              Collection<WayPoint> trailProgress = trail.checkProgress(location);
              if(trailProgress == null)
-                 return null;
+                 break;
              for(WayPoint wayPoint: trailProgress){
                  points.add(wayPoint.getPoint());
              }
-             return points;
+             if (points.size() > 0)
+                return points;
         }
         return null;
     /* end updateLocation()*/

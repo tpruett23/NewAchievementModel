@@ -3,9 +3,12 @@ package screens;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +18,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.toripruett.newachievementmodel.R;
@@ -42,6 +46,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -74,6 +79,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     private Location lastLocation;
     /** location marker for the current location*/
     private Marker locationMarker;
+    /** Location Manager to help receive the location*/
+    private LocationManager locationManager;
 
     /** trail parser which will input all information for the trail system*/
     private XMLTrailParser trailParser;
@@ -82,7 +89,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
     /** Polyline which will show the trail*/
     //TODO: change this to a collection of Polylines
-    private Polyline line;
+    private Polyline trailSystem;
+    private Polyline trailProgress;
 
     /**
      * Called when the activity is starting. This is where most initialization
@@ -93,14 +101,18 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      * @param savedInstanceState - current instance to reference
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         trailParser = new XMLTrailParser();
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        if(mapFragment != null)
+        if (mapFragment != null)
             mapFragment.getMapAsync(this);
+
+        //locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        //checkLocationPermission();
+        //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, this);
     /* end onCreate*/
     }
 
@@ -161,7 +173,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     }
 
     /**
-     * Create the Google APi Client with accesss to
+     * Create the Google APi Client with access to
      * Plus and Games
      */
     protected synchronized void buildGoogleApiClient(){
@@ -182,6 +194,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      */
     @Override
     public void onLocationChanged(Location location){
+        Log.v("onLocationChanged", "begin onLocationChanged");
         lastLocation = location;
 
         //remove the current marker
@@ -194,17 +207,39 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Current Position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
         locationMarker = mGoogleMap.addMarker(markerOptions);
 
         //move the camera to the current location
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
 
+        Log.v("onLocationChanged", trailParser.getTrailSystem().getName() + "check the location");
         Collection<LatLng> progress = trailParser.updateLocation(location);
-        if (progress != null){
-            drawProgress(progress);
-        }//end if
+        //if (progress != null){
+            //Log.v("onLocationChanged", "new Location!!!");
+            //drawProgress(progress);
+        //}//end if
+        /*
+        if(trailProgress != null) {
+            if (trailProgress.getPoints().size() > 0) {
+                List<LatLng> curProgress = trailProgress.getPoints();
+                curProgress.add(new LatLng(location.getLongitude(), location.getLatitude()));
+                drawProgress(curProgress);
+            }else{
+                Collection<LatLng> newList = new ArrayList<>();
+                newList.add(new LatLng(location.getLongitude(), location.getLatitude()));
+                drawProgress(newList);
+            }
+        }else{
+            Collection<LatLng> newList = new ArrayList<>();
+            newList.add(new LatLng(location.getLongitude(), location.getLatitude()));
+            drawProgress(newList);
+        } */
+        LatLng compare = new LatLng(location.getLatitude(), location.getLongitude());
+        notify(compare);
+
+        Log.v("onLocationChanged", "end onLocationChanged");
 
     /* end onLocationChanged*/
     }
@@ -215,8 +250,66 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      *                 of location
      */
     private void drawProgress(Collection<LatLng> progress){
+        PolylineOptions path = new PolylineOptions();
+        path.addAll(progress);
+        path.color(Color.RED);
+        path.width(10);
+        this.trailProgress = mGoogleMap.addPolyline(path);
 
+        //show an example of a pop up for users to see
+        final EditText taskEditText = new EditText(getApplicationContext());
+        AlertDialog dialog = new AlertDialog.Builder(getApplicationContext())
+                .setTitle("Progress has been made!")
+                .setMessage("What do you want to do next?")
+                .setView(taskEditText)
+                .setPositiveButton("Continue", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        String task = String.valueOf(taskEditText.getText());
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .create();
+
+        dialog.show();
     /* end drawProgress()*/
+    }
+
+    /**
+     * Method to notify the user if the new location is part of the trail system
+     * @param point - point to be checked
+     */
+    private void notify(LatLng point){
+        Log.v("Notify", "begin notify");
+        List<LatLng> points = trailSystem.getPoints();
+        Log.v("Notify", point.toString());
+        for(LatLng latLng: points){
+            Log.v("Notify", latLng.toString());
+            Double lat1 = latLng.latitude;
+            Double lat2 = point.latitude;
+            Double lng1 = latLng.longitude;
+            Double lng2 = point.longitude;
+            if((Math.abs(lat1 - lat2) < 0.0001)){
+                if(Math.abs(lng1 - lng2) < 0.0001){
+                    Log.v("Notify", "true!!!");
+                    final EditText taskEditText = new EditText(this);
+                    AlertDialog dialog = new AlertDialog.Builder(this)
+                            .setTitle("Progress has been made!")
+                            .setMessage("What do you want to do next?")
+                            .setView(taskEditText)
+                            .setPositiveButton("Continue", new DialogInterface.OnClickListener(){
+                                @Override
+                                public void onClick(DialogInterface dialog, int which){
+                                    String task = String.valueOf(taskEditText.getText());
+                                }
+                            })
+                            .setNegativeButton("Cancel", null)
+                            .create();
+
+                    dialog.show();
+                }
+            }
+        }
     }
 
     /**
@@ -348,9 +441,10 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
     /**
      * Create the entire polyline for the trail system
+     * This method will later separate the polylines into seperate lines by trail
      */
     private void createLine(){
-        Log.v("createLine", "Begin createLine");
+        //Log.v("createLine", "Begin createLine");
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
@@ -368,11 +462,16 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             }//end for
             path.width(6);
 
-            line = mGoogleMap.addPolyline(path);
+            this.trailSystem = mGoogleMap.addPolyline(path);
             Log.v("createLine", "finished polyline");
         }catch (Exception e){
             e.printStackTrace();
         }
+
+        //Once the line has been created, receive location updates
+        locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        checkLocationPermission();
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, this);
 
         /*
         try {
@@ -393,7 +492,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             }//end for
             path.width(6);
 
-            line = mGoogleMap.addPolyline(path);
+            trailSystem = mGoogleMap.addPolyline(path);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -404,18 +503,18 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
     /**
      * Adds a trail to the map with the specified color
-     * @param path - options for line to be displayed
+     * @param path - options for trailSystem to be displayed
      * @param trail - trail which will be displayed
      * @param color - int value of color
      */
     private void addTrailToLine(PolylineOptions path, Trail trail, int color){
-        Log.v("addTrailToLine", "begin addTrailToLine");
+        //Log.v("addTrailToLine", "begin addTrailToLine");
         Collection<WayPoint> waypoints = trail.getPath();
         ArrayList<LatLng> latLngs = new ArrayList<>();
 
         for(WayPoint wayPoint: waypoints){
             latLngs.add(wayPoint.getPoint());
-            Log.v("addTrailToLine", String.valueOf(wayPoint.getPoint().latitude));
+            //Log.v("addTrailToLine", String.valueOf(wayPoint.getPoint().latitude));
         }//end for
         path.addAll(latLngs);
         path.color(color);

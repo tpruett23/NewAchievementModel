@@ -1,6 +1,7 @@
 package trailsystem;
 
 import android.location.Location;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -146,15 +147,22 @@ public class Trail {
     /**
      * check the progress against the current trail
      * @param location - location to be compared with
+     * @return - collection of WayPoints if progress is different
+     *         - null if no changes occurred
      */
     public Collection<WayPoint> checkProgress(Location location){
-
+        Log.v("checkProgress", "begin check progress");
+        Log.v("checkProgress", name + path.toString());
         //check if the location accessed is in the trail
         for(WayPoint wayPoint: path){
             LatLng latLng = wayPoint.getPoint();
             double curLng = location.getLongitude();
             double curLat = location.getLatitude();
             boolean longitude,latitude;
+            Log.v("checkProgress", String.valueOf(curLng));
+            Log.v("checkProgress", String.valueOf(latLng.longitude));
+            Log.v("checkProgress", String.valueOf(curLat));
+            Log.v("checkProgress", String.valueOf(latLng.latitude));
 
             longitude = Double.compare(latLng.longitude, curLng) == 0;
 
