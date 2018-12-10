@@ -51,6 +51,7 @@ import trailsystem.Trail;
 import trailsystem.TrailSystem;
 import trailsystem.WayPoint;
 
+
 /**
  * Screen which will show all of the trail systems on a specific trail
  * @author - Melchor Dominguez
@@ -74,6 +75,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     private Location lastLocation;
     /** location marker for the current location*/
     private Marker locationMarker;
+    /** UserCompleted Instance */
+    UserCompleted UC = new UserCompleted();
 
     /** trail parser which will input all information for the trail system*/
     private XMLTrailParser trailParser;
@@ -183,7 +186,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     @Override
     public void onLocationChanged(Location location){
         lastLocation = location;
-
+        UC.getMap().add(location);
+        UC.addDistance();
         //remove the current marker
         if(locationMarker != null){
             locationMarker.remove();

@@ -2,6 +2,11 @@ package achievements;
 
 import achievements.AchievementDescriptor;
 
+/**
+ * The Time Achievement Descriptor.
+ * @author Tori Pruett
+ * @version 2.0
+ */
 public class Time extends AchievementDescriptor {
     /**
      * The name of the achievement

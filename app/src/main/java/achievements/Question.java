@@ -2,33 +2,33 @@ package achievements;
 
 import achievements.AchievementDescriptor;
 
+/**
+ * Question Achievement Descriptor
+ * @author Tori Pruett
+ * @version 2.0
+ */
+
 public class Question extends AchievementDescriptor {
     /**
      * The name of the achievement
      **/
     String name;
-
     /**
      * How many points for the achievement.
      **/
     int points;
-
     /**
      * The description of the achievement.
      **/
     String description;
-
     /**
      * The distance associated with the achievement.
      **/
     double distance;
-
-
     /**
      * The number of questions answered correctly to receive this achievement.
      */
     int questionsCorrect;
-
 
     /**
      * The constructor for the Question achievement.

@@ -16,11 +16,19 @@ public abstract class AchievementDescriptor {
      **/
     private double distance;
 
-
+    /**
+     * The speed of the user traveling.
+     */
     private int speed;
 
+    /**
+     * The amount of steps the user has traveled.
+     */
     private int steps;
-
+    /**
+     * The amount of trails completed.
+     */
+    private int trails;
     /**
      * The description of the achievement.
      **/
@@ -87,7 +95,7 @@ public abstract class AchievementDescriptor {
     }
 
     /**
-     * Gets the distance of the achievement.
+     * Gets the speed of the achievement.
      *
      * @return The distance.
      */
@@ -97,13 +105,23 @@ public abstract class AchievementDescriptor {
     }
 
     /**
-     * Gets the distance of the achievement.
+     * Gets the amount of steps of the achievement.
      *
      * @return The distance.
      */
 
     public int getSteps() {
         return this.steps;
+    }
+
+    /**
+     * Gets the amount of trails of the achievement.
+     *
+     * @return The distance.
+     */
+
+    public int getTrails() {
+        return this.trails;
     }
 
 

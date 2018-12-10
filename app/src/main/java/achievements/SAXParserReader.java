@@ -40,6 +40,9 @@ import achievements.Achievements;
  */
 public class SAXParserReader extends FragmentActivity {
 
+    /**
+     * Instance of the SaxParserReader.
+     */
     private static SAXParserReader instance;
 
     /**
@@ -52,26 +55,33 @@ public class SAXParserReader extends FragmentActivity {
      */
 
     ArrayList<Achievements> achievements = new ArrayList<>();
-
-    //Achievements ach = new Achievements();
-
-
-
+    /**
+     * Achievement instance to get needed data.
+     */
+    Achievements ach = new Achievements();
+    /**
+     * Context for the class.
+     */
     Context context;
-
+    /**
+     * Constructor for the SaxParserReader.
+     * @param context
+     */
     public SAXParserReader(Context context){
         onCreate(context);
     }//end constructor
 
+    /**
+     * Contructor
+     */
     public SAXParserReader(){
 
     }
 
     public void onCreate(Context context){
-
         this.context = context;
         this.instance = this;
-        filename = "achsavefile";
+        filename = "achxmltester";
 
     }//end onCreate
 
@@ -88,8 +98,7 @@ public class SAXParserReader extends FragmentActivity {
             AchievementXMLHandler handler = new AchievementXMLHandler();
             xmlreader.setContentHandler(handler);
 
-
-           InputStream inStream = context.getResources().openRawResource(R.raw.achxmltester);
+           InputStream inStream = this.context.getResources().openRawResource(R.raw.achxmltester);
             InputSource inStream2 = new InputSource(inStream);
             xmlreader.parse(inStream2);
 
@@ -109,20 +118,21 @@ public class SAXParserReader extends FragmentActivity {
      * @return The XML String.
      */
     public String toXML() {
-        /*return "<achievement>\n" +
-                "\t<name>" + ach.getName()+ "</name>" +
-                "\t<points>" + ach.getPoints() + "</points>" +
-                "\t<description>" + ach.getDescription() + "</description>" +
-                "\t<type>" + ach.getDescriptorA() + "</type>" +
-                "</achievement>";
-                */
-
         return "<achievement>\n" +
+                "\t<name>" + ach.getName()+ "</name>\n" +
+                "\t<points>" + ach.getPoints() + "</points>\n" +
+                "\t<description>" + ach.getDescription() + "</description>\n" +
+                "\t<type>" + ach.getDescriptorA()+ "</type>\n" +
+                "</achievement>";
+
+
+       /* return "<achievement>\n" +
                 "\t<name>" + "name"+ "</name>" +
                 "\t<points>" + "points" + "</points>" +
                 "\t<description>" + "des" + "</description>" +
                 "\t<type>" + "type" + "</type>" +
                 "</achievement>";
+                */
     }
 
 
@@ -131,24 +141,17 @@ public class SAXParserReader extends FragmentActivity {
      */
     public void save() {
 
-        String xml_data  = toXML();  //TODO: FIX THIS
+        String xml_data  = toXML();
 
         //Create a file if its not already on disk
+        File filesDIR = this.context.getFilesDir();
         File file = new File(this.context.getFilesDir(), filename);
-
-
-        //String string = "";
 
         FileOutputStream outputStream;//declare FOS
 
-        try {  //to do this
-            /*
-            outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-            outputStream.write(xml_data.getBytes());
-            outputStream.close();
-            */
+        try {
 
-            outputStream = openFileOutput("achsavefile", Context.MODE_APPEND);
+            outputStream = this.context.openFileOutput(filename, Context.MODE_PRIVATE);
             outputStream.write(xml_data.getBytes());
             outputStream.close();
 
@@ -169,26 +172,17 @@ public class SAXParserReader extends FragmentActivity {
      * Loads the achievements from internal storage.
      */
         public void load() {
-
-            //Create a file if its not already on disk
             File extDir = new File(context.getFilesDir(), filename);
-
-            //Read text from file
             StringBuilder text = new StringBuilder();
 
             try {
-
                 BufferedReader br = new BufferedReader(new FileReader(extDir));
-                if(extDir != null){
-                    Log.v("File Error","File is not null");
-                }
                 String line;
 
                 while ((line = br.readLine()) != null) {
                     text.append(line);
                     text.append('\n');
                 }
-
                 br.close();
             }//end try
             catch (FileNotFoundException e) {//If file not found on disk here.
@@ -199,7 +193,6 @@ public class SAXParserReader extends FragmentActivity {
                 Toast.makeText(this.context, "Error loading file", Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }//end catch
-
             //Set the data from the file content and convert it to a String
             String data = new String(text);
 

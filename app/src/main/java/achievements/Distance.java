@@ -2,6 +2,12 @@ package achievements;
 
 import achievements.AchievementDescriptor;
 
+/**
+ * Distance Achievement Descriptor
+ * @author Tori Pruett
+ * @version 2.0
+ */
+
 public class Distance extends AchievementDescriptor {
     /**
      * The name of the achievement
@@ -27,7 +33,7 @@ public class Distance extends AchievementDescriptor {
     /**
      * The constructor for the Distance achievement.
      */
-    public Distance(String name, int points, double distance, String description) {
+    public Distance(String name, int points,double distance, String description) {
         this.name = name;
         this.points = points;
         this.distance = distance;

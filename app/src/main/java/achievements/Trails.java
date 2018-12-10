@@ -3,6 +3,11 @@ package achievements;
 import achievements.AchievementDescriptor;
 import achievements.Achievements;
 
+/**
+ * The Trail Achievement Descriptor
+ * @author Tori Pruett
+ * @version 2.0
+ */
 public class Trails extends AchievementDescriptor {
 
     /**
@@ -28,18 +33,18 @@ public class Trails extends AchievementDescriptor {
     /**
      * The number of trails completed to earn this achievement.
      */
-    int numTrails;
+    int trails;
 
     /**
      * The constructor for the Trails achievement.
      */
-    public Trails(String name, int points, double distance, String description, int numTrails) {
+    public Trails(String name, int points,String description, int numTrails) {
 
         this.name = name;
         this.points = points;
         this.distance = distance;
         this.description = description;
-        this.numTrails = numTrails;
+        this.trails = numTrails;
 
     }
 
@@ -110,6 +115,14 @@ public class Trails extends AchievementDescriptor {
     @Override
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Gets the amount of trails completed.
+     * @return The amount of trails.
+     */
+    public int getTrails(){
+        return this.trails;
     }
 
 

@@ -27,7 +27,6 @@
         <type>
             <time>1</time>
         </type>
-
     </achievement>
 
 
@@ -36,11 +35,17 @@
         <points>25</points>
         <description>You have walked 5 miles on the Trail System in 2 minutes.</description>
         <type>
-            <distance>5</distance>
             <time>2</time>
         </type>
+    </achievement>
 
-
+    <achievement>
+        <name>Two Hundred Steps Traveled</name>
+        <points>15</points>
+        <description>You have taken 200 steps while traveling.</description>
+        <type>
+            <step>200</step>
+        </type>
     </achievement>
 
 </achievements>

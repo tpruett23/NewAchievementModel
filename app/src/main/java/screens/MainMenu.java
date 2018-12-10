@@ -1,6 +1,5 @@
 package screens;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +15,7 @@ import com.example.toripruett.newachievementmodel.R;
 
 import achievements.SAXParserReader;
 import achievements.Settings;
-import achievements.UserCompleted;
+import achievements.UserCompletedDisplay;
 
 /**
  * This represents the main menu of the application.
@@ -24,6 +23,7 @@ import achievements.UserCompleted;
  * @version 1.0
  */
 public class MainMenu extends AppCompatActivity implements OnClickListener{
+
     /**
      * This button takes the user to the story mode screen.
      **/
@@ -40,12 +40,6 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
     Toolbar toolbar;
 
 
-    Button saveButton;
-
-    Button loadButton;
-
-    SAXParserReader sax = new SAXParserReader();
-
     /**
      * The method is called whenever this activity is created to assign values and build.
      * @param savedInstanceState
@@ -57,14 +51,13 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
         setContentView(R.layout.activity_main);
         storyButton = (Button)findViewById(R.id.storyButton);
         miniGameButton = (Button)findViewById(R.id.miniButton);
-        saveButton = (Button)findViewById(R.id.saveButton);
-        loadButton = (Button)findViewById(R.id.loadButton);
         toolbar = (Toolbar) findViewById(R.id.toolbar1);
         storyButton.setOnClickListener(this);
         miniGameButton.setOnClickListener(this);
-        saveButton.setOnClickListener(this);
-        loadButton.setOnClickListener(this);
 
+
+        SAXParserReader saxParserReader = new SAXParserReader(this);
+        saxParserReader.parseXML();
 
 
 
@@ -81,6 +74,7 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
         getMenuInflater().inflate(R.menu.toolbar, menu);
         return true;
     }
+
 
     /**
      * This is the method called when one of the buttons in the toolbar is clicked.
@@ -100,7 +94,7 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
                 startActivity(i);
                 return true;
             case R.id.completed:
-                i = new Intent(this,UserCompleted.class);
+                i = new Intent(this, UserCompletedDisplay.class);
                 startActivity(i);
                 return true;
             case R.id.Settings:
@@ -130,10 +124,6 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
         }else if(v.getId() == miniGameButton.getId()) {
             i = new Intent(this, MiniGame.class);
             startActivity(i);
-        }else if(v.getId() == saveButton.getId()){
-            //sax.save();
-        }else if(v.getId() == loadButton.getId()){
-            //sax.load();
         }
 
     }

@@ -1,20 +1,19 @@
 package achievements;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 
 import achievements.AchievementDescriptor;
+import trailsystem.WayPoint;
 
 /**
  * The class represents the users information.
  *
  * @author Tori Pruett
+ * @version 2.0
  */
 public class UserInfo {
-
-    /**
-     * Instance of UserCompleted class to access values.
-     */
-    //UserCompleted UC = new UserCompleted();
 
     /**
      * The total amount of points the user has won.
@@ -34,28 +33,19 @@ public class UserInfo {
     /**
      * How fast the user is traveling.
      */
-    public  int speed;
+    public  int speed = 10;
 
     /**
      * The number of steps the user has taken.
      */
-    public  int steps;
-
-    /**
-     * The arraylist to hold all of the completed achievements.
-     */
-    //ArrayList<Achievements> completed = UC.getCompleted();
-
+    public  int steps = 500;
 
     /**
      * The constructor for UserInfo.
      */
     public void UserInfo() {
 
-        totalDistance = 6;
-        timePlayed = 7.0;
-        speed = 9;
-        steps = 200;
+
     }
 
     /**

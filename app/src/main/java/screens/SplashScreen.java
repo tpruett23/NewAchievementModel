@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.toripruett.newachievementmodel.R;
 
+import achievements.SAXParserReader;
+
 /**
  * The class represents the splash screen of the application.
  * @author Tori Pruett
@@ -27,6 +29,7 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
     }
 
     /**
