@@ -13,7 +13,7 @@ import achievements.Achievements;
 /**
  * The class displays the details of the Achievement when clicked.
  * @author Tori Pruett
- * @version 1.0
+ * @version 2.0
  */
 public class AchievementDetails extends Activity {
     /**
@@ -34,12 +34,10 @@ public class AchievementDetails extends Activity {
     TextView points;
 
     /**
-     * The textview for the distance to be displayed for that achievement.
+     * The textview for the descriptor to be displayed for that achievement.
      */
-    TextView distance;
-
     TextView des1;
-    TextView des2;
+
 
     /**
      * The method is called to build and start the activity.
@@ -54,9 +52,7 @@ public class AchievementDetails extends Activity {
         achvDetails = (TextView)findViewById(R.id.detailtextview1);
         achvTitle = (TextView)findViewById(R.id.detailtitle);
         points = (TextView)findViewById(R.id.pointtextview);
-        distance = (TextView)findViewById(R.id.distancetextview);
         des1 = (TextView)findViewById(R.id.des1);
-        des2 = (TextView)findViewById(R.id.des2);
 
         setImage();
     }
@@ -65,9 +61,6 @@ public class AchievementDetails extends Activity {
      * Sets the image and other textview boxes with the achievement details.
      */
     public void setImage(){
-
-
-
 
         Bundle extras = getIntent().getExtras();
         String image = extras.getString("pic");
@@ -99,8 +92,6 @@ public class AchievementDetails extends Activity {
         int points1 = extras.getInt("points");
         points.setText("Points: " + points1);
 
-        double distance1 = extras.getDouble("distance");
-        distance.setText("Distance: " + distance1);
 
         String desText1 = extras.getString("achDesA");
         des1.setText(desText1);

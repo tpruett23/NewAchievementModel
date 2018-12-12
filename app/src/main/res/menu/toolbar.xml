@@ -22,7 +22,7 @@
 
     <item
         android:id="@+id/completed"
-        android:icon="@drawable/completed"
+        android:icon="@drawable/goldtrophy"
         android:orderInCategory="1"
         android:title="completed"
         app:showAsAction="always" />

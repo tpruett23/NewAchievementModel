@@ -1,5 +1,6 @@
 package achievements;
 
+import android.content.Context;
 import android.widget.ListView;
 
 import org.xml.sax.Attributes;
@@ -14,27 +15,31 @@ import achievements.Achievements;
  * Created by Andrew on 4/15/2015.
  */
 public class AchievementXMLHandler extends DefaultHandler {
-
     /** A global list of achievements **/
     private  static ArrayList<Achievements> achievements1;
-
-    /** A temp achievement built to get each marker element**/
+    /**
+     * Achievement factory instance.
+     */
+    AchievementFactory af = new AchievementFactory();
+    /**
+     * A temp achievement built to get each marker element
+     *
+     */
    Achievements temp;
-
-   //AchievementFactory af = new AchievementFactory();
-
-   static Achievements temp2 = new Achievements();
-
+    /**
+     * Achievements instance.
+     */
+   Achievements temp2 = new Achievements();
+    /**
+     * Boolean value to check what level of xml tags we are in.
+     */
    boolean types  =  false;
-
-   AchievementDescriptor achievementDescriptor;
 
     /** The current element being read by the XML parser**/
     String tmpName, tmpDesc, tmpPoints,tmpADPoints;
 
     /** The current element being read off**/
     private String currentElement;
-
 
     //=========================================================================
     /**
@@ -43,7 +48,6 @@ public class AchievementXMLHandler extends DefaultHandler {
     //=========================================================================
     public AchievementXMLHandler() {
         achievements1 = new ArrayList<>();
-
 
     }//========================================================================
 
@@ -57,11 +61,13 @@ public class AchievementXMLHandler extends DefaultHandler {
         return achievements1;
     }//========================================================================
 
+    /**
+     * Gets the second Achievement instance.
+     * @return
+     */
     public  Achievements getTemp2(){
         return this.temp2;
     }//========================================================================
-
-
 
     /**
      * Called when a start element is found
@@ -133,75 +139,78 @@ public class AchievementXMLHandler extends DefaultHandler {
     @Override
     public void endElement(String uri, String localName, String qName)
             throws SAXException {
-
+        AchievementFactory af = new AchievementFactory();
 
             if (temp == null)
                 temp = new Achievements();
-
 
             /** set value */
             if (qName.equals("name")) {//when title is found close
                 temp.setName(currentElement);
 
+
             } else if (qName.equals("description")) {
                 temp.setDescription(currentElement);
+
 
             } else if (qName.equals("points")) {
                 temp.setPoints(Integer.parseInt(currentElement));
 
 
-            }else if(types == true){
-                if(qName.equals("time")) {
-                    AchievementDescriptor TimeAch = new Time("Time Achievement",temp.getPoints(),Integer.parseInt(currentElement),temp.getDescription(),0);
+            }else if(types == true) {
+
+                if (qName.equals("time")) {
+                    AchievementDescriptor TimeAch = new Time("Time Achievement", temp.getPoints(), Integer.parseInt(currentElement), temp.getDescription(), 0);
                     temp.setDescriptor(TimeAch);
-                    //AchievementFactory.addCompleted(temp);
-                    //TimeAch.setPoints(Integer.parseInt(currentElement));
+                    af.addCompleted(temp,TimeAch);
                     temp2.getAllAchievements().add(TimeAch);
-                }else if(qName.equals("distance")){
-                    achievementDescriptor = new Distance("Distance Achievement",temp.getPoints(),Double.parseDouble(currentElement),temp.getDescription());
-                    temp.setDescriptor(achievementDescriptor);
-                    temp2.getAllAchievements().add(achievementDescriptor);
-                    //AchievementFactory.addCompleted(temp);
 
-                }else if(qName.equals("trails")){
-                    AchievementDescriptor trailAch = new Trails();
-                    trailAch.setPoints(Integer.parseInt(currentElement));
+                } else if (qName.equals("distance")) {
+                    AchievementDescriptor distanceAch = new Distance("Distance Achievement", temp.getPoints(), Double.parseDouble("900"), temp.getDescription());
+                    temp.setDescriptor(distanceAch);
+                    temp2.getAllAchievements().add(distanceAch);
+                   // af.addCompleted(temp,distanceAch);
+
+                } else if (qName.equals("trails")) {
+                    AchievementDescriptor trailAch = new Trails("Trail Achievement", temp.getPoints(), temp.getDescription(), Integer.parseInt(currentElement));
+                    temp.setDescriptor(trailAch);
                     temp2.getAllAchievements().add(trailAch);
+                    af.addCompleted(temp,trailAch);
 
-                }else if(qName.equals("steps")){
-                    AchievementDescriptor stepAch = new Steps();
-                    stepAch.setPoints(Integer.parseInt(currentElement));
+                } else if (qName.equals("step")) {
+                    AchievementDescriptor stepAch = new Steps("Step Achievement", temp.getPoints(),temp.getDescription(),200);
+                    temp.setDescriptor(stepAch);
                     temp2.getAllAchievements().add(stepAch);
+                    af.addCompleted(temp,stepAch);
 
-                }else if(qName.equals("speed")){
-                    AchievementDescriptor speedAch = new Speed();
-                    speedAch.setPoints(Integer.parseInt(currentElement));
+                } else if (qName.equals("speed")) {
+                    AchievementDescriptor speedAch = new Speed("Speed Achievement", temp.getPoints(), Integer.parseInt(currentElement), temp.getDescription());
+                    temp.setDescriptor(speedAch);
                     temp2.getAllAchievements().add(speedAch);
+                    af.addCompleted(temp,speedAch);
 
-                }else if(qName.equals("challenges")){
-                    AchievementDescriptor challAch = new Challenges();
-                    challAch.setPoints(Integer.parseInt(currentElement));
+                } else if (qName.equals("challenges")) {
+                    AchievementDescriptor challAch = new Challenges("Challenge Achievement", temp.getPoints(), Integer.parseInt(currentElement), temp.getDescription());
+                    temp.setDescriptor(challAch);
                     temp2.getAllAchievements().add(challAch);
+                    af.addCompleted(temp,challAch);
 
                 }
             }
+
 
             if (qName.equals("achievement") && temp != null) {
                 System.out.println(temp);
                 achievements1.add(temp);
                 temp = null;//</achievement> is found set to null.
-
-
                 System.out.println(achievements1);
             }
 
             currentElement = null;
 
 
-
-
-
     }//========================================================================
+
 
     //=========================================================================
     /**
@@ -218,6 +227,9 @@ public class AchievementXMLHandler extends DefaultHandler {
         if (currentElement != null) {
             currentElement = currentElement + new String(ch, start, length);
         }
+
     }//=========================================================================
+
+
 
 }//end class####################################################################

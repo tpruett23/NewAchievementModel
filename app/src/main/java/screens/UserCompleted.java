@@ -1,27 +1,29 @@
-package achievements;
+package screens;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.location.Location;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.toripruett.newachievementmodel.R;
-
 import java.util.ArrayList;
 
-public class UserCompleted extends Activity {
+import achievements.Achievements;
+
+/**
+ * The class holds the information for all of the tasks the user has completed.
+ */
+
+public class UserCompleted {
+
     /**
      * The Listview that displays the completed achievements.
      */
     private ListView lv;
 
-    AchievementXMLHandler ach = new AchievementXMLHandler();
-
     /**
      * The number of trails that have been completed by the user.
      */
-    private int trails = 4;
+    private int trails = 10;
 
     /**
      * The number of questions that have answered correctly by the user.
@@ -43,34 +45,38 @@ public class UserCompleted extends Activity {
      */
     private int challenges = 4;
 
+    /**
+     * Distance the user has traveled.
+     */
+    private float distanceUser;
 
     /**
      * The arraylist to hold the completed achievements for the user.
      */
-     private ArrayList<Achievements> completed = new ArrayList<>();
-
-    /**
-     * The adapter to display the arraylist.
-     */
-    ArrayAdapter<Achievements> adapter;
-
-    /**
-     * The method that is called to start and build the activity.
-     *
-     * @param savedInstanceState
-     */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.usertrophycabinet);
+     ArrayList<Location> map = new ArrayList<>();
 
 
-        lv = (ListView) findViewById(R.id.list);
-        adapter = new CustomListAdapter(this, R.layout.userlist, R.layout.activity_list_view, completed);
+    public UserCompleted(){
 
-        lv.setAdapter(adapter);
     }
+
+    public void addDistance(){
+        float temp = 0;
+        float distance = 0;
+        for(int i = 0; i < map.size(); i++){
+            for(int j = 1; j < map.size();j++) {
+                Location loc = map.get(i);
+                Location loc2 = map.get(j);
+                distance = loc.distanceTo(loc2);
+                temp += distance;
+
+            }
+        }
+        distanceUser = (temp - distanceUser);
+        Log.v("Distance", distanceUser + "");
+    }
+
+
 
     /**
      * Gets the number of trails completed.
@@ -118,15 +124,20 @@ public class UserCompleted extends Activity {
     }
 
     /**
-     * Gets the arraylist of completed achievements.
-     *
-     * @return the arraylist of completed achievements.
+     * Gets the total distance the user has completed.
+     * @return The total distance the user has traveled.
      */
-    public  ArrayList<Achievements> getCompleted() {
-        return this.completed;
+    public float getDistanceUser(){
+        return this.distanceUser;
     }
 
-
+    /**
+     * Gets the arraylist of locations the user has been to.
+     * @return Gets the arraylist of locations the user has been to.
+     */
+    public ArrayList<Location> getMap() {
+        return map;
+    }
 }
 
 

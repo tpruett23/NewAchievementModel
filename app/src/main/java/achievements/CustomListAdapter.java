@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.toripruett.newachievementmodel.R;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 import achievements.AchievementDescriptor;
@@ -21,6 +22,10 @@ import achievements.AchievementDescriptor;
  * @version 1.0
  */
 public class CustomListAdapter extends ArrayAdapter<Achievements> {
+    /**
+     * ArrayList of positions to disable in the arraylist.
+     */
+    ArrayList<Integer> positions_to_disable = new ArrayList<Integer>();
     /**
      * The arraylist of achievements.
      **/
@@ -85,10 +90,27 @@ public class CustomListAdapter extends ArrayAdapter<Achievements> {
 
         //Set texts on views
         bTitle.setText(achievements.get(position).getName());
+        v.setEnabled(false);
 
         return (v);//Return the layout view populated with data.
 
     }//=====================================
+
+    /**
+     * Not implemented yet, but method to disable achievements not been completed.
+     * @param position The position of the disabled achievement.
+     * @return
+     */
+    @Override
+    public boolean isEnabled(int position) {
+
+        for (int j = 0; j < positions_to_disable.size(); j++) {
+            if (position == positions_to_disable.get(j)) {
+                return false;
+            }
+        }
+        return super.isEnabled(position);
+    }
 
 
 }

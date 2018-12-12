@@ -40,7 +40,7 @@ public class Challenges extends AchievementDescriptor {
     /**
      * The constructor for the Challenges achievement.
      */
-    public Challenges(String name, int points, double distance, String description, int challengeNum) {
+    public Challenges(String name, int points, int challengeNum,String description) {
         this.name = name;
         this.points = points;
         this.distance = distance;

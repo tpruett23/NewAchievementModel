@@ -23,14 +23,15 @@ public class Speed extends AchievementDescriptor {
      **/
     private double distance;
 
+    /**
+     * The speed of the achievement.
+     */
+    private int speed;
 
-
-
-   private int speed;
     /**
      * The constructor for the Speed Achievement.
      */
-    public Speed(String name, int points, double distance,int speed, String description) {
+    public Speed(String name, int points,int speed, String description) {
         this.name = name;
         this.points = points;
         this.distance = distance;

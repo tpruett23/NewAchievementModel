@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.toripruett.newachievementmodel">
 
+
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -10,11 +12,18 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.IMAGE_CAPTURE"/>
+    <uses-feature android:name="android.hardware.camera.any" android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+
+   <uses-feature android:name="android.hardware.camera" android:required="true" />
+
 
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/mountainicon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -35,7 +44,8 @@
         <activity android:name="screens.MiniGame" />
         <activity android:name="achievements.ListViewAchv" />
         <activity android:name="screens.AchievementDetails" />
-        <activity android:name="achievements.UserCompleted" />
+        <activity android:name="achievements.UserCompletedDisplay" />
+
         <activity
             android:name="screens.ScreenToMap"
             android:label="@string/title_activity_screen_to_map"

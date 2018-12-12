@@ -38,24 +38,16 @@ public class Achievements {
      */
      private int points;
 
+    /**
+     * Achievement descriptor contained in the achievement.
+     */
     AchievementDescriptor a;
-
-
-
 
 
     /**
      * Constructor for the Achievements class.
      */
-    public Achievements() {
-        //allAchievements = new ArrayList<>();
-
-
-    }
-
-    public Achievements(AchievementDescriptor a, AchievementDescriptor b){
-
-    }
+    public Achievements() { }
 
 
     /**
@@ -67,45 +59,67 @@ public class Achievements {
         return this.allAchievements;
     }
 
-
+    /**
+     * Gets the name of the achievement.
+     * @return The name.
+     */
     public  String getName(){
         return this.name;
     }
 
+    /**
+     * Gets the description of the achievement.
+     * @return The description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Gets the points of the achievement.
+     * @return The points.
+     */
     public int getPoints() {
         return points;
     }
 
+    /**
+     * Sets the name of the achievement.
+     * @param name1
+     */
     public void setName(String name1){
         name = name1;
     }
 
+    /**
+     * Sets the description of the achievement.
+     * @param description1
+     */
     public void setDescription(String description1){
         description = description1;
     }
 
+    /**
+     * Sets the points of the achievement.
+     * @param points1
+     */
     public void setPoints(int points1){
         points = points1;
     }
 
-
-    public void setDescriptors(AchievementDescriptor a){
-        this.a = a;
-    }
+    /**
+     * Sets the description of the achievement.
+     * @param a
+     */
     public void setDescriptor(AchievementDescriptor a){
         this.a = a;
-
     }
 
+    /**
+     * Gets the descriptor of the achievement.
+     * @return
+     */
     public AchievementDescriptor getDescriptorA(){
         return this.a;
-
     }
-
-
-
 }
