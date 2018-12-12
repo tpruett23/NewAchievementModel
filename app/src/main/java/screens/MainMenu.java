@@ -15,7 +15,7 @@ import com.example.toripruett.newachievementmodel.R;
 
 import achievements.SAXParserReader;
 import achievements.Settings;
-import achievements.UserCompletedDisplay;
+//import achievements.UserCompletedDisplay;
 
 /**
  * This represents the main menu of the application.
@@ -94,7 +94,7 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
                 startActivity(i);
                 return true;
             case R.id.completed:
-                i = new Intent(this, UserCompletedDisplay.class);
+                i = new Intent(this, UserCompleted.class);
                 startActivity(i);
                 return true;
             case R.id.Settings:
