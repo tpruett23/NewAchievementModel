@@ -31,12 +31,12 @@ public class Time extends AchievementDescriptor {
     /**
      * The time traveled on the trail to complete this achievement.
      */
-    int timeTraveled;
+    double timeTraveled;
 
     /**
      * The constructor for the Time achievement.
      */
-    public Time(String name, int points, double distance, String description, int timeTraveled) {
+    public Time(String name, int points, String description, double timeTraveled) {
         this.name = name;
         this.points = points;
         this.distance = distance;
@@ -114,6 +114,11 @@ public class Time extends AchievementDescriptor {
     public String getDescription() {
         return this.description;
     }
+    @Override
+    public double getTime(){
+        return this.timeTraveled;
+    }
+
 
 
 }

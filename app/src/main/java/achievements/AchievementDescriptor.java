@@ -34,6 +34,8 @@ public abstract class AchievementDescriptor {
      **/
     String description;
 
+    private double time;
+
 
     /**
      * Checks to see if the achievement has been met.
@@ -122,6 +124,10 @@ public abstract class AchievementDescriptor {
 
     public int getTrails() {
         return this.trails;
+    }
+
+    public double getTime() {
+        return this.time;
     }
 
 

@@ -21,7 +21,7 @@ public class Achievements {
     /**
      * The arraylist to hold all of the achievements.
      **/
-    private ArrayList<AchievementDescriptor> allAchievements = new ArrayList<>();
+    private ArrayList<AchievementDescriptor> allAchievements;
 
     /**
      * Name of the achievement read in by xml.
@@ -47,7 +47,9 @@ public class Achievements {
     /**
      * Constructor for the Achievements class.
      */
-    public Achievements() { }
+    public Achievements() {
+        allAchievements = new ArrayList<>();
+    }
 
 
     /**

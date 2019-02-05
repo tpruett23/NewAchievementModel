@@ -28,7 +28,7 @@ public class UserInfo {
     /**
      * How long the user has been playing.
      */
-    public  double timePlayed;
+    public  double timePlayed = 7;
 
     /**
      * How fast the user is traveling.
@@ -38,7 +38,7 @@ public class UserInfo {
     /**
      * The number of steps the user has taken.
      */
-    public  int steps = 500;
+    public  int steps = 100;
 
     /**
      * The constructor for UserInfo.
@@ -72,7 +72,7 @@ public class UserInfo {
      *
      * @return total amount of time the user has played.
      */
-    public  double getTimePlayed() {
+    public double getTimePlayed() {
         return this.timePlayed;
     }
 

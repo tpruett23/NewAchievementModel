@@ -34,4 +34,8 @@
     <color name="cream">#c4b79d</color>
     <color name="light_grey">#83817f</color>
     <color name="dark_purp">#40115b</color>
+    <color name="mixedpurple">#666699</color>
+    <color name="darkmixedpurp">#667099</color>
+    <color name="mixedgrey">#404040</color>
+    <color name="mixeddarkgrey">#505050</color>
 </resources>

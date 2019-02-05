@@ -55,7 +55,7 @@ public class SAXParserReader extends FragmentActivity {
      */
 
     ArrayList<Achievements> achievements = new ArrayList<>();
-    /**
+     /**
      * Achievement instance to get needed data.
      */
     Achievements ach = new Achievements();
@@ -172,7 +172,7 @@ public class SAXParserReader extends FragmentActivity {
      * Loads the achievements from internal storage.
      */
         public void load() {
-            File extDir = new File(context.getFilesDir(), filename);
+            File extDir = new File(this.context.getFilesDir(), filename);
             StringBuilder text = new StringBuilder();
 
             try {

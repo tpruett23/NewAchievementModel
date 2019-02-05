@@ -2,16 +2,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context="screens.MainMenu"
     android:id="@+id/toolbar1"
-
     >
 
 
-
-<item android:id = "@+id/action_rib"
-        android:title = "ribbon"
-        android:orderInCategory = "4"
-        android:icon="@drawable/achievement_ribbon"
-    app:showAsAction="always" />
+    <item
+        android:id="@+id/action_rib"
+        android:orderInCategory="4"
+        android:title="ribbon"
+        app:showAsAction="always"
+        android:icon="@android:drawable/btn_star_big_off" />
 
     <item android:id = "@+id/Settings"
         android:title = "Settings"
@@ -20,12 +19,12 @@
         app:showAsAction="always" />
 
 
-    <item
-        android:id="@+id/completed"
-        android:icon="@drawable/goldtrophy"
-        android:orderInCategory="1"
-        android:title="completed"
-        app:showAsAction="always" />
+    <!--<item-->
+        <!--android:id="@+id/completed"-->
+        <!--android:icon="@drawable/goldtrophy"-->
+        <!--android:orderInCategory="1"-->
+        <!--android:title="completed"-->
+        <!--app:showAsAction="always" />-->
 
     <item android:id = "@+id/action_cam"
         android:title = "Camera"
@@ -35,7 +34,7 @@
 
     <item android:id = "@+id/toMap"
         android:title = "Map"
-        android:orderInCategory = "2"
+        android:orderInCategory = "3"
         android:icon="@android:drawable/ic_dialog_map"
         app:showAsAction="always" />
 

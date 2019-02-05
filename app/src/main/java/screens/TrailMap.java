@@ -46,6 +46,8 @@ import java.util.Collection;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import achievements.AchievementFactory;
+import achievements.SAXParserReader;
 import load.XMLTrailParser;
 import trailsystem.Trail;
 import trailsystem.TrailSystem;
@@ -77,6 +79,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     private Marker locationMarker;
     /** UserCompleted Instance */
     UserCompleted UC = new UserCompleted();
+    AchievementFactory AF = new AchievementFactory();
 
     /** trail parser which will input all information for the trail system*/
     private XMLTrailParser trailParser;
@@ -187,7 +190,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     public void onLocationChanged(Location location){
         lastLocation = location;
         UC.getMap().add(location);
-        UC.addDistance();
+        UC.setLocation(location);
         //remove the current marker
         if(locationMarker != null){
             locationMarker.remove();
@@ -206,6 +209,11 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
 
         Collection<LatLng> progress = trailParser.updateLocation(location);
+        UC.updateDistance();
+        SAXParserReader saxParserReader = new SAXParserReader(this);
+        saxParserReader.parseXML();
+
+
         if (progress != null){
             drawProgress(progress);
         }//end if

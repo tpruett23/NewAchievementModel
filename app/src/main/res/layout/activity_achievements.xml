@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:weightSum="20"
-    android:background="@drawable/woodenlight"
+    android:background="@drawable/blackbackground"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context="achievements.Achievements">
+    <!--android:background="@drawable/woodenlight"-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/Achievements"
-            android:textSize="40sp"
+            android:fontFamily="@font/alvarocondensed"
+            android:textSize="65sp"
             android:textColor="@color/gold" />
     </LinearLayout>
 

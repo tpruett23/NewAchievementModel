@@ -5,48 +5,108 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="@drawable/wcunature"
+android:background = "@color/mixedpurple"
 android:orientation="vertical"
-android:weightSum="10"
-tools:context="screens.MainMenu" >
+android:weightSum="9"
+tools:context="screens.MainMenu">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Catamountain Quest"
+        android:textColor="@color/gold"
+        android:textSize="55sp"
+     android:layout_marginTop="25dp"
+        android:gravity="center_horizontal"
+        android:fontFamily="@font/postamt"
+        />
 
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="95dp"
-        android:gravity="center"
-        android:layout_weight="3">
+        android:gravity="center_vertical"
+        android:layout_weight="2">
 
 
     <Button
         android:id="@+id/storyButton"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:layout_height="72dp"
+        android:textColor="@color/mixedpurple"
         android:text="Story"
-        android:textSize="35sp"
-        style="@style/buttons" />
+        android:textSize="50sp"
+        style="@style/buttons"
+        android:background="@drawable/roundbutton"
+        android:fontFamily="@font/alvarocondensed"
+        android:theme="@style/MyButton"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1">
+        android:gravity="center_vertical"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="2">
 
 
         <Button
             android:id="@+id/miniButton"
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:layout_height="72dp"
+            android:textColor="@color/mixedpurple"
             android:text="@string/minigames"
-            android:textSize="35sp"
-            style="@style/buttons" />
+            android:textSize="50sp"
+            android:background="@drawable/roundbutton"
+            android:fontFamily="@font/alvarocondensed"
+            style="@style/buttons"
+            android:theme="@style/MyButton"/>
 
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical"
+        android:layout_weight="2">
+
+
+        <Button
+            android:id="@+id/loadButton"
+            android:layout_width="250dp"
+            android:layout_height="72dp"
+            android:textColor="@color/mixedpurple"
+            android:text="@string/Load"
+            android:textSize="50sp"
+            android:fontFamily="@font/alvarocondensed"
+            style="@style/buttons"
+            android:background="@drawable/roundbutton"
+            android:theme="@style/MyButton"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical"
+        android:layout_weight="2">
+
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="250dp"
+            android:layout_height="72dp"
+            android:textColor="@color/mixedpurple"
+            android:text="@string/savebutton"
+            android:textSize="50sp"
+            style="@style/buttons"
+            android:fontFamily="@font/alvarocondensed"
+            android:background="@drawable/roundbutton"
+            android:theme="@style/MyButton"/>
     </LinearLayout>
 
 

@@ -2,6 +2,7 @@ package screens;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -15,6 +16,7 @@ import com.example.toripruett.newachievementmodel.R;
 
 import achievements.SAXParserReader;
 import achievements.Settings;
+import achievements.UserCompletedDisplay;
 //import achievements.UserCompletedDisplay;
 
 /**
@@ -34,6 +36,12 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
      **/
     Button miniGameButton;
 
+    Button loadButton;
+
+    Button saveButton;
+
+    SAXParserReader spr;
+
     /**
      * This represents the toolbar that is displayed on the main menu.
      **/
@@ -51,13 +59,15 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
         setContentView(R.layout.activity_main);
         storyButton = (Button)findViewById(R.id.storyButton);
         miniGameButton = (Button)findViewById(R.id.miniButton);
+        loadButton = (Button)findViewById(R.id.loadButton);
+        saveButton = (Button)findViewById(R.id.saveButton);
         toolbar = (Toolbar) findViewById(R.id.toolbar1);
         storyButton.setOnClickListener(this);
         miniGameButton.setOnClickListener(this);
+        loadButton.setOnClickListener(this);
+        saveButton.setOnClickListener(this);
 
-
-        SAXParserReader saxParserReader = new SAXParserReader(this);
-        saxParserReader.parseXML();
+        spr = new SAXParserReader();
 
 
 
@@ -93,10 +103,6 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
                 i = new Intent(this, QRScan.class);
                 startActivity(i);
                 return true;
-            case R.id.completed:
-                i = new Intent(this, UserCompleted.class);
-                startActivity(i);
-                return true;
             case R.id.Settings:
                 i = new Intent(this, Settings.class);
                 startActivity(i);
@@ -124,6 +130,11 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
         }else if(v.getId() == miniGameButton.getId()) {
             i = new Intent(this, MiniGame.class);
             startActivity(i);
+        }
+        else if(v.getId() == loadButton.getId()) {
+           spr.load();
+        }else if(v.getId() == saveButton.getId()) {
+           spr.save();
         }
 
     }
