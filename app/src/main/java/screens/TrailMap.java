@@ -3,6 +3,7 @@ package screens;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
@@ -54,7 +55,6 @@ import javax.xml.parsers.SAXParserFactory;
 import achievements.AchievementFactory;
 import achievements.ListViewAchv;
 import achievements.SAXParserReader;
-import achievements.Settings;
 import load.XMLTrailParser;
 import trailsystem.Trail;
 import trailsystem.TrailSystem;
@@ -101,7 +101,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     //TODO: change this to a collection of Polylines
     private Polyline line;
 
-    MediaPlayer mediaPlayer;
+    public static MediaPlayer mediaPlayer;
 
     /**
      * Called when the activity is starting. This is where most initialization

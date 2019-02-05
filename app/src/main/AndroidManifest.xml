@@ -40,7 +40,7 @@
         <activity android:name="screens.MainMenu"
             android:banner="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="achievements.Settings"
+            android:name="screens.Settings"
             android:label="Settings"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name="screens.Story"

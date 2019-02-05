@@ -1,4 +1,4 @@
-package achievements;
+package screens;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.toripruett.newachievementmodel.R;
 
-import screens.MainMenu;
+import trailsystem.Trail;
 
 /**
  * The class represents the settings screen and the values associated with it.
@@ -55,10 +55,11 @@ public class Settings extends AppCompatActivity implements OnClickListener {
         bar = (SeekBar) findViewById(R.id.seekbar);
         load = (Button) findViewById(R.id.loadb);
         save = (Button) findViewById(R.id.saveb);
-        back = (Button) findViewById(R.id.backb);
+        //back = (Button) findViewById(R.id.backb);
 
         load.setOnClickListener(this);
         save.setOnClickListener(this);
+        sound.setOnClickListener(this);
 
 
         bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -75,10 +76,20 @@ public class Settings extends AppCompatActivity implements OnClickListener {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 Toast.makeText(Settings.this, "Seek bar progress is :" + volume,
                         Toast.LENGTH_SHORT).show();
+                int newVolume = bar.getProgress();
+                if(newVolume == 0) {
+                    TrailMap.mediaPlayer.pause();
+                }else {
+                    TrailMap.mediaPlayer.setVolume(Float.parseFloat(Integer.toString(newVolume)), Float.parseFloat(Integer.toString(newVolume)));
+                    if(!TrailMap.mediaPlayer.isPlaying()){
+                        TrailMap.mediaPlayer.start();
+                    }
+                }
             }
 
 
         });
+
         loadPrefs();
     }
 
@@ -102,7 +113,12 @@ public class Settings extends AppCompatActivity implements OnClickListener {
 
 
         } else if (v.getId() == R.id.soundcheck) {
-            sound.setChecked(true);
+            if(sound.isChecked()){
+                if(!TrailMap.mediaPlayer.isPlaying())
+                    TrailMap.mediaPlayer.start();
+            }else{
+                TrailMap.mediaPlayer.pause();
+            }
         }
 
     }
@@ -142,7 +158,6 @@ public class Settings extends AppCompatActivity implements OnClickListener {
             settings.putInt("sound", 1);
         } else {
             settings.putInt("sound", 3);
-
 
         }
 
