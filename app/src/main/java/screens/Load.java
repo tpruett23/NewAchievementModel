@@ -48,7 +48,7 @@ public class Load extends AppCompatActivity {
      * Brings the user to the main menu screen after the splash screen.
      */
     private void nextScreen() {
-        Intent i = new Intent(this, MainMenu.class);
+        Intent i = new Intent(this, TrailMap.class);
 
         this.startActivity(i);
         this.finish();
