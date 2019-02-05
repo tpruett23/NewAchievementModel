@@ -118,6 +118,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         trailParser = new XMLTrailParser();
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.strange_beginnings);
+        mediaPlayer.setLooping(true);
         mediaPlayer.start();
         achButton = (Button)findViewById(R.id.Achievements);
         settingsButton = (Button)findViewById(R.id.Settings);
