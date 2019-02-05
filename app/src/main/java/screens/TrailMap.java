@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationListener;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.toripruett.newachievementmodel.R;
@@ -92,6 +94,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     //TODO: change this to a collection of Polylines
     private Polyline line;
 
+    MediaPlayer mediaPlayer;
+
     /**
      * Called when the activity is starting. This is where most initialization
      * should go: calling setContentView(int) to inflate the activity's UI, using
@@ -106,6 +110,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         setContentView(R.layout.activity_maps2);
         trailParser = new XMLTrailParser();
 
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.strange_beginnings);
+        mediaPlayer.start();
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment != null)
             mapFragment.getMapAsync(this);
