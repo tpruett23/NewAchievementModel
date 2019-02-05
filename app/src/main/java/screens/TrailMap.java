@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Build;
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -101,7 +103,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_maps2);
         trailParser = new XMLTrailParser();
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -138,6 +140,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         mGoogleMap = googleMap;
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+        declareStyle(googleMap);
+
         /* Initialize Google Play Services */
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if(ContextCompat.checkSelfPermission(this,
@@ -164,6 +168,27 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         createLine();
 
     /* end onMapReady*/
+    }
+
+    /**
+     * Helper function to help define the style of the Google map
+     * @param googleMap - google map which will be updated
+     */
+    private void declareStyle(GoogleMap googleMap){
+        try{
+            //Customize the styling of the base map using a JSON object in
+            // raw resource file.
+            boolean success = googleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.style_json));
+
+            if(!success){
+                Log.e("MAP", "Style parsing failed.");
+            }
+        }catch(Resources.NotFoundException e){
+            Log.e("MAP", "Can't find style. Error: ", e);
+        }//end try catch
+    /* end declareStyle*/
     }
 
     /**

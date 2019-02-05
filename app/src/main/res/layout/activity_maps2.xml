@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tolls"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MapActivity">
+
+    <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:scrollbars="vertical"
+        class="com.google.android.gms.maps.SupportMapFragment"/>
+    
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        android:background="#80000000"
+        android:padding="4dp"
+        android:layout_alignParentBottom="true">
+        
+        <Button
+            android:id="@+id/Settings"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text = "@string/Settings"
+            android:layout_weight="1"
+            android:textColor="@color/cyan"/>
+
+        <Button
+            android:id="@+id/Story"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/Story"
+            android:layout_weight="1"
+            android:textColor="@color/cyan"/>
+
+        <Button
+            android:id="@+id/Achievements"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text= "@string/Achievements"
+            android:layout_weight="1"
+            android:textColor="@color/cyan"/>
+        
+        
+    </RadioGroup>
+
+</RelativeLayout>

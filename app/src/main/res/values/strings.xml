@@ -26,6 +26,9 @@
     <string name="minigames">Mini Game</string>
     <string name="savebutton">Save</string>
     <string name="loadbutton">Load</string>
+    <string name="MenuBar">Menu Bar</string>
+    <string name="Story">Story</string>
+    <string name="Settings">Settings</string>
 
 
 
