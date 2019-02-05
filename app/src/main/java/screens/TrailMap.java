@@ -3,6 +3,7 @@ package screens;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
@@ -16,6 +17,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.toripruett.newachievementmodel.R;
@@ -49,7 +52,9 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import achievements.AchievementFactory;
+import achievements.ListViewAchv;
 import achievements.SAXParserReader;
+import achievements.Settings;
 import load.XMLTrailParser;
 import trailsystem.Trail;
 import trailsystem.TrailSystem;
@@ -63,9 +68,10 @@ import trailsystem.WayPoint;
  */
 public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener, View.OnClickListener {
 
     /** Google map which will display the trail system*/
+
     private GoogleMap mGoogleMap;
     /** SupportMapFragment to achieve the proper display*/
     private SupportMapFragment mapFragment;
@@ -82,6 +88,9 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     /** UserCompleted Instance */
     UserCompleted UC = new UserCompleted();
     AchievementFactory AF = new AchievementFactory();
+    Button achButton;
+    Button settingsButton;
+    Button storyButton;
 
     /** trail parser which will input all information for the trail system*/
     private XMLTrailParser trailParser;
@@ -105,6 +114,17 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps2);
         trailParser = new XMLTrailParser();
+
+        achButton = (Button)findViewById(R.id.Achievements);
+        settingsButton = (Button)findViewById(R.id.Settings);
+        storyButton = (Button)findViewById(R.id.Story);
+
+        achButton.setOnClickListener(this);
+        settingsButton.setOnClickListener(this);
+        storyButton.setOnClickListener(this);
+
+
+
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment != null)
@@ -649,5 +669,24 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         /* end characters()*/
         }
     };
+
+
+
+    @Override
+    public void onClick(View v) {
+        Intent i;
+        if(v.getId() == storyButton.getId()){
+            i = new Intent(this,Story.class);
+            startActivity(i);
+        }
+        else if(v.getId() == achButton.getId()) {
+            i = new Intent(this, ListViewAchv.class);
+            startActivity(i);
+
+        }else if(v.getId() == settingsButton.getId()) {
+            i = new Intent(this, Settings.class);
+            startActivity(i);
+        }
+    }
 }
 
