@@ -54,7 +54,9 @@ public class SAXParserReader extends FragmentActivity {
      * The arraylist to hold all the achievements.
      */
 
-    ArrayList<Achievements> achievements = new ArrayList<>();
+    //ArrayList<Achievements> achievements = new ArrayList<>();
+
+    ArrayList<Achievements> achievements = AchievementFactory.achievements;
      /**
      * Achievement instance to get needed data.
      */
@@ -118,21 +120,23 @@ public class SAXParserReader extends FragmentActivity {
      * @return The XML String.
      */
     public String toXML() {
-        return "<achievement>\n" +
+        String achWord = "";
+        for(int i = 0; i < achievements.size();i++) {
+             achWord += "<achievement>\n" +
+                    "\t<name>" + achievements.get(i).getName() + "</name>\n" +
+                    "\t<points>" + achievements.get(i).getPoints() + "</points>\n" +
+                    "\t<description>" + achievements.get(i).getDescription() + "</description>\n" +
+                    "\t<type>" + achievements.get(i).getDescriptorA().getName() + "</type>\n" +
+                    "</achievement>\n";
+        }
+        return "<achievements>\n" + achWord + "</achievements>";
+
+        /*return "<achievement>\n" +
                 "\t<name>" + ach.getName()+ "</name>\n" +
                 "\t<points>" + ach.getPoints() + "</points>\n" +
                 "\t<description>" + ach.getDescription() + "</description>\n" +
                 "\t<type>" + ach.getDescriptorA()+ "</type>\n" +
-                "</achievement>";
-
-
-       /* return "<achievement>\n" +
-                "\t<name>" + "name"+ "</name>" +
-                "\t<points>" + "points" + "</points>" +
-                "\t<description>" + "des" + "</description>" +
-                "\t<type>" + "type" + "</type>" +
-                "</achievement>";
-                */
+                "</achievement>";*/
     }
 
 
@@ -155,7 +159,7 @@ public class SAXParserReader extends FragmentActivity {
             outputStream.write(xml_data.getBytes());
             outputStream.close();
 
-            Toast.makeText(this.context, "Saved", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.context, "Achievements Saved", Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
             Toast.makeText(this.context, "Error saving file", Toast.LENGTH_LONG).show();
             e.printStackTrace();
@@ -184,6 +188,7 @@ public class SAXParserReader extends FragmentActivity {
                     text.append('\n');
                 }
                 br.close();
+                Toast.makeText(this.context, "Achievements Loaded", Toast.LENGTH_LONG).show();
             }//end try
             catch (FileNotFoundException e) {//If file not found on disk here.
                 Toast.makeText(this.context, "There was no data to load", Toast.LENGTH_LONG).show();

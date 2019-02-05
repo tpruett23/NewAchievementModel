@@ -31,7 +31,7 @@ import screens.UserCompleted;
  */
 public class ListViewAchv extends AppCompatActivity {
     /**
-     * the arraylist of all achievements.
+     * The arraylist of all achievements.
      **/
     private ArrayList<Achievements> achievements;
     /**

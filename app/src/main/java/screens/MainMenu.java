@@ -67,7 +67,7 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
         loadButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
 
-        spr = new SAXParserReader();
+        spr = new SAXParserReader(this);
 
 
 

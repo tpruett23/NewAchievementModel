@@ -32,7 +32,6 @@ public class AchievementDetails extends Activity {
      * The textview for the points to be displayed for that achievement.
      */
     TextView points;
-
     /**
      * The textview for the descriptor to be displayed for that achievement.
      */

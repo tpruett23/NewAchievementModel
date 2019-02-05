@@ -23,7 +23,7 @@ public class UserCompleted {
     /**
      * The number of trails that have been completed by the user.
      */
-    private int trails = 3;
+    private int trails = 5;
 
     /**
      * The number of questions that have answered correctly by the user.
