@@ -52,17 +52,21 @@ public class Settings extends AppCompatActivity implements OnClickListener {
         setContentView(R.layout.settings);
 
         sound = (CheckBox) findViewById(R.id.soundcheck);
-        bar = (SeekBar) findViewById(R.id.seekbar);
+        sound.setOnClickListener(this);
+        sound.setChecked(true);
+
+       /* bar = (SeekBar) findViewById(R.id.seekbar);
         load = (Button) findViewById(R.id.loadb);
-        save = (Button) findViewById(R.id.saveb);
+        save = (Button) findViewById(R.id.saveb);*/
         //back = (Button) findViewById(R.id.backb);
 
-        load.setOnClickListener(this);
+     /*   load.setOnClickListener(this);
         save.setOnClickListener(this);
-        sound.setOnClickListener(this);
+        */
 
 
-        bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+    }
+        /*bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
 
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -91,7 +95,7 @@ public class Settings extends AppCompatActivity implements OnClickListener {
         });
 
         loadPrefs();
-    }
+    }*/
 
     /**
      * The method that is called when one of the buttons is clicked.
@@ -100,28 +104,29 @@ public class Settings extends AppCompatActivity implements OnClickListener {
      */
     public void onClick(View v) {
         Intent i = null;
-        if (v.getId() == R.id.backb) {
-            i = new Intent(this, MainMenu.class);
-            startActivity(i);
-
-        } else if (v.getId() == R.id.loadb) {
-            loadPrefs();
-
-
-        } else if (v.getId() == R.id.saveb) {
-            savePrefs();
-
-
-        } else if (v.getId() == R.id.soundcheck) {
-            if(sound.isChecked()){
-                if(!TrailMap.mediaPlayer.isPlaying())
+//        if (v.getId() == R.id.backb) {
+//            i = new Intent(this, MainMenu.class);
+//            startActivity(i);
+//
+//        } else if (v.getId() == R.id.loadb) {
+//            loadPrefs();
+//
+//
+//        } else if (v.getId() == R.id.saveb) {
+//            savePrefs();
+//
+//
+        if (v.getId() == R.id.soundcheck) {
+            if (sound.isChecked()) {
+                if (!TrailMap.mediaPlayer.isPlaying())
                     TrailMap.mediaPlayer.start();
-            }else{
+            } else {
                 TrailMap.mediaPlayer.pause();
             }
         }
-
     }
+
+    //}
 
     /**
      * Loads the preferences put in by the user after being saved.
