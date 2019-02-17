@@ -31,7 +31,7 @@ d
     /**
      * Boolean value to check what level of xml tags we are in.
      */
-   //boolean types  =  false;
+
     boolean types;
 
     /** The current element being read by the XML parser**/
@@ -49,6 +49,8 @@ d
         achievements1 = new ArrayList<>();
         temp2 = new Achievements();
         types = false;
+
+
 
     }//========================================================================
 
@@ -163,32 +165,37 @@ d
                 if (qName.equals("time")) {
                     AchievementDescriptor TimeAch = new Time("Time Achievement", temp.getPoints(), temp.getDescription(), Double.parseDouble(currentElement));
                     temp.setDescriptor(TimeAch);
-                    af.checkTimeAchievement(temp);
+                    CheckAchievements timeCheck = new TimeCheck();
+                    timeCheck.checkAchievement(temp);
                     temp2.getAllAchievements().add(TimeAch);
 
                 } else if (qName.equals("distance")) {
                     AchievementDescriptor distanceAch = new Distance("Distance Achievement", temp.getPoints(), Double.parseDouble(currentElement), temp.getDescription());
                     temp.setDescriptor(distanceAch);
                     temp2.getAllAchievements().add(distanceAch);
-                    af.checkDistanceAchievement(temp);
+                    DistanceCheck distanceCheck = new DistanceCheck();
+                    distanceCheck.checkAchievement(temp);
 
                 } else if (qName.equals("trails")) {
                     AchievementDescriptor trailAch = new Trails("Trail Achievement", temp.getPoints(), temp.getDescription(), Integer.parseInt(currentElement));
                     temp.setDescriptor(trailAch);
                     temp2.getAllAchievements().add(trailAch);
-                    af.checkTrailAchievement(temp);
+                    TrailNumCheck trailCheck = new TrailNumCheck();
+                    trailCheck.checkAchievement(temp);
 
                 } else if (qName.equals("step")) {
                     AchievementDescriptor stepAch = new Steps("Step Achievement", temp.getPoints(), temp.getDescription(), Integer.parseInt(currentElement));
                     temp.setDescriptor(stepAch);
                     temp2.getAllAchievements().add(stepAch);
-                    af.checkStepsAchievement(temp);
+                   StepCheck stepCheck = new StepCheck();
+                    stepCheck.checkAchievement(temp);
 
                 } else if (qName.equals("speed")) {
                     AchievementDescriptor speedAch = new Speed("Speed Achievement", temp.getPoints(), Integer.parseInt(currentElement), temp.getDescription());
                     temp.setDescriptor(speedAch);
                     temp2.getAllAchievements().add(speedAch);
-                    af.checkSpeedAchievement(temp);
+                    SpeedCheck speedCheck = new SpeedCheck();
+                    speedCheck.checkAchievement(temp);
 
 
                 }

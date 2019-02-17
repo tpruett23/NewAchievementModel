@@ -38,7 +38,7 @@ public class UserInfo {
     /**
      * The number of steps the user has taken.
      */
-    public  int steps = 100;
+    public  int steps = 400;
 
     /**
      * The constructor for UserInfo.

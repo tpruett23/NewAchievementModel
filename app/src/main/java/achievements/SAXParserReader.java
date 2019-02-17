@@ -45,6 +45,8 @@ public class SAXParserReader extends FragmentActivity {
      */
     private static SAXParserReader instance;
 
+    AchievementFactory achievementFactory = new AchievementFactory();
+
     /**
      * The name of the XML file we are reading.
      */
@@ -56,7 +58,7 @@ public class SAXParserReader extends FragmentActivity {
 
     //ArrayList<Achievements> achievements = new ArrayList<>();
 
-    ArrayList<Achievements> achievements = AchievementFactory.achievements;
+    ArrayList<Achievements> achievements = achievementFactory.getAchievements();
      /**
      * Achievement instance to get needed data.
      */

@@ -1,33 +1,30 @@
 package screens;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import achievements.AchievementFactory;
-import achievements.AchievementXMLHandler;
-import achievements.ListViewAchv;
-import achievements.SAXParserReader;
-import achievements.UserCompletedDisplay;
-import achievements.UserInfo;
+
+import achievements.MyIntentService;
+import achievements.MyService;
+import achievements.Validation;
 
 public class Load extends AppCompatActivity {
 
+
+
     public void onCreate(){
+
+
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        TrailMap map = new TrailMap();
-        SAXParserReader saxParserReader = new SAXParserReader(this);
-        saxParserReader.parseXML();
-        ListViewAchv LV = new ListViewAchv();
+        Validation validation = new Validation();
+        startService(new Intent(this, MyService.class));
+        startService(new Intent(this,MyIntentService.class));
         Handler handler = new Handler();
         handler.postDelayed(runner, 0);
 
@@ -44,12 +41,12 @@ public class Load extends AppCompatActivity {
         }
     };
 
+
     /**
      * Brings the user to the main menu screen after the splash screen.
      */
     private void nextScreen() {
         Intent i = new Intent(this, TrailMap.class);
-
         this.startActivity(i);
         this.finish();
 

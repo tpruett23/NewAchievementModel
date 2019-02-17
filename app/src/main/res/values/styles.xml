@@ -38,7 +38,6 @@
     </style>
 
 
-
     <style name="originalButtons">
     <item name="android:background">@drawable/roundbutton</item>
     <item name="android:textColor">@color/black</item>

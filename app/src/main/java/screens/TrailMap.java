@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -54,6 +55,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import achievements.AchievementFactory;
 import achievements.ListViewAchv;
+import achievements.MyIntentService;
 import achievements.SAXParserReader;
 import load.XMLTrailParser;
 import trailsystem.Trail;
@@ -113,9 +115,13 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      */
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        AppCompatDelegate.setDefaultNightMode(
+                AppCompatDelegate.MODE_NIGHT_AUTO);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps2);
         trailParser = new XMLTrailParser();
+
+
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.strange_beginnings);
         mediaPlayer.start();
@@ -126,6 +132,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         achButton.setOnClickListener(this);
         settingsButton.setOnClickListener(this);
         storyButton.setOnClickListener(this);
+
 
 
 
