@@ -46,9 +46,6 @@ public class ListViewAchv extends AppCompatActivity {
     AchievementFactory AF = new AchievementFactory();
 
 
-
-
-
     /**
      * The onCreate that is called to build and start the activity.
      *

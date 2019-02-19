@@ -60,7 +60,7 @@ public class UserCompleted {
 
     private Location prevLocation;
     private Location location;
-    private double distance = 0d;
+
 
 
     public UserCompleted(){
@@ -70,28 +70,11 @@ public class UserCompleted {
 
 
     public void updateDistance(Double dis) {
-        distanceUser += dis;
+        this.distanceUser += dis;
 
     }
 
 
-
-    /*public void addDistance(){
-        float temp = 0;
-        float distance = 0;
-        for(int i = 0; i < map.size(); i++){
-            for(int j = 1; j < map.size();j++) {
-                Location loc = map.get(i);
-                Location loc2 = map.get(j);
-                distance = loc.distanceTo(loc2);
-                temp += distance;
-
-            }
-        }
-        this.distanceUser = (temp - this.distanceUser);
-        Log.v("Distance", distanceUser + "");
-    }
-*/
 
 
     /**

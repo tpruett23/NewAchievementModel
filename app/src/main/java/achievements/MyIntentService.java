@@ -36,10 +36,12 @@ public class MyIntentService extends Service {
             @Override
             public void run() {
                 SAXParserReader saxParserReader = new SAXParserReader(getApplicationContext());
+                //saxParserReader.parseXML();
+                ListViewAchv lv = new ListViewAchv();
                 Toast.makeText(getApplicationContext(),"Testing",Toast.LENGTH_LONG).show();
-                ha.postDelayed(this, 10000);
+                ha.postDelayed(this, 60000);
             }
-        }, 10000);
+        }, 60000);
 
 
         return START_STICKY;
@@ -52,21 +54,7 @@ public class MyIntentService extends Service {
     }
 
 
-    public void startService() {
-        SAXParserReader saxParserReader = new SAXParserReader(this);
 
-        Validation validation = new Validation();
-        //validation.add();
-
-
-           /*  Intent newintent = new Intent("Valid");
-             newintent.putExtra("message", message);
-
-            // Toast.makeText(this,message,Toast.LENGTH_LONG).show();
-             LocalBroadcastManager.getInstance(this).sendBroadcast(newintent);*/
-             Log.d("sender", "Broadcasting message");
-
- }
 
     /**
      * The method turns the object into an xml file.

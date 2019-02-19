@@ -257,9 +257,6 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         }
         lastLocation = location;
 
-       // UC.getMap().add(location);
-       // UC.setLocation(location);
-
         //remove the current marker
         if(locationMarker != null){
             locationMarker.remove();
@@ -279,12 +276,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
         Collection<LatLng> progress = trailParser.updateLocation(location);
 
-        //UC.updateDistance();
-        //SAXParserReader saxParserReader = new SAXParserReader(this);
-        //saxParserReader.parseXML();
-
-        SAXParserReader saxParserReader = new SAXParserReader(this);
-        saxParserReader.parseXML();
+       //SAXParserReader saxParserReader = new SAXParserReader(this);
+       // saxParserReader.parseXML();
 
 
         if (progress != null){

@@ -87,6 +87,9 @@
             android:theme="@style/Theme.AppCompat">
         </activity>
         <activity android:name="screens.CharacterScreen" />
+        <service android:name="achievements.MyIntentService"/>
+        <service android:name="achievements.MyService"/>
+
 
 
     </application>
