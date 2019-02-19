@@ -102,6 +102,10 @@ public class XMLTrailParser {
     /* end getTrailSystem */
     }
 
+    public void addEvent(InputStream is){
+        trailSystem.addEvent(is);
+    }
+
     /**
      * Method to forward a new location from the user to check against the trail
      * @param location - location received from the google map

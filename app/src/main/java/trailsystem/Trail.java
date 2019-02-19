@@ -5,8 +5,10 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 /**
  * Trail class which will model a specific trail
@@ -26,6 +28,8 @@ public class Trail {
     /** The progress achieved of the trail*/
     private TrailProgress progress;
 
+    private LinkedList<WayPoint> events;
+
     /**
      * Initialize a completely empty trail
      */
@@ -35,6 +39,7 @@ public class Trail {
         start = null;
         end = null;
         progress = new TrailProgress();
+        events = new LinkedList<WayPoint>();
     /* end constructor*/
     }
 
@@ -53,8 +58,9 @@ public class Trail {
      * @param add - WayPoint to be added
      */
     public void addPoint(WayPoint add){
+        end = add;
         if(!path.contains(add)){
-            path.add(add);
+            path.add(end);
         }//end if
     }//end addPoint()
 
@@ -71,7 +77,8 @@ public class Trail {
         }//end for
 
         WayPoint wayPoint = new WayPoint(add);
-        path.add(wayPoint);
+        end = wayPoint;
+        path.add(end);
     /* end addPoint()*/
     }
 
@@ -175,6 +182,38 @@ public class Trail {
         }//end for
         return null;
     /* end checkProgress */
+    }
+
+    public void addEvent(InputStream inputStream){
+        end.addEvent(inputStream);
+        events.add(end);
+
+    }
+
+    public boolean checkEvent(LatLng latLng){
+        if(events.isEmpty())
+            return false;
+        LatLng top = events.peek().getPoint();
+        if(measure(top, latLng) < 20){
+            return true;
+        }
+        return false;
+    }
+
+    public StoryEvent getEvent(){
+        return events.pop().getEvent();
+    }
+
+    private double measure(LatLng first, LatLng compare){
+        double R = 6378.137; // Radius of earth in KM
+        double dLat = compare.latitude * Math.PI/180 - first.latitude * Math.PI/180;
+        double dLon = compare.longitude * Math.PI/180 - first.longitude * Math.PI/180;
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.cos(first.latitude * Math.PI/180) * Math.cos(compare.latitude * Math.PI / 180) *
+                            Math.sin(dLat/2) * Math.sin(dLon/2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double d = R * c;
+        return (d * 1000); //meters
     }
 /* end Trail class */
 }

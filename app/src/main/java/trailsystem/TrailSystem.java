@@ -1,9 +1,12 @@
 package trailsystem;
 
+import android.content.Context;
 import android.location.Location;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -178,5 +181,20 @@ public class TrailSystem {
         }
         return null;
     /* end updateLocation()*/
+    }
+
+    public void addEvent(InputStream inputStream){
+        currentTrail.addEvent(inputStream);
+    }
+
+    public boolean checkEvent(LatLng latLng){
+        Log.v("begin checkEvent:", "checking event...");
+        boolean check = currentTrail.checkEvent(latLng);
+        Log.v("end checkEvent: ", String.valueOf(check));
+        return check;
+    }
+
+    public StoryEvent getEvent(){
+        return currentTrail.getEvent();
     }
 }

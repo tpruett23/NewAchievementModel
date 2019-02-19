@@ -129,8 +129,8 @@ public class MainMenu extends AppCompatActivity implements OnClickListener {
     public void onClick(View v) {
         Intent i;
         if (v.getId() == storyButton.getId()) {
-            i = new Intent(this, Story.class);
-            startActivity(i);
+            //i = new Intent(this, Story.class);
+            //startActivity(i);
         } else if (v.getId() == miniGameButton.getId()) {
             i = new Intent(this, MiniGame.class);
             startActivity(i);
