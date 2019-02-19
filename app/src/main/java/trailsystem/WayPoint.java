@@ -2,6 +2,7 @@ package trailsystem;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -19,6 +20,8 @@ public class WayPoint {
     /** Collection of events for different game-modes
      * -- This may later be changed into a key-value pair -- */
     private Collection<PointOfInterest> pOIs;
+
+    private StoryEvent event;
 
     /**
      * Constructor which will create a waypoint with a location
@@ -102,5 +105,13 @@ public class WayPoint {
         }//end removePOI
         return false;
     }//end removePOI
+
+    public void addEvent(InputStream inputStream){
+        event = new StoryEvent(inputStream);
+    }
+
+    public StoryEvent getEvent(){
+        return event;
+    }
 
 }//end WayPoint class

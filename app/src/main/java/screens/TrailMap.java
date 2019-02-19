@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -58,6 +59,7 @@ import achievements.ListViewAchv;
 import achievements.MyIntentService;
 import achievements.SAXParserReader;
 import load.XMLTrailParser;
+import trailsystem.StoryEvent;
 import trailsystem.Trail;
 import trailsystem.TrailSystem;
 import trailsystem.WayPoint;
@@ -134,10 +136,6 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         settingsButton.setOnClickListener(this);
         storyButton.setOnClickListener(this);
 
-
-
-
-
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment != null)
             mapFragment.getMapAsync(this);
@@ -199,6 +197,11 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
         createLine();
 
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, this);
+
+        //LocationManager locationManager = (LocationManger) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+
     /* end onMapReady*/
     }
 
@@ -245,9 +248,13 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      */
     @Override
     public void onLocationChanged(Location location){
-        double distance = lastLocation.distanceTo(location);
+        Log.v("location:", "location has been changed");
+        if(location != null & lastLocation != null) {
+            double distance = lastLocation.distanceTo(location);
+            lastLocation = location;
+            UC.updateDistance(distance);
+        }
         lastLocation = location;
-        UC.updateDistance(distance);
        // UC.getMap().add(location);
        // UC.setLocation(location);
         //remove the current marker
@@ -275,6 +282,12 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         if (progress != null){
             drawProgress(progress);
         }//end if
+
+        if(trailParser.getTrailSystem().checkEvent(new LatLng(location.getLatitude(), location.getLongitude()))){
+            StoryEvent storyEvent = trailParser.getTrailSystem().getEvent();
+            Log.v("event:", "starting...");
+            storyEvent.startEvent(this);
+        }
 
     /* end onLocationChanged*/
     }
@@ -307,6 +320,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         locationRequest.setFastestInterval(1000);
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
+
         locationCallback = new LocationCallback(){
             @Override
             public void onLocationResult(LocationResult locationResult){
@@ -316,6 +330,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
                 for(Location location: locationResult.getLocations()){
                     if(location != null){
                         lastLocation = location;
+                        Log.v("location2:", "new location???");
                     }//end if
                 }//end for
 
@@ -578,6 +593,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         boolean waypoint = false;
         boolean latitude = false;
         boolean longitude = false;
+        boolean story = false;
 
         double curLat;
         double curLon;
@@ -615,9 +631,11 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
                 longitude = true;
             }else if(qName.equalsIgnoreCase("trail_name")) {
                 trailName = true;
+            }else if(qName.equalsIgnoreCase("story")) {
+                story = true;
             }else if(trail){
                 trail = false;
-            }//end if-else
+            }
 
         /* End startElement method*/
         }
@@ -675,9 +693,15 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
                 LatLng latLng = new LatLng(curLat, curLon);
                 trailParser.addPoint(latLng);
                 longitude = false;
-            }else if(trailName){
+            }else if(story) {
+                InputStream is = getResources().openRawResource(getResources().getIdentifier(
+                        new String(ch,start,length), "raw", getPackageName()));
+                trailParser.addEvent(is);
+                story = false;
+            } else if(trailName){
                 trailParser.addTrail(new String(ch, start, length));
                 Log.v("check", new String(ch, start, length));
+                trailName = false;
             }//end if-else
         /* end characters()*/
         }

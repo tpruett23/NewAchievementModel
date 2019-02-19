@@ -21,7 +21,7 @@
         <waypoint>
             <latitude>35.30541</latitude>
             <longitude>-83.2045</longitude>
-            <story></story>
+            <story>character1_2</story>
         </waypoint>
         <waypoint>
             <latitude>35.30553</latitude>
@@ -38,6 +38,7 @@
         <waypoint>
             <latitude>35.30611</latitude>
             <longitude>-83.2035</longitude>
+            <story>character1_3</story>
         </waypoint>
         <waypoint>
             <latitude>35.30635</latitude>
@@ -58,6 +59,7 @@
         <waypoint>
             <latitude>35.30685</latitude>
             <longitude>-83.2036</longitude>
+            <story>character1_4</story>
         </waypoint>
     </trail>
 </trailsystem>
