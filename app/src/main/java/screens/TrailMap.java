@@ -248,6 +248,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      */
     @Override
     public void onLocationChanged(Location location){
+
         Log.v("location:", "location has been changed");
         if(location != null & lastLocation != null) {
             double distance = lastLocation.distanceTo(location);
@@ -255,8 +256,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             UC.updateDistance(distance);
         }
         lastLocation = location;
-       // UC.getMap().add(location);
-       // UC.setLocation(location);
+
         //remove the current marker
         if(locationMarker != null){
             locationMarker.remove();
@@ -275,8 +275,9 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
 
         Collection<LatLng> progress = trailParser.updateLocation(location);
-        SAXParserReader saxParserReader = new SAXParserReader(this);
-        saxParserReader.parseXML();
+
+       //SAXParserReader saxParserReader = new SAXParserReader(this);
+       // saxParserReader.parseXML();
 
 
         if (progress != null){

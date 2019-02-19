@@ -39,8 +39,6 @@ public class Validation extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mMessageReceiver,
-                new IntentFilter("Valid"));
 
     }
 
@@ -57,6 +55,7 @@ public class Validation extends Activity {
 
 
     public void testAdd(Achievements ach) {
+
             AchievementFactory.achievements.add(ach);
     }
 

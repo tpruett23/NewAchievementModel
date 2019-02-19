@@ -72,17 +72,18 @@ public class MyService extends Service {
     }
 
 
-        @Override
+      /*  @Override
         public void onStart (Intent intent,int startid){
-            TrailMap map = new TrailMap();
+           TrailMap map = new TrailMap();
             SAXParserReader saxParserReader = new SAXParserReader(this);
             saxParserReader.parseXML();
             ListViewAchv LV = new ListViewAchv();
+            startService(new Intent(this,MyIntentService.class));
 
 
           //   Toast.makeText(this, "Service started by user.", Toast.LENGTH_LONG).show();
         }
-
+*/
 
     }
 

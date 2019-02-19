@@ -22,7 +22,6 @@ public class AchievementXMLHandler extends DefaultHandler {
     /** A global list of achievements **/
     private  static ArrayList<Achievements> achievements1;
     /**
-    /**
      * A temp achievement built to get each marker element
      *
      */

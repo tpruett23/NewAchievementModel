@@ -48,7 +48,10 @@ public class UserCompleted {
     /**
      * Distance the user has traveled.
      */
-    private double distanceUser;
+
+    private double distanceUser = 0;
+
+
 
     /**
      * The arraylist to hold the completed achievements for the user.
@@ -57,7 +60,7 @@ public class UserCompleted {
 
     private Location prevLocation;
     private Location location;
-    private double distance = 0d;
+
 
 
     public UserCompleted(){
@@ -65,37 +68,13 @@ public class UserCompleted {
     }
 
 
-    public void updateDistance(double distance) {
-        distanceUser += distance;
 
-        /*double distanceToLast = location.distanceTo(prevLocation);
-        // if less than 10 metres, do not record
-        if (distanceToLast < 0) {
-            Log.i("DISTANCE", "Values too close, so not used.");
-        } else
-            distanceUser += distanceToLast;
-        prevLocation = location;*/
+    public void updateDistance(Double dis) {
+        this.distanceUser += dis;
+
     }
 
 
-
-
-    /*public void addDistance(){
-        float temp = 0;
-        float distance = 0;
-        for(int i = 0; i < map.size(); i++){
-            for(int j = 1; j < map.size();j++) {
-                Location loc = map.get(i);
-                Location loc2 = map.get(j);
-                distance = loc.distanceTo(loc2);
-                temp += distance;
-
-            }
-        }
-        this.distanceUser = (temp - this.distanceUser);
-        Log.v("Distance", distanceUser + "");
-    }
-*/
 
 
     /**
