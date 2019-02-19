@@ -3,9 +3,13 @@ package screens;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,7 +18,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.toripruett.newachievementmodel.R;
@@ -30,6 +37,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -46,7 +54,12 @@ import java.util.Collection;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import achievements.AchievementFactory;
+import achievements.ListViewAchv;
+import achievements.MyIntentService;
+import achievements.SAXParserReader;
 import load.XMLTrailParser;
+import trailsystem.StoryEvent;
 import trailsystem.Trail;
 import trailsystem.TrailSystem;
 import trailsystem.WayPoint;
@@ -59,9 +72,10 @@ import trailsystem.WayPoint;
  */
 public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener, View.OnClickListener {
 
     /** Google map which will display the trail system*/
+
     private GoogleMap mGoogleMap;
     /** SupportMapFragment to achieve the proper display*/
     private SupportMapFragment mapFragment;
@@ -77,6 +91,10 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     private Marker locationMarker;
     /** UserCompleted Instance */
     UserCompleted UC = new UserCompleted();
+    AchievementFactory AF = new AchievementFactory();
+    Button achButton;
+    Button settingsButton;
+    Button storyButton;
 
     /** trail parser which will input all information for the trail system*/
     private XMLTrailParser trailParser;
@@ -86,6 +104,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     /** Polyline which will show the trail*/
     //TODO: change this to a collection of Polylines
     private Polyline line;
+
+    public static MediaPlayer mediaPlayer;
 
     /**
      * Called when the activity is starting. This is where most initialization
@@ -97,9 +117,24 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      */
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        AppCompatDelegate.setDefaultNightMode(
+                AppCompatDelegate.MODE_NIGHT_AUTO);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_maps2);
         trailParser = new XMLTrailParser();
+
+
+
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.strange_beginnings);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
+        achButton = (Button)findViewById(R.id.Achievements);
+        settingsButton = (Button)findViewById(R.id.Settings);
+        storyButton = (Button)findViewById(R.id.Story);
+
+        achButton.setOnClickListener(this);
+        settingsButton.setOnClickListener(this);
+        storyButton.setOnClickListener(this);
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment != null)
@@ -135,6 +170,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         mGoogleMap = googleMap;
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+        declareStyle(googleMap);
+
         /* Initialize Google Play Services */
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if(ContextCompat.checkSelfPermission(this,
@@ -160,7 +197,33 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
         createLine();
 
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, this);
+
+        //LocationManager locationManager = (LocationManger) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+
     /* end onMapReady*/
+    }
+
+    /**
+     * Helper function to help define the style of the Google map
+     * @param googleMap - google map which will be updated
+     */
+    private void declareStyle(GoogleMap googleMap){
+        try{
+            //Customize the styling of the base map using a JSON object in
+            // raw resource file.
+            boolean success = googleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.style_json));
+
+            if(!success){
+                Log.e("MAP", "Style parsing failed.");
+            }
+        }catch(Resources.NotFoundException e){
+            Log.e("MAP", "Can't find style. Error: ", e);
+        }//end try catch
+    /* end declareStyle*/
     }
 
     /**
@@ -185,9 +248,15 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      */
     @Override
     public void onLocationChanged(Location location){
+        Log.v("location:", "location has been changed");
+        if(location != null & lastLocation != null) {
+            double distance = lastLocation.distanceTo(location);
+            lastLocation = location;
+            UC.updateDistance(distance);
+        }
         lastLocation = location;
-        UC.getMap().add(location);
-        UC.addDistance();
+       // UC.getMap().add(location);
+       // UC.setLocation(location);
         //remove the current marker
         if(locationMarker != null){
             locationMarker.remove();
@@ -206,9 +275,19 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
 
         Collection<LatLng> progress = trailParser.updateLocation(location);
+        SAXParserReader saxParserReader = new SAXParserReader(this);
+        saxParserReader.parseXML();
+
+
         if (progress != null){
             drawProgress(progress);
         }//end if
+
+        if(trailParser.getTrailSystem().checkEvent(new LatLng(location.getLatitude(), location.getLongitude()))){
+            StoryEvent storyEvent = trailParser.getTrailSystem().getEvent();
+            Log.v("event:", "starting...");
+            storyEvent.startEvent(this);
+        }
 
     /* end onLocationChanged*/
     }
@@ -241,6 +320,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         locationRequest.setFastestInterval(1000);
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
+
         locationCallback = new LocationCallback(){
             @Override
             public void onLocationResult(LocationResult locationResult){
@@ -250,6 +330,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
                 for(Location location: locationResult.getLocations()){
                     if(location != null){
                         lastLocation = location;
+                        Log.v("location2:", "new location???");
                     }//end if
                 }//end for
 
@@ -512,6 +593,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         boolean waypoint = false;
         boolean latitude = false;
         boolean longitude = false;
+        boolean story = false;
 
         double curLat;
         double curLon;
@@ -526,7 +608,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
          *                  being performed
          * @param qName - The qualified name (with prefix), or the empty
          *              string if qualified names are not available
-         * @param attributes - The attributes attched to the element. If
+         * @param attributes - The attributes attached to the element. If
          *                   there are not attributes, it shall be an
          *                   empty Attributes object.
          * @throws SAXException - Any SAX exception, possibly wrapping
@@ -549,9 +631,11 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
                 longitude = true;
             }else if(qName.equalsIgnoreCase("trail_name")) {
                 trailName = true;
+            }else if(qName.equalsIgnoreCase("story")) {
+                story = true;
             }else if(trail){
                 trail = false;
-            }//end if-else
+            }
 
         /* End startElement method*/
         }
@@ -609,12 +693,37 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
                 LatLng latLng = new LatLng(curLat, curLon);
                 trailParser.addPoint(latLng);
                 longitude = false;
-            }else if(trailName){
+            }else if(story) {
+                InputStream is = getResources().openRawResource(getResources().getIdentifier(
+                        new String(ch,start,length), "raw", getPackageName()));
+                trailParser.addEvent(is);
+                story = false;
+            } else if(trailName){
                 trailParser.addTrail(new String(ch, start, length));
                 Log.v("check", new String(ch, start, length));
+                trailName = false;
             }//end if-else
         /* end characters()*/
         }
     };
+
+
+
+    @Override
+    public void onClick(View v) {
+        Intent i;
+        if(v.getId() == storyButton.getId()){
+            i = new Intent(this,Story.class);
+            startActivity(i);
+        }
+        else if(v.getId() == achButton.getId()) {
+            i = new Intent(this, ListViewAchv.class);
+            startActivity(i);
+
+        }else if(v.getId() == settingsButton.getId()) {
+            i = new Intent(this, Settings.class);
+            startActivity(i);
+        }
+    }
 }
 

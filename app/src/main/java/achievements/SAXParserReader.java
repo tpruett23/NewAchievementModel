@@ -3,6 +3,7 @@ package achievements;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -45,6 +46,8 @@ public class SAXParserReader extends FragmentActivity {
      */
     private static SAXParserReader instance;
 
+    AchievementFactory achievementFactory = new AchievementFactory();
+
     /**
      * The name of the XML file we are reading.
      */
@@ -54,11 +57,9 @@ public class SAXParserReader extends FragmentActivity {
      * The arraylist to hold all the achievements.
      */
 
-    ArrayList<Achievements> achievements = new ArrayList<>();
-    /**
-     * Achievement instance to get needed data.
-     */
-    Achievements ach = new Achievements();
+
+    ArrayList<Achievements> achievements = achievementFactory.getAchievements();
+
     /**
      * Context for the class.
      */
@@ -99,8 +100,9 @@ public class SAXParserReader extends FragmentActivity {
             xmlreader.setContentHandler(handler);
 
            InputStream inStream = this.context.getResources().openRawResource(R.raw.achxmltester);
-            InputSource inStream2 = new InputSource(inStream);
-            xmlreader.parse(inStream2);
+           InputSource inStream2 = new InputSource(inStream);
+           xmlreader.parse(inStream2);
+
 
         } catch (ParserConfigurationException e) {
             Toast.makeText(this.context, "Error reading xml file.", Toast.LENGTH_LONG).show();
@@ -118,21 +120,23 @@ public class SAXParserReader extends FragmentActivity {
      * @return The XML String.
      */
     public String toXML() {
-        return "<achievement>\n" +
+        String achWord = "";
+        for(int i = 0; i < achievements.size();i++) {
+             achWord += "<achievement>\n" +
+                    "\t<name>" + achievements.get(i).getName() + "</name>\n" +
+                    "\t<points>" + achievements.get(i).getPoints() + "</points>\n" +
+                    "\t<description>" + achievements.get(i).getDescription() + "</description>\n" +
+                    "\t<type>" + achievements.get(i).getDescriptorA().getName() + "</type>\n" +
+                    "</achievement>\n";
+        }
+        return "<achievements>\n" + achWord + "</achievements>";
+
+        /*return "<achievement>\n" +
                 "\t<name>" + ach.getName()+ "</name>\n" +
                 "\t<points>" + ach.getPoints() + "</points>\n" +
                 "\t<description>" + ach.getDescription() + "</description>\n" +
                 "\t<type>" + ach.getDescriptorA()+ "</type>\n" +
-                "</achievement>";
-
-
-       /* return "<achievement>\n" +
-                "\t<name>" + "name"+ "</name>" +
-                "\t<points>" + "points" + "</points>" +
-                "\t<description>" + "des" + "</description>" +
-                "\t<type>" + "type" + "</type>" +
-                "</achievement>";
-                */
+                "</achievement>";*/
     }
 
 
@@ -155,7 +159,7 @@ public class SAXParserReader extends FragmentActivity {
             outputStream.write(xml_data.getBytes());
             outputStream.close();
 
-            Toast.makeText(this.context, "Saved", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.context, "Achievements Saved", Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
             Toast.makeText(this.context, "Error saving file", Toast.LENGTH_LONG).show();
             e.printStackTrace();
@@ -172,7 +176,7 @@ public class SAXParserReader extends FragmentActivity {
      * Loads the achievements from internal storage.
      */
         public void load() {
-            File extDir = new File(context.getFilesDir(), filename);
+            File extDir = new File(this.context.getFilesDir(), filename);
             StringBuilder text = new StringBuilder();
 
             try {
@@ -184,6 +188,7 @@ public class SAXParserReader extends FragmentActivity {
                     text.append('\n');
                 }
                 br.close();
+                Toast.makeText(this.context, "Achievements Loaded", Toast.LENGTH_LONG).show();
             }//end try
             catch (FileNotFoundException e) {//If file not found on disk here.
                 Toast.makeText(this.context, "There was no data to load", Toast.LENGTH_LONG).show();

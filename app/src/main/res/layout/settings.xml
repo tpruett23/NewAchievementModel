@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/gold"
     android:weightSum="20"
-    tools:context="achievements.Settings">
+    tools:context="screens.Settings">
 
 
     <LinearLayout
@@ -22,8 +22,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/settings"
-            android:textColor="@color/purple"
-            android:textSize="40sp">
+            android:fontFamily="@font/alvarocondensed"
+            android:textColor="@color/black"
+            android:textSize="65sp">
         </TextView>
 
     </LinearLayout>
@@ -40,13 +41,14 @@
             android:layout_width="wrap_content"
             android:textColor="@color/black"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/alvarocondensed"
             android:text="@string/sound"
-            android:textSize="30sp"/>
+            android:textSize="45sp"/>
 
     </LinearLayout>
 
 
-
+<!--
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,7 +64,8 @@
             android:layout_height="match_parent"
             android:text="@string/selectVolume"
             android:textColor="@color/black"
-            android:textSize="25sp">
+            android:fontFamily="@font/alvarocondensed"
+            android:textSize="45sp">
 
         </TextView>
 
@@ -79,56 +82,33 @@
             android:id="@+id/seekbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/dark_purp"
+            android:background="@color/black"
             android:max="100"
             android:progress="20"
             />
-    </LinearLayout>
+    </LinearLayout>-->
 
 
 
 
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="7"
-        android:weightSum="7.5"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center_horizontal">
-
+<!--
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="2.5">
-            <Button
-                android:id="@+id/backb"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:onClick="onClick"
-                android:layout_marginRight="10dp"
-                style="@style/buttonssquare"
-                android:textColor="@color/white"
-                android:text="@string/Back"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_weight="2.5">
             <Button
                 android:id="@+id/loadb"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/white"
+                android:layout_width="110dp"
+                android:layout_height="60dp"
+                android:textColor="@color/black"
+                android:background="@drawable/roundbutton"
+                android:fontFamily="@font/alvarocondensed"
                 android:layout_marginRight="10dp"
                 android:onClick="onClick"
-                style="@style/buttonssquare"
+                style="@style/buttons"
 
                 android:text="@string/Load"/>
         </LinearLayout>
@@ -136,19 +116,20 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_weight="2.5">
             <Button
                 android:id="@+id/saveb"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="110dp"
+                android:layout_height="60dp"
                 android:onClick="onClick"
                 style="@style/buttonssquare"
-                android:textColor="@color/white"
+                android:background="@drawable/roundbutton"
+                android:fontFamily="@font/alvarocondensed"
+                android:textColor="@color/black"
                 android:text="@string/Save"/>
 
-        </LinearLayout>
+        </LinearLayout>-->
 
     </LinearLayout>
 
-</LinearLayout>

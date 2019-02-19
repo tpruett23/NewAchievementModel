@@ -29,9 +29,9 @@
             android:layout_height="300dp"
             android:textAlignment="center"
             android:text="@string/app_name"
-            android:fontFamily="@font/kidsfont"
+            android:fontFamily="@font/postamt"
             android:textColor="@color/black"
-            android:textSize="50sp" />
+            android:textSize="55sp" />
 
     </LinearLayout>
 

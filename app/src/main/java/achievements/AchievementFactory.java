@@ -14,11 +14,7 @@ import trailsystem.Trail;
  * @version 1.0
  */
 public class AchievementFactory {
-    UserCompleted UC = new UserCompleted();
-    /**
-     * The userinfo instance to access the completed arraylist.
-     **/
-    UserInfo UI = new UserInfo();
+
     /**
      * The boolean value to make sure they are only added once.
      **/
@@ -26,62 +22,16 @@ public class AchievementFactory {
     /**
      * Arraylist to hold all the users completed achievements.
      */
-    static ArrayList<Achievements> achievements = new ArrayList<>();
+     static ArrayList<Achievements> achievements = new ArrayList<>() ;
 
-    int steps;
-    /**
-     * The constructor for an Achievement Factory.
-     */
-    public AchievementFactory() {
+    public ArrayList<Achievements> getAchievements(){
+    return this.achievements;
+}
 
 
 
     }
-    /**
-     * Calls the method in the abstract AchievementDescriptor class to check to see if the
-     * achievement has been met.
-     */
-    public void addCompleted(Achievements ach,AchievementDescriptor ad) {
 
-
-       // if (ad.getName().equals("Distance Achievement")){
-
-               if( UC.getDistanceUser() >= ach.getDescriptorA().getDistance()) {
-                   if (!this.achievements.contains(ach)) {
-                       this.achievements.add(ach);
-                   }
-               }
-
-
-       // }
-       // else if(ad.getName().equals("Speed Achievement")) {
-            if (UI.getSpeed() >= ach.getDescriptorA().getSpeed()) {
-                int speed = ach.getDescriptorA().getSpeed();
-                if (!this.achievements.contains(ach)) {
-
-                    this.achievements.add(ach);
-                }
-            }
-       // }
-        //else if(ad.getName().equals("Step Achievement")) {
-            if (UI.getSteps() >= ach.getDescriptorA().getSteps()) {
-                steps = ach.getDescriptorA().getSteps();
-                if (!this.achievements.contains(ach)) {
-                    this.achievements.add(ach);
-                }
-
-            }
-        //}
-
-    }
-
-        public ArrayList<Achievements> getAchievements () {
-            return this.achievements;
-        }
-
-
-
-    }
 
 
 

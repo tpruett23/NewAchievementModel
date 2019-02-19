@@ -25,7 +25,7 @@ public class CustomListAdapter extends ArrayAdapter<Achievements> {
     /**
      * ArrayList of positions to disable in the arraylist.
      */
-    ArrayList<Integer> positions_to_disable = new ArrayList<Integer>();
+    ArrayList<Integer> positions_to_disable = new ArrayList<>();
     /**
      * The arraylist of achievements.
      **/
@@ -60,6 +60,8 @@ public class CustomListAdapter extends ArrayAdapter<Achievements> {
         this.achievements = achievements;
         viewSource = tvri;
         viewSource2 = tvri2;
+        //positions_to_disable.add(0);
+       // positions_to_disable.add(2);
 
     }
 
@@ -104,10 +106,12 @@ public class CustomListAdapter extends ArrayAdapter<Achievements> {
     @Override
     public boolean isEnabled(int position) {
 
+
         for (int j = 0; j < positions_to_disable.size(); j++) {
             if (position == positions_to_disable.get(j)) {
                 return false;
             }
+
         }
         return super.isEnabled(position);
     }

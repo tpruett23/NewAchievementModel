@@ -121,6 +121,7 @@ public class Trails extends AchievementDescriptor {
      * Gets the amount of trails completed.
      * @return The amount of trails.
      */
+    @Override
     public int getTrails(){
         return this.trails;
     }

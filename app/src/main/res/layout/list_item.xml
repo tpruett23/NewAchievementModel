@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="85dp"
-    android:background="@drawable/texture"
+   android:background="@color/mixedpurple"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:weightSum="10">
 
-
+    <!--android:background="@drawable/texture"-->
+    <!--android:background="@drawable/trophylist">-->
     <LinearLayout
         android:layout_width="25dp"
         android:layout_height="match_parent"
@@ -22,7 +23,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/trophylist">
-
         </ImageView>
 
     </LinearLayout>
@@ -36,8 +36,9 @@
         android:paddingLeft="5dp"
         android:paddingRight="2dp"
         android:text="Achievement Name"
+        android:fontFamily="@font/alvarocondensed"
         android:textColor="@color/gold"
-        android:textSize="20sp"
+        android:textSize="40sp"
         android:textStyle="bold" />
 
 

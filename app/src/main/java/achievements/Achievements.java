@@ -3,6 +3,8 @@ package achievements;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,12 +18,12 @@ import java.util.ArrayList;
  * @author Tori Pruett
  * @version 1.0
  */
-public class Achievements {
+public class Achievements implements Parcelable {
 
     /**
      * The arraylist to hold all of the achievements.
      **/
-    private ArrayList<AchievementDescriptor> allAchievements = new ArrayList<>();
+    private ArrayList<AchievementDescriptor> allAchievements;
 
     /**
      * Name of the achievement read in by xml.
@@ -47,8 +49,28 @@ public class Achievements {
     /**
      * Constructor for the Achievements class.
      */
-    public Achievements() { }
+    public Achievements() {
+        allAchievements = new ArrayList<>();
+    }
 
+
+    protected Achievements(Parcel in) {
+        name = in.readString();
+        description = in.readString();
+        points = in.readInt();
+    }
+
+    public static final Creator<Achievements> CREATOR = new Creator<Achievements>() {
+        @Override
+        public Achievements createFromParcel(Parcel in) {
+            return new Achievements(in);
+        }
+
+        @Override
+        public Achievements[] newArray(int size) {
+            return new Achievements[size];
+        }
+    };
 
     /**
      * The getter method to get the achievements arraylist.
@@ -121,5 +143,17 @@ public class Achievements {
      */
     public AchievementDescriptor getDescriptorA(){
         return this.a;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(description);
+        dest.writeInt(points);
     }
 }

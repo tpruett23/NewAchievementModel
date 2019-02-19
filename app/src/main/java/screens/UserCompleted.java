@@ -23,44 +23,64 @@ public class UserCompleted {
     /**
      * The number of trails that have been completed by the user.
      */
-    private int trails = 10;
+    private int trails = 5;
 
     /**
      * The number of questions that have answered correctly by the user.
      */
-    private int questionsCorrect = 11;
+    private int questionsCorrect;
 
     /**
      * The number of questions that have been answered incorrectly.
      */
-    private int questionsIncorrect = 2;
+    private int questionsIncorrect;
 
     /**
      * The number of achievements won by the user.
      */
-    private int achievementsWon = 3;
+    private int achievementsWon;
 
     /**
      * The number of challenges met by the user.
      */
-    private int challenges = 4;
+    private int challenges;
 
     /**
      * Distance the user has traveled.
      */
-    private float distanceUser;
+    private double distanceUser;
 
     /**
      * The arraylist to hold the completed achievements for the user.
      */
      ArrayList<Location> map = new ArrayList<>();
 
+    private Location prevLocation;
+    private Location location;
+    private double distance = 0d;
+
 
     public UserCompleted(){
 
     }
 
-    public void addDistance(){
+
+    public void updateDistance(double distance) {
+        distanceUser += distance;
+
+        /*double distanceToLast = location.distanceTo(prevLocation);
+        // if less than 10 metres, do not record
+        if (distanceToLast < 0) {
+            Log.i("DISTANCE", "Values too close, so not used.");
+        } else
+            distanceUser += distanceToLast;
+        prevLocation = location;*/
+    }
+
+
+
+
+    /*public void addDistance(){
         float temp = 0;
         float distance = 0;
         for(int i = 0; i < map.size(); i++){
@@ -72,10 +92,10 @@ public class UserCompleted {
 
             }
         }
-        distanceUser = (temp - distanceUser);
+        this.distanceUser = (temp - this.distanceUser);
         Log.v("Distance", distanceUser + "");
     }
-
+*/
 
 
     /**
@@ -127,7 +147,7 @@ public class UserCompleted {
      * Gets the total distance the user has completed.
      * @return The total distance the user has traveled.
      */
-    public float getDistanceUser(){
+    public double getDistanceUser(){
         return this.distanceUser;
     }
 
@@ -137,6 +157,10 @@ public class UserCompleted {
      */
     public ArrayList<Location> getMap() {
         return map;
+    }
+
+    public void setLocation(Location loc){
+        this.location = loc;
     }
 }
 

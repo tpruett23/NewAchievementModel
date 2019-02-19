@@ -32,7 +32,6 @@ public class AchievementDetails extends Activity {
      * The textview for the points to be displayed for that achievement.
      */
     TextView points;
-
     /**
      * The textview for the descriptor to be displayed for that achievement.
      */
@@ -80,7 +79,7 @@ public class AchievementDetails extends Activity {
                 achvImage.setVisibility(View.VISIBLE);
             }
 
-        achvImage.setImageResource(R.drawable.unknown);
+        achvImage.setImageResource(R.drawable.medaldetails);
 
 
         String text = extras.getString("text");

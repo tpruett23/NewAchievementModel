@@ -31,7 +31,7 @@ import screens.UserCompleted;
  */
 public class ListViewAchv extends AppCompatActivity {
     /**
-     * the arraylist of all achievements.
+     * The arraylist of all achievements.
      **/
     private ArrayList<Achievements> achievements;
     /**
@@ -42,6 +42,12 @@ public class ListViewAchv extends AppCompatActivity {
      * The adapter to put the arraylist in the listview.
      */
     ArrayAdapter<Achievements> adapter;
+
+    AchievementFactory AF = new AchievementFactory();
+
+
+
+
 
     /**
      * The onCreate that is called to build and start the activity.
@@ -57,9 +63,8 @@ public class ListViewAchv extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.list);
 
-
-
-        achievements = AchievementXMLHandler.getAchievements();
+        //achievements = AchievementXMLHandler.getAchievements();
+        achievements = AF.achievements;
 
         adapter = new CustomListAdapter(this, R.layout.list_item, R.layout.activity_list_view, achievements);
 
@@ -81,6 +86,7 @@ public class ListViewAchv extends AppCompatActivity {
                 data.putExtra("title", achievements.get(position).getName());
                 data.putExtra("text", achievements.get(position).getDescription());
                 data.putExtra("achDesA",achievements.get(position).getDescriptorA().getName());
+                //adapter.isEnabled(position);
 
                 startActivity(data);
 
