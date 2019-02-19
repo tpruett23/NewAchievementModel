@@ -48,7 +48,7 @@ public class UserCompleted {
     /**
      * Distance the user has traveled.
      */
-    private float distanceUser;
+    private float distanceUser = 7;
 
     /**
      * The arraylist to hold the completed achievements for the user.

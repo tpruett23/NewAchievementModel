@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.toripruett.newachievementmodel">
 
-
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -13,62 +11,85 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.IMAGE_CAPTURE"/>
-    <uses-feature android:name="android.hardware.camera.any" android:required="true" />
-    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+    <uses-permission android:name="android.permission.IMAGE_CAPTURE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-   <uses-feature android:name="android.hardware.camera" android:required="true" />
-
-
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/mountainicon"
-        android:label="CQ"
+        android:label="Main Menu"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name="screens.SplashScreen"
+        <service
+            android:name="achievements.MyIntentService"
+        ></service>
+        <service
+            android:name="achievements.MyService"
+          />
+
+        <activity
+            android:name="screens.SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="screens.MainMenu"
+            android:banner="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name="achievements.MyApp">
         </activity>
 
-        <activity android:name="screens.MainMenu"
-            android:banner="@style/AppTheme.NoActionBar"/>
+
+
         <activity
             android:name="screens.Settings"
             android:label="Settings"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="screens.Story"
-                  android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="screens.Story"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="screens.QRScan" />
-
-        <activity android:name="screens.MiniGame"
-                  android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity android:name="achievements.ListViewAchv"
-                  android:label="@string/Achievements"
-                  android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity android:name="screens.AchievementDetails"
-                  android:label="Achievement Details"
-                  android:theme="@style/Theme.AppCompat.DayNight"
-
-                 />
-
+        <activity
+            android:name="screens.MiniGame"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="achievements.ListViewAchv"
+            android:label="@string/Achievements"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="screens.AchievementDetails"
+            android:label="Achievement Details"
+            android:theme="@style/Theme.AppCompat.DayNight" />
         <activity android:name="achievements.UserCompletedDisplay" />
-
         <activity android:name="screens.Load" />
-
         <activity
             android:name="screens.ScreenToMap"
             android:label="@string/title_activity_screen_to_map"
             android:theme="@style/AppTheme.NoActionBar" />
+
+
+
+
+
+        
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -84,9 +105,15 @@
         <activity
             android:name="screens.TrailMap"
             android:label="@string/title_activity_maps"
-            android:theme="@style/Theme.AppCompat">
+            android:theme="@style/Theme.AppCompat.DayNight">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
         </activity>
-
-
     </application>
+
 </manifest>

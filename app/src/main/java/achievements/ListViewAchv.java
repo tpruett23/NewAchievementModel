@@ -43,6 +43,8 @@ public class ListViewAchv extends AppCompatActivity {
      */
     ArrayAdapter<Achievements> adapter;
 
+    AchievementFactory AF = new AchievementFactory();
+
 
 
 
@@ -62,7 +64,7 @@ public class ListViewAchv extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.list);
 
         //achievements = AchievementXMLHandler.getAchievements();
-        achievements = AchievementFactory.achievements;
+        achievements = AF.achievements;
 
         adapter = new CustomListAdapter(this, R.layout.list_item, R.layout.activity_list_view, achievements);
 

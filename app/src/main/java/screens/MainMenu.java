@@ -1,5 +1,8 @@
 package screens;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +16,7 @@ import android.widget.Button;
 import achievements.ListViewAchv;
 import com.example.toripruett.newachievementmodel.R;
 
+import achievements.MyAlarmReceiver;
 import achievements.SAXParserReader;
 //import achievements.UserCompletedDisplay;
 
@@ -21,7 +25,7 @@ import achievements.SAXParserReader;
  * @author Tori Pruett
  * @version 1.0
  */
-public class MainMenu extends AppCompatActivity implements OnClickListener{
+public class MainMenu extends AppCompatActivity implements OnClickListener {
 
     /**
      * This button takes the user to the story mode screen.
@@ -37,7 +41,7 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
 
     Button saveButton;
 
-    SAXParserReader spr;
+
 
     /**
      * This represents the toolbar that is displayed on the main menu.
@@ -47,6 +51,7 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
 
     /**
      * The method is called whenever this activity is created to assign values and build.
+     *
      * @param savedInstanceState
      */
     //===========================================================
@@ -54,24 +59,24 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        storyButton = (Button)findViewById(R.id.storyButton);
-        miniGameButton = (Button)findViewById(R.id.miniButton);
-        loadButton = (Button)findViewById(R.id.loadButton);
-        saveButton = (Button)findViewById(R.id.saveButton);
+        storyButton = (Button) findViewById(R.id.storyButton);
+        miniGameButton = (Button) findViewById(R.id.miniButton);
+        loadButton = (Button) findViewById(R.id.loadButton);
+        saveButton = (Button) findViewById(R.id.saveButton);
         toolbar = (Toolbar) findViewById(R.id.toolbar1);
         storyButton.setOnClickListener(this);
         miniGameButton.setOnClickListener(this);
         loadButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
 
-        spr = new SAXParserReader(this);
-
+        //spr = new SAXParserReader(this);
 
 
     }//==========================================================
 
     /**
      * This method inflates the toolbar on the screen.
+     *
      * @param menu The toolbar to inflate.
      * @return returns true if successful.
      */
@@ -85,6 +90,7 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
 
     /**
      * This is the method called when one of the buttons in the toolbar is clicked.
+     *
      * @param item The item in the toolbar.
      * @return returns true if successful.
      */
@@ -117,24 +123,22 @@ public class MainMenu extends AppCompatActivity implements OnClickListener{
 
     /**
      * The method that is called when the other buttons not in the toolbar are called.
+     *
      * @param v The button that is clicked.
      */
-    public void onClick(View v){
+    public void onClick(View v) {
         Intent i;
-        if(v.getId() == storyButton.getId()){
-            i = new Intent(this,Story.class);
+        if (v.getId() == storyButton.getId()) {
+            i = new Intent(this, Story.class);
             startActivity(i);
-        }else if(v.getId() == miniGameButton.getId()) {
+        } else if (v.getId() == miniGameButton.getId()) {
             i = new Intent(this, MiniGame.class);
             startActivity(i);
         }
-        else if(v.getId() == loadButton.getId()) {
-           spr.load();
-        }else if(v.getId() == saveButton.getId()) {
-           spr.save();
-        }
 
     }
+
+
 }
 
 
