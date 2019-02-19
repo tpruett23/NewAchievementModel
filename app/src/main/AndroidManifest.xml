@@ -83,6 +83,10 @@
             android:name="screens.ScreenToMap"
             android:label="@string/title_activity_screen_to_map"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="trailsystem.StoryEvent$CharacterScreen"
+            android:label="@string/title_activity_screen_to_map"
+            android:theme="@style/AppTheme.NoActionBar" />
 
 
 

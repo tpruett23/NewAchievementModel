@@ -55,7 +55,7 @@ public class MyIntentService extends Service {
     public void startService() {
         SAXParserReader saxParserReader = new SAXParserReader(this);
         Validation validation = new Validation();
-        validation.add();
+        //validation.add();
 
            /*  Intent newintent = new Intent("Valid");
              newintent.putExtra("message", message);

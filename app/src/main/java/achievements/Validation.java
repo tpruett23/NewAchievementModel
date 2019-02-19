@@ -62,7 +62,7 @@ public class Validation extends Activity {
         }
     };
 
-    public void add() {
+    /*public void add() {
         Achievements dis = (Achievements) getIntent().getParcelableExtra("distance");
         Achievements trails = (Achievements) getIntent().getParcelableExtra("trails");
         Achievements speed = (Achievements) getIntent().getParcelableExtra("speed");
@@ -83,7 +83,7 @@ public class Validation extends Activity {
         if (steps != null) {
             AchievementXMLHandler.getAchievements().add(steps);
         }
-    }
+    }*/
 
         public void testAdd(Achievements ach) {
             AchievementFactory.achievements.add(ach);

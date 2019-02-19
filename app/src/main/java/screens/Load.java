@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import achievements.MyIntentService;
 import achievements.MyService;
 import achievements.Validation;
+import trailsystem.StoryEvent;
 
 public class Load extends AppCompatActivity {
 
@@ -48,7 +49,6 @@ public class Load extends AppCompatActivity {
      */
     private void nextScreen() {
         Intent i = new Intent(this, TrailMap.class);
-
         this.startActivity(i);
         this.finish();
 
