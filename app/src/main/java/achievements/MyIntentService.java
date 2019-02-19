@@ -4,27 +4,16 @@ import android.app.IntentService;
 import android.app.Service;
 import android.content.Intent;
 import android.content.Context;
-import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.google.android.gms.common.api.Api;
-
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Timer;
-
-import screens.TrailMap;
-
-
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -41,13 +30,16 @@ public class MyIntentService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startid) {
 
-        final Handler ha=new Handler();
+        final Handler ha = new Handler();
         ha.postDelayed(new Runnable() {
 
             @Override
             public void run() {
-               // testprint();
-                sendMessage("Hello");
+                ///startService();
+                SAXParserReader saxParserReader = new SAXParserReader();
+                //Validation validation = new Validation();
+                //validation.add();
+                Toast.makeText(getApplicationContext(),"Testing",Toast.LENGTH_LONG).show();
 
                 ha.postDelayed(this, 10000);
             }
@@ -64,12 +56,16 @@ public class MyIntentService extends Service {
     }
 
 
-    public void sendMessage(final String message) {
+    public void startService() {
+        SAXParserReader saxParserReader = new SAXParserReader(this);
+        Validation validation = new Validation();
+        validation.add();
 
-             Intent newintent = new Intent("Valid");
+           /*  Intent newintent = new Intent("Valid");
              newintent.putExtra("message", message);
+
             // Toast.makeText(this,message,Toast.LENGTH_LONG).show();
-             LocalBroadcastManager.getInstance(this).sendBroadcast(newintent);
+             LocalBroadcastManager.getInstance(this).sendBroadcast(newintent);*/
              Log.d("sender", "Broadcasting message");
 
  }
@@ -95,7 +91,7 @@ public class MyIntentService extends Service {
      */
     public void save() {
 
-        String xml_data  = toXML();
+        String xml_data = toXML();
 
         //Create a file if its not already on disk
         File filesDIR = this.getFilesDir();
@@ -120,59 +116,21 @@ public class MyIntentService extends Service {
             Toast.makeText(this, "Error saving file", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
-    }
 
-    /**
-     * Loads the achievements from internal storage.
-     *//*
-    public void load() {
-        File extDir = new File(this.context.getFilesDir(), filename);
-        StringBuilder text = new StringBuilder();
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(extDir));
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                text.append(line);
-                text.append('\n');
-            }
-            br.close();
-            Toast.makeText(this.context, "Achievements Loaded", Toast.LENGTH_LONG).show();
-        }//end try
-        catch (FileNotFoundException e) {//If file not found on disk here.
-            Toast.makeText(this.context, "There was no data to load", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        } catch (IOException e)//If io Exception here
-        {
-            Toast.makeText(this.context, "Error loading file", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }//end catch
-        //Set the data from the file content and convert it to a String
-        String data = new String(text);
-
-        //Safety first Parse data if available.
-        if (data.length() > 0) {
-            parseXML();
-        } else
-            Toast.makeText(this.context, "There is no data to display", Toast.LENGTH_LONG).show();
-    }//end LOAD*/
-
-
-    public void testprint(){
-        Toast.makeText(this,"Testing Service",Toast.LENGTH_LONG).show();
 
     }
 
-    private void stopService () {
-        if (timer != null) timer.cancel();
-    }
 
-    @Override
-    public void onStart (Intent intent,int startid){
+                private void stopService () {
+                    if (timer != null) timer.cancel();
+                }
 
-        //   Toast.makeText(this, "Service started by user.", Toast.LENGTH_LONG).show();
-    }
+                @Override
+                public void onStart (Intent intent,int startid){
+
+                    //   Toast.makeText(this, "Service started by user.", Toast.LENGTH_LONG).show();
+                }
 
 
-}
+
+        }

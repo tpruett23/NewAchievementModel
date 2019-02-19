@@ -1,6 +1,10 @@
 package achievements;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.ListView;
 
 import org.xml.sax.Attributes;
@@ -18,12 +22,12 @@ public class AchievementXMLHandler extends DefaultHandler {
     /** A global list of achievements **/
     private  static ArrayList<Achievements> achievements1;
     /**
-d
     /**
      * A temp achievement built to get each marker element
      *
      */
    Achievements temp;
+   Context con;
     /**
      * Achievements instance.
      */
@@ -54,7 +58,13 @@ d
 
     }//========================================================================
 
+
     //=========================================================================
+
+
+
+
+
     /**
      * Return the array list achievements.
      * @return
@@ -142,7 +152,7 @@ d
     @Override
     public void endElement(String uri, String localName, String qName)
             throws SAXException {
-        AchievementFactory af = new AchievementFactory();
+
 
             if (temp == null)
                 temp = new Achievements();
@@ -162,43 +172,68 @@ d
 
             }else if(types == true) {
 
+
+
                 if (qName.equals("time")) {
+                  //  Intent intent = new Intent(con,Validation.class);
                     AchievementDescriptor TimeAch = new Time("Time Achievement", temp.getPoints(), temp.getDescription(), Double.parseDouble(currentElement));
                     temp.setDescriptor(TimeAch);
                     CheckAchievements timeCheck = new TimeCheck();
-                    timeCheck.checkAchievement(temp);
+                    if(timeCheck.checkAchievement(temp)){
+                    //    intent.putExtra("time",true);
+                    }
+                   // con.startActivity(intent);
+
                     temp2.getAllAchievements().add(TimeAch);
 
                 } else if (qName.equals("distance")) {
+                    Validation val = new Validation();
+                    //Intent intent = new Intent(con,Validation.class);
                     AchievementDescriptor distanceAch = new Distance("Distance Achievement", temp.getPoints(), Double.parseDouble(currentElement), temp.getDescription());
                     temp.setDescriptor(distanceAch);
                     temp2.getAllAchievements().add(distanceAch);
                     DistanceCheck distanceCheck = new DistanceCheck();
-                    distanceCheck.checkAchievement(temp);
+                    if(distanceCheck.checkAchievement(temp)){
+                        val.testAdd(temp);
+                        //intent.putExtra("distance",temp);
+                    }
+                   // con.startActivity(intent);
+
 
                 } else if (qName.equals("trails")) {
                     AchievementDescriptor trailAch = new Trails("Trail Achievement", temp.getPoints(), temp.getDescription(), Integer.parseInt(currentElement));
                     temp.setDescriptor(trailAch);
                     temp2.getAllAchievements().add(trailAch);
                     TrailNumCheck trailCheck = new TrailNumCheck();
-                    trailCheck.checkAchievement(temp);
+                    if(trailCheck.checkAchievement(temp)){
+                        //intent.putExtra("trails",temp);
+                    }
+
 
                 } else if (qName.equals("step")) {
                     AchievementDescriptor stepAch = new Steps("Step Achievement", temp.getPoints(), temp.getDescription(), Integer.parseInt(currentElement));
                     temp.setDescriptor(stepAch);
                     temp2.getAllAchievements().add(stepAch);
-                   StepCheck stepCheck = new StepCheck();
-                    stepCheck.checkAchievement(temp);
+                    StepCheck stepCheck = new StepCheck();
+
+                    if(stepCheck.checkAchievement(temp)){
+                       // intent.putExtra("steps",temp);
+                    }
 
                 } else if (qName.equals("speed")) {
                     AchievementDescriptor speedAch = new Speed("Speed Achievement", temp.getPoints(), Integer.parseInt(currentElement), temp.getDescription());
                     temp.setDescriptor(speedAch);
                     temp2.getAllAchievements().add(speedAch);
                     SpeedCheck speedCheck = new SpeedCheck();
-                    speedCheck.checkAchievement(temp);
+                    if(speedCheck.checkAchievement(temp)){
+                        //intent.putExtra("speed",temp);
+                    }
 
 
                 }
+
+                //con.startActivity(intent);
+
             }
 
 
@@ -210,7 +245,10 @@ d
             currentElement = null;
 
 
+
+
     }//========================================================================
+
 
 
     //=========================================================================
@@ -230,7 +268,5 @@ d
         }
 
     }//=========================================================================
-
-
 
 }//end class####################################################################

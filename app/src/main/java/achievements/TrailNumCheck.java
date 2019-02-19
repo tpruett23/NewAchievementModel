@@ -1,18 +1,23 @@
 package achievements;
 
+import android.content.Intent;
+
 import screens.UserCompleted;
 
 public class TrailNumCheck implements CheckAchievements {
     UserCompleted UC = new UserCompleted();
     @Override
-    public void checkAchievement(Achievements ach) {
+    public boolean checkAchievement(Achievements ach) {
+
+        boolean check = false;
         if (UC.getTrails() > ach.getDescriptorA().getTrails()) {
             int trails = ach.getDescriptorA().getSpeed();
             if (!AchievementFactory.achievements.contains(ach)) {
-
+                check = true;
                AchievementFactory.achievements.add(ach);
             }
         }
+        return check;
 
     }
 }

@@ -35,9 +35,8 @@ import javax.xml.parsers.SAXParserFactory;
 import screens.UserCompleted;
 
 public class Validation extends Activity {
-    Context thisContext;
 
-    String filename = "validfiles";
+
     String name;
     String type;
     static ArrayList<Validation> validAch;
@@ -59,14 +58,39 @@ public class Validation extends Activity {
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context1, Intent intent) {
-            Toast.makeText(context1,"Message Received",Toast.LENGTH_LONG).show();
+            Toast.makeText(context1, "Message Received", Toast.LENGTH_LONG).show();
             String message = intent.getStringExtra("message");
             Toast.makeText(context1, message, Toast.LENGTH_LONG).show();
             Log.d("receiver", "Got message: " + message);
         }
     };
 
+    public void add() {
+        Achievements dis = (Achievements) getIntent().getParcelableExtra("distance");
+        Achievements trails = (Achievements) getIntent().getParcelableExtra("trails");
+        Achievements speed = (Achievements) getIntent().getParcelableExtra("speed");
+        Achievements time = (Achievements) getIntent().getParcelableExtra("time");
+        Achievements steps = (Achievements) getIntent().getParcelableExtra("steps");
 
+        if (dis != null) {
+            AchievementXMLHandler.getAchievements().add(dis);
+        }
+        if (trails != null) {
+            AchievementXMLHandler.getAchievements().add(speed);
+
+        }
+        if (time != null) {
+            AchievementXMLHandler.getAchievements().add(time);
+
+        }
+        if (steps != null) {
+            AchievementXMLHandler.getAchievements().add(steps);
+        }
+    }
+
+        public void testAdd(Achievements ach) {
+            AchievementXMLHandler.getAchievements().add(ach);
+    }
 
 
     @Override
@@ -86,122 +110,5 @@ public class Validation extends Activity {
                 registerReceiver(mMessageReceiver, new IntentFilter("Valid"));
     }
 }
-  /*      protected void onDestroy () {
-            super.onDestroy();
-            LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(mMessageReceiver);
-        }
-
-/*
-        validAch = ValidXMLHandler.getValid();
-
-    }
-
-    public  boolean checkValid(){
-       boolean isValid = false;
-  *//*     // for(int i = 0; i < validAch.size(); i++ ){
-            if(validAch.get(0).type .equals("Distance")){
-                if(UC.getDistanceUser() > 5){
-                    isValid = true;
-
-                    validAch.remove(0);
-
-                }else if(UC.getDistanceUser() == 1){
-                    isValid = true;
-                    validAch.remove(0);
-                }
-
-            }else if(validAch.get(0).type.equals("Trails" )){
-                if(UC.getTrails() > 4){
-                    isValid = true;
-                    validAch.remove(0);
-                }
-            }*//*
-        //}
-        Toast.makeText(this,isValid + "",Toast.LENGTH_LONG).show();
-        return isValid;
-    }
-
-    public void parseXML() {
-        SAXParserFactory factory = SAXParserFactory.newInstance();
-        try {
-            SAXParser saxParser = factory.newSAXParser();
-            XMLReader xmlreader = saxParser.getXMLReader();
-
-
-            ValidXMLHandler handler = new ValidXMLHandler();
-            xmlreader.setContentHandler(handler);
-
-            InputStream inStream = this.context.getResources().openRawResource(R.raw.validfiles);
-            InputSource inStream2 = new InputSource(inStream);
-            xmlreader.parse(inStream2);
-
-        } catch (ParserConfigurationException e) {
-            Toast.makeText(this, "Error reading xml file.", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        } catch (SAXException e) {
-            Toast.makeText(this, "Error reading xml file.", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-    public void load() {
-
-            File extDir = new File(this.context.getFilesDir(), "validfiles");
-            StringBuilder text = new StringBuilder();
-
-            try {
-                BufferedReader br = new BufferedReader(new FileReader(extDir));
-                String line;
-
-                while ((line = br.readLine()) != null) {
-                    text.append(line);
-                    text.append('\n');
-                }
-                br.close();
-                Toast.makeText(this, "Achievements Loaded", Toast.LENGTH_LONG).show();
-            }//end try
-            catch (FileNotFoundException e) {//If file not found on disk here.
-                Toast.makeText(this, "There was no data to load", Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            } catch (IOException e)//If io Exception here
-            {
-                Toast.makeText(this, "Error loading file", Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }//end catch
-            //Set the data from the file content and convert it to a String
-            String data = new String(text);
-
-            //Safety first Parse data if available.
-            if (data.length() > 0) {
-                parseXML();
-            } else
-                Toast.makeText(this, "There is no data to display", Toast.LENGTH_LONG).show();
-        }//end LOAD
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setType(String type){
-        this.type = type;
-    }
-}*/
-
-
-
-
-
-
-  /*      LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mMessageReceiver,
-                new IntentFilter("push-message"));
-        super.onCreate(savedInstanceState);
-*/
-
-
-
-
 
 

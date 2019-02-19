@@ -46,6 +46,7 @@ public class MyService extends Service {
     @Override
     public void onCreate() {
 
+
     }
 
     @Override
@@ -70,22 +71,6 @@ public class MyService extends Service {
     }
 
 
-   /* private  void sendMessageToActivity(String msg) {
-        Intent intent = new Intent("intentKey");
-// You can also include some extra data.
-        intent.putExtra("key", msg);
-        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-    }
-
-    public void testprint(){
-        Toast.makeText(this,"Testing Service",Toast.LENGTH_LONG).show();
-
-    }
-
-        private void stopService () {
-            if (timer != null) timer.cancel();
-        }
-*/
         @Override
         public void onStart (Intent intent,int startid){
 

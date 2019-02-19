@@ -3,6 +3,7 @@ package achievements;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -56,13 +57,9 @@ public class SAXParserReader extends FragmentActivity {
      * The arraylist to hold all the achievements.
      */
 
-    //ArrayList<Achievements> achievements = new ArrayList<>();
 
     ArrayList<Achievements> achievements = achievementFactory.getAchievements();
-     /**
-     * Achievement instance to get needed data.
-     */
-    Achievements ach = new Achievements();
+
     /**
      * Context for the class.
      */
@@ -103,8 +100,9 @@ public class SAXParserReader extends FragmentActivity {
             xmlreader.setContentHandler(handler);
 
            InputStream inStream = this.context.getResources().openRawResource(R.raw.achxmltester);
-            InputSource inStream2 = new InputSource(inStream);
-            xmlreader.parse(inStream2);
+           InputSource inStream2 = new InputSource(inStream);
+           xmlreader.parse(inStream2);
+
 
         } catch (ParserConfigurationException e) {
             Toast.makeText(this.context, "Error reading xml file.", Toast.LENGTH_LONG).show();
