@@ -35,12 +35,8 @@ public class MyIntentService extends Service {
 
             @Override
             public void run() {
-                ///startService();
                 SAXParserReader saxParserReader = new SAXParserReader();
-                //Validation validation = new Validation();
-                //validation.add();
                 Toast.makeText(getApplicationContext(),"Testing",Toast.LENGTH_LONG).show();
-
                 ha.postDelayed(this, 10000);
             }
         }, 10000);

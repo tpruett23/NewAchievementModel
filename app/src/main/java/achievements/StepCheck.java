@@ -15,7 +15,7 @@ public class StepCheck implements CheckAchievements{
             if (UI.getSteps() > ach.getDescriptorA().getSteps()) {
                 if (!AchievementFactory.achievements.contains(ach)) {
                     check = true;
-                   AchievementFactory.achievements.add(ach);
+                   //AchievementFactory.achievements.add(ach);
                 }
 
             }

@@ -172,32 +172,27 @@ public class AchievementXMLHandler extends DefaultHandler {
 
             }else if(types == true) {
 
-
+                Validation val = new Validation();
 
                 if (qName.equals("time")) {
-                  //  Intent intent = new Intent(con,Validation.class);
                     AchievementDescriptor TimeAch = new Time("Time Achievement", temp.getPoints(), temp.getDescription(), Double.parseDouble(currentElement));
                     temp.setDescriptor(TimeAch);
                     CheckAchievements timeCheck = new TimeCheck();
                     if(timeCheck.checkAchievement(temp)){
-                    //    intent.putExtra("time",true);
+                        val.testAdd(temp);
                     }
-                   // con.startActivity(intent);
+
 
                     temp2.getAllAchievements().add(TimeAch);
 
                 } else if (qName.equals("distance")) {
-                    Validation val = new Validation();
-                    //Intent intent = new Intent(con,Validation.class);
                     AchievementDescriptor distanceAch = new Distance("Distance Achievement", temp.getPoints(), Double.parseDouble(currentElement), temp.getDescription());
                     temp.setDescriptor(distanceAch);
                     temp2.getAllAchievements().add(distanceAch);
                     DistanceCheck distanceCheck = new DistanceCheck();
                     if(distanceCheck.checkAchievement(temp)){
                         val.testAdd(temp);
-                        //intent.putExtra("distance",temp);
                     }
-                   // con.startActivity(intent);
 
 
                 } else if (qName.equals("trails")) {
@@ -206,7 +201,7 @@ public class AchievementXMLHandler extends DefaultHandler {
                     temp2.getAllAchievements().add(trailAch);
                     TrailNumCheck trailCheck = new TrailNumCheck();
                     if(trailCheck.checkAchievement(temp)){
-                        //intent.putExtra("trails",temp);
+                       val.testAdd(temp);
                     }
 
 
@@ -217,7 +212,7 @@ public class AchievementXMLHandler extends DefaultHandler {
                     StepCheck stepCheck = new StepCheck();
 
                     if(stepCheck.checkAchievement(temp)){
-                       // intent.putExtra("steps",temp);
+                       val.testAdd(temp);
                     }
 
                 } else if (qName.equals("speed")) {
@@ -226,13 +221,12 @@ public class AchievementXMLHandler extends DefaultHandler {
                     temp2.getAllAchievements().add(speedAch);
                     SpeedCheck speedCheck = new SpeedCheck();
                     if(speedCheck.checkAchievement(temp)){
-                        //intent.putExtra("speed",temp);
+                        val.testAdd(temp);
                     }
 
 
                 }
 
-                //con.startActivity(intent);
 
             }
 

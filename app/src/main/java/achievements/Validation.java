@@ -38,11 +38,8 @@ public class Validation extends Activity {
 
 
     String name;
-    String type;
-    static ArrayList<Validation> validAch;
     static UserCompleted UC;
     static UserInfo UI;
-    final String messagez = "Hello Test";
 
 
     @Override
@@ -89,7 +86,7 @@ public class Validation extends Activity {
     }
 
         public void testAdd(Achievements ach) {
-            AchievementXMLHandler.getAchievements().add(ach);
+            AchievementFactory.achievements.add(ach);
     }
 
 

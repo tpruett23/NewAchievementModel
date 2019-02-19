@@ -14,7 +14,7 @@ public class TrailNumCheck implements CheckAchievements {
             int trails = ach.getDescriptorA().getSpeed();
             if (!AchievementFactory.achievements.contains(ach)) {
                 check = true;
-               AchievementFactory.achievements.add(ach);
+               //AchievementFactory.achievements.add(ach);
             }
         }
         return check;

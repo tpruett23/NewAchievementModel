@@ -11,10 +11,8 @@ public class SpeedCheck implements CheckAchievements {
 
             if (UI.getSpeed() > ach.getDescriptorA().getSpeed()) {
                 if (!AchievementFactory.achievements.contains(ach)) {
-
                     check= true;
-
-                 AchievementFactory.achievements.add(ach);
+                 //AchievementFactory.achievements.add(ach);
                 }
             }
             return check;

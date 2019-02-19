@@ -13,7 +13,7 @@ public class TimeCheck implements CheckAchievements {
             if (!AchievementFactory.achievements.contains(ach)) {
                 check= true;
 
-               AchievementFactory.achievements.add(ach);
+               //AchievementFactory.achievements.add(ach);
             }
         }
         return check;
