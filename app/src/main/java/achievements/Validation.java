@@ -36,18 +36,11 @@ import screens.UserCompleted;
 
 public class Validation extends Activity {
 
-
-    String name;
-    static UserCompleted UC;
-    static UserInfo UI;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mMessageReceiver,
                 new IntentFilter("Valid"));
-
 
     }
 
@@ -85,7 +78,11 @@ public class Validation extends Activity {
         }
     }*/
 
-        public void testAdd(Achievements ach) {
+
+
+
+    public void testAdd(Achievements ach) {
+
             AchievementFactory.achievements.add(ach);
     }
 
@@ -93,7 +90,6 @@ public class Validation extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
 
 

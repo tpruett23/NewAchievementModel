@@ -59,12 +59,6 @@ public class AchievementXMLHandler extends DefaultHandler {
     }//========================================================================
 
 
-    //=========================================================================
-
-
-
-
-
     /**
      * Return the array list achievements.
      * @return
@@ -181,8 +175,6 @@ public class AchievementXMLHandler extends DefaultHandler {
                     if(timeCheck.checkAchievement(temp)){
                         val.testAdd(temp);
                     }
-
-
                     temp2.getAllAchievements().add(TimeAch);
 
                 } else if (qName.equals("distance")) {
