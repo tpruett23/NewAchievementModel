@@ -238,6 +238,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      */
     @Override
     public void onLocationChanged(Location location){
+        double distance = lastLocation.distanceTo(location);
         lastLocation = location;
         UC.getMap().add(location);
         UC.setLocation(location);
@@ -584,7 +585,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
          *                  being performed
          * @param qName - The qualified name (with prefix), or the empty
          *              string if qualified names are not available
-         * @param attributes - The attributes attched to the element. If
+         * @param attributes - The attributes attached to the element. If
          *                   there are not attributes, it shall be an
          *                   empty Attributes object.
          * @throws SAXException - Any SAX exception, possibly wrapping

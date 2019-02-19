@@ -24,7 +24,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/mountainicon"
-        android:label="Main Menu"
+        android:label="CQ"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
@@ -85,10 +85,6 @@
             android:name="screens.TrailMap"
             android:label="@string/title_activity_maps"
             android:theme="@style/Theme.AppCompat">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
 
 

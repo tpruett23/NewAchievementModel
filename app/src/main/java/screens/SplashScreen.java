@@ -31,8 +31,8 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
     }
-
     /**
+
      * Part of the activity lifecycle it starts the activity.
      */
     public void onStart() {

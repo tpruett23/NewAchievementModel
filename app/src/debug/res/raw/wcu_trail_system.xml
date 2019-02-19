@@ -8,6 +8,7 @@
         <waypoint>
             <latitude>35.30476</latitude>
             <longitude>-83.2038</longitude>
+            <story>character1_1</story>
         </waypoint>
         <waypoint>
             <latitude>35.30488</latitude>
@@ -20,6 +21,7 @@
         <waypoint>
             <latitude>35.30541</latitude>
             <longitude>-83.2045</longitude>
+            <story></story>
         </waypoint>
         <waypoint>
             <latitude>35.30553</latitude>
