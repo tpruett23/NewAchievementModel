@@ -21,11 +21,11 @@ public class Load extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+        Validation val = new Validation();
         super.onStart();
-        Validation validation = new Validation();
         startService(new Intent(this, MyService.class));
         startService(new Intent(this,MyIntentService.class));
-        //startService(new Intent(this,MyIntentService.class));
+
         Handler handler = new Handler();
         handler.postDelayed(runner, 0);
 
@@ -48,7 +48,6 @@ public class Load extends AppCompatActivity {
      */
     private void nextScreen() {
         Intent i = new Intent(this, TrailMap.class);
-
         this.startActivity(i);
         this.finish();
 

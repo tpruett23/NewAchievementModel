@@ -66,6 +66,7 @@ public class MyService extends Service {
 
 
 
+
         return START_NOT_STICKY;
 
     }
@@ -73,6 +74,10 @@ public class MyService extends Service {
 
         @Override
         public void onStart (Intent intent,int startid){
+            TrailMap map = new TrailMap();
+            SAXParserReader saxParserReader = new SAXParserReader(this);
+            saxParserReader.parseXML();
+            ListViewAchv LV = new ListViewAchv();
 
 
           //   Toast.makeText(this, "Service started by user.", Toast.LENGTH_LONG).show();

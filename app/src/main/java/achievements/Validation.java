@@ -36,18 +36,11 @@ import screens.UserCompleted;
 
 public class Validation extends Activity {
 
-
-    String name;
-    static UserCompleted UC;
-    static UserInfo UI;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mMessageReceiver,
                 new IntentFilter("Valid"));
-
 
     }
 
@@ -62,30 +55,8 @@ public class Validation extends Activity {
         }
     };
 
-    public void add() {
-        Achievements dis = (Achievements) getIntent().getParcelableExtra("distance");
-        Achievements trails = (Achievements) getIntent().getParcelableExtra("trails");
-        Achievements speed = (Achievements) getIntent().getParcelableExtra("speed");
-        Achievements time = (Achievements) getIntent().getParcelableExtra("time");
-        Achievements steps = (Achievements) getIntent().getParcelableExtra("steps");
 
-        if (dis != null) {
-            AchievementXMLHandler.getAchievements().add(dis);
-        }
-        if (trails != null) {
-            AchievementXMLHandler.getAchievements().add(speed);
-
-        }
-        if (time != null) {
-            AchievementXMLHandler.getAchievements().add(time);
-
-        }
-        if (steps != null) {
-            AchievementXMLHandler.getAchievements().add(steps);
-        }
-    }
-
-        public void testAdd(Achievements ach) {
+    public void testAdd(Achievements ach) {
             AchievementFactory.achievements.add(ach);
     }
 
@@ -93,7 +64,6 @@ public class Validation extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
 
 
