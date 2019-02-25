@@ -13,6 +13,7 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.example.toripruett.newachievementmodel.R;
+import com.google.android.gms.maps.model.MapStyleOptions;
 
 import trailsystem.Trail;
 
@@ -26,6 +27,7 @@ public class Settings extends AppCompatActivity implements OnClickListener {
      * The checkbox to turn the sound on and off.
      */
     CheckBox sound;
+    CheckBox darkMode;
     /**
      * The seekbar to adjust the volume.
      */
@@ -54,6 +56,12 @@ public class Settings extends AppCompatActivity implements OnClickListener {
         sound = (CheckBox) findViewById(R.id.soundcheck);
         sound.setOnClickListener(this);
         sound.setChecked(true);
+
+        darkMode = (CheckBox) findViewById(R.id.darkcheck);
+        darkMode.setOnClickListener(this);
+        darkMode.setChecked(true);
+
+
 
        /* bar = (SeekBar) findViewById(R.id.seekbar);
         load = (Button) findViewById(R.id.loadb);
@@ -124,6 +132,16 @@ public class Settings extends AppCompatActivity implements OnClickListener {
                 TrailMap.mediaPlayer.pause();
             }
         }
+
+        if (v.getId() == R.id.darkcheck) {
+            if (darkMode.isChecked()) {
+                MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json);
+                TrailMap.UpdateMapStyleOptions(mapStyleOptions);
+            }else{
+                MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(this, R.raw.style2_json);
+                TrailMap.UpdateMapStyleOptions(mapStyleOptions);
+            }
+        }
     }
 
     //}
@@ -164,6 +182,13 @@ public class Settings extends AppCompatActivity implements OnClickListener {
         } else {
             settings.putInt("sound", 3);
 
+        }
+
+        boolean mode = darkMode.isChecked();
+        if(mode){
+            settings.putInt("mode", 1);
+        }else{
+            settings.putInt("mode", 2);
         }
 
 
