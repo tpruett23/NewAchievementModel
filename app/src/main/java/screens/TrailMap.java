@@ -12,6 +12,8 @@ import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -21,6 +23,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -92,9 +96,13 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     /** UserCompleted Instance */
     UserCompleted UC = new UserCompleted();
     AchievementFactory AF = new AchievementFactory();
+    Button eventButton;
     Button achButton;
     Button settingsButton;
     Button storyButton;
+
+    static Double distanceSend;
+    //Vibrator v;
 
     /** trail parser which will input all information for the trail system*/
     private XMLTrailParser trailParser;
@@ -107,6 +115,12 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
     public static MediaPlayer mediaPlayer;
 
+    Animation bounce;
+
+    public TrailMap() {
+        distanceSend = 0.0;
+    }
+
     /**
      * Called when the activity is starting. This is where most initialization
      * should go: calling setContentView(int) to inflate the activity's UI, using
@@ -117,13 +131,14 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      */
     @Override
     protected void onCreate(Bundle savedInstanceState){
+      // v  = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         AppCompatDelegate.setDefaultNightMode(
                 AppCompatDelegate.MODE_NIGHT_AUTO);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps2);
         trailParser = new XMLTrailParser();
 
-
+        bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.strange_beginnings);
         mediaPlayer.setLooping(true);
@@ -131,10 +146,14 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         achButton = (Button)findViewById(R.id.Achievements);
         settingsButton = (Button)findViewById(R.id.Settings);
         storyButton = (Button)findViewById(R.id.Story);
+        eventButton = (Button)findViewById(R.id.eventAvailable);
 
         achButton.setOnClickListener(this);
         settingsButton.setOnClickListener(this);
         storyButton.setOnClickListener(this);
+        eventButton.setOnClickListener(this);
+
+        eventButton.setVisibility(View.GONE);
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment != null)
@@ -253,7 +272,11 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         if(location != null & lastLocation != null) {
             double distance = lastLocation.distanceTo(location);
             lastLocation = location;
-            UC.updateDistance(distance);
+            UC.setDistanceUser(distance);
+            //this.distanceSend = distance;
+
+            UC.updateDistance();
+
         }
         lastLocation = location;
 
@@ -276,22 +299,41 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
         Collection<LatLng> progress = trailParser.updateLocation(location);
 
-       //SAXParserReader saxParserReader = new SAXParserReader(this);
-       // saxParserReader.parseXML();
-
 
         if (progress != null){
             drawProgress(progress);
         }//end if
 
         if(trailParser.getTrailSystem().checkEvent(new LatLng(location.getLatitude(), location.getLongitude()))){
-            StoryEvent storyEvent = trailParser.getTrailSystem().getEvent();
-            Log.v("event:", "starting...");
-            storyEvent.startEvent(this);
-        }
+
+
+            eventButton.startAnimation(bounce);
+            eventButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            eventButton.setTextColor(getResources().getColor(R.color.black));
+            eventButton.setVisibility(View.VISIBLE);
+            eventButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v)
+                {
+                    StoryEvent storyEvent = trailParser.getTrailSystem().getEvent();
+                    Log.v("event:", "starting...");
+                    storyEvent.startEvent(getApplicationContext());
+
+
+                    Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        vib.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                    } else {
+                        vib.vibrate(500);
+                    }
+            }
+
+        });
 
     /* end onLocationChanged*/
     }
+    }
+
 
     /**
      * Draw a polyline to signify progress achieved throughout the trail
@@ -707,6 +749,10 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         /* end characters()*/
         }
     };
+
+    public double getDistanceSend(){
+        return this.distanceSend;
+    }
 
 
 

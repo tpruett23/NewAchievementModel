@@ -49,7 +49,7 @@ public class UserCompleted {
      * Distance the user has traveled.
      */
 
-    private double distanceUser = 0;
+    double distanceUser = 0.0;
 
 
 
@@ -69,8 +69,10 @@ public class UserCompleted {
 
 
 
-    public void updateDistance(Double dis) {
-        this.distanceUser += dis;
+    public void updateDistance() {
+        TrailMap tm = new TrailMap();
+
+        this.distanceUser += tm.getDistanceSend();
 
     }
 
@@ -128,6 +130,11 @@ public class UserCompleted {
      */
     public double getDistanceUser(){
         return this.distanceUser;
+    }
+
+    public void setDistanceUser(double num)
+    {
+        this.distanceUser += num;
     }
 
     /**

@@ -45,6 +45,14 @@
             android:text= "@string/Achievements"
             android:layout_weight="1"
             android:textColor="@color/cyan"/>
+
+        <Button
+            android:id="@+id/eventAvailable"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text= "@string/EventAvailable"
+            android:layout_weight="1"
+            android:textColor="@color/cyan"/>
         
         
     </RadioGroup>

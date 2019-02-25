@@ -18,8 +18,6 @@ public class DistanceCheck implements CheckAchievements {
             if (!AchievementFactory.achievements.contains(ach)) {
                 check = true;
 
-               //AchievementFactory.achievements.add(ach);
-
             }
         }
         return check;

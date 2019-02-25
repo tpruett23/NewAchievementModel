@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.Toast;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,7 +24,6 @@ import java.util.Timer;
  * helper methods.
  */
 public class MyIntentService extends Service {
-    private Timer timer = new Timer();
     String filename = "validfiles";
 
 
@@ -35,16 +35,19 @@ public class MyIntentService extends Service {
 
             @Override
             public void run() {
-                SAXParserReader saxParserReader = new SAXParserReader(getApplicationContext());
+                //SAXParserReader saxParserReader = new SAXParserReader(getApplicationContext());
+                AchievementXMLHandler achievementXMLHandler = new AchievementXMLHandler();
+                achievementXMLHandler.checkAll();
+                ListViewAchv L = new ListViewAchv();
+
                 //saxParserReader.parseXML();
-                ListViewAchv lv = new ListViewAchv();
                 Toast.makeText(getApplicationContext(),"Testing",Toast.LENGTH_LONG).show();
                 ha.postDelayed(this, 60000);
             }
         }, 60000);
 
 
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
     @Nullable
@@ -74,28 +77,6 @@ public class MyIntentService extends Service {
 
 
 
-                private void stopService () {
-                    if (timer != null) timer.cancel();
-                }
-
-                @Override
-                public void onStart (Intent intent,int startid){
-
-                    final Handler ha = new Handler();
-                    ha.postDelayed(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            SAXParserReader saxParserReader = new SAXParserReader(getApplicationContext());
-                            Toast.makeText(getApplicationContext(),"Testing",Toast.LENGTH_LONG).show();
-                            ha.postDelayed(this, 10000);
-                        }
-                    }, 10000);
 
 
-                    //   Toast.makeText(this, "Service started by user.", Toast.LENGTH_LONG).show();
-                }
-
-
-
-        }
+}

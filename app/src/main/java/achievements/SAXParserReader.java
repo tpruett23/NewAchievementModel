@@ -131,12 +131,6 @@ public class SAXParserReader extends FragmentActivity {
         }
         return "<achievements>\n" + achWord + "</achievements>";
 
-        /*return "<achievement>\n" +
-                "\t<name>" + ach.getName()+ "</name>\n" +
-                "\t<points>" + ach.getPoints() + "</points>\n" +
-                "\t<description>" + ach.getDescription() + "</description>\n" +
-                "\t<type>" + ach.getDescriptorA()+ "</type>\n" +
-                "</achievement>";*/
     }
 
 

@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.SensorEvent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
@@ -60,30 +61,15 @@ public class MyService extends Service {
     public int onStartCommand(Intent intent, int flags, int startid) {
 
         TrailMap map = new TrailMap();
+        StepCounterActivity stepCounterActivity = new StepCounterActivity();
         SAXParserReader saxParserReader = new SAXParserReader(this);
         saxParserReader.parseXML();
         ListViewAchv LV = new ListViewAchv();
-
-
-
 
         return START_NOT_STICKY;
 
     }
 
-
-      /*  @Override
-        public void onStart (Intent intent,int startid){
-           TrailMap map = new TrailMap();
-            SAXParserReader saxParserReader = new SAXParserReader(this);
-            saxParserReader.parseXML();
-            ListViewAchv LV = new ListViewAchv();
-            startService(new Intent(this,MyIntentService.class));
-
-
-          //   Toast.makeText(this, "Service started by user.", Toast.LENGTH_LONG).show();
-        }
-*/
 
     }
 

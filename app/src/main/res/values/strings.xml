@@ -30,12 +30,10 @@
     <string name="Story">Story</string>
     <string name="Settings">Settings</string>
     <string name="Unknown">_???</string>
-
-
-
+    <string name="EventAvailable">Event Available</string>
+    <string name="step_counter">android.hardware.sensor.stepcounter</string>
+    <string name="step_detector">android.hardware.sensor.stepdetector</string>
     <string-array name="values_array">
-
-
     </string-array>
     <string name="title_activity_screen_to_map">ScreenToMap</string>
     <string name="title_activity_maps">Map</string>

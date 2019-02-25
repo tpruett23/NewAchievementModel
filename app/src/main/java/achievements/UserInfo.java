@@ -40,6 +40,10 @@ public class UserInfo {
      */
     public  int steps = 400;
 
+    int stepsDectected = 0;
+
+
+
     /**
      * The constructor for UserInfo.
      */
@@ -94,6 +98,22 @@ public class UserInfo {
         return this.steps;
     }
 
+    /**
+     * The number of steps the user has taken.
+     *
+     * @return number of steps the user has taken.
+     */
+    public void setSteps(int stepz) {
+         this.steps = stepz;
+    }
+
+    public int getStepsDectected() {
+        return stepsDectected;
+    }
+
+    public void setStepsDectected(int stepsDectected) {
+        this.stepsDectected = stepsDectected;
+    }
 
 
 }

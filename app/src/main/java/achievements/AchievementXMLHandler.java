@@ -21,6 +21,7 @@ import achievements.Achievements;
 public class AchievementXMLHandler extends DefaultHandler {
     /** A global list of achievements **/
     private  static ArrayList<Achievements> achievements1;
+    private  static ArrayList<Achievements> tempAchievements;
     /**
      * A temp achievement built to get each marker element
      *
@@ -50,6 +51,7 @@ public class AchievementXMLHandler extends DefaultHandler {
     //=========================================================================
     public AchievementXMLHandler() {
         achievements1 = new ArrayList<>();
+        tempAchievements = new ArrayList<>();
         temp2 = new Achievements();
         types = false;
 
@@ -175,6 +177,7 @@ public class AchievementXMLHandler extends DefaultHandler {
                         val.testAdd(temp);
                     }
                     temp2.getAllAchievements().add(TimeAch);
+                    //tempAchievements.add(temp);
 
                 } else if (qName.equals("distance")) {
                     AchievementDescriptor distanceAch = new Distance("Distance Achievement", temp.getPoints(), Double.parseDouble(currentElement), temp.getDescription());
@@ -184,6 +187,8 @@ public class AchievementXMLHandler extends DefaultHandler {
                     if(distanceCheck.checkAchievement(temp)){
                         val.testAdd(temp);
                     }
+                   // tempAchievements.add(temp);
+
 
 
                 } else if (qName.equals("trails")) {
@@ -194,6 +199,7 @@ public class AchievementXMLHandler extends DefaultHandler {
                     if(trailCheck.checkAchievement(temp)){
                        val.testAdd(temp);
                     }
+                    //tempAchievements.add(temp);
 
 
                 } else if (qName.equals("step")) {
@@ -205,6 +211,7 @@ public class AchievementXMLHandler extends DefaultHandler {
                     if(stepCheck.checkAchievement(temp)){
                        val.testAdd(temp);
                     }
+                   // tempAchievements.add(temp);
 
                 } else if (qName.equals("speed")) {
                     AchievementDescriptor speedAch = new Speed("Speed Achievement", temp.getPoints(), Integer.parseInt(currentElement), temp.getDescription());
@@ -214,6 +221,7 @@ public class AchievementXMLHandler extends DefaultHandler {
                     if(speedCheck.checkAchievement(temp)){
                         val.testAdd(temp);
                     }
+                    //tempAchievements.add(temp);
 
 
                 }
@@ -224,6 +232,7 @@ public class AchievementXMLHandler extends DefaultHandler {
 
             if (qName.equals("achievement") && temp != null) {
                 achievements1.add(temp);
+                tempAchievements.add(temp);
                 temp = null;//</achievement> is found set to null.
             }
 
@@ -233,7 +242,17 @@ public class AchievementXMLHandler extends DefaultHandler {
 
 
     }//========================================================================
-
+    public void checkAll(){
+        for(int i = 0; i < temp2.getAllAchievements().size(); i++){
+            Validation validation = new Validation();
+           if(tempAchievements.get(i).getName().equals("Distance Achievement")){
+               DistanceCheck distanceCheck = new DistanceCheck();
+               if(distanceCheck.checkAchievement(tempAchievements.get(i)));
+               AchievementFactory.achievements.add(tempAchievements.get(i));
+               validation.testAdd(tempAchievements.get(i));
+           }
+        }
+    }
 
 
     //=========================================================================
