@@ -80,7 +80,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
     /** Google map which will display the trail system*/
 
-    private GoogleMap mGoogleMap;
+    private static GoogleMap mGoogleMap;
     /** SupportMapFragment to achieve the proper display*/
     private SupportMapFragment mapFragment;
     /** LocationRequest to handle location requests for the application*/
@@ -165,7 +165,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      * Called as part of the activity lifecycle when an activity
      * is going into the background, but has not (yet) been killed.
      * The counterpart to onResume().
-     */
+     *
     @Override
     public void onPause(){
         super.onPause();
@@ -174,8 +174,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         if(mGoogleApiClient != null)
             LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(this.locationCallback);
 
-    /* end onPause()*/
-    }
+     end onPause()
+    } */
 
     /**
      * Called when the map is ready to be used
@@ -190,6 +190,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         declareStyle(googleMap);
+        //MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(this, R.raw.style2_json);
+        //googleMap.setMapStyle(mapStyleOptions);
 
         /* Initialize Google Play Services */
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
@@ -222,6 +224,10 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         //LocationManager locationManager = (LocationManger) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
 
     /* end onMapReady*/
+    }
+
+    public static void UpdateMapStyleOptions(MapStyleOptions mapStyleOptions){
+        mGoogleMap.setMapStyle(mapStyleOptions);
     }
 
     /**

@@ -45,6 +45,15 @@
             android:text="@string/sound"
             android:textSize="45sp"/>
 
+        <CheckBox
+            android:id="@+id/darkcheck"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alvarocondensed"
+            android:text="@string/darkmode"
+            android:textSize="45sp"/>
+
     </LinearLayout>
 
 
