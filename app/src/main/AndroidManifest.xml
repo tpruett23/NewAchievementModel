@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.toripruett.newachievementmodel">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -19,13 +18,12 @@
     <uses-feature
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
-
     <uses-feature
-        android:name="@string/step_detector" android:required="false"/>
-
+        android:name="@string/step_detector"
+        android:required="false" />
     <uses-feature
-        android:name="@string/step_counter" android:required="false"/>
-
+        android:name="@string/step_counter"
+        android:required="false" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -40,7 +38,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-
         <activity
             android:name="screens.SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
@@ -96,7 +93,7 @@
         <activity
             android:name="screens.TrailMap"
             android:label="@string/title_activity_maps"
-            android:theme="@style/Theme.AppCompat"></activity>
+            android:theme="@style/Theme.AppCompat" />
         <activity android:name="screens.CharacterScreen" />
 
         <service android:name="achievements.MyIntentService" />

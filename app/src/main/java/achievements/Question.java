@@ -41,11 +41,6 @@ public class Question extends AchievementDescriptor {
         this.questionsCorrect = questionsCorrect;
 
     }
-
-    public Question(){
-
-    }
-
     /**
      * The method to check to see if the achievement has been met.
      *

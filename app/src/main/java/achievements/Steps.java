@@ -57,7 +57,6 @@ public class Steps extends AchievementDescriptor {
      * @param num The value to be checked.
      * @return true if met false if not met.
      */
-    //@Override
     public static boolean checkCompleted(double num, double numCheck) {
         boolean check = false;
         if (num > numCheck) {
@@ -104,7 +103,6 @@ public class Steps extends AchievementDescriptor {
     public void setPoints(int points){
         this.points = points;
     }
-
 
     /**
      * Gets the distance of the achievement.

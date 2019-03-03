@@ -34,50 +34,45 @@ public class UserCompleted {
      * The number of questions that have been answered incorrectly.
      */
     private int questionsIncorrect;
-
     /**
      * The number of achievements won by the user.
      */
     private int achievementsWon;
-
     /**
      * The number of challenges met by the user.
      */
     private int challenges;
-
     /**
      * Distance the user has traveled.
      */
-
-    double distanceUser = 0.0;
-
-
-
+    static double distanceUser;
     /**
      * The arraylist to hold the completed achievements for the user.
      */
      ArrayList<Location> map = new ArrayList<>();
 
-    private Location prevLocation;
-    private Location location;
-
 
 
     public UserCompleted(){
-
+        distanceUser = 0.0;
+        TrailMap object = new TrailMap();
+        object.setCustomObjectListener(new TrailMap.MyCustomObjectListener() {
+            @Override
+            public void onObjectReady(double distance) {
+                distanceUser += distance;
+            }
+        });
     }
 
 
-
+    /**
+     * Updates the users distance after they have been traveling.
+     */
     public void updateDistance() {
         TrailMap tm = new TrailMap();
-
         this.distanceUser += tm.getDistanceSend();
 
     }
-
-
-
 
     /**
      * Gets the number of trails completed.
@@ -132,6 +127,10 @@ public class UserCompleted {
         return this.distanceUser;
     }
 
+    /**
+     * Setter method to set the users distance.
+     * @param num
+     */
     public void setDistanceUser(double num)
     {
         this.distanceUser += num;
@@ -145,9 +144,7 @@ public class UserCompleted {
         return map;
     }
 
-    public void setLocation(Location loc){
-        this.location = loc;
-    }
+
 }
 
 

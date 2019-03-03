@@ -94,12 +94,14 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     /** location marker for the current location*/
     private Marker locationMarker;
     /** UserCompleted Instance */
-    UserCompleted UC = new UserCompleted();
+    static UserCompleted UC = new UserCompleted();
     AchievementFactory AF = new AchievementFactory();
     Button eventButton;
     Button achButton;
     Button settingsButton;
     Button storyButton;
+
+    private MyCustomObjectListener listener;
 
     static Double distanceSend;
     //Vibrator v;
@@ -119,6 +121,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
     public TrailMap() {
         distanceSend = 0.0;
+        this.listener = null;
     }
 
     /**
@@ -158,7 +161,10 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment != null)
             mapFragment.getMapAsync(this);
-    /* end onCreate*/
+
+
+
+        /* end onCreate*/
     }
 
     /**
@@ -278,10 +284,9 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         if(location != null & lastLocation != null) {
             double distance = lastLocation.distanceTo(location);
             lastLocation = location;
-            UC.setDistanceUser(distance);
+            loadDataAsync(distance);
             //this.distanceSend = distance;
-
-            UC.updateDistance();
+            //UC.updateDistance();
 
         }
         lastLocation = location;
@@ -330,7 +335,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         vib.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
                     } else {
-                        vib.vibrate(500);
+                        vib.vibrate(10000);
                     }
             }
 
@@ -778,5 +783,31 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             startActivity(i);
         }
     }
-}
+
+
+    public interface MyCustomObjectListener {
+
+        // These methods are the different events and
+        // need to pass relevant arguments related to the event triggered
+        public void onObjectReady(double distance);
+
+    }
+
+    // Assign the listener implementing events interface that will receive the events
+    public void setCustomObjectListener(MyCustomObjectListener listener) {
+        this.listener = listener;
+    }
+
+    public void loadDataAsync(double distance) {
+
+                if (listener != null)
+                    listener.onObjectReady(distance); // <---- fire listener here
+            }
+    }
+
+
+
+
+
+
 

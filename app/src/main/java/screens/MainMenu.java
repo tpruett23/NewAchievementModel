@@ -35,8 +35,6 @@ public class MainMenu extends AppCompatActivity implements OnClickListener {
 
     Button saveButton;
 
-
-
     /**
      * This represents the toolbar that is displayed on the main menu.
      **/

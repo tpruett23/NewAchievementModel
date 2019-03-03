@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="85dp"
-   android:background="@color/mixedpurple"
+    android:background="@drawable/purple1"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:weightSum="10">
 
     <!--android:background="@drawable/texture"-->
     <!--android:background="@drawable/trophylist">-->
+
     <LinearLayout
         android:layout_width="25dp"
         android:layout_height="match_parent"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:weightSum="20"
-    android:background="@drawable/blackbackground"
+    android:background="@drawable/smallgold"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context="achievements.Achievements">
@@ -22,7 +22,7 @@
             android:text="@string/Achievements"
             android:fontFamily="@font/alvarocondensed"
             android:textSize="65sp"
-            android:textColor="@color/gold" />
+            android:textColor="@color/dk_pink" />
     </LinearLayout>
 
 

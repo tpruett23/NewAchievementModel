@@ -18,7 +18,6 @@ public class UserCompletedDisplay extends Activity {
      * The Listview that displays the completed achievements.
      */
     private ListView lv;
-
     /**
      * The arraylist to hold the completed achievements for the user.
      */
@@ -36,16 +35,12 @@ public class UserCompletedDisplay extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.usertrophycabinet);
         completed = AchievementXMLHandler.getAchievements();
         lv = (ListView) findViewById(R.id.list);
         adapter = new CustomListAdapter(this, R.layout.userlist, R.layout.activity_list_view, completed);
-
         lv.setAdapter(adapter);
     }
-
-
 
     public ArrayList<Achievements> getCompleted() {
         return this.completed;

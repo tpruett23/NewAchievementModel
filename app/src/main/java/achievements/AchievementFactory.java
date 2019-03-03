@@ -1,11 +1,5 @@
 package achievements;
-
-import android.util.Log;
-
 import java.util.ArrayList;
-
-import screens.UserCompleted;
-import trailsystem.Trail;
 
 /**
  * The class checks the achievements and if met adds it to the appropriate arraylist.
@@ -24,11 +18,13 @@ public class AchievementFactory {
      */
      static ArrayList<Achievements> achievements = new ArrayList<>() ;
 
+    /**
+     * Gets the list of completed achievements.
+     * @return the users completed achievements.
+     */
     public ArrayList<Achievements> getAchievements(){
     return this.achievements;
 }
-
-
 
     }
 

@@ -11,7 +11,7 @@ import screens.UserCompleted;
 public interface CheckAchievements {
     Context context = null;
 
-    public boolean checkAchievement(Achievements ach);
+    boolean checkAchievement(Achievements ach);
 
 }
 

@@ -42,7 +42,9 @@ public class ListViewAchv extends AppCompatActivity {
      * The adapter to put the arraylist in the listview.
      */
     ArrayAdapter<Achievements> adapter;
-
+    /**
+     * Achievement factory instance to access certain methods and variables.
+     */
     AchievementFactory AF = new AchievementFactory();
 
 

@@ -33,9 +33,10 @@ public abstract class AchievementDescriptor {
      * The description of the achievement.
      **/
     String description;
-
-    private double time;
-
+    /**
+     * The time the user has been playing.
+     */
+    double time;
 
     /**
      * Checks to see if the achievement has been met.
@@ -46,6 +47,12 @@ public abstract class AchievementDescriptor {
     public static boolean checkCompleted(double num, double checkNum){
        return true;
     };
+
+    /**
+     * Checks completed achievements.
+     * @param num
+     * @return
+     */
 
     public static boolean checkCompleted(int num){return true;};
 
@@ -126,11 +133,13 @@ public abstract class AchievementDescriptor {
         return this.trails;
     }
 
-    public double getTime() {
+    /**
+     * Gets the time the user has been playing.
+     * @return
+     */
+    public double getTime(){
         return this.time;
     }
-
-
 
 
 }

@@ -16,17 +16,24 @@ import java.util.ArrayList;
 import achievements.Achievements;
 
 /**
- * Created by Andrew on 4/15/2015.
+ *@author Tori Pruett.
  */
 public class AchievementXMLHandler extends DefaultHandler {
+
     /** A global list of achievements **/
-    private  static ArrayList<Achievements> achievements1;
-    private  static ArrayList<Achievements> tempAchievements;
+    private static ArrayList<Achievements> achievements1;
+    /**
+     * Arraylist to be able to check if new achievements have been made.
+     */
+    private ArrayList<Achievements> tempAchievements;
     /**
      * A temp achievement built to get each marker element
      *
      */
    Achievements temp;
+    /**
+     * Context used to use intents
+     */
    Context con;
     /**
      * Achievements instance.
@@ -35,7 +42,6 @@ public class AchievementXMLHandler extends DefaultHandler {
     /**
      * Boolean value to check what level of xml tags we are in.
      */
-
     boolean types;
 
     /** The current element being read by the XML parser**/
@@ -243,14 +249,15 @@ public class AchievementXMLHandler extends DefaultHandler {
 
     }//========================================================================
     public void checkAll(){
-        for(int i = 0; i < temp2.getAllAchievements().size(); i++){
+        for(int i = 0; i < temp2.getAllAchievements().size(); i++) {
             Validation validation = new Validation();
-           if(tempAchievements.get(i).getName().equals("Distance Achievement")){
-               DistanceCheck distanceCheck = new DistanceCheck();
-               if(distanceCheck.checkAchievement(tempAchievements.get(i)));
-               AchievementFactory.achievements.add(tempAchievements.get(i));
-               validation.testAdd(tempAchievements.get(i));
-           }
+            if (tempAchievements.get(i).getName().equals("Distance Achievement")) {
+                DistanceCheck distanceCheck = new DistanceCheck();
+                if (distanceCheck.checkAchievement(tempAchievements.get(i))) {
+                    AchievementFactory.achievements.add(tempAchievements.get(i));
+                    validation.testAdd(tempAchievements.get(i));
+                }
+            }
         }
     }
 

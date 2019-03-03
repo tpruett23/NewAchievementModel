@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.hardware.SensorEvent;
 import android.os.Handler;
 import android.os.IBinder;
+import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.widget.Toast;
 
@@ -26,36 +27,9 @@ import screens.TrailMap;
 
 
 public class MyService extends Service {
-    private final int UPDATE_INTERVAL = 60 * 1000;
-    private Timer timer = new Timer();
 
 
 
-    public MyService() {
-
-
-    }
-
-
-    @Override
-    public IBinder onBind(Intent intent) {
-
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    @Override
-    public void onCreate() {
-
-
-    }
-
-    @Override
-    public void onDestroy() {
-
-
-        Toast.makeText(this, "Service stopped", Toast.LENGTH_LONG).show();
-    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startid) {
@@ -70,7 +44,13 @@ public class MyService extends Service {
 
     }
 
-
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
+
+
+}
 
 

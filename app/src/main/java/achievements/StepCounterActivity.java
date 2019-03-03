@@ -6,7 +6,10 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.widget.Toast;
 
 import com.example.toripruett.newachievementmodel.R;
@@ -37,6 +40,14 @@ public class StepCounterActivity extends Activity implements SensorEventListener
     }
 
     public void onSensorChanged(SensorEvent event) {
+        Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vib.vibrate(VibrationEffect.createOneShot(10000, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            vib.vibrate(10000);
+        }
+
         Sensor sensor = event.sensor;
         float[] values = event.values;
         int value = -1;

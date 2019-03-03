@@ -28,15 +28,6 @@ public class Settings extends AppCompatActivity implements OnClickListener {
      */
     CheckBox sound;
     CheckBox darkMode;
-    /**
-     * The seekbar to adjust the volume.
-     */
-    SeekBar bar;
-
-    /**
-     * The volume the sound is at.
-     */
-    int volume;
 
     /**
      * The buttons to save, load, and go back to the previous screen.
@@ -61,49 +52,8 @@ public class Settings extends AppCompatActivity implements OnClickListener {
         darkMode.setOnClickListener(this);
         darkMode.setChecked(true);
 
-
-
-       /* bar = (SeekBar) findViewById(R.id.seekbar);
-        load = (Button) findViewById(R.id.loadb);
-        save = (Button) findViewById(R.id.saveb);*/
-        //back = (Button) findViewById(R.id.backb);
-
-     /*   load.setOnClickListener(this);
-        save.setOnClickListener(this);
-        */
-
-
-    }
-        /*bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
-
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                volume = progress;
-            }
-
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-            }
-
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(Settings.this, "Seek bar progress is :" + volume,
-                        Toast.LENGTH_SHORT).show();
-                int newVolume = bar.getProgress();
-                if(newVolume == 0) {
-                    TrailMap.mediaPlayer.pause();
-                }else {
-                    TrailMap.mediaPlayer.setVolume(Float.parseFloat(Integer.toString(newVolume)), Float.parseFloat(Integer.toString(newVolume)));
-                    if(!TrailMap.mediaPlayer.isPlaying()){
-                        TrailMap.mediaPlayer.start();
-                    }
-                }
-            }
-
-
-        });
-
         loadPrefs();
-    }*/
+    }
 
     /**
      * The method that is called when one of the buttons is clicked.
@@ -112,18 +62,7 @@ public class Settings extends AppCompatActivity implements OnClickListener {
      */
     public void onClick(View v) {
         Intent i = null;
-//        if (v.getId() == R.id.backb) {
-//            i = new Intent(this, MainMenu.class);
-//            startActivity(i);
-//
-//        } else if (v.getId() == R.id.loadb) {
-//            loadPrefs();
-//
-//
-//        } else if (v.getId() == R.id.saveb) {
-//            savePrefs();
-//
-//
+
         if (v.getId() == R.id.soundcheck) {
             if (sound.isChecked()) {
                 if (!TrailMap.mediaPlayer.isPlaying())
@@ -152,16 +91,18 @@ public class Settings extends AppCompatActivity implements OnClickListener {
     public void loadPrefs() {
         SharedPreferences settings = getPreferences(Context.MODE_PRIVATE);
         int att = settings.getInt("sound", 1);
-        int seek = settings.getInt("seekbar", 0);
-
-
-        bar.setProgress(seek);
-
+        int mode = settings.getInt("mode",1);
 
         if (att == 1) {
             sound.setChecked(true);
         } else {
             sound.setChecked(false);
+        }
+
+        if(mode == 1){
+            darkMode.setChecked(true);
+        }else{
+            darkMode.setChecked(false);
         }
 
 
@@ -173,8 +114,6 @@ public class Settings extends AppCompatActivity implements OnClickListener {
 
     public void savePrefs() {
         SharedPreferences.Editor settings = getPreferences(MODE_PRIVATE).edit();
-        int vol = bar.getProgress();
-        settings.putInt("seekbar", vol);
 
         boolean save = sound.isChecked();
         if (save) {
@@ -196,6 +135,11 @@ public class Settings extends AppCompatActivity implements OnClickListener {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        savePrefs();
+    }
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {

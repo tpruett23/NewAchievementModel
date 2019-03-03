@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:text = "@string/Settings"
             android:layout_weight="1"
-            android:textColor="@color/cyan"/>
+            android:textColor="@color/red"/>
 
         <Button
             android:id="@+id/Story"
@@ -36,7 +36,7 @@
             android:layout_height="match_parent"
             android:text="@string/Story"
             android:layout_weight="1"
-            android:textColor="@color/cyan"/>
+            android:textColor="@color/lt_pink"/>
 
         <Button
             android:id="@+id/Achievements"
@@ -44,7 +44,7 @@
             android:layout_height="match_parent"
             android:text= "@string/Achievements"
             android:layout_weight="1"
-            android:textColor="@color/cyan"/>
+            android:textColor="@color/dark_purp"/>
 
         <Button
             android:id="@+id/eventAvailable"
