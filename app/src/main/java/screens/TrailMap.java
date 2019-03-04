@@ -6,6 +6,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -117,12 +121,16 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
     public static MediaPlayer mediaPlayer;
 
+    float mLightQuantity;
+
     Animation bounce;
 
     public TrailMap() {
         distanceSend = 0.0;
         this.listener = null;
     }
+
+
 
     /**
      * Called when the activity is starting. This is where most initialization
@@ -134,11 +142,43 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      */
     @Override
     protected void onCreate(Bundle savedInstanceState){
-      // v  = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        AppCompatDelegate.setDefaultNightMode(
-                AppCompatDelegate.MODE_NIGHT_AUTO);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps2);
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_maps2);
+        /*AppCompatDelegate.setDefaultNightMode(
+                AppCompatDelegate.MODE_NIGHT_AUTO);*/
+
+            final SensorManager mSensorManager;
+
+        mSensorManager =
+                (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
+
+
+        final Sensor LightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+
+
+
+        SensorEventListener sensorlistener = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                mLightQuantity = event.values[0];
+
+                }
+
+
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
+        };
+
+        mSensorManager.registerListener(
+               sensorlistener,
+                LightSensor,
+                SensorManager.SENSOR_DELAY_NORMAL);
+
+
         trailParser = new XMLTrailParser();
 
         bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
@@ -161,6 +201,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment != null)
             mapFragment.getMapAsync(this);
+
+
 
 
 
