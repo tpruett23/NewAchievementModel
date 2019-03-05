@@ -27,6 +27,7 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
         textView = findViewById(R.id.textView);
         imageView = findViewById(R.id.imageView);
         textView.setOnClickListener(this);
+        imageView.setOnClickListener(this);
         textView.setText(dialogue.pop());
 
         if(TrailMap.mediaPlayer.isPlaying())
@@ -35,10 +36,14 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
-        if(!dialogue.isEmpty()){
-            textView.setText(dialogue.pop());
-        }else{
-            this.finish();
+        if(view == textView) {
+            if (!dialogue.isEmpty()) {
+                textView.setText(dialogue.pop());
+            } else {
+                this.finish();
+            }
+        }else if(view == imageView){
+            playVoice();
         }
     }
 
