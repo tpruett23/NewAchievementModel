@@ -20,6 +20,7 @@ public class StepCounterActivity extends Activity implements SensorEventListener
 
 
         private UserInfo ui;
+
         private SensorManager mSensorManager;
 
         private Sensor mStepCounterSensor;

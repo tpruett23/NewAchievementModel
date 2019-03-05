@@ -33,14 +33,8 @@
     <string name="darkmode">Dark Mode</string>
     <string name="automode">Auto Light</string>
     <string name="EventAvailable">Event Available</string>
-    <string name="step_counter">
-         android.hardware.sensor.stepcounter
-   </string>
-
-
-    <string name="step_detector">
-         android.hardware.sensor.stepdetector
-   </string>
+    <string name="step_counter">android.hardware.sensor.stepcounter</string>
+    <string name="step_detector">android.hardware.sensor.stepdetector</string>
 
 
     <string-array name="values_array">

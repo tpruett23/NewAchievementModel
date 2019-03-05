@@ -41,6 +41,9 @@ public class Settings extends AppCompatActivity implements OnClickListener {
      */
     Button load, save, back;
 
+    public Settings(){
+
+    }
     /**
      * The method is called to create the activity and to build the activity.
      *
@@ -53,7 +56,7 @@ public class Settings extends AppCompatActivity implements OnClickListener {
 
         sound = (CheckBox) findViewById(R.id.soundcheck);
         sound.setOnClickListener(this);
-        //sound.setChecked(true);
+
 
         autolight = (CheckBox) findViewById(R.id.autolight);
         autolight.setOnClickListener(this);
@@ -64,6 +67,8 @@ public class Settings extends AppCompatActivity implements OnClickListener {
         darkMode.setChecked(true);
 
         loadPrefs();
+
+
     }
 
     /**
@@ -87,16 +92,18 @@ public class Settings extends AppCompatActivity implements OnClickListener {
             if (darkMode.isChecked()) {
                 MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json);
                 TrailMap.UpdateMapStyleOptions(mapStyleOptions);
+                autolight.setChecked(false);
+
             }else{
                 MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(this, R.raw.style2_json);
                 TrailMap.UpdateMapStyleOptions(mapStyleOptions);
+
             }
         }
 
 
         if (v.getId() == R.id.autolight) {
             if (autolight.isChecked()) {
-                autolight.setChecked(true);
                 final SensorManager mSensorManager;
 
                 mSensorManager =
@@ -111,6 +118,7 @@ public class Settings extends AppCompatActivity implements OnClickListener {
                         if(mLightQuantity > 150){
                             MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.style2_json);
                             TrailMap.UpdateMapStyleOptions(mapStyleOptions);
+
                         }else{
                             {
                                 MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.style_json);
@@ -134,6 +142,7 @@ public class Settings extends AppCompatActivity implements OnClickListener {
                         SensorManager.SENSOR_DELAY_NORMAL);
             }
         }
+        savePrefs();
     }
 
     //}
