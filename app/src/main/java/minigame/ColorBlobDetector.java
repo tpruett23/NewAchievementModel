@@ -1,5 +1,6 @@
 package minigame;
 
+import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
@@ -7,6 +8,7 @@ import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ColorBlobDetector {
@@ -70,7 +72,32 @@ public class ColorBlobDetector {
     }
 
     public void process(Mat rgbaImage){
+        Imgproc.pyrDown(rgbaImage, mPyrDownMat);
+        Imgproc.pyrDown(mPyrDownMat, mPyrDownMat);
 
+        Imgproc.cvtColor(mPyrDownMat, mHSVMat, Imgproc.COLOR_HSV2BGR_FULL);
+
+        Core.inRange(mHSVMat, mLowerBound, mUpperBound, mMask);
+        Imgproc.dilate(mMask, mDilatedMask, new Mat());
+
+        List<MatOfPoint> contours = new ArrayList<>();
+
+        Imgproc.findContours(mDilatedMask, contours, mHierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+
+        //Find max contour area
+        double maxArea = 0;
+        Iterator<MatOfPoint> each = contours.iterator();
+        while(each.hasNext()){
+            MatOfPoint contour = each.next();
+            if(Imgproc.contourArea(contour) > mMinContourArea*maxArea){
+                Core.multiply(contour, new Scalar(4,4), contour);
+                mContours.add(contour);
+            }
+        }
+    }
+
+    public List<MatOfPoint> getContours(){
+        return mContours;
     }
 
 }
