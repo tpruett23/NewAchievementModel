@@ -1,10 +1,6 @@
 package screens;
 
-import android.content.ContentResolver;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,7 +9,6 @@ import android.widget.TextView;
 
 import com.example.toripruett.newachievementmodel.R;
 
-import java.io.InputStream;
 import java.util.LinkedList;
 
 public class CharacterScreen extends AppCompatActivity implements View.OnClickListener {
@@ -35,7 +30,7 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
         textView.setText(dialogue.pop());
 
         if(TrailMap.mediaPlayer.isPlaying())
-            TrailMap.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.lostTraveler);
+            TrailMap.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.lost_traveler);
     }
 
     @Override
