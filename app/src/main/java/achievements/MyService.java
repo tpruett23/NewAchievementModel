@@ -34,7 +34,6 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startid) {
 
-        TrailMap map = new TrailMap();
         StepCounterActivity stepCounterActivity = new StepCounterActivity();
         SAXParserReader saxParserReader = new SAXParserReader(this);
         saxParserReader.parseXML();

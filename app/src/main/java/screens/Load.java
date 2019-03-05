@@ -1,7 +1,9 @@
 package screens;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 
 
@@ -13,7 +15,6 @@ import trailsystem.StoryEvent;
 public class Load extends AppCompatActivity {
 
 
-
     public void onCreate(){
 
 
@@ -23,10 +24,9 @@ public class Load extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Validation val = new Validation();
         startService(new Intent(this, MyService.class));
         Handler handler = new Handler();
-        handler.postDelayed(runner, 0);
+        handler.post(runner);
 
     }
 

@@ -1,5 +1,7 @@
 package screens;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -9,11 +11,14 @@ import java.util.ArrayList;
 
 import achievements.Achievements;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * The class holds the information for all of the tasks the user has completed.
  */
 
 public class UserCompleted {
+    Context context;
 
     /**
      * The Listview that displays the completed achievements.
@@ -45,7 +50,7 @@ public class UserCompleted {
     /**
      * Distance the user has traveled.
      */
-    static double distanceUser;
+     double distanceUser;
     /**
      * The arraylist to hold the completed achievements for the user.
      */
@@ -53,15 +58,25 @@ public class UserCompleted {
 
 
 
-    public UserCompleted(){
-        distanceUser = 0.0;
+    public UserCompleted(Context context){
+
+        this.context = context;
+/*
         TrailMap object = new TrailMap();
-        object.setCustomObjectListener(new TrailMap.MyCustomObjectListener() {
+       object.setCustomObjectListener(new TrailMap.MyCustomObjectListener() {
             @Override
             public void onObjectReady(double distance) {
                 distanceUser += distance;
             }
-        });
+        });*/
+
+
+
+
+    }
+
+    public UserCompleted(){
+
     }
 
 
@@ -69,8 +84,11 @@ public class UserCompleted {
      * Updates the users distance after they have been traveling.
      */
     public void updateDistance() {
-        TrailMap tm = new TrailMap();
-        this.distanceUser += tm.getDistanceSend();
+        /*TrailMap tm = new TrailMap();*/
+
+        SharedPreferences prefs = this.context.getSharedPreferences("distance", MODE_PRIVATE);
+       float distance =  prefs.getFloat("userdistance", 0);
+        this.distanceUser += distance;
 
     }
 

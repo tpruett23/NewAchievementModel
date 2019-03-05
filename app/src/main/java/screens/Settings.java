@@ -3,6 +3,10 @@ package screens;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -28,6 +32,9 @@ public class Settings extends AppCompatActivity implements OnClickListener {
      */
     CheckBox sound;
     CheckBox darkMode;
+    CheckBox autolight;
+
+    static float mLightQuantity;
 
     /**
      * The buttons to save, load, and go back to the previous screen.
@@ -46,7 +53,11 @@ public class Settings extends AppCompatActivity implements OnClickListener {
 
         sound = (CheckBox) findViewById(R.id.soundcheck);
         sound.setOnClickListener(this);
-        sound.setChecked(true);
+        //sound.setChecked(true);
+
+        autolight = (CheckBox) findViewById(R.id.autolight);
+        autolight.setOnClickListener(this);
+        autolight.setChecked(false);
 
         darkMode = (CheckBox) findViewById(R.id.darkcheck);
         darkMode.setOnClickListener(this);
@@ -81,6 +92,48 @@ public class Settings extends AppCompatActivity implements OnClickListener {
                 TrailMap.UpdateMapStyleOptions(mapStyleOptions);
             }
         }
+
+
+        if (v.getId() == R.id.autolight) {
+            if (autolight.isChecked()) {
+                autolight.setChecked(true);
+                final SensorManager mSensorManager;
+
+                mSensorManager =
+                        (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
+                final Sensor LightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+
+                SensorEventListener sensorlistener = new SensorEventListener() {
+                    @Override
+                    public void onSensorChanged(SensorEvent event) {
+                        mLightQuantity = event.values[0];
+                        if(mLightQuantity > 150){
+                            MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.style2_json);
+                            TrailMap.UpdateMapStyleOptions(mapStyleOptions);
+                        }else{
+                            {
+                                MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.style_json);
+                                TrailMap.UpdateMapStyleOptions(mapStyleOptions);
+                            }
+
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+                    }
+                };
+
+                mSensorManager.registerListener(
+                        sensorlistener,
+                        LightSensor,
+                        SensorManager.SENSOR_DELAY_NORMAL);
+            }
+        }
     }
 
     //}
@@ -92,6 +145,7 @@ public class Settings extends AppCompatActivity implements OnClickListener {
         SharedPreferences settings = getPreferences(Context.MODE_PRIVATE);
         int att = settings.getInt("sound", 1);
         int mode = settings.getInt("mode",1);
+        int light = settings.getInt("light",1);
 
         if (att == 1) {
             sound.setChecked(true);
@@ -104,6 +158,14 @@ public class Settings extends AppCompatActivity implements OnClickListener {
         }else{
             darkMode.setChecked(false);
         }
+
+
+        if(light == 1){
+            darkMode.setChecked(true);
+        }else{
+            darkMode.setChecked(false);
+        }
+
 
 
     }
@@ -128,6 +190,13 @@ public class Settings extends AppCompatActivity implements OnClickListener {
             settings.putInt("mode", 1);
         }else{
             settings.putInt("mode", 2);
+        }
+
+        boolean light = autolight.isChecked();
+        if(light){
+            settings.putInt("light", 1);
+        }else{
+            settings.putInt("light", 2);
         }
 
 

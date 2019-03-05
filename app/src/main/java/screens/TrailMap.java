@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.hardware.Sensor;
@@ -97,8 +98,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     private Location lastLocation;
     /** location marker for the current location*/
     private Marker locationMarker;
-    /** UserCompleted Instance */
-    static UserCompleted UC = new UserCompleted();
+
     AchievementFactory AF = new AchievementFactory();
     Button eventButton;
     Button achButton;
@@ -107,8 +107,9 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
     private MyCustomObjectListener listener;
 
+    UserCompleted userCompleted = new UserCompleted(this);
+
     static Double distanceSend;
-    //Vibrator v;
 
     /** trail parser which will input all information for the trail system*/
     private XMLTrailParser trailParser;
@@ -121,13 +122,11 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
     public static MediaPlayer mediaPlayer;
 
-    float mLightQuantity;
-
     Animation bounce;
 
     public TrailMap() {
         distanceSend = 0.0;
-        this.listener = null;
+        listener = null;
     }
 
 
@@ -146,38 +145,6 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             setContentView(R.layout.activity_maps2);
         /*AppCompatDelegate.setDefaultNightMode(
                 AppCompatDelegate.MODE_NIGHT_AUTO);*/
-
-            final SensorManager mSensorManager;
-
-        mSensorManager =
-                (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
-
-
-        final Sensor LightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-
-
-
-        SensorEventListener sensorlistener = new SensorEventListener() {
-            @Override
-            public void onSensorChanged(SensorEvent event) {
-                mLightQuantity = event.values[0];
-
-                }
-
-
-
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-            }
-        };
-
-        mSensorManager.registerListener(
-               sensorlistener,
-                LightSensor,
-                SensorManager.SENSOR_DELAY_NORMAL);
-
 
         trailParser = new XMLTrailParser();
 
@@ -201,8 +168,6 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment != null)
             mapFragment.getMapAsync(this);
-
-
 
 
 
@@ -321,14 +286,20 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      */
     @Override
     public void onLocationChanged(Location location){
+        SharedPreferences prefs = getSharedPreferences("distance", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+
 
         Log.v("location:", "location has been changed");
         if(location != null & lastLocation != null) {
-            double distance = lastLocation.distanceTo(location);
-            lastLocation = location;
+            float distance = lastLocation.distanceTo(location);
             loadDataAsync(distance);
-            //this.distanceSend = distance;
-            //UC.updateDistance();
+
+            editor.putFloat("userdistance",distance).commit();
+            userCompleted.updateDistance();
+
+
 
         }
         lastLocation = location;
@@ -837,7 +808,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
     // Assign the listener implementing events interface that will receive the events
     public void setCustomObjectListener(MyCustomObjectListener listener) {
-        this.listener = listener;
+        listener = listener;
     }
 
     public void loadDataAsync(double distance) {
