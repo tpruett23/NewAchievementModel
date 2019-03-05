@@ -58,9 +58,10 @@ public class Settings extends AppCompatActivity implements OnClickListener {
         sound.setOnClickListener(this);
 
 
+
         autolight = (CheckBox) findViewById(R.id.autolight);
         autolight.setOnClickListener(this);
-        autolight.setChecked(false);
+        //autolight.setChecked(false);
 
         darkMode = (CheckBox) findViewById(R.id.darkcheck);
         darkMode.setOnClickListener(this);
@@ -145,7 +146,7 @@ public class Settings extends AppCompatActivity implements OnClickListener {
         savePrefs();
     }
 
-    //}
+
 
     /**
      * Loads the preferences put in by the user after being saved.

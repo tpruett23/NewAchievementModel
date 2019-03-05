@@ -1,5 +1,4 @@
 package screens;
-
 import android.content.ContentResolver;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -35,7 +34,7 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
         textView.setText(dialogue.pop());
 
         if(TrailMap.mediaPlayer.isPlaying())
-            TrailMap.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.lostTraveler);
+            TrailMap.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.losttraveler);
     }
 
     @Override
