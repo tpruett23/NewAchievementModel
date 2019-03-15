@@ -12,49 +12,62 @@
         android:scrollbars="vertical"
         class="com.google.android.gms.maps.SupportMapFragment"/>
     
-    <RadioGroup
+    <!--<RadioGroup
         android:id="@+id/radio_group"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="65dp"
         android:orientation="horizontal"
         android:gravity="bottom"
-        android:background="#80000000"
+        android:background="@color/dk_green"
         android:padding="4dp"
         android:layout_alignParentBottom="true">
+
+
         
         <Button
+
             android:id="@+id/Settings"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:text = "@string/Settings"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/redsettings"
             android:layout_weight="1"
             android:textColor="@color/red"/>
 
         <Button
             android:id="@+id/Story"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
+            android:layout_marginRight="25dp"
             android:layout_height="match_parent"
-            android:text="@string/Story"
+            android:background="@drawable/story2"
             android:layout_weight="1"
             android:textColor="@color/lt_pink"/>
 
         <Button
             android:id="@+id/Achievements"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:text= "@string/Achievements"
+            android:layout_marginRight="25dp"
+           android:background="@drawable/bluetrophy"
             android:layout_weight="1"
-            android:textColor="@color/dark_purp"/>
-
+            android:textColor="@color/dark_purp"/>-->
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom|right">
         <Button
             android:id="@+id/eventAvailable"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text= "@string/EventAvailable"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:text="@string/EventAvailable"
+            android:background="@drawable/bluebell"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:textColor="@color/cyan"/>
+            android:textColor="@color/black"/>
+</RelativeLayout>
         
         
-    </RadioGroup>
+    <!--</RadioGroup>-->
 
 </RelativeLayout>

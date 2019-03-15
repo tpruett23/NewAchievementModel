@@ -30,11 +30,8 @@ public class MyService extends Service {
 
 
 
-
     @Override
     public int onStartCommand(Intent intent, int flags, int startid) {
-
-        StepCounterActivity stepCounterActivity = new StepCounterActivity();
         SAXParserReader saxParserReader = new SAXParserReader(this);
         saxParserReader.parseXML();
         ListViewAchv LV = new ListViewAchv();

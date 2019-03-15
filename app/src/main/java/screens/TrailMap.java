@@ -23,16 +23,20 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.example.toripruett.newachievementmodel.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -67,6 +71,7 @@ import achievements.AchievementFactory;
 import achievements.ListViewAchv;
 import achievements.MyIntentService;
 import achievements.SAXParserReader;
+import achievements.StepCounterActivity;
 import load.XMLTrailParser;
 import trailsystem.StoryEvent;
 import trailsystem.Trail;
@@ -82,6 +87,10 @@ import trailsystem.WayPoint;
 public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         LocationListener, View.OnClickListener {
+
+    Context mContext = this;
+
+    Toolbar mTopToolbar;
 
     /** Google map which will display the trail system*/
 
@@ -100,12 +109,15 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     private Marker locationMarker;
 
     AchievementFactory AF = new AchievementFactory();
-    Button eventButton;
-    Button achButton;
+   Button eventButton;
+    /*Button achButton;
     Button settingsButton;
-    Button storyButton;
+    Button storyButton;*/
+
 
     private MyCustomObjectListener listener;
+
+    LocalBroadcastManager localBroadcastManager;
 
     UserCompleted userCompleted = new UserCompleted(this);
 
@@ -129,6 +141,13 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         listener = null;
     }
 
+    public TrailMap(Context context){
+        mContext = context;
+        distanceSend = 0.0;
+        listener = null;
+
+    }
+
 
 
     /**
@@ -143,24 +162,31 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     protected void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_maps2);
+       localBroadcastManager = LocalBroadcastManager.getInstance(this);
         /*AppCompatDelegate.setDefaultNightMode(
                 AppCompatDelegate.MODE_NIGHT_AUTO);*/
 
         trailParser = new XMLTrailParser();
+
+
+        mTopToolbar = (Toolbar) findViewById(R.id.toolbar1);
+
 
         bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.strange_beginnings);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
-        achButton = (Button)findViewById(R.id.Achievements);
+
+
+        /*achButton = (Button)findViewById(R.id.Achievements);
         settingsButton = (Button)findViewById(R.id.Settings);
-        storyButton = (Button)findViewById(R.id.Story);
+        storyButton = (Button)findViewById(R.id.Story);*/
         eventButton = (Button)findViewById(R.id.eventAvailable);
 
-        achButton.setOnClickListener(this);
+        /*achButton.setOnClickListener(this);
         settingsButton.setOnClickListener(this);
-        storyButton.setOnClickListener(this);
+        storyButton.setOnClickListener(this);*/
         eventButton.setOnClickListener(this);
 
         eventButton.setVisibility(View.GONE);
@@ -285,26 +311,25 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      * @param location - The new location, as a Location object
      */
     @Override
-    public void onLocationChanged(Location location){
+    public void onLocationChanged(Location location) {
+
         SharedPreferences prefs = getSharedPreferences("distance", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
-
-
         Log.v("location:", "location has been changed");
-        if(location != null & lastLocation != null) {
-            float distance = lastLocation.distanceTo(location);
-            loadDataAsync(distance);
+        if (location != null & lastLocation != null) {
+            double distance = lastLocation.distanceTo(location);
 
-            editor.putFloat("userdistance",distance).apply();
-            userCompleted.updateDistance();
+            final Intent intent = new Intent("ACTION_DATA_AVAILABLE");
+            intent.putExtra("KEY", distance);
+            localBroadcastManager.sendBroadcast(intent);
 
 
         }
         lastLocation = location;
 
         //remove the current marker
-        if(locationMarker != null){
+        if (locationMarker != null) {
             locationMarker.remove();
         }//end if
 
@@ -323,15 +348,15 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         Collection<LatLng> progress = trailParser.updateLocation(location);
 
 
-        if (progress != null){
+        if (progress != null) {
             drawProgress(progress);
         }//end if
 
-        if(trailParser.getTrailSystem().checkEvent(new LatLng(location.getLatitude(), location.getLongitude()))){
+        if (trailParser.getTrailSystem().checkEvent(new LatLng(location.getLatitude(), location.getLongitude()))) {
 
 
             eventButton.startAnimation(bounce);
-            eventButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            //eventButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             eventButton.setTextColor(getResources().getColor(R.color.black));
             eventButton.setVisibility(View.VISIBLE);
             eventButton.setOnClickListener(new View.OnClickListener() {
@@ -351,11 +376,13 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
                     }
             }
 
-        });
+             });
 
-    /* end onLocationChanged*/
-    }
-    }
+            //* end onLocationChanged*//*
+        }
+        }
+
+
 
 
     /**
@@ -777,13 +804,18 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         return this.distanceSend;
     }
 
+    @Override
+    public void onClick(View v) {
 
+    }
+
+/*
 
     @Override
     public void onClick(View v) {
         Intent i;
         if(v.getId() == storyButton.getId()){
-            i = new Intent(this,Story.class);
+            i = new Intent(this, Story.class);
             startActivity(i);
         }
         else if(v.getId() == achButton.getId()) {
@@ -794,7 +826,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             i = new Intent(this, Settings.class);
             startActivity(i);
         }
-    }
+    }*/
 
 
     public interface MyCustomObjectListener {
@@ -815,7 +847,51 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
                 if (listener != null)
                     listener.onObjectReady(distance); // <---- fire listener here
             }
+
+    public Context getmContext() {
+        return mContext;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        Intent i = null;
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_rib) {
+            i = new Intent(this,ListViewAchv.class);
+            startActivity(i);
+            //Toast.makeText(this, "Action clicked", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        if (id == R.id.Settings) {
+            i = new Intent(this,Settings.class);
+            startActivity(i);
+            //Toast.makeText(this, "Action clicked", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.action_story) {
+            i = new Intent(this,Story.class);
+            //Toast.makeText(this, "Action clicked", Toast.LENGTH_LONG).show();
+            startActivity(i);
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+}
+
 
 
 

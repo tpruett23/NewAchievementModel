@@ -16,17 +16,15 @@ public class MyIntentService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startid) {
-
         final Handler ha = new Handler(getApplicationContext().getMainLooper());
         ha.postDelayed(new Runnable() {
 
             @Override
             public void run() {
-                //SAXParserReader saxParserReader = new SAXParserReader(getApplicationContext());
                 AchievementXMLHandler achievementXMLHandler = new AchievementXMLHandler();
                 achievementXMLHandler.checkAll();
                 ListViewAchv L = new ListViewAchv();
-                Toast.makeText(getApplicationContext(),"Testing",Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),"Testing",Toast.LENGTH_LONG).show();
                 ha.postDelayed(this, 60000);
 
             }

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import achievements.MyIntentService;
 import achievements.MyService;
+import achievements.StepCounterActivity;
 import achievements.Validation;
 import trailsystem.StoryEvent;
 
@@ -24,6 +25,7 @@ public class Load extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        startService(new Intent(this, StepCounterActivity.class));
         startService(new Intent(this, MyService.class));
         Handler handler = new Handler();
         handler.post(runner);
