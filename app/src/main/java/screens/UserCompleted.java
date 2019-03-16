@@ -1,5 +1,10 @@
 package screens;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -9,11 +14,15 @@ import java.util.ArrayList;
 
 import achievements.Achievements;
 
+import static android.content.Context.MODE_PRIVATE;
+import static android.provider.SyncStateContract.Columns.DATA;
+
 /**
  * The class holds the information for all of the tasks the user has completed.
  */
 
-public class UserCompleted {
+public class UserCompleted  extends BroadcastReceiver{
+    Context context;
 
     /**
      * The Listview that displays the completed achievements.
@@ -45,7 +54,7 @@ public class UserCompleted {
     /**
      * Distance the user has traveled.
      */
-    static double distanceUser;
+     double distanceUser;
     /**
      * The arraylist to hold the completed achievements for the user.
      */
@@ -53,15 +62,37 @@ public class UserCompleted {
 
 
 
-    public UserCompleted(){
-        distanceUser = 0.0;
+
+    public UserCompleted(Context context){
+
+        this.context = context;
+
+
+
+/*          }
         TrailMap object = new TrailMap();
-        object.setCustomObjectListener(new TrailMap.MyCustomObjectListener() {
+       object.setCustomObjectListener(new TrailMap.MyCustomObjectListener() {
             @Override
             public void onObjectReady(double distance) {
                 distanceUser += distance;
             }
-        });
+        });*/
+
+
+
+
+    }
+
+    public UserCompleted(){
+
+    }
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        double dis = (double)intent.getExtras().get("KEY");
+        distanceUser += dis;
+
+
     }
 
 
@@ -69,8 +100,11 @@ public class UserCompleted {
      * Updates the users distance after they have been traveling.
      */
     public void updateDistance() {
-        TrailMap tm = new TrailMap();
-        this.distanceUser += tm.getDistanceSend();
+        /*TrailMap tm = new TrailMap();*/
+
+        SharedPreferences prefs = this.context.getSharedPreferences("distance", MODE_PRIVATE);
+       float distance =  prefs.getFloat("userdistance", 0);
+        this.distanceUser += distance;
 
     }
 
@@ -127,14 +161,6 @@ public class UserCompleted {
         return this.distanceUser;
     }
 
-    /**
-     * Setter method to set the users distance.
-     * @param num
-     */
-    public void setDistanceUser(double num)
-    {
-        this.distanceUser += num;
-    }
 
     /**
      * Gets the arraylist of locations the user has been to.

@@ -102,10 +102,10 @@ public class MainMenu extends AppCompatActivity implements OnClickListener {
                 i = new Intent(this, Settings.class);
                 startActivity(i);
                 return true;
-            case R.id.toMap:
-                i = new Intent(this, TrailMap.class);
-                startActivity(i);
-                return true;
+            //case R.id.toMap:
+               // i = new Intent(this, TrailMap.class);
+               // startActivity(i);
+               // return true;
         }
 
 
