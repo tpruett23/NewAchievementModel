@@ -7,10 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -26,13 +22,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.support.v7.widget.Toolbar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -69,10 +63,8 @@ import javax.xml.parsers.SAXParserFactory;
 
 import achievements.AchievementFactory;
 import achievements.ListViewAchv;
-import achievements.MyIntentService;
-import achievements.SAXParserReader;
-import achievements.StepCounterActivity;
 import load.XMLTrailParser;
+import services.DistanceService;
 import trailsystem.StoryEvent;
 import trailsystem.Trail;
 import trailsystem.TrailSystem;
@@ -107,6 +99,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     private Location lastLocation;
     /** location marker for the current location*/
     private Marker locationMarker;
+    /** last amount of distance gathered**/
+    public static double distance;
 
     AchievementFactory AF = new AchievementFactory();
    Button eventButton;
@@ -229,8 +223,6 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         declareStyle(googleMap);
-        //MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(this, R.raw.style2_json);
-        //googleMap.setMapStyle(mapStyleOptions);
 
         /* Initialize Google Play Services */
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
@@ -259,12 +251,15 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, this);
-
-        //LocationManager locationManager = (LocationManger) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
-
+        
     /* end onMapReady*/
     }
 
+    /**
+     * Method to update map styles for the google map if a different
+     * style has been requested
+     * @param mapStyleOptions - the mapStyleOption that has been changed.
+     */
     public static void UpdateMapStyleOptions(MapStyleOptions mapStyleOptions){
         mGoogleMap.setMapStyle(mapStyleOptions);
     }
@@ -318,7 +313,10 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
         Log.v("location:", "location has been changed");
         if (location != null & lastLocation != null) {
-            double distance = lastLocation.distanceTo(location);
+            distance = lastLocation.distanceTo(location);
+
+            //start the service to receive the location change
+            startService(new Intent(this, DistanceService.class));
 
             final Intent intent = new Intent("ACTION_DATA_AVAILABLE");
             intent.putExtra("KEY", distance);
@@ -679,7 +677,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
         /** Boolean variables to check the current element in
          * the xml file */
-        boolean trailsystem = false;
+        boolean trailSystem = false;
         boolean trail = true;
         boolean trailName = true;
         boolean name = false;
@@ -713,7 +711,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
             //check for which element is being started
             if(qName.equalsIgnoreCase("trailsystem")){
-                trailsystem = true;
+                trailSystem = true;
             }else if(qName.equalsIgnoreCase("name")){
                 name = true;
             }else if(qName.equalsIgnoreCase("waypoint")){
@@ -774,8 +772,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             if(name){
                 trailParser.setTrailSystemName(new String(ch, start, length));
                 name = false;
-            }else if(trailsystem){
-                trailsystem = false;
+            }else if(trailSystem){
+                trailSystem = false;
             }else if(waypoint){
                 waypoint = false;
             }else if(latitude){
@@ -799,10 +797,6 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         /* end characters()*/
         }
     };
-
-    public double getDistanceSend(){
-        return this.distanceSend;
-    }
 
     @Override
     public void onClick(View v) {
