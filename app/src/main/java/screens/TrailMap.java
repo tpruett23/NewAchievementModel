@@ -60,21 +60,21 @@ import java.util.Collection;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
-import achievements.AchievementFactory;
 import achievements.ListViewAchv;
 import load.XMLTrailParser;
 import services.DistanceService;
+import services.LightService;
 import trailsystem.StoryEvent;
 import trailsystem.Trail;
 import trailsystem.TrailSystem;
 import trailsystem.WayPoint;
 
 
+
 /**
  * Screen which will show all of the trail systems on a specific trail
  * @author - Melchor Dominguez
- * @version - 1.2
+ * @version - 1.4
  */
 public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
@@ -85,7 +85,6 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     Toolbar mTopToolbar;
 
     /** Google map which will display the trail system*/
-
     private static GoogleMap mGoogleMap;
     /** SupportMapFragment to achieve the proper display*/
     private SupportMapFragment mapFragment;
@@ -99,21 +98,17 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     private Location lastLocation;
     /** location marker for the current location*/
     private Marker locationMarker;
-    /** last amount of distance gathered**/
+    /** last amount of distance gathered - only 1 distance value should be calculated at a time**/
     public static double distance;
+    /** boolean to check if lightService should be running - only 1 light service can be running**/
+    private static boolean lightSensorService;
 
-    AchievementFactory AF = new AchievementFactory();
    Button eventButton;
-    /*Button achButton;
-    Button settingsButton;
-    Button storyButton;*/
 
 
     private MyCustomObjectListener listener;
 
     LocalBroadcastManager localBroadcastManager;
-
-    UserCompleted userCompleted = new UserCompleted(this);
 
     static Double distanceSend;
 
@@ -157,30 +152,22 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_maps2);
        localBroadcastManager = LocalBroadcastManager.getInstance(this);
-        /*AppCompatDelegate.setDefaultNightMode(
-                AppCompatDelegate.MODE_NIGHT_AUTO);*/
 
         trailParser = new XMLTrailParser();
 
 
-        mTopToolbar = (Toolbar) findViewById(R.id.toolbar1);
+        mTopToolbar = findViewById(R.id.toolbar1);
 
-
+        //load an animation to make buttons "bounce"
         bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
 
+        // Begin a media player
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.strange_beginnings);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
 
+        eventButton = findViewById(R.id.eventAvailable);
 
-        /*achButton = (Button)findViewById(R.id.Achievements);
-        settingsButton = (Button)findViewById(R.id.Settings);
-        storyButton = (Button)findViewById(R.id.Story);*/
-        eventButton = (Button)findViewById(R.id.eventAvailable);
-
-        /*achButton.setOnClickListener(this);
-        settingsButton.setOnClickListener(this);
-        storyButton.setOnClickListener(this);*/
         eventButton.setOnClickListener(this);
 
         eventButton.setVisibility(View.GONE);
@@ -188,13 +175,9 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment != null)
             mapFragment.getMapAsync(this);
-
-
-
-        /* end onCreate*/
     }
 
-    /**
+    /*
      * Called as part of the activity lifecycle when an activity
      * is going into the background, but has not (yet) been killed.
      * The counterpart to onResume().
@@ -219,9 +202,11 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     @Override
     public void onMapReady(GoogleMap googleMap){
 
+        //get the google map and set its type
         mGoogleMap = googleMap;
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+        //declare the style for the googleMap
         declareStyle(googleMap);
 
         /* Initialize Google Play Services */
@@ -251,8 +236,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, this);
-        
-    /* end onMapReady*/
+
     }
 
     /**
@@ -282,11 +266,28 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         }catch(Resources.NotFoundException e){
             Log.e("MAP", "Can't find style. Error: ", e);
         }//end try catch
-    /* end declareStyle*/
+
+        //when the style is first declared, the light service should not be running
+        lightSensorService = false;
+    }
+
+    public void setLightSensorService(boolean value){
+        if(value != lightSensorService){
+            lightSensorService = value;
+            lightServiceChange();
+        }
+    }
+
+    private void lightServiceChange(){
+        if(lightSensorService == true){
+            startService(new Intent(getBaseContext(), LightService.class));
+        }else{
+            stopService(new Intent(getBaseContext(), LightService.class));
+        }
     }
 
     /**
-     * Create the Google APi Client with accesss to
+     * Create the Google APi Client with access to
      * Plus and Games
      */
     protected synchronized void buildGoogleApiClient(){
@@ -872,6 +873,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             i = new Intent(this,Settings.class);
             startActivity(i);
             //Toast.makeText(this, "Action clicked", Toast.LENGTH_LONG).show();
+            setLightSensorService(Settings.lightSensor);
             return true;
         }
         if (id == R.id.action_story) {
