@@ -62,7 +62,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import achievements.ListViewAchv;
 import load.XMLTrailParser;
-import services.DistanceService;
+import services.LocationService;
 import services.LightService;
 import trailsystem.StoryEvent;
 import trailsystem.Trail;
@@ -121,11 +121,12 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     //TODO: change this to a collection of Polylines
     private Polyline line;
 
+    /** Media player for the application - only 1 is needed **/
     public static MediaPlayer mediaPlayer;
 
     Animation bounce;
 
-    public TrailMap() {
+    /*public TrailMap() {
         distanceSend = 0.0;
         listener = null;
     }
@@ -135,7 +136,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         distanceSend = 0.0;
         listener = null;
 
-    }
+    } */
 
 
 
@@ -317,7 +318,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             distance = lastLocation.distanceTo(location);
 
             //start the service to receive the location change
-            startService(new Intent(this, DistanceService.class));
+            startService(new Intent(this, LocationService.class));
 
             final Intent intent = new Intent("ACTION_DATA_AVAILABLE");
             intent.putExtra("KEY", distance);

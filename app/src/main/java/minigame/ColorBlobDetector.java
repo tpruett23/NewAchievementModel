@@ -30,7 +30,7 @@ public class ColorBlobDetector {
     Mat mHierarchy = new Mat();
 
     /**
-     * Set the color radius nn the HSV color space
+     * Set the color radius in the HSV color space
      * @param radius - new radius
      */
     public void setColorRadius(Scalar radius){
