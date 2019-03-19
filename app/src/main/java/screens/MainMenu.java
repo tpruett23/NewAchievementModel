@@ -94,10 +94,10 @@ public class MainMenu extends AppCompatActivity implements OnClickListener {
                 i = new Intent(this, ListViewAchv.class);
                 startActivity(i);
                 return true;
-            case R.id.action_cam:
+           /* case R.id.action_cam:
                 i = new Intent(this, QRScan.class);
-                startActivity(i);
-                return true;
+                startActivity(i);*/
+                //return true;
             case R.id.Settings:
                 i = new Intent(this, Settings.class);
                 startActivity(i);

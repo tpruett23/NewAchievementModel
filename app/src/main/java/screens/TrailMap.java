@@ -320,9 +320,9 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             //start the service to receive the location change
             startService(new Intent(this, LocationService.class));
 
-            final Intent intent = new Intent("ACTION_DATA_AVAILABLE");
+            /*final Intent intent = new Intent("ACTION_DATA_AVAILABLE");
             intent.putExtra("KEY", distance);
-            localBroadcastManager.sendBroadcast(intent);
+            localBroadcastManager.sendBroadcast(intent);*/
 
 
         }
