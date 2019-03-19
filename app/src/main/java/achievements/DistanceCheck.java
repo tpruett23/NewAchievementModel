@@ -6,7 +6,7 @@ import android.content.Intent;
 import screens.UserCompleted;
 
 public class DistanceCheck implements CheckAchievements {
-    UserCompleted UC = new UserCompleted();
+
 
 
 
@@ -14,11 +14,12 @@ public class DistanceCheck implements CheckAchievements {
     public boolean checkAchievement(Achievements ach) {
         boolean check = false;
 
-        if (UC.getDistanceUser() > ach.getDescriptorA().getDistance()) {
-            if (!AchievementFactory.achievements.contains(ach)) {
-                check = true;
+        if (UserCompleted.distanceUser > ach.getDescriptorA().getDistance()) {
+            if(!(AchievementFactory.achievements.contains(ach))) {
 
+                check = true;
             }
+
         }
         return check;
 

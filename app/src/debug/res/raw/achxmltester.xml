@@ -5,7 +5,7 @@
         <points>10</points>
         <description>You have walked one mile on the Trail System.</description>
         <type>
-            <distance>0</distance>
+            <distance>20</distance>
         </type>
     </achievement>
 
@@ -14,7 +14,7 @@
         <points>25</points>
         <description>You have walked 5 miles on the Trail System.</description>
         <type>
-            <distance>0</distance>
+            <distance>130</distance>
         </type>
     </achievement>
 
@@ -38,11 +38,11 @@
     </achievement>
 
     <achievement>
-        <name>Two Hundred Steps Traveled</name>
+        <name>65 Steps Traveled</name>
         <points>15</points>
-        <description>You have taken 200 steps while traveling.</description>
+        <description>You have taken 65 steps while traveling.</description>
         <type>
-            <step>200</step>
+            <step>65</step>
         </type>
     </achievement>
 </achievements>

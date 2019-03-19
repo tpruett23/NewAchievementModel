@@ -9,6 +9,7 @@ import android.location.Location;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ import static android.provider.SyncStateContract.Columns.DATA;
  * The class holds the information for all of the tasks the user has completed.
  */
 
-public class UserCompleted  extends BroadcastReceiver{
+public class UserCompleted{
     Context context;
 
     /**
@@ -32,17 +33,8 @@ public class UserCompleted  extends BroadcastReceiver{
     /**
      * The number of trails that have been completed by the user.
      */
-    private int trails = 5;
+    private int trails;
 
-    /**
-     * The number of questions that have answered correctly by the user.
-     */
-    private int questionsCorrect;
-
-    /**
-     * The number of questions that have been answered incorrectly.
-     */
-    private int questionsIncorrect;
     /**
      * The number of achievements won by the user.
      */
@@ -54,7 +46,7 @@ public class UserCompleted  extends BroadcastReceiver{
     /**
      * Distance the user has traveled.
      */
-     double distanceUser;
+     public static double distanceUser;
     /**
      * The arraylist to hold the completed achievements for the user.
      */
@@ -67,31 +59,9 @@ public class UserCompleted  extends BroadcastReceiver{
 
         this.context = context;
 
-
-
-/*          }
-        TrailMap object = new TrailMap();
-       object.setCustomObjectListener(new TrailMap.MyCustomObjectListener() {
-            @Override
-            public void onObjectReady(double distance) {
-                distanceUser += distance;
-            }
-        });*/
-
-
-
-
     }
 
     public UserCompleted(){
-
-    }
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        double dis = (double)intent.getExtras().get("KEY");
-        distanceUser += dis;
-
 
     }
 
@@ -99,12 +69,10 @@ public class UserCompleted  extends BroadcastReceiver{
     /**
      * Updates the users distance after they have been traveling.
      */
-    public void updateDistance() {
+    public void updateDistance(double distance) {
         /*TrailMap tm = new TrailMap();*/
+        this.distanceUser +=  distance;
 
-        SharedPreferences prefs = this.context.getSharedPreferences("distance", MODE_PRIVATE);
-       float distance =  prefs.getFloat("userdistance", 0);
-        this.distanceUser += distance;
 
     }
 
@@ -124,24 +92,6 @@ public class UserCompleted  extends BroadcastReceiver{
      */
     public int getChallenges() {
         return challenges;
-    }
-
-    /**
-     * Gets the number of questions answered correctly.
-     *
-     * @return The questions answered correctly.
-     */
-    public int getQuestionsCorrect() {
-        return questionsCorrect;
-    }
-
-    /**
-     * Gets the number of questions answered incorrectly.
-     *
-     * @return The number of questions answered incorrectly.
-     */
-    public int getQuestionsIncorrect() {
-        return questionsIncorrect;
     }
 
     /**

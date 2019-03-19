@@ -24,6 +24,7 @@ import achievements.SAXParserReader;
 import screens.Load;
 import screens.MainMenu;
 import screens.TrailMap;
+import services.CheckAllService;
 
 
 public class MyService extends Service {
@@ -34,7 +35,7 @@ public class MyService extends Service {
     public int onStartCommand(Intent intent, int flags, int startid) {
         SAXParserReader saxParserReader = new SAXParserReader(this);
         saxParserReader.parseXML();
-        ListViewAchv LV = new ListViewAchv();
+
 
         return START_NOT_STICKY;
 

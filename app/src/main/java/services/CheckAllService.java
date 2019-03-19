@@ -1,4 +1,4 @@
-package com.example.toripruett.newachievementmodel;
+package services;
 
 import android.app.Service;
 import android.content.Intent;
@@ -13,16 +13,14 @@ public class CheckAllService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+       AchievementXMLHandler.checkAll();
         return super.onStartCommand(intent, flags, startId);
-        AchievementXMLHandler achievementXMLHandler = new AchievementXMLHandler();
-        achievementXMLHandler.checkAll();
-        ListViewAchv L = new ListViewAchv();
+
 
     }
 }

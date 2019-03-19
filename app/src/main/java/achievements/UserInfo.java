@@ -28,17 +28,17 @@ public class UserInfo {
     /**
      * How long the user has been playing.
      */
-    public  double timePlayed = 7;
+    public  double timePlayed;
 
     /**
      * How fast the user is traveling.
      */
-    public  int speed = 10;
+    public  int speed;
 
     /**
      * The number of steps the user has taken.
      */
-    public  int steps = 400;
+    static int steps;
 
     /**
      * The number of steps that have been detected that the user has taken.

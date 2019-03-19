@@ -18,12 +18,12 @@ import java.util.ArrayList;
  * @author Tori Pruett
  * @version 1.0
  */
-public class Achievements implements Parcelable {
+public class Achievements {
 
     /**
      * The arraylist to hold all of the achievements.
      **/
-    private ArrayList<AchievementDescriptor> allAchievements;
+    static ArrayList<AchievementDescriptor> allAchievements = new ArrayList<>();
 
     /**
      * Name of the achievement read in by xml.
@@ -50,27 +50,11 @@ public class Achievements implements Parcelable {
      * Constructor for the Achievements class.
      */
     public Achievements() {
-        allAchievements = new ArrayList<>();
+
     }
 
 
-    protected Achievements(Parcel in) {
-        name = in.readString();
-        description = in.readString();
-        points = in.readInt();
-    }
 
-    public static final Creator<Achievements> CREATOR = new Creator<Achievements>() {
-        @Override
-        public Achievements createFromParcel(Parcel in) {
-            return new Achievements(in);
-        }
-
-        @Override
-        public Achievements[] newArray(int size) {
-            return new Achievements[size];
-        }
-    };
 
     /**
      * The getter method to get the achievements arraylist.
@@ -85,7 +69,7 @@ public class Achievements implements Parcelable {
      * Gets the name of the achievement.
      * @return The name.
      */
-    public  String getName(){
+    public String getName(){
         return this.name;
     }
 
@@ -145,15 +129,5 @@ public class Achievements implements Parcelable {
         return this.a;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(description);
-        dest.writeInt(points);
-    }
 }

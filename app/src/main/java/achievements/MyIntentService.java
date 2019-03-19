@@ -7,6 +7,8 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
+import services.CheckAllService;
+
 
 /**
  * The class is a service that checks for new achievements.
@@ -21,14 +23,12 @@ public class MyIntentService extends Service {
 
             @Override
             public void run() {
-                AchievementXMLHandler achievementXMLHandler = new AchievementXMLHandler();
-                achievementXMLHandler.checkAll();
-                ListViewAchv L = new ListViewAchv();
-                //Toast.makeText(getApplicationContext(),"Testing",Toast.LENGTH_LONG).show();
-                ha.postDelayed(this, 60000);
+               Intent intent1 = new Intent(getApplicationContext(), CheckAllService.class);
+                startService(intent1);
+                ha.postDelayed(this, 10000);
 
             }
-        }, 60000);
+        }, 10000);
 
 
         return START_NOT_STICKY;

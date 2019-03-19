@@ -11,6 +11,7 @@ import achievements.MyIntentService;
 import achievements.MyService;
 import achievements.StepCounterActivity;
 import achievements.Validation;
+import services.CheckAllService;
 import trailsystem.StoryEvent;
 
 public class Load extends AppCompatActivity {
@@ -27,6 +28,7 @@ public class Load extends AppCompatActivity {
         super.onStart();
         startService(new Intent(this, StepCounterActivity.class));
         startService(new Intent(this, MyService.class));
+        startService(new Intent(this,MyIntentService.class));
         Handler handler = new Handler();
         handler.post(runner);
 
@@ -49,7 +51,6 @@ public class Load extends AppCompatActivity {
      */
     private void nextScreen() {
         Intent i = new Intent(this, TrailMap.class);
-        startService(new Intent(this,MyIntentService.class));
         this.startActivity(i);
         this.finish();
 

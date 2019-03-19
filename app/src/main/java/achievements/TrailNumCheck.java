@@ -12,10 +12,9 @@ public class TrailNumCheck implements CheckAchievements {
         boolean check = false;
         if (UC.getTrails() > ach.getDescriptorA().getTrails()) {
             int trails = ach.getDescriptorA().getSpeed();
-            if (!AchievementFactory.achievements.contains(ach)) {
                 check = true;
                //AchievementFactory.achievements.add(ach);
-            }
+
         }
         return check;
 

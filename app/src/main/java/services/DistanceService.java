@@ -6,7 +6,12 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
+import achievements.AchievementXMLHandler;
+import achievements.ListViewAchv;
+import achievements.MyIntentService;
+import achievements.UserInfo;
 import screens.TrailMap;
+import screens.UserCompleted;
 
 /**
  * Class which extends service to help keep track of the distance
@@ -14,6 +19,8 @@ import screens.TrailMap;
  * @version 1.0
  */
 public class DistanceService extends Service {
+    UserCompleted userCompleted = new UserCompleted();
+
 
     /**
      * Called when the distance service has been created and performs
@@ -23,6 +30,12 @@ public class DistanceService extends Service {
     public void onCreate(){
         //get the most recent distance update
         double recentdistance = TrailMap.distance;
+        userCompleted.updateDistance(recentdistance);
+        Toast.makeText(this,userCompleted.getDistanceUser() + "",Toast.LENGTH_LONG).show();
+
+
+
+
         stopSelf(); // service no longer needs to continue
                     // will start again when a new distance is calculated.
     }
@@ -74,7 +87,7 @@ public class DistanceService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
         //Let it continue running until stopped.
-        Toast.makeText(this, "Distance Service Started", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Distance Service Started", Toast.LENGTH_LONG).show();
         return START_STICKY;
     }
 
@@ -86,6 +99,6 @@ public class DistanceService extends Service {
      */
     public void onDestroy(){
         super.onDestroy();
-        Toast.makeText(this, "Distance Service stopped", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Distance Service stopped", Toast.LENGTH_LONG).show();
     }
 }

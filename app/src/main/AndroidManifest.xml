@@ -15,7 +15,7 @@
 
     <uses-feature
         android:name="android.hardware.camera.any"
-        android:required="true" />
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
@@ -39,7 +39,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-
+        <service
+            android:name="services.CheckAllService"
+            android:enabled="true"
+            android:exported="true"></service>
 
         <activity
             android:name="screens.SplashScreen"
@@ -95,16 +98,11 @@
             android:label="@string/title_activity_maps"
             android:theme="@style/Theme.AppCompat" />
         <activity android:name="screens.CharacterScreen" />
+
         <service android:name="achievements.StepCounterActivity" />
         <service android:name="achievements.MyIntentService" />
         <service android:name="achievements.MyService" />
         <service android:name="services.DistanceService" />
-
-        <receiver android:name="screens.UserCompleted">
-            <intent-filter>
-                <action android:name="somemessage" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

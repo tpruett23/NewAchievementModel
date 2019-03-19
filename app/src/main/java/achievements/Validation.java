@@ -47,97 +47,11 @@ public class Validation extends Activity {
 
     }
 
-    /*private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context1, Intent intent) {
-            Toast.makeText(context1, "Message Received", Toast.LENGTH_LONG).show();
-            String message = intent.getStringExtra("message");
-            Toast.makeText(context1, message, Toast.LENGTH_LONG).show();
-            Log.d("receiver", "Got message: " + message);
-        }
-    };*/
-
 
     public void testAdd(Achievements ach) {
 
         AchievementFactory.achievements.add(ach);
-    }
-
-
-   /* @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
-
 
     }
-
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        LocalBroadcastManager.
-                getInstance(this).
-                registerReceiver(mMessageReceiver, new IntentFilter("Valid"));
-    }
-*/
-  /*  private MyService2 myServiceBinder;
-    public ServiceConnection myConnection = new ServiceConnection() {
-
-        public void onServiceConnected(ComponentName className, IBinder binder) {
-            myServiceBinder = ((MyService2.MyBinder) binder).getService();
-            Log.d("ServiceConnection","connected");
-            showServiceData();
-        }
-
-        public void onServiceDisconnected(ComponentName className) {
-            Log.d("ServiceConnection","disconnected");
-            myService2 = null;
-        }
-    };
-
-    public Handler myHandler = new Handler() {
-        public void handleMessage(Message message) {
-            Bundle data = message.getData();
-        }
-    };
-
-    public void doBindService() {
-        Intent intent = null;
-        intent = new Intent(this, BTService.class);
-        // Create a new Messenger for the communication back
-        // From the Service to the Activity
-        Messenger messenger = new Messenger(myHandler);
-        intent.putExtra("MESSENGER", messenger);
-
-        bindService(intent, myConnection, Context.BIND_AUTO_CREATE);
-    }
-
-    @Override
-    protected void onResume() {
-
-        Log.d("activity", "onResume");
-        if (myService2 == null) {
-            doBindService();
-        }
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        //FIXME put back
-
-        Log.d("activity", "onPause");
-        if (myService2 != null) {
-            unbindService(myConnection);
-            myService2 = null;
-        }
-        super.onPause();
-    }
-
-*/
 
 }
-
-
