@@ -18,7 +18,7 @@ import screens.UserCompleted;
  * @author - Melchor Dominguez
  * @version 1.0
  */
-public class DistanceService extends Service {
+public class LocationService extends Service {
     UserCompleted userCompleted = new UserCompleted();
 
 

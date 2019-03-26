@@ -102,7 +102,7 @@
         <service android:name="achievements.StepCounterActivity" />
         <service android:name="achievements.MyIntentService" />
         <service android:name="achievements.MyService" />
-        <service android:name="services.DistanceService" />
+        <service android:name="services.LocationService" />
     </application>
 
 </manifest>
