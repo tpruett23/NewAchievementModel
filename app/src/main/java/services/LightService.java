@@ -9,6 +9,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.toripruett.newachievementmodel.R;
 import com.google.android.gms.maps.model.MapStyleOptions;
@@ -81,7 +83,8 @@ public class LightService extends Service {
 
         assert mSensorManager != null;
         final Sensor LightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-
+        Toast.makeText(this,"Light Service is Running",Toast.LENGTH_LONG).show();
+        Log.v("Light", "The light service is running");
         SensorEventListener sensorEventListener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent event) {
@@ -89,6 +92,7 @@ public class LightService extends Service {
                 if(mLightQuantity > 150){
                     MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.style2_json);
                     TrailMap.UpdateMapStyleOptions(mapStyleOptions);
+
 
                 }else{
                     {
@@ -112,6 +116,12 @@ public class LightService extends Service {
                 LightSensor,
                 SensorManager.SENSOR_DELAY_NORMAL);
 
+
         return START_STICKY;
+    }
+
+    public void onDestroy(){
+        super.onDestroy();
+        Toast.makeText(this,"Service Destroyed",Toast.LENGTH_LONG).show();
     }
 }

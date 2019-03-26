@@ -14,15 +14,19 @@ import achievements.Validation;
 import services.CheckAllService;
 import trailsystem.StoryEvent;
 
+/**
+ * This activity is responsible for starting all services needed to set up the application
+ * after the splash screen.
+ * @author Tori Pruett
+ * @version 2.0
+ */
 public class Load extends AppCompatActivity {
 
 
-    public void onCreate(){
-
-
-
-    }
-
+    /**
+     * When this activity is started this method is starting all needed services for the
+     * application.
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -47,7 +51,7 @@ public class Load extends AppCompatActivity {
 
 
     /**
-     * Brings the user to the main menu screen after the splash screen.
+     * Brings the user to the TrailMap/Main Menu screen after the splash screen.
      */
     private void nextScreen() {
         Intent i = new Intent(this, TrailMap.class);

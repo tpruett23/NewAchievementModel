@@ -11,11 +11,18 @@ import services.CheckAllService;
 
 
 /**
+ * @author  Tori Pruett
  * The class is a service that checks for new achievements.
  */
 public class MyIntentService extends Service {
 
-
+    /**
+     * Starts the service every 1 minute to check for new achievements.
+     * @param intent
+     * @param flags
+     * @param startid
+     * @return
+     */
     @Override
     public int onStartCommand(Intent intent, int flags, int startid) {
         final Handler ha = new Handler(getApplicationContext().getMainLooper());

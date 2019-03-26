@@ -26,11 +26,22 @@ import screens.MainMenu;
 import screens.TrailMap;
 import services.CheckAllService;
 
-
+/**
+ * @author Tori Pruett
+ * @version 1.0
+ * This service starts the process of parsing through the achievements.
+ */
 public class MyService extends Service {
 
 
 
+    /**
+     * Starts the parsing on the achievements when this service is started.
+     * @param intent
+     * @param flags
+     * @param startid
+     * @return
+     */
     @Override
     public int onStartCommand(Intent intent, int flags, int startid) {
         SAXParserReader saxParserReader = new SAXParserReader(this);

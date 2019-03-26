@@ -18,7 +18,7 @@ public class UserInfo {
     /**
      * The total amount of points the user has won.
      */
-    public int totalPoints;
+    public static int totalPoints;
 
     /**
      * The total distance the user has traveled.
@@ -53,6 +53,10 @@ public class UserInfo {
      */
     public int getTotalPoints() {
         return this.totalPoints;
+    }
+
+    public static void setTotalPoints(int totalPoints1){
+        totalPoints += totalPoints1;
     }
 
     /**

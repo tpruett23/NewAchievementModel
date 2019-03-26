@@ -39,7 +39,14 @@ import javax.xml.parsers.SAXParserFactory;
 
 import screens.UserCompleted;
 
+/**
+ * This class resembles another step in validating that the achievement is an actual valid
+ * achievement.
+ * @author Tori Pruett
+ * @version 1.0
+ */
 public class Validation extends Activity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +54,10 @@ public class Validation extends Activity {
 
     }
 
-
+    /**
+     * Method to add the achievement to the Arraylist of completed achievements.
+     * @param ach The achievement to be added.
+     */
     public void testAdd(Achievements ach) {
 
         AchievementFactory.achievements.add(ach);

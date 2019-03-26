@@ -30,6 +30,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.toripruett.newachievementmodel.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -42,6 +43,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
@@ -61,6 +63,7 @@ import java.util.Collection;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import achievements.ListViewAchv;
+import achievements.UserInfo;
 import load.XMLTrailParser;
 import services.DistanceService;
 import services.LightService;
@@ -102,6 +105,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     public static double distance;
     /** boolean to check if lightService should be running - only 1 light service can be running**/
     private static boolean lightSensorService;
+
+    TextView points;
 
    Button eventButton;
 
@@ -151,7 +156,12 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     protected void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_maps2);
+            /*Settings set = new Settings();
+            set.savePrefs();*/
        localBroadcastManager = LocalBroadcastManager.getInstance(this);
+
+      /* points = (TextView) findViewById(R.id.pointtextview);
+       points.setText(UserInfo.totalPoints + "");*/
 
         trailParser = new XMLTrailParser();
 
@@ -308,6 +318,9 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      */
     @Override
     public void onLocationChanged(Location location) {
+        setLightSensorService(Settings.lightSensor);
+        lightServiceChange();
+
 
         SharedPreferences prefs = getSharedPreferences("distance", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -337,7 +350,9 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Current Position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+        //markerOptions.icon2(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.navigation);
+        markerOptions.icon(icon);
         locationMarker = mGoogleMap.addMarker(markerOptions);
 
         //move the camera to the current location
@@ -874,6 +889,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             startActivity(i);
             //Toast.makeText(this, "Action clicked", Toast.LENGTH_LONG).show();
             setLightSensorService(Settings.lightSensor);
+            lightServiceChange();
             return true;
         }
         if (id == R.id.action_story) {

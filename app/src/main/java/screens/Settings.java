@@ -27,14 +27,23 @@ public class Settings extends AppCompatActivity implements OnClickListener {
      * The checkbox to turn the sound on and off.
      */
     CheckBox sound;
+    /**
+     * The checkbox to turn darkmode on and off.
+     */
     CheckBox darkMode;
+    /**
+     * The checkbox to turn on the autoLight service.
+     */
     CheckBox autoLight;
-
+    /**
+     * The lightsensor boolean to determine if the autolight service should be started.
+     */
     public static boolean lightSensor;
 
     static float mLightQuantity;
 
     public Settings(){
+
 
     }
     /**
@@ -57,7 +66,9 @@ public class Settings extends AppCompatActivity implements OnClickListener {
 
         darkMode = findViewById(R.id.darkcheck);
         darkMode.setOnClickListener(this);
-        darkMode.setChecked(true);
+        //darkMode.setChecked(true);
+
+
 
         loadPrefs();
 
@@ -70,6 +81,7 @@ public class Settings extends AppCompatActivity implements OnClickListener {
      * @param v The button that is clicked.
      */
     public void onClick(View v) {
+
 
         if (v.getId() == R.id.soundcheck) {
             if (sound.isChecked()) {
@@ -84,11 +96,13 @@ public class Settings extends AppCompatActivity implements OnClickListener {
             if (darkMode.isChecked()) {
                 MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json);
                 TrailMap.UpdateMapStyleOptions(mapStyleOptions);
-                autoLight.setChecked(false);
+
 
             }else{
                 MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(this, R.raw.style2_json);
                 TrailMap.UpdateMapStyleOptions(mapStyleOptions);
+
+
 
             }
         }
@@ -136,7 +150,8 @@ public class Settings extends AppCompatActivity implements OnClickListener {
                         SensorManager.SENSOR_DELAY_NORMAL); */
                 lightSensor = true;
             }
-            lightSensor = false;
+                lightSensor = false;
+
         }
         savePrefs();
     }
@@ -148,7 +163,7 @@ public class Settings extends AppCompatActivity implements OnClickListener {
      */
     public void loadPrefs() {
         SharedPreferences settings = getPreferences(Context.MODE_PRIVATE);
-        int att = settings.getInt("sound", 1);
+        int att = settings.getInt("sound",1);
         int mode = settings.getInt("mode",1);
         int light = settings.getInt("light",1);
 
@@ -180,8 +195,7 @@ public class Settings extends AppCompatActivity implements OnClickListener {
      */
 
     public void savePrefs() {
-        SharedPreferences.Editor settings;
-        settings = getPreferences(MODE_PRIVATE).edit();
+        SharedPreferences.Editor settings = getPreferences(MODE_PRIVATE).edit();
 
         boolean save = sound.isChecked();
         if (save) {
@@ -212,8 +226,9 @@ public class Settings extends AppCompatActivity implements OnClickListener {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         savePrefs();
+        super.onDestroy();
+        //savePrefs();
     }
 
     @Override

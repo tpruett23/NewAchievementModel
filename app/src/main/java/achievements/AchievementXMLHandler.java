@@ -266,12 +266,14 @@ public class AchievementXMLHandler extends DefaultHandler {
                     DistanceCheck distanceCheck = new DistanceCheck();
                     if (distanceCheck.checkAchievement(tempAchievements.get(i))) {
                         validation.testAdd(tempAchievements.get(i));
+                        UserInfo.setTotalPoints(tempAchievements.get(i).getDescriptorA().getPoints());
                     }
                 }
                 if (tempAchievements.get(i).getName().equals("Step Achievement")) {
                     StepCheck stepCheck = new StepCheck();
                     if (stepCheck.checkAchievement(tempAchievements.get(i))) {
                         validation.testAdd(tempAchievements.get(i));
+                        UserInfo.setTotalPoints(tempAchievements.get(i).getDescriptorA().getPoints());
                     }
                 }
             }

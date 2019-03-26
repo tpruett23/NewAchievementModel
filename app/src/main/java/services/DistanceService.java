@@ -31,7 +31,7 @@ public class DistanceService extends Service {
         //get the most recent distance update
         double recentdistance = TrailMap.distance;
         userCompleted.updateDistance(recentdistance);
-        Toast.makeText(this,userCompleted.getDistanceUser() + "",Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,userCompleted.getDistanceUser() + "",Toast.LENGTH_LONG).show();
 
 
 
