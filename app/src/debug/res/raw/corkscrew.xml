@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trailsystem>
+    <name> WCU Trail System</name>
+
+    <trail>
+        <trail_name> Corkscrew </trail_name>
+        <waypoint>
+            <latitude>35.30644</latitude>
+            <longitude>-83.20866</longitude>
+        </waypoint>
+        <waypoint>
+            <latitude>35.30642</latitude>
+            <longitude>-83.208664</longitude>
+        </waypoint>
+        <waypoint>
+            <latitude>35.306442</latitude>
+            <longitude>-83.208694</longitude>
+        </waypoint>
+    </trail>
+</trailsystem>

@@ -23,21 +23,33 @@
             android:fontFamily="@font/alvarocondensed"
             android:textSize="65sp"
             android:textColor="@color/dk_pink" />
+
     </LinearLayout>
 
 
+        <TextView
+            android:id="@+id/pointtextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HERE"
+            android:textSize="36dp"
+            android:textColor="@color/dk_pink"
+            android:gravity="top|right"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="19">
 
-        <include layout="@layout/activity_list_view"></include>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="19">
+
+            <include layout="@layout/activity_list_view"></include>
+        </LinearLayout>
+
+
+
+
     </LinearLayout>
-
-
-
-
-</LinearLayout>
 
 

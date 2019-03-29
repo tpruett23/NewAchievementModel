@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trailsystem>
+    <name> WCU Trail System</name>
+
+    <trail>
+    <trail_name>Little Savannah Connector</trail_name>
+        <waypoint>
+            <latitude>35.306774</latitude>
+            <longitude>-83.205414</longitude>
+        </waypoint>
+        <waypoint>
+            <latitude>35.306786</latitude>
+            <longitude>-83.205475</longitude>
+        </waypoint>
+        <waypoint>
+            <latitude>35.306797</latitude>
+            <longitude>-83.20553</longitude>
+        </waypoint>
+        <waypoint>
+            <latitude>35.306786</latitude>
+            <longitude>-83.20554</longitude>
+        </waypoint>
+    </trail>
+</trailsystem>

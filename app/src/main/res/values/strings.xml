@@ -29,12 +29,17 @@
     <string name="MenuBar">Menu Bar</string>
     <string name="Story">Story</string>
     <string name="Settings">Settings</string>
+    <string name="corkscrew">Corkscrew</string>
+    <string name="ggloop">Gribble Gap Loop</string>
+    <string name="HHSconnector">HHS Connector</string>
+    <string name="catamounttrail">Catamount Trail</string>
     <string name="Unknown">_???</string>
     <string name="darkmode">Dark Mode</string>
     <string name="automode">Auto Light</string>
     <string name="EventAvailable">Event Available</string>
     <string name="step_counter">android.hardware.sensor.stepcounter</string>
     <string name="step_detector">android.hardware.sensor.stepdetector</string>
+    <string name="question1">Which of the following is not a trail on the WCU Trail System?</string>
 
 
     <string-array name="values_array">
@@ -44,5 +49,6 @@
     <string name="title_activity_screen_to_map">ScreenToMap</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_question_event">QuestionEvent</string>
 
 </resources>

@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.toripruett.newachievementmodel.R;
@@ -38,6 +39,8 @@ public class ListViewAchv extends AppCompatActivity {
      * The listview to display all of the achievements
      **/
     private ListView lv;
+
+    static TextView totalPoints;
     /**
      * The adapter to put the arraylist in the listview.
      */
@@ -59,6 +62,8 @@ public class ListViewAchv extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
+        totalPoints = (TextView) findViewById(R.id.pointtextview);
+        totalPoints.setText("Total Points: " + UserInfo.totalPoints);
 
         lv = (ListView) findViewById(R.id.list);
 
@@ -98,6 +103,9 @@ public class ListViewAchv extends AppCompatActivity {
 
         });
 
+    }
+    public static void setTotalPoints(String text){
+       totalPoints.setText(text);
     }
 
 }

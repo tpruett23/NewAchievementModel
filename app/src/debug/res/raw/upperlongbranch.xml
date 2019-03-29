@@ -1,0 +1,55 @@
+<trailsystem>
+    <name>WCU Trail System</name>
+
+    <trail>
+        <trail_name>Upper Long Branch</trail_name>
+        <waypoint>
+	        <latitude>35.30696</latitude>
+	        <longitude>-83.207726</longitude>
+        </waypoint>
+        <waypoint>
+	        <latitude>35.306263</latitude>
+	        <longitude>-83.205925</longitude>
+        </waypoint>
+        <waypoint>
+	        <latitude>35.30626</latitude>
+	        <longitude>-83.20589</longitude>
+        </waypoint>
+        <waypoint>
+	        <latitude>35.306095</latitude>
+	        <longitude>-83.20595</longitude>
+        </waypoint>
+        <waypoint>
+	        <latitude>35.30605</latitude>
+	        <longitude>-83.20596</longitude>
+        </waypoint>
+        <waypoint>
+	        <latitude>35.30611</latitude>
+	        <longitude>-83.205864</longitude>
+        </waypoint>
+        <waypoint>
+	        <latitude>35.30604</latitude>
+	        <longitude>-83.205956</longitude>
+        </waypoint>
+        <waypoint>
+	        <latitude>35.30608</latitude>
+	        <longitude>-83.20597</longitude>
+        </waypoint>
+        <waypoint>
+	        <latitude>35.30776</latitude>
+	        <longitude>-83.203415</longitude>
+        </waypoint>
+        <waypoint>
+	        <latitude>35.30775</latitude>
+	        <longitude>-83.2036</longitude>
+        </waypoint>
+        <waypoint>
+	        <latitude>35.31074</latitude>
+	        <longitude>-83.19954</longitude>
+        </waypoint>
+        <waypoint>
+	        <latitude>35.31024</latitude>
+	        <longitude>-83.19651</longitude>
+        </waypoint>
+    </trail>
+</trailsystem>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trailsystem>
+    <name>WCU Trail System</name>
+
+    <trail>
+        <trail_name>Lower Long Branch</trail_name>
+        <waypoint>
+            <latitude>35.310364</latitude>
+            <longitude>-83.19659</longitude>
+        </waypoint>
+        <waypoint>
+            <latitude>35.309013</latitude>
+            <longitude>-83.20141</longitude>
+        </waypoint>
+        <waypoint>
+            <latitude>35.310013</latitude>
+            <longitude>-83.20169</longitude>
+        </waypoint>
+        <waypoint>
+            <latitude>35.310005</latitude>
+            <longitude>-83.20171</longitude>
+        </waypoint>
+    </trail>
+
+</trailsystem>
