@@ -1,9 +1,11 @@
 package screens;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -30,7 +32,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.example.toripruett.newachievementmodel.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -63,8 +64,8 @@ import java.util.Collection;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import achievements.ListViewAchv;
+import achievements.MyService;
 import achievements.QuestionEvent;
-import achievements.UserInfo;
 import load.XMLTrailParser;
 import services.LocationService;
 import services.LightService;
@@ -106,15 +107,14 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     public static double distance;
     /** boolean to check if lightService should be running - only 1 light service can be running**/
     private static boolean lightSensorService;
+    /** Class for interacting with the main interface of the location service**/
+    private BroadcastReceiver mLightReceiver;
 
-    TextView points;
 
-   Button eventButton;
+    Button eventButton;
 
 
     private MyCustomObjectListener listener;
-
-    LocalBroadcastManager localBroadcastManager;
 
     static Double distanceSend;
 
@@ -124,27 +124,12 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     public static final int PERMISSIONS_REQUEST_LOCATION = 99;
 
     /** Polyline which will show the trail*/
-    //TODO: change this to a collection of Polylines
     private Polyline line;
 
     /** Media player for the application - only 1 is needed **/
     public static MediaPlayer mediaPlayer;
 
     Animation bounce;
-
-    /*public TrailMap() {
-        distanceSend = 0.0;
-        listener = null;
-    }
-
-    public TrailMap(Context context){
-        mContext = context;
-        distanceSend = 0.0;
-        listener = null;
-
-    } */
-
-
 
     /**
      * Called when the activity is starting. This is where most initialization
@@ -160,7 +145,6 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             setContentView(R.layout.activity_maps2);
             /*Settings set = new Settings();
             set.savePrefs();*/
-       localBroadcastManager = LocalBroadcastManager.getInstance(this);
 
       /* points = (TextView) findViewById(R.id.pointtextview);
        points.setText(UserInfo.totalPoints + "");*/
@@ -187,23 +171,41 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment != null)
             mapFragment.getMapAsync(this);
+
+        // light receiver
+        mLightReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.v("lService", "received something...");
+                float lightQuality = intent.getFloatExtra("lightQuantity", -1);
+                if(lightQuality > 150){
+                    MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.style2_json);
+                    TrailMap.UpdateMapStyleOptions(mapStyleOptions);
+                }else{
+                    MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.style_json);
+                    TrailMap.UpdateMapStyleOptions(mapStyleOptions);
+                }
+                Log.v("lService", String.valueOf(lightQuality));
+            }
+        };
     }
 
-    /*
-     * Called as part of the activity lifecycle when an activity
-     * is going into the background, but has not (yet) been killed.
-     * The counterpart to onResume().
+    /**
      *
+     */
+    @Override
+    public void onResume(){
+        super.onResume();
+        //This registers message receiver to receive messages
+        LocalBroadcastManager.getInstance(this).registerReceiver(mLightReceiver,
+                new IntentFilter("light-number"));
+    }
+
     @Override
     public void onPause(){
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mLightReceiver);
         super.onPause();
-
-        //stop location updates when Map no longer active
-        if(mGoogleApiClient != null)
-            LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(this.locationCallback);
-
-     end onPause()
-    } */
+    }
 
     /**
      * Called when the map is ready to be used
@@ -239,7 +241,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         }//end if-else
 
         LatLng hhs = new LatLng(35.306631, -83.201796);
-        mGoogleMap.addMarker(new MarkerOptions().position(hhs).title("Health and Human Sciences Building"));
+        //mGoogleMap.addMarker(new MarkerOptions().position(hhs).title("Health and Human Sciences Building"));
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(hhs));
         mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(17));
 
@@ -248,6 +250,10 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, this);
+
+        //when the style is first declared, the light service should be running
+        lightSensorService = true;
+        lightServiceChange();
 
     }
 
@@ -279,8 +285,6 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             Log.e("MAP", "Can't find style. Error: ", e);
         }//end try catch
 
-        //when the style is first declared, the light service should not be running
-        lightSensorService = false;
     }
 
     public void setLightSensorService(boolean value){
@@ -292,11 +296,13 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
     private void lightServiceChange(){
         if(lightSensorService == true){
-            startService(new Intent(getBaseContext(), LightService.class));
+            Log.v("lService", "let's start a service");
+            startService(new Intent(getApplicationContext(), LightService.class));
         }else{
-            stopService(new Intent(getBaseContext(), LightService.class));
+            stopService(new Intent(getApplicationContext(), MyService.class));
         }
     }
+
 
     /**
      * Create the Google APi Client with access to
@@ -563,32 +569,6 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             e.printStackTrace();
         }
 
-        /*
-        try {
-            XMLTrailParser trailParser;
-            XmlPullParserFactory parserFactory = XmlPullParserFactory.newInstance();
-            XmlPullParser parser = parserFactory.newPullParser();
-          //  InputStream is = getAssets().open("wcu_trail_system");
-           // trailParser = new XMLTrailParser(is);
-
-            InputStream is = getResources().openRawResource(R.raw.wcu_trail_system);
-            trailParser = new XMLTrailParser();
-
-            PolylineOptions path = new PolylineOptions();
-            TrailSystem trailSystem = trailParser.getTrailSystem();
-            Collection<Trail> trails = trailSystem.getTrails();
-            for (Trail trail : trails) {
-                addTrailToLine(path, trail, R.color.dk_pink);
-            }//end for
-            path.width(6);
-
-            line = mGoogleMap.addPolyline(path);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        } */
-
-    /* end createLine()*/
     }
 
     /**
@@ -816,31 +796,13 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
     }
 
-/*
-
-    @Override
-    public void onClick(View v) {
-        Intent i;
-        if(v.getId() == storyButton.getId()){
-            i = new Intent(this, Story.class);
-            startActivity(i);
-        }
-        else if(v.getId() == achButton.getId()) {
-            i = new Intent(this, ListViewAchv.class);
-            startActivity(i);
-
-        }else if(v.getId() == settingsButton.getId()) {
-            i = new Intent(this, Settings.class);
-            startActivity(i);
-        }
-    }*/
 
 
     public interface MyCustomObjectListener {
 
         // These methods are the different events and
         // need to pass relevant arguments related to the event triggered
-        public void onObjectReady(double distance);
+        void onObjectReady(double distance);
 
     }
 
@@ -895,7 +857,6 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             startActivity(i);
             return true;
         }
-
 
         return super.onOptionsItemSelected(item);
     }
