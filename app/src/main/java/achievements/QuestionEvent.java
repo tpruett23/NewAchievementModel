@@ -62,10 +62,10 @@ public class QuestionEvent extends AppCompatActivity implements View.OnClickList
 
         question = (TextView) findViewById(R.id.questions);
         answerGroup = (RadioGroup) findViewById(R.id.answerGroup);
-        correctAnswerSpot = 0;
+        correctAnswerSpot = 1;
 
         allQuestions.add("Which of the following is not a trail on the WCU Trail System?");
-        allQuestions.add("What is the longest trail in the WCU Trail System");
+        allQuestions.add("What is the longest trail in the WCU Trail System?");
 
 
 
