@@ -62,6 +62,8 @@ import java.util.Collection;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
+import achievements.AchievementXMLHandler;
 import achievements.ListViewAchv;
 import achievements.QuestionEvent;
 import achievements.UserInfo;
@@ -181,6 +183,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         eventButton = findViewById(R.id.eventAvailable);
 
         eventButton.setOnClickListener(this);
+
+        AchievementXMLHandler.setCon(getApplicationContext());
 
         eventButton.setVisibility(View.GONE);
 
