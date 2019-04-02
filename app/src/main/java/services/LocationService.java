@@ -4,12 +4,8 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.widget.Toast;
+import android.support.v4.content.LocalBroadcastManager;
 
-import achievements.AchievementXMLHandler;
-import achievements.ListViewAchv;
-import achievements.MyIntentService;
-import achievements.UserInfo;
 import screens.TrailMap;
 import screens.UserCompleted;
 
@@ -20,6 +16,7 @@ import screens.UserCompleted;
  */
 public class LocationService extends Service {
     UserCompleted userCompleted = new UserCompleted();
+    double recentDistance;
 
 
     /**
@@ -29,13 +26,13 @@ public class LocationService extends Service {
     @Override
     public void onCreate(){
         //get the most recent distance update
-        double recentdistance = TrailMap.distance;
-        userCompleted.updateDistance(recentdistance);
+        recentDistance = TrailMap.distance;
+        userCompleted.updateDistance(recentDistance);
         //Toast.makeText(this,userCompleted.getDistanceUser() + "",Toast.LENGTH_LONG).show();
 
 
 
-
+        sendMessage();
         stopSelf(); // service no longer needs to continue
                     // will start again when a new distance is calculated.
     }
@@ -100,5 +97,11 @@ public class LocationService extends Service {
     public void onDestroy(){
         super.onDestroy();
         //Toast.makeText(this, "Distance Service stopped", Toast.LENGTH_LONG).show();
+    }
+
+    private void sendMessage(){
+        Intent intent = new Intent("location-distance");
+        intent.putExtra("distance", recentDistance);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 }
