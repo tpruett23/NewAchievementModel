@@ -20,7 +20,9 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 
 import screens.TrailMap;
 
-
+/**
+ *
+ */
 public class LightService extends Service {
 
     /** indicates the light quality for the light service **/
@@ -28,7 +30,7 @@ public class LightService extends Service {
     /** indicates how to behave if the service is killed **/
     private int mStartMode;
     /** interface for clients that bind **/
-    IBinder mBinder;
+    IBinder mBinder = null;
     /** indicates whether onRebind should be used **/
     private boolean mAllowRebind;
 
@@ -75,6 +77,8 @@ public class LightService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId){
         //Let it continue running until it is stopped
 
+        Log.v("lService", "service started");
+
         final SensorManager mSensorManager;
 
         mSensorManager =
@@ -88,20 +92,8 @@ public class LightService extends Service {
             @Override
             public void onSensorChanged(SensorEvent event) {
                 mLightQuantity = event.values[0];
-                if(mLightQuantity > 150){
-                    MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.style2_json);
-                    TrailMap.UpdateMapStyleOptions(mapStyleOptions);
-
-
-                }else{
-                    {
-                        MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.style_json);
-                        TrailMap.UpdateMapStyleOptions(mapStyleOptions);
-                    }
-
-                }
-
-
+                Log.v("lService", String.valueOf(mLightQuantity));
+                sendMessage();
             }
 
             @Override
@@ -115,16 +107,16 @@ public class LightService extends Service {
                 LightSensor,
                 SensorManager.SENSOR_DELAY_NORMAL);
 
-
         return START_STICKY;
     }
 
     public void onDestroy(){
+        Log.v("lService", "service stopping");
         super.onDestroy();
-        Toast.makeText(this,"Service Destroyed",Toast.LENGTH_LONG).show();
     }
 
     private void sendMessage(){
+        Log.v ("lService", "sending a message");
         Intent intent = new Intent("light-number");
         intent.putExtra("lightQuantity", mLightQuantity);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);

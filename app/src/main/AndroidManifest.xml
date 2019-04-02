@@ -107,6 +107,7 @@
         <service android:name="achievements.MyIntentService" />
         <service android:name="achievements.MyService" />
         <service android:name="services.LocationService" />
+        <service android:name="services.LightService"/>
     </application>
 
 </manifest>
