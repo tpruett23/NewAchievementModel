@@ -16,6 +16,8 @@ public abstract class AchievementDescriptor {
      **/
     private double distance;
 
+    private int questions;
+
     /**
      * The speed of the user traveling.
      */
@@ -139,6 +141,14 @@ public abstract class AchievementDescriptor {
      */
     public double getTime(){
         return this.time;
+    }
+
+    /**
+     * Gets the time the user has been playing.
+     * @return
+     */
+    public int getQuestions(){
+        return this.questions;
     }
 
 

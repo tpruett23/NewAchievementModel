@@ -40,13 +40,13 @@ public class UserCompleted{
      */
     private int achievementsWon;
     /**
-     * The number of challenges met by the user.
+     * The number of questions answered correctly by the user.
      */
-    private int challenges;
+    public static int questions;
     /**
      * Distance the user has traveled.
      */
-     public static double distanceUser;
+    public static double distanceUser;
     /**
      * The arraylist to hold the completed achievements for the user.
      */
@@ -90,8 +90,8 @@ public class UserCompleted{
      *
      * @return Number of challenges.
      */
-    public int getChallenges() {
-        return challenges;
+    public int getQuestions() {
+        return this.questions;
     }
 
     /**

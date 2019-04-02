@@ -63,6 +63,7 @@ import java.util.Collection;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import achievements.ListViewAchv;
+import achievements.QuestionEvent;
 import achievements.UserInfo;
 import load.XMLTrailParser;
 import services.LocationService;
@@ -889,7 +890,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             return true;
         }
         if (id == R.id.action_story) {
-            i = new Intent(this,Story.class);
+            i = new Intent(this, QuestionEvent.class);
             //Toast.makeText(this, "Action clicked", Toast.LENGTH_LONG).show();
             startActivity(i);
             return true;

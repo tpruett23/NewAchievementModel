@@ -46,6 +46,7 @@ public class MyService extends Service {
     public int onStartCommand(Intent intent, int flags, int startid) {
     /*    locationSaxParserReader locationSaxParserReader = new locationSaxParserReader(this);
         locationSaxParserReader.save();*/
+
         SAXParserReader saxParserReader = new SAXParserReader(this);
         saxParserReader.parseXML();
 

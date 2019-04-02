@@ -45,4 +45,13 @@
             <step>65</step>
         </type>
     </achievement>
+
+    <achievement>
+        <name>Four Questions Answered Correctly</name>
+        <points>10</points>
+        <description>You have answered steps 4 questions correctly.</description>
+        <type>
+            <question>1</question>
+        </type>
+    </achievement>
 </achievements>

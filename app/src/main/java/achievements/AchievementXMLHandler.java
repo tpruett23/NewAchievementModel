@@ -136,7 +136,7 @@ public class AchievementXMLHandler extends DefaultHandler {
         }else if(qName.equals("speed")){
             currentElement = tmpADPoints;
 
-        }else if(qName.equals("challenges")){
+        }else if(qName.equals("question")){
             currentElement = tmpADPoints;
 
         }else
@@ -184,7 +184,7 @@ public class AchievementXMLHandler extends DefaultHandler {
                     AchievementDescriptor TimeAch = new Time("Time Achievement", temp.getPoints(), temp.getDescription(), Double.parseDouble(currentElement));
                     temp.setDescriptor(TimeAch);
                     CheckAchievements timeCheck = new TimeCheck();
-                    if(timeCheck.checkAchievement(temp)){
+                    if (timeCheck.checkAchievement(temp)) {
                         val.testAdd(temp);
                     }
                     temp2.getAllAchievements().add(TimeAch);
@@ -195,13 +195,11 @@ public class AchievementXMLHandler extends DefaultHandler {
                     temp.setDescriptor(distanceAch);
                     tempAchievements.add(temp);
                     temp2.getAllAchievements().add(distanceAch);
-                    tempAchievements.add(temp);
+                    //tempAchievements.add(temp);
                     DistanceCheck distanceCheck = new DistanceCheck();
-                    if(distanceCheck.checkAchievement(temp)){
+                    if (distanceCheck.checkAchievement(temp)) {
                         val.testAdd(temp);
                     }
-
-
 
 
                 } else if (qName.equals("trails")) {
@@ -210,10 +208,9 @@ public class AchievementXMLHandler extends DefaultHandler {
                     tempAchievements.add(temp);
                     temp2.getAllAchievements().add(trailAch);
                     TrailNumCheck trailCheck = new TrailNumCheck();
-                    if(trailCheck.checkAchievement(temp)){
-                       val.testAdd(temp);
+                    if (trailCheck.checkAchievement(temp)) {
+                        val.testAdd(temp);
                     }
-                    tempAchievements.add(temp);
 
 
                 } else if (qName.equals("step")) {
@@ -223,10 +220,10 @@ public class AchievementXMLHandler extends DefaultHandler {
                     temp2.getAllAchievements().add(stepAch);
                     StepCheck stepCheck = new StepCheck();
 
-                    if(stepCheck.checkAchievement(temp)){
-                       val.testAdd(temp);
+                    if (stepCheck.checkAchievement(temp)) {
+                        val.testAdd(temp);
                     }
-                    tempAchievements.add(temp);
+                    //tempAchievements.add(temp);
 
                 } else if (qName.equals("speed")) {
                     AchievementDescriptor speedAch = new Speed("Speed Achievement", temp.getPoints(), Integer.parseInt(currentElement), temp.getDescription());
@@ -234,15 +231,23 @@ public class AchievementXMLHandler extends DefaultHandler {
                     tempAchievements.add(temp);
                     temp2.getAllAchievements().add(speedAch);
                     SpeedCheck speedCheck = new SpeedCheck();
-                    if(speedCheck.checkAchievement(temp)){
+                    if (speedCheck.checkAchievement(temp)) {
                         val.testAdd(temp);
                     }
 
 
+                } else if (qName.equals("question")) {
+                    AchievementDescriptor quesAch = new Question("Question Achievement", temp.getPoints(), temp.getDescription(), Integer.parseInt(currentElement));
+                    temp.setDescriptor(quesAch);
+                    tempAchievements.add(temp);
+                    temp2.getAllAchievements().add(quesAch);
+                    QuestionCheck quesCheck = new QuestionCheck();
+
+                    if (quesCheck.checkAchievement(temp)) {
+                        val.testAdd(temp);
+                    }
 
                 }
-
-
             }
 
 
@@ -269,9 +274,16 @@ public class AchievementXMLHandler extends DefaultHandler {
                         UserInfo.setTotalPoints(tempAchievements.get(i).getDescriptorA().getPoints());
                     }
                 }
-                if (tempAchievements.get(i).getName().equals("Step Achievement")) {
+                if (tempAchievements.get(i).getDescriptorA().getName().equals("Step Achievement")) {
                     StepCheck stepCheck = new StepCheck();
                     if (stepCheck.checkAchievement(tempAchievements.get(i))) {
+                        validation.testAdd(tempAchievements.get(i));
+                        UserInfo.setTotalPoints(tempAchievements.get(i).getDescriptorA().getPoints());
+                    }
+                }
+                if (tempAchievements.get(i).getDescriptorA().getName().equals("Question Achievement")) {
+                    QuestionCheck quesCheck = new QuestionCheck();
+                    if (quesCheck.checkAchievement(tempAchievements.get(i))) {
                         validation.testAdd(tempAchievements.get(i));
                         UserInfo.setTotalPoints(tempAchievements.get(i).getDescriptorA().getPoints());
                     }

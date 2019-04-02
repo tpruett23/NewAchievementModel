@@ -8,6 +8,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,15 +27,15 @@ public class Settings extends AppCompatActivity implements OnClickListener {
     /**
      * The checkbox to turn the sound on and off.
      */
-    CheckBox sound;
+    static CheckBox sound;
     /**
      * The checkbox to turn darkmode on and off.
      */
-    CheckBox darkMode;
+    static CheckBox darkMode;
     /**
      * The checkbox to turn on the autoLight service.
      */
-    CheckBox autoLight;
+     static CheckBox autoLight;
     /**
      * The lightsensor boolean to determine if the autolight service should be started.
      */
@@ -42,10 +43,12 @@ public class Settings extends AppCompatActivity implements OnClickListener {
 
     static float mLightQuantity;
 
-    public Settings(){
+    public Settings() {
+
 
 
     }
+
     /**
      * The method is called to create the activity and to build the activity.
      *
@@ -58,7 +61,7 @@ public class Settings extends AppCompatActivity implements OnClickListener {
 
         sound = findViewById(R.id.soundcheck);
         sound.setOnClickListener(this);
-
+        sound.setChecked(true);
 
 
         autoLight = findViewById(R.id.autolight);
@@ -66,7 +69,6 @@ public class Settings extends AppCompatActivity implements OnClickListener {
 
         darkMode = findViewById(R.id.darkcheck);
         darkMode.setOnClickListener(this);
-        //darkMode.setChecked(true);
 
 
 
@@ -98,10 +100,9 @@ public class Settings extends AppCompatActivity implements OnClickListener {
                 TrailMap.UpdateMapStyleOptions(mapStyleOptions);
 
 
-            }else{
+            } else {
                 MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(this, R.raw.style2_json);
                 TrailMap.UpdateMapStyleOptions(mapStyleOptions);
-
 
 
             }
@@ -150,22 +151,21 @@ public class Settings extends AppCompatActivity implements OnClickListener {
                         SensorManager.SENSOR_DELAY_NORMAL); */
                 lightSensor = true;
             }
-                lightSensor = false;
+            lightSensor = false;
 
         }
         savePrefs();
     }
 
 
-
     /**
      * Loads the preferences put in by the user after being saved.
      */
     public void loadPrefs() {
-        SharedPreferences settings = getPreferences(Context.MODE_PRIVATE);
-        int att = settings.getInt("sound",1);
-        int mode = settings.getInt("mode",1);
-        int light = settings.getInt("light",1);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        int att = sharedPreferences.getInt("sound", 1);
+        int mode = sharedPreferences.getInt("mode", 1);
+        int light = sharedPreferences.getInt("light",1);
 
         if (att == 1) {
             sound.setChecked(true);
@@ -173,54 +173,58 @@ public class Settings extends AppCompatActivity implements OnClickListener {
             sound.setChecked(false);
         }
 
-        if(mode == 1){
+        if (mode == 1) {
             darkMode.setChecked(true);
-        }else{
+        } else if(mode == 4){
             darkMode.setChecked(false);
         }
 
 
-        if(light == 1){
-            darkMode.setChecked(true);
-        }else{
-            darkMode.setChecked(false);
-        }
-
-
-
+        if (light == 1) {
+            autoLight.setChecked(true);
+        } else if (light == 5){
+            autoLight.setChecked(false);
     }
+
+}
+
+
+
+
 
     /**
      * Saves the preferences entered by the user.
      */
 
-    public void savePrefs() {
-        SharedPreferences.Editor settings = getPreferences(MODE_PRIVATE).edit();
+    public  void savePrefs() {
+        SharedPreferences sf = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        SharedPreferences.Editor editor = sf.edit();
+
 
         boolean save = sound.isChecked();
         if (save) {
-            settings.putInt("sound", 1);
+            editor.putInt("sound", 1);
         } else {
-            settings.putInt("sound", 3);
+            editor.putInt("sound", 3);
 
         }
 
         boolean mode = darkMode.isChecked();
         if(mode){
-            settings.putInt("mode", 1);
+           editor.putInt("mode", 1);
         }else{
-            settings.putInt("mode", 2);
+            editor.putInt("mode", 4);
         }
 
         boolean light = autoLight.isChecked();
         if(light){
-            settings.putInt("light", 1);
+            editor.putInt("light", 1);
         }else{
-            settings.putInt("light", 2);
+            editor.putInt("light", 5);
         }
 
 
-        settings.apply();
+        editor.apply();
 
     }
 

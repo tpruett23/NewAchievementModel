@@ -10,12 +10,12 @@
         android:orderInCategory="4"
         android:title="ribbon"
         app:showAsAction="always"
-        android:icon="@android:drawable/btn_star_big_off" />
+        android:icon="@drawable/favorite" />
 
     <item android:id = "@+id/Settings"
         android:title = "Settings"
         android:orderInCategory = "1"
-        android:icon="@android:drawable/ic_menu_preferences"
+        android:icon="@drawable/settingsflaticon"
         app:showAsAction="always" />
 
 
@@ -31,7 +31,7 @@
         android:orderInCategory="2"
         android:title="Story"
         app:showAsAction="always"
-        android:icon="@android:drawable/ic_menu_myplaces" />
+        android:icon="@drawable/book" />
 
   <!--  <item android:id = "@+id/toMap"
         android:title = "Map"

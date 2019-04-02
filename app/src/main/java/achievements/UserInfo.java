@@ -23,7 +23,7 @@ public class UserInfo {
     /**
      * The total distance the user has traveled.
      */
-    public  double totalDistance;
+    public static double totalDistance;
 
     /**
      * How long the user has been playing.
@@ -38,7 +38,7 @@ public class UserInfo {
     /**
      * The number of steps the user has taken.
      */
-    static int steps;
+    public static int steps;
 
     /**
      * The number of steps that have been detected that the user has taken.

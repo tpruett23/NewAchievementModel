@@ -1,5 +1,6 @@
 package achievements;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,12 +15,18 @@ import android.widget.Toast;
 
 import com.example.toripruett.newachievementmodel.R;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+import screens.TrailMap;
+import screens.UserCompleted;
+
 /**
  * The class represents the question event that asks the users questions.
  * @author Tori Pruett
  * @version 1.0
  */
-public class QuestionEvent extends AppCompatActivity {
+public class QuestionEvent extends AppCompatActivity implements View.OnClickListener {
     /**
      * The radio group that holds all the answer choices to the question.
      */
@@ -27,11 +34,21 @@ public class QuestionEvent extends AppCompatActivity {
     /**
      * The textview that holds the question being asked.
      */
-    TextView question;
+    static TextView question;
+
+    String askedQuestion;
     /**
      * The spot in the radiogroup that the correct answer choice is in.
      */
     int correctAnswerSpot;
+    /**
+     * Button to submit the answer choice.
+     */
+    Button submit;
+    /**
+     * Arraylist that holds all of questions that the user could be asked.
+     */
+    ArrayList<String> allQuestions = new ArrayList<>();
 
 
 
@@ -39,9 +56,17 @@ public class QuestionEvent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_layout);
-      question = (TextView) findViewById(R.id.questions);
+        submit = (Button)findViewById(R.id.submitbutton);
+        submit.setOnClickListener(this);
+
+
+        question = (TextView) findViewById(R.id.questions);
         answerGroup = (RadioGroup) findViewById(R.id.answerGroup);
         correctAnswerSpot = 0;
+
+        allQuestions.add("Which of the following is not a trail on the WCU Trail System?");
+        allQuestions.add("What is the longest trail in the WCU Trail System");
+
 
 
         answerGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -52,6 +77,7 @@ public class QuestionEvent extends AppCompatActivity {
                 if(checkedId == correctAnswerSpot) {
                     Toast.makeText(getApplicationContext(), "Correct Answer!",
                             Toast.LENGTH_SHORT).show();
+                    UserCompleted.questions++;
                 }else{
                     Toast.makeText(getApplicationContext(),"Incorrect Answer.",Toast.LENGTH_LONG);
                 }
@@ -68,12 +94,13 @@ public class QuestionEvent extends AppCompatActivity {
 
     }
 
+
     /**
      * Sets the question that is going to be asked.
-     * @param question The new question being asked.
+     * @param question2 The new question being asked.
      */
-    public static void setQuestion(TextView question) {
-       question = question;
+    public static void setQuestion(String question2) {
+       question.setText(question2);
     }
 
     /**
@@ -82,5 +109,19 @@ public class QuestionEvent extends AppCompatActivity {
      */
     public static void setCorrectAnswerSpot(int correctAnswerSpot) {
        correctAnswerSpot = correctAnswerSpot;
+    }
+
+    public void addQuestion(String text){
+        if(!allQuestions.contains(text)) {
+            allQuestions.add(text);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+    if(v.getId() == R.id.submitbutton){
+        Intent i = new Intent(this, TrailMap.class);
+        startActivity(i);
+    }
     }
 }
