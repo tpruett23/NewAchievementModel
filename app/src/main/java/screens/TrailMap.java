@@ -187,7 +187,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
         eventButton.setVisibility(View.GONE);
 
-        AchievementXMLHandler.setCon(getBaseContext());
+        AchievementXMLHandler.setCon(getApplicationContext());
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment != null)

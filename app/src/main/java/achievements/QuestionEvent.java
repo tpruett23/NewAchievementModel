@@ -153,8 +153,9 @@ public class QuestionEvent extends AppCompatActivity implements View.OnClickList
 
         Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
         if (correctAnswerSpot == 0) {
-            answer0.startAnimation(shake);
+
             Toast.makeText(getApplicationContext(), "Correct Answer!", Toast.LENGTH_SHORT).show();
+            answer0.startAnimation(shake);
 
 
         } else if (correctAnswerSpot == 1) {

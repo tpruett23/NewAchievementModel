@@ -30,9 +30,9 @@ public class Load extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        startService(new Intent(getApplicationContext(), StepCounterActivity.class));
-        startService(new Intent(getApplicationContext(), MyService.class));
-        startService(new Intent(getBaseContext(),MyIntentService.class));
+        startService(new Intent(this, StepCounterActivity.class));
+        startService(new Intent(this, MyService.class));
+        startService(new Intent(getApplicationContext(),MyIntentService.class));
 
         Handler handler = new Handler();
         handler.post(runner);

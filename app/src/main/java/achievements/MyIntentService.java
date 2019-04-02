@@ -32,10 +32,10 @@ public class MyIntentService extends Service {
             public void run() {
                Intent intent1 = new Intent(getBaseContext(), CheckAllService.class);
                 startService(intent1);
-                ha.postDelayed(this, 10000);
+                ha.postDelayed(this, 30000);
 
             }
-        }, 10000);
+        }, 30000);
 
 
         return START_NOT_STICKY;
