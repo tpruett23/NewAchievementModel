@@ -30,7 +30,7 @@ public class MyIntentService extends Service {
 
             @Override
             public void run() {
-               Intent intent1 = new Intent(getApplicationContext(), CheckAllService.class);
+               Intent intent1 = new Intent(getBaseContext(), CheckAllService.class);
                 startService(intent1);
                 ha.postDelayed(this, 10000);
 

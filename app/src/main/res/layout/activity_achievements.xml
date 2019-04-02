@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/Achievements"
-            android:fontFamily="@font/alvarocondensed"
+            android:fontFamily="@font/kidsfont"
             android:textSize="65sp"
             android:textColor="@color/dk_pink" />
 
@@ -32,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="HERE"
+            android:fontFamily="@font/kidsfont"
             android:textSize="36dp"
             android:textColor="@color/dk_pink"
             android:gravity="top|right"/>

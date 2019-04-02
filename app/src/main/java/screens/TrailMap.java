@@ -62,7 +62,10 @@ import java.util.Collection;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
+import achievements.AchievementXMLHandler;
 import achievements.ListViewAchv;
+import achievements.Question;
 import achievements.QuestionEvent;
 import achievements.UserInfo;
 import load.XMLTrailParser;
@@ -183,6 +186,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         eventButton.setOnClickListener(this);
 
         eventButton.setVisibility(View.GONE);
+
+        AchievementXMLHandler.setCon(getBaseContext());
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment != null)

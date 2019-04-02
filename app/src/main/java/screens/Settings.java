@@ -225,6 +225,7 @@ public class Settings extends AppCompatActivity implements OnClickListener {
 
 
         editor.apply();
+        editor.commit();
 
     }
 

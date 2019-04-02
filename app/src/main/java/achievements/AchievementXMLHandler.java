@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -34,7 +35,7 @@ public class AchievementXMLHandler extends DefaultHandler {
     /**
      * Context used to use intents
      */
-   Context con;
+   static Context con;
     /**
      * Achievements instance.
      */
@@ -59,8 +60,6 @@ public class AchievementXMLHandler extends DefaultHandler {
     public AchievementXMLHandler() {
         achievements1 = new ArrayList<>();
         tempAchievements = new ArrayList<>();
-        //temp2 = new Achievements();
-        //temp = new Achievements();
         types = false;
 
 
@@ -272,6 +271,7 @@ public class AchievementXMLHandler extends DefaultHandler {
                     if (distanceCheck.checkAchievement(tempAchievements.get(i))) {
                         validation.testAdd(tempAchievements.get(i));
                         UserInfo.setTotalPoints(tempAchievements.get(i).getDescriptorA().getPoints());
+                        Toast.makeText(con,"You have earned a Distance Achievement!" ,Toast.LENGTH_LONG).show();
                     }
                 }
                 if (tempAchievements.get(i).getDescriptorA().getName().equals("Step Achievement")) {
@@ -279,6 +279,7 @@ public class AchievementXMLHandler extends DefaultHandler {
                     if (stepCheck.checkAchievement(tempAchievements.get(i))) {
                         validation.testAdd(tempAchievements.get(i));
                         UserInfo.setTotalPoints(tempAchievements.get(i).getDescriptorA().getPoints());
+                        Toast.makeText(con,"You have earned a Step Achievement!" ,Toast.LENGTH_LONG).show();
                     }
                 }
                 if (tempAchievements.get(i).getDescriptorA().getName().equals("Question Achievement")) {
@@ -286,6 +287,7 @@ public class AchievementXMLHandler extends DefaultHandler {
                     if (quesCheck.checkAchievement(tempAchievements.get(i))) {
                         validation.testAdd(tempAchievements.get(i));
                         UserInfo.setTotalPoints(tempAchievements.get(i).getDescriptorA().getPoints());
+                        Toast.makeText(con,"You have earned a Question Achievement!" ,Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -311,5 +313,9 @@ public class AchievementXMLHandler extends DefaultHandler {
         }
 
     }//=========================================================================
+
+    public static void setCon(Context context){
+        con = context;
+    }
 
 }//end class####################################################################

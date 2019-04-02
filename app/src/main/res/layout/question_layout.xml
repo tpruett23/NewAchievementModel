@@ -38,11 +38,7 @@
             android:textColor="@color/black"
             android:textSize="40sp"/>
 
-       <RadioGroup
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:id="@+id/answerGroup"
-           android:layout_gravity="center">
+
            <RadioButton
                android:id="@+id/answer0"
                android:layout_width="wrap_content"
@@ -72,7 +68,7 @@
                android:textSize="30sp"
                android:text="@string/ggloop" />
 
-       </RadioGroup>
+
     </LinearLayout>
 
     <Button
