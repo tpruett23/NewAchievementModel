@@ -24,7 +24,7 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.character_screen);
-        textView = findViewById(R.id.textView);
+        textView = findViewById(R.id.script);
         imageView = findViewById(R.id.imageView);
         textView.setOnClickListener(this);
         imageView.setOnClickListener(this);

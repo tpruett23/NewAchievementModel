@@ -31,6 +31,7 @@
         android:name="android.hardware.camera"
         android:required="true" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/mountainicon"
@@ -108,6 +109,11 @@
         <service android:name="achievements.MyService" />
         <service android:name="services.LocationService" />
         <service android:name="services.LightService"/>
+
+        <receiver
+            android:name="achievements.AlarmReciever"
+            android:process=":remote" >
+        </receiver>
     </application>
 
 </manifest>

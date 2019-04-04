@@ -31,13 +31,7 @@ public class CheckAllService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         AchievementXMLHandler.checkAll();
         return super.onStartCommand(intent, flags, startId);
-
-
     }
 
-    @Override
-    public void onStart(Intent intent, int startId) {
-        AchievementXMLHandler.checkAll();
-        super.onStart(intent, startId);
-    }
+
 }

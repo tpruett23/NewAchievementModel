@@ -35,7 +35,7 @@ public class AchievementXMLHandler extends DefaultHandler {
     /**
      * Context used to use intents
      */
-   static Context con;
+  static Context con;
     /**
      * Achievements instance.
      */
@@ -61,6 +61,8 @@ public class AchievementXMLHandler extends DefaultHandler {
         achievements1 = new ArrayList<>();
         tempAchievements = new ArrayList<>();
         types = false;
+
+
 
 
 

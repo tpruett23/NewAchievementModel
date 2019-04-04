@@ -49,9 +49,9 @@
     <achievement>
         <name>Four Questions Answered Correctly</name>
         <points>10</points>
-        <description>You have answered steps 4 questions correctly.</description>
+        <description>You have answered 4 questions correctly.</description>
         <type>
-            <question>1</question>
+            <question>2</question>
         </type>
     </achievement>
 </achievements>

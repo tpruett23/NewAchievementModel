@@ -72,6 +72,11 @@ public class Question extends AchievementDescriptor {
         this.points = points;
     }
 
+    @Override
+    public int getQuestions(){
+        return this.questionsCorrect;
+    }
+
 
     /**
      * Gets the distance of the achievement.

@@ -63,6 +63,8 @@ import java.util.Collection;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
+import achievements.AchievementXMLHandler;
 import achievements.ListViewAchv;
 import achievements.MyService;
 import achievements.QuestionEvent;
@@ -165,6 +167,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         eventButton = findViewById(R.id.eventAvailable);
 
         eventButton.setOnClickListener(this);
+
+        AchievementXMLHandler.setCon(getApplicationContext());
 
         eventButton.setVisibility(View.GONE);
 
@@ -297,9 +301,9 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     private void lightServiceChange(){
         if(lightSensorService == true){
             Log.v("lService", "let's start a service");
-            startService(new Intent(getApplicationContext(), LightService.class));
+            startService(new Intent(this, LightService.class));
         }else{
-            stopService(new Intent(getApplicationContext(), MyService.class));
+            stopService(new Intent(this, MyService.class));
         }
     }
 
