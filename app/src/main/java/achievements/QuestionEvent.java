@@ -39,30 +39,42 @@ public class QuestionEvent extends AppCompatActivity implements View.OnClickList
      * The textview that holds the question being asked.
      */
     static TextView question;
-
+    /**
+     * All of the radiobuttons that hold the answer choices.
+     */
     RadioButton answer0, answer1, answer2, answer3;
-
+    /**
+     * The question being asked.
+     */
     String askedQuestion;
     /**
      * The spot in the radiogroup that the correct answer choice is in.
      */
     int correctAnswerSpot;
+
     /**
-     * Button to submit the answer choice.
+     * Animation that makes the buttons shake.
      */
-    Button submit;
+    Animation shake;
     /**
      * Arraylist that holds all of questions that the user could be asked.
      */
     ArrayList<String> allQuestions = new ArrayList<>();
+    /**
+     * The arraylist that is full of the radiobuttons that correspond to the answers.
+     */
+    ArrayList<RadioButton> answerButtons = new ArrayList<>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_layout);
-        submit = (Button) findViewById(R.id.submitbutton);
-        submit.setOnClickListener(this);
+
+
+
+
+        shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
 
         answer0 = findViewById(R.id.answer0);
         answer1 = findViewById(R.id.answer1);
@@ -74,44 +86,21 @@ public class QuestionEvent extends AppCompatActivity implements View.OnClickList
         answer2.setOnClickListener(this);
         answer3.setOnClickListener(this);
 
+        answerButtons.add(answer0);
+        answerButtons.add(answer1);
+        answerButtons.add(answer2);
+        answerButtons.add(answer3);
+
         question = (TextView) findViewById(R.id.questions);
+        setQuestion("What trail is not included in the WCU Trail System?");
 
-        correctAnswerSpot = 1;
 
-        allQuestions.add("Which of the following is not a trail on the WCU Trail System?");
-        allQuestions.add("What is the longest trail in the WCU Trail System?");
-        loadPrefs();
+        correctAnswerSpot = 0;
 
 
 
-/*
-        this.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // find which radio button is selected
-                if(checkedId == R.id.answer0) {
-                    Toast.makeText(getApplicationContext(), "Correct Answer!",
-                            Toast.LENGTH_SHORT).show();
-                    Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
-
-                    checkedId.startAnimation(shake);
-                    UserCompleted.questions++;
-                }else{
-                    Toast.makeText(getApplicationContext(),"Incorrect Answer.",Toast.LENGTH_LONG);
-                }*/
-          /*      } else if(checkedId == R.id.ans) {
-                    Toast.makeText(getApplicationContext(), "choice: Sound",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "choice: Vibration",
-                            Toast.LENGTH_SHORT).show();
-                }*/
     }
-
-    // });
-
-    //loadPrefs();
 
 
     /**
@@ -132,69 +121,42 @@ public class QuestionEvent extends AppCompatActivity implements View.OnClickList
         correctAnswerSpot = correctAnswerSpot;
     }
 
-    public void setAnswerText() {
 
-
-    }
-
+    /**
+     * Adds a new question to be asked to the arraylist.
+     * @param text The question to be added.
+     */
     public void addQuestion(String text) {
         if (!allQuestions.contains(text)) {
             allQuestions.add(text);
         }
     }
 
+    /**
+     * Method that is called when an answer choice has been clicked.
+     * @param v The answer choice or radio button that was clicked.
+     */
     @Override
     public void onClick(View v) {
-        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = saved_values.edit();
-        editor.putInt("answer", v.getId());
-        editor.apply();
-        editor.commit();
-
-        Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
-        if (correctAnswerSpot == 0) {
-
-            Toast.makeText(getApplicationContext(), "Correct Answer!", Toast.LENGTH_SHORT).show();
-            answer0.startAnimation(shake);
-
-
-        } else if (correctAnswerSpot == 1) {
-            Toast.makeText(getApplicationContext(), "Correct Answer!", Toast.LENGTH_SHORT).show();
-            answer1.startAnimation(shake);
-
-        } else if (correctAnswerSpot == 2) {
-
-            Toast.makeText(getApplicationContext(), "Correct Answer!", Toast.LENGTH_SHORT).show();
-            answer2.startAnimation(shake);
-        } else if (correctAnswerSpot == 3) {
-
-
-            Toast.makeText(getApplicationContext(), "Correct Answer!",
-                    Toast.LENGTH_SHORT).show();
-            answer3.startAnimation(shake);
-
+        int spot = v.getId();
+        if (v.getId() == answerButtons.get(correctAnswerSpot).getId()) {
+            RadioButton temp = answerButtons.get(correctAnswerSpot);
+            v.startAnimation(shake);
+            UserCompleted.setQuestions(1);
+            Toast.makeText(this, "Correct Answer!", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Incorrect Answer!", Toast.LENGTH_LONG).show();
         }
 
-
-
-
-
-    }
-
-    /**
-     * Loads the preferences put in by the user after being saved.
-     */
-    public void loadPrefs() {
-        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        int answer = saved_values.getInt("answer", 1);
-
-        if (answer == R.id.answer1) {
-            answer1.setChecked(true);
+        for (int i = 0; i < answerButtons.size(); i++) {
+            if (i != spot) {
+                answerButtons.get(i).setEnabled(false);
+            }
         }
-
-
     }
+
+
+
 
 
 }

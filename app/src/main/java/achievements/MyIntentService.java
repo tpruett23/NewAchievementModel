@@ -1,5 +1,7 @@
 package achievements;
+import android.app.IntentService;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
@@ -8,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 import services.CheckAllService;
+import trailsystem.Trail;
 
 
 /**
@@ -15,12 +18,21 @@ import services.CheckAllService;
  * The class is a service that checks for new achievements.
  */
 public class MyIntentService extends Service {
+    Context context;
+   /* *//**
+     * Creates an IntentService.  Invoked by your subclass's constructor.
+     *
+     * @param name Used to name the worker thread, important only for debugging.
+     *//*
+    public MyIntentService(String name) {
+        super(name);
+    }*/
 
     /**
-     * Starts the service every 1 minute to check for new achievements.
+     * Starts the service every 30 sec to check for new achievements.
      * @param intent
-     * @param flags
-     * @param startid
+     //* @param flags
+     //* @param startid
      * @return
      */
     @Override
@@ -30,15 +42,16 @@ public class MyIntentService extends Service {
 
             @Override
             public void run() {
-               Intent intent1 = new Intent(getBaseContext(), CheckAllService.class);
+               Intent intent1 = new Intent(getApplicationContext(), CheckAllService.class);
                 startService(intent1);
+                Toast.makeText(getApplicationContext(),"Check All Service Started",Toast.LENGTH_LONG).show();
                 ha.postDelayed(this, 30000);
 
             }
         }, 30000);
 
 
-        return START_NOT_STICKY;
+        return START_STICKY;
     }
 
     @Nullable
@@ -47,5 +60,29 @@ public class MyIntentService extends Service {
         return null;
     }
 
+  /*  @Override
+    protected void onHandleIntent(@Nullable Intent intent) {
+        try
 
-}
+        {
+
+            Thread.sleep(5000);
+
+        }
+
+        catch (InterruptedException e)
+
+        {
+
+            e.printStackTrace();
+
+        }
+        if (intent.getStringExtra("foo").equals("AlarmReceiver")) {
+            ///Intent intent1 = new Intent(this, CheckAllService.class);
+            //startService(intent1);
+        }
+
+    }*/
+    }
+
+

@@ -115,10 +115,10 @@ public class Achievements {
 
     /**
      * Sets the description of the achievement.
-     * @param a
+     * @param a1
      */
-    public void setDescriptor(AchievementDescriptor a){
-        this.a = a;
+    public void setDescriptor(AchievementDescriptor a1){
+        this.a = a1;
     }
 
     /**

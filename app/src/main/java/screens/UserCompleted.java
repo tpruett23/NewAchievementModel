@@ -90,8 +90,12 @@ public class UserCompleted{
      *
      * @return Number of challenges.
      */
-    public int getQuestions() {
-        return this.questions;
+    public static int getQuestions() {
+        return questions;
+    }
+
+    public static void setQuestions(int num){
+        questions += num;
     }
 
     /**

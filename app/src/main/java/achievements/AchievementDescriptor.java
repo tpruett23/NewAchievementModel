@@ -144,7 +144,7 @@ public abstract class AchievementDescriptor {
     }
 
     /**
-     * Gets the time the user has been playing.
+     * Gets the questions the user has been answered correctly.
      * @return
      */
     public int getQuestions(){
