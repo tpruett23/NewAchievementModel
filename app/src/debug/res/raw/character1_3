@@ -1,11 +1,16 @@
 <!screen character1_concept>
+<!voice character1_3_1>
 Holland: What happened to my friends? Well... I don't really know myself.
+<!voice character1_3_2>
 Holland: I was camping. I woke up - and something was wrong. I found this note:
 <!screen note>
 The note read: I'm sorry for leaving,
 but what happened yesterday is something I never want to experience ever again.
 I'm finding my way back home, you should too.
-<!screen holland>
+<!screen character1_concept>
+<!voice character 1_3_3>
 Holland: I don't know who wrote it... I was with my friends.
+<!voice character 1_3_4>
 Holland: We were all just camping and having a good time.
+<!voice character 1_3_5>
 Holland: We went to sleep and I woke up with that on my chest.

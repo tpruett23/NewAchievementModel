@@ -1,5 +1,7 @@
 package screens;
 
+import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,8 @@ import android.widget.TextView;
 import com.example.toripruett.newachievementmodel.R;
 
 import java.util.LinkedList;
+
+import minigame.ColorBlobDetectionActivity;
 
 public class CharacterScreen extends AppCompatActivity implements View.OnClickListener {
 
@@ -60,7 +64,9 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
                 playVoice();
             }else if(line.startsWith("search")){
                 String newSearch = line.substring(7);
-                //TODO: connect to color recognition
+                Context context = this.getApplicationContext();
+                Intent intent = new Intent(context, ColorBlobDetectionActivity.class);
+                context.startActivity(intent);
             }
         }
 

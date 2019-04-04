@@ -1,7 +1,12 @@
 <!screen character1_concept>
+<!voice character1_2_1>
 Holland: Can you help me find my compass? I lost it while i was running down here.
+<!voice character1_2_2>
 Holland: I think it's in a bush or something... I was near something green...
 <!search green>
+<!voice character1_2_3>
 Holland: Thanks! You have no idea what this means. I need it for today.
+<!voice character1_2_4>
 Holland: Why do I need it? I'm going back - I can't leave my friends.
+<!voice character1_2_5>
 Holland: Sure, they may have already left, but I wouldn't forgive myself if something happened.
