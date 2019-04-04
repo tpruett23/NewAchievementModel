@@ -46,6 +46,8 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
     private Scalar contour_color;
     /** template to hold size of contour color*/
     private Size spectrum_size;
+    private Scalar lowerLimit;
+    private Scalar upperLimit;
 
     /** class implementing the interaction with Camera and OpenCV library*/
     private CameraBridgeViewBase mOpenCVCameraView;
@@ -202,10 +204,12 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
         for (int i = 0; i < mBlobColorHsv.val.length; i++)
             mBlobColorHsv.val[i] /= pointCount;
 
-        mBlobColorRgba = converScalarHsv2Rgba(mBlobColorHsv);
+        mBlobColorRgba = convertScalarHsv2Rgba(mBlobColorHsv);
 
         Log.i(TAG, "Touched rgba color: (" + mBlobColorRgba.val[0] + ", " + mBlobColorRgba.val[1] +
                 ", " + mBlobColorRgba.val[2] + ", " + mBlobColorRgba.val[3] + ")");
+        Log.i(TAG, "Touched hsv color: (" + mBlobColorHsv.val[0] + ", " + mBlobColorHsv.val[1] +
+                ", " + mBlobColorHsv.val[2] + ", " +  ")");
 
         mDetector.setHsvColor(mBlobColorHsv);
 
@@ -230,6 +234,14 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
 
         if (mIsColorSelected) {
             mDetector.process(mRgba);
+
+            boolean check = checkGreen();
+            if(check == true){
+                //Toast.makeText(this, "Some green has been found", Toast.LENGTH_LONG).show();
+                Log.v("color-check", "green has been detected");
+                this.onDestroy();
+            }
+
             List<MatOfPoint> contours = mDetector.getContours();
             Log.e(TAG, "Contours count: " + contours.size());
             Imgproc.drawContours(mRgba, contours, -1, contour_color);
@@ -244,7 +256,34 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
         return mRgba;
     }
 
-    private Scalar converScalarHsv2Rgba(Scalar hsvColor) {
+    private void setLimits(Scalar lowerLimit, Scalar upperLimit){
+        this.lowerLimit = lowerLimit;
+        this.upperLimit = upperLimit;
+    }
+
+    private boolean checkLimit(){
+        for(int i = 0; i< mBlobColorHsv.val.length; i++){
+            if(mBlobColorHsv.val[i] > upperLimit.val[i] || mBlobColorHsv.val[i] < lowerLimit.val[i])
+                return false;
+        }
+        return true;
+    }
+
+    private boolean checkGreen(){
+        double sensitivty = 30;
+        if(mBlobColorHsv.val[0] > 60 + sensitivty || mBlobColorHsv.val[0] < 60 - sensitivty){
+            return false;
+        }
+        if(mBlobColorHsv.val[1] > 255 || mBlobColorHsv.val[1] < 100){
+            return  false;
+        }
+        if(mBlobColorHsv.val[2] > 255 || mBlobColorHsv.val[2] < 100){
+            return false;
+        }
+        return true;
+    }
+
+    private Scalar convertScalarHsv2Rgba(Scalar hsvColor) {
         Mat pointMatRgba = new Mat();
         Mat pointMatHsv = new Mat(1, 1, CvType.CV_8UC3, hsvColor);
         Imgproc.cvtColor(pointMatHsv, pointMatRgba, Imgproc.COLOR_HSV2RGB_FULL, 4);
