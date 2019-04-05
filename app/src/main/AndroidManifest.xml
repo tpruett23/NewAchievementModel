@@ -14,7 +14,7 @@
 
     <uses-feature
         android:name="android.hardware.camera.any"
-        android:required="false" />
+        android:required="true" />
     <uses-feature
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
@@ -66,6 +66,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="screens.CharacterScreen" />
+
 
 
 "
@@ -113,7 +115,8 @@
             android:name="screens.TrailMap"
             android:label="@string/title_activity_maps"
             android:theme="@style/Theme.AppCompat" />
-        <activity android:name="screens.CharacterScreen" />
+
+
 
         <service android:name="achievements.StepCounterActivity" />
         <service android:name="achievements.MyIntentService" />
