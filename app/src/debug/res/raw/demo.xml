@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<trailsystem>
+    <name>WCU Trail System</name>
+
+    <trail>
+        <trail_name> HHS Connector </trail_name>
+        <waypoint>
+            <latitude>35.312297</latitude>
+            <longitude>-83.180364</longitude>
+            <story>character1_1</story>
+            <story>character1_2</story>
+            <story>character1_3</story>
+            <story>character1_4</story>
+        </waypoint>
+    </trail>
+</trailsystem>

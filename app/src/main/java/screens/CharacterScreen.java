@@ -14,6 +14,7 @@ import com.example.toripruett.newachievementmodel.R;
 import java.util.LinkedList;
 
 import minigame.ColorBlobDetectionActivity;
+import trailsystem.Trail;
 
 public class CharacterScreen extends AppCompatActivity implements View.OnClickListener {
 
@@ -22,6 +23,7 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
     public static LinkedList<String> dialogue;
     public static MediaPlayer mediaPlayer;
     public static int voicePlaying;
+    public boolean wasPlaying;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -34,8 +36,15 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
         imageView.setOnClickListener(this);
         textView.setText(dialogue.pop());
 
+        wasPlaying = TrailMap.mediaPlayer.isPlaying();
+
         if(TrailMap.mediaPlayer.isPlaying())
+
+            TrailMap.mediaPlayer.pause();
+
             TrailMap.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.lost_traveler);
+
+            TrailMap.mediaPlayer.start();
     }
 
     @Override
@@ -54,20 +63,22 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
     private void parseLine(String line){
         if(line.startsWith("<!")){
             String command = line.substring(2, line.length()-1);
-            if(line.startsWith("screen")){
-                String newPicture = line.substring(7);
+            if(command.startsWith("screen")){
+                String newPicture = command.substring(7);
                 int id = getResource(newPicture, "drawable");
                 imageView.setImageResource(id);
-            }else if(line.startsWith("voice")){
-                String newVoice = line.substring(6);
+            }else if(command.startsWith("voice")){
+                String newVoice = command.substring(6);
                 voicePlaying = getResource(newVoice, "raw");
                 playVoice();
-            }else if(line.startsWith("search")){
-                String newSearch = line.substring(7);
+            }else if(command.startsWith("search")){
+                String newSearch = command.substring(7);
                 Context context = this.getApplicationContext();
                 Intent intent = new Intent(context, ColorBlobDetectionActivity.class);
                 context.startActivity(intent);
             }
+        }else{
+
         }
 
     }
@@ -81,6 +92,7 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
         if(TrailMap.mediaPlayer.isPlaying()) {
             TrailMap.mediaPlayer.setVolume(Float.valueOf("0.2"), Float.valueOf("0.2"));
             mediaPlayer = MediaPlayer.create(getApplicationContext(), voicePlaying);
+            mediaPlayer.start();
             TrailMap.mediaPlayer.setVolume(1,1);
         }
     }
