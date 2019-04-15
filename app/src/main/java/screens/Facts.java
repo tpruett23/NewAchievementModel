@@ -69,10 +69,14 @@ public class Facts extends AppCompatActivity{
                         dialog.dismiss();
                         dialog.cancel();
 
+
+
+
                     }
                 })
                .create()
                 .show();
+
 
        }
 

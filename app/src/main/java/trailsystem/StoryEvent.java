@@ -53,6 +53,7 @@ public class StoryEvent extends PointOfInterest {
         Log.v("dialogue", dialogue.peek());
         CharacterScreen.dialogue = this.dialogue;
         Intent intent = new Intent(context, CharacterScreen.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
