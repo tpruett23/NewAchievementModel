@@ -557,7 +557,7 @@ Facts fact = new Facts();
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
             Context context = getApplicationContext();
-            InputStream is = context.getResources().openRawResource(R.raw.wcu_trail_system);
+            InputStream is = context.getResources().openRawResource(R.raw.demo);
             saxParser.parse(is, handler);
 
 
