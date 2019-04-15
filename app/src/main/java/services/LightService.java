@@ -86,7 +86,7 @@ public class LightService extends Service {
 
         assert mSensorManager != null;
         final Sensor LightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-        Toast.makeText(this,"Light Service is Running",Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,"Light Service is Running",Toast.LENGTH_LONG).show();
         Log.v("Light", "The light service is running");
         SensorEventListener sensorEventListener = new SensorEventListener() {
             @Override

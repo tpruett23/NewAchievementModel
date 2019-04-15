@@ -1,14 +1,28 @@
 package achievements;
+import android.app.AlertDialog;
 import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
+import android.view.View;
 import android.widget.Toast;
 
+import com.example.toripruett.newachievementmodel.R;
+
+import java.util.Random;
+
+import screens.Facts;
+import screens.NotificationActivity;
 import services.CheckAllService;
 import trailsystem.Trail;
 
@@ -42,13 +56,22 @@ public class MyIntentService extends Service {
 
             @Override
             public void run() {
+
                Intent intent1 = new Intent(getApplicationContext(), CheckAllService.class);
                 startService(intent1);
-                Toast.makeText(getApplicationContext(),"Check All Service Started",Toast.LENGTH_LONG).show();
+                Intent intent2 = new Intent(getApplicationContext(), Facts.class);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent2);
+
+
+
+                //Toast.makeText(getApplicationContext(),"Check All Service Started",Toast.LENGTH_LONG).show();
                 ha.postDelayed(this, 30000);
 
             }
         }, 30000);
+
+
 
 
         return START_STICKY;

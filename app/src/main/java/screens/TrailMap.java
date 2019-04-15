@@ -90,6 +90,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     Context mContext = this;
 
     Toolbar mTopToolbar;
+Facts fact = new Facts();
 
     /** Google map which will display the trail system*/
     private static GoogleMap mGoogleMap;
@@ -150,6 +151,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
       /* points = (TextView) findViewById(R.id.pointtextview);
        points.setText(UserInfo.totalPoints + "");*/
+
+
 
         trailParser = new XMLTrailParser();
 

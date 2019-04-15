@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.IMAGE_CAPTURE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <uses-feature
         android:name="android.hardware.camera.any"
@@ -39,10 +40,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+
         <activity
             android:name="achievements.QuestionEvent"
             android:label="@string/title_activity_question_event"
-            android:theme="@style/NoActionBar"></activity>
+            android:theme="@style/NoActionBar">
+        </activity>
 
         <service
             android:name="services.CheckAllService"
@@ -54,10 +57,11 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name="minigame.ColorBlobDetectionActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -68,9 +72,6 @@
 
         <activity android:name="screens.CharacterScreen" />
 
-
-
-"
         <activity
             android:name="screens.MainMenu"
             android:banner="@style/AppTheme.NoActionBar" />
@@ -116,6 +117,14 @@
             android:label="@string/title_activity_maps"
             android:theme="@style/Theme.AppCompat" />
 
+        <activity android:name="screens.Facts"
+            android:theme="@style/UserDialog" >
+
+        </activity>
+        <activity android:name="screens.NotificationActivity"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"/>
+
 
 
         <service android:name="achievements.StepCounterActivity" />
@@ -128,6 +137,7 @@
             android:name="achievements.AlarmReciever"
             android:process=":remote" >
         </receiver>
+
     </application>
 
 </manifest>
