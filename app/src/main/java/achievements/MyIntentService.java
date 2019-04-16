@@ -59,9 +59,6 @@ public class MyIntentService extends Service {
 
                Intent intent1 = new Intent(getApplicationContext(), CheckAllService.class);
                 startService(intent1);
-                Intent intent2 = new Intent(getApplicationContext(), Facts.class);
-                intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent2);
 
 
 
@@ -85,29 +82,6 @@ public class MyIntentService extends Service {
         return null;
     }
 
-  /*  @Override
-    protected void onHandleIntent(@Nullable Intent intent) {
-        try
-
-        {
-
-            Thread.sleep(5000);
-
-        }
-
-        catch (InterruptedException e)
-
-        {
-
-            e.printStackTrace();
-
-        }
-        if (intent.getStringExtra("foo").equals("AlarmReceiver")) {
-            ///Intent intent1 = new Intent(this, CheckAllService.class);
-            //startService(intent1);
-        }
-
-    }*/
     }
 
 

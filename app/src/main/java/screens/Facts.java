@@ -68,19 +68,15 @@ public class Facts extends AppCompatActivity{
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         dialog.cancel();
-
-
-
+                        finish();
 
                     }
                 })
-               .create()
+                .create()
                 .show();
 
 
-       }
-
-
+    }
 
 
 }
