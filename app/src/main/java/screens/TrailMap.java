@@ -388,8 +388,6 @@ Facts fact = new Facts();
                 {
                     StoryEvent storyEvent = trailParser.getTrailSystem().getEvent();
                     Log.v("event:", "starting...");
-                    storyEvent.startEvent(getApplicationContext());
-
 
                     Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -398,9 +396,15 @@ Facts fact = new Facts();
                     } else {
                         vib.vibrate(10000);
                     }
+
+                    storyEvent.startEvent(getApplicationContext());
+                    //eventButton.setVisibility(View.GONE);
+
             }
 
              });
+
+
 
             //* end onLocationChanged*//*
         }
