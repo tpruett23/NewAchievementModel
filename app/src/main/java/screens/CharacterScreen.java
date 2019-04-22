@@ -13,6 +13,7 @@ import com.example.toripruett.newachievementmodel.R;
 
 import java.util.LinkedList;
 
+import achievements.QuestionEvent;
 import minigame.ColorBlobDetectionActivity;
 import trailsystem.Trail;
 
@@ -72,11 +73,17 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
                 voicePlaying = getResource(newVoice, "raw");
                 playVoice();
             }else if(command.startsWith("search")){
-                String newSearch = command.substring(7);
-                Context context = this.getApplicationContext();
-                Intent intent = new Intent(context, ColorBlobDetectionActivity.class);
-                context.startActivity(intent);
-            }
+            String newSearch = command.substring(7);
+            Context context = this.getApplicationContext();
+            Intent intent = new Intent(context, ColorBlobDetectionActivity.class);
+            context.startActivity(intent);
+
+        }else if(command.startsWith("question")){
+            String newSearch = command.substring(7);
+            Context context = this.getApplicationContext();
+            Intent intent = new Intent(context, QuestionEvent.class);
+            context.startActivity(intent);
+        }
         }else{
 
         }

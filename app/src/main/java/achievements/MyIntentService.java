@@ -60,17 +60,11 @@ public class MyIntentService extends Service {
                Intent intent1 = new Intent(getApplicationContext(), CheckAllService.class);
                 startService(intent1);
 
-
-
                 //Toast.makeText(getApplicationContext(),"Check All Service Started",Toast.LENGTH_LONG).show();
                 ha.postDelayed(this, 30000);
 
             }
         }, 30000);
-
-
-
-
 
 
         return START_STICKY;

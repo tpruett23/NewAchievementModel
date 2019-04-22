@@ -91,8 +91,10 @@ public class QuestionEvent extends AppCompatActivity implements View.OnClickList
         answerButtons.add(answer2);
         answerButtons.add(answer3);
 
+        allQuestions.add("What trail are we currently on?");
+
         question = (TextView) findViewById(R.id.questions);
-        setQuestion("What trail is not included in the WCU Trail System?");
+        setQuestion(allQuestions.get(0));
 
 
         correctAnswerSpot = 0;

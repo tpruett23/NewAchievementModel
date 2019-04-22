@@ -44,7 +44,7 @@ public class MyService extends Service {
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startid) {
-    /*    locationSaxParserReader locationSaxParserReader = new locationSaxParserReader(this);
+      /*  locationSaxParserReader locationSaxParserReader = new locationSaxParserReader(this);
         locationSaxParserReader.save();*/
 
         SAXParserReader saxParserReader = new SAXParserReader(this);
