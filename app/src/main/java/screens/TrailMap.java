@@ -60,6 +60,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -388,6 +389,8 @@ Facts fact = new Facts();
                 {
                     StoryEvent storyEvent = trailParser.getTrailSystem().getEvent();
                     Log.v("event:", "starting...");
+                    storyEvent.startEvent(mContext);
+
 
                     Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -403,8 +406,6 @@ Facts fact = new Facts();
             }
 
              });
-
-
 
             //* end onLocationChanged*//*
         }

@@ -32,6 +32,10 @@ public class WayPoint {
         pOIs = null;
     }//end constructor
 
+    public WayPoint(){
+
+    }
+
     /**
      * Constructor which will create a waypoint with a location
      * and a correlating point of interest
