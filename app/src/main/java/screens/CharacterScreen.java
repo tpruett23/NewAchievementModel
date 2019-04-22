@@ -43,18 +43,20 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
 
             TrailMap.mediaPlayer.pause();
 
-            TrailMap.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.lost_traveler);
+            //TrailMap.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.lost_traveler);
 
-            TrailMap.mediaPlayer.start();
+            //TrailMap.mediaPlayer.start();
     }
 
     @Override
     public void onClick(View view) {
         if(view == textView) {
             if (!dialogue.isEmpty()) {
-                textView.setText(dialogue.pop());
+                parseLine(dialogue.pop());
             } else {
+                TrailMap.mediaPlayer.setVolume(1,1);
                 this.finish();
+
             }
         }else if(view == imageView){
             playVoice();
@@ -85,7 +87,7 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
             context.startActivity(intent);
         }
         }else{
-
+            textView.setText(line);
         }
 
     }
@@ -100,7 +102,10 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
             TrailMap.mediaPlayer.setVolume(Float.valueOf("0.2"), Float.valueOf("0.2"));
             mediaPlayer = MediaPlayer.create(getApplicationContext(), voicePlaying);
             mediaPlayer.start();
-            TrailMap.mediaPlayer.setVolume(1,1);
+            //TrailMap.mediaPlayer.setVolume(1,1);
+        }else{
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), voicePlaying);
+            mediaPlayer.start();
         }
     }
 

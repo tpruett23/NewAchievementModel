@@ -372,34 +372,10 @@ Facts fact = new Facts();
 
         Collection<LatLng> progress = trailParser.updateLocation(location);
 
-      /*  Random random  = new Random();
-        Trail  t = new Trail();
-        WayPoint w = new WayPoint();
-
-        int num = random.nextInt(t.getPath().size());
-        int num2 = random.nextInt(w.getPOIs().size());*/
-
-
-        LatLng latLngTemp = new LatLng(35.30583, -83.20379999999999);
-        LatLng latLngTemp2 = new LatLng(35.30655 ,-83.20369833333334);
-
-        if(latLng.equals(latLngTemp) ){
-            Intent intent2 = new Intent(getApplicationContext(), Facts.class);
-
-            //intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent2);
-        }else if (latLng.equals(latLngTemp2)) {
-            Intent intent2 = new Intent(getApplicationContext(), Facts.class);
-            //intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent2);
-        }
-
 
         if (progress != null) {
             drawProgress(progress);
         }//end if
-
-
 
         if (trailParser.getTrailSystem().checkEvent(new LatLng(location.getLatitude(), location.getLongitude()))) {
 
@@ -423,23 +399,16 @@ Facts fact = new Facts();
                     } else {
                         vib.vibrate(10000);
                     }
+
+                    storyEvent.startEvent(getApplicationContext());
+                    //eventButton.setVisibility(View.GONE);
+
             }
 
              });
 
             //* end onLocationChanged*//*
         }
-
-
-
-
-
-
-
-
-
-
-
         }
 
 
