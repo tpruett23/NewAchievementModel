@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.IMAGE_CAPTURE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <uses-feature
         android:name="android.hardware.camera.any"
@@ -71,6 +72,7 @@
         </activity>
 
         <activity android:name="screens.CharacterScreen" />
+
 
         <activity
             android:name="screens.MainMenu"
