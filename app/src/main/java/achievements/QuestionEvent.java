@@ -76,8 +76,6 @@ public class QuestionEvent extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.question_layout);
 
 
-
-
         shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
 
         answer0 = findViewById(R.id.answer0);
@@ -112,9 +110,6 @@ public class QuestionEvent extends AppCompatActivity implements View.OnClickList
 
 
         correctAnswerSpot = 0;
-
-
-
 
     }
 
@@ -171,6 +166,13 @@ public class QuestionEvent extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /**
+     * Sets different answer choices per question.
+     * @param a
+     * @param b
+     * @param c
+     * @param d
+     */
     public void setAnswers(String a, String b, String c, String d){
         allAnswers.add(a);
         allAnswers.add(b);

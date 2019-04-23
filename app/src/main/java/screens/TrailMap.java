@@ -82,6 +82,8 @@ import trailsystem.Trail;
 import trailsystem.TrailSystem;
 import trailsystem.WayPoint;
 
+import static android.app.Notification.DEFAULT_SOUND;
+import static android.app.Notification.DEFAULT_VIBRATE;
 import static android.support.v4.app.NotificationCompat.VISIBILITY_PUBLIC;
 
 
@@ -203,29 +205,13 @@ Facts fact = new Facts();
             }
         };
 
-    createNotificationChannel();
+
 
 
     }
 
 
 
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "NotChannel";
-            String description = "Notification Channel";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(NotificationChannel.DEFAULT_CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-
-        }
-    }
 
     /**
      *
@@ -408,7 +394,7 @@ Facts fact = new Facts();
 
         if (trailParser.getTrailSystem().checkEvent(new LatLng(location.getLatitude(), location.getLongitude()))) {
 
-
+            //Makes the button for the event bounce.
             eventButton.startAnimation(bounce);
             //eventButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             eventButton.setTextColor(getResources().getColor(R.color.black));
@@ -436,17 +422,32 @@ Facts fact = new Facts();
 
              });
 
-            NotificationCompat.Builder mBuilder =
-                    new NotificationCompat.Builder(this)
-                            .setSmallIcon(R.drawable.smiley)
-                            .setContentTitle("My notification")
-                            .setContentText("Hello World!")
-                            .setDefaults(Notification.DEFAULT_ALL)
-                            .setPriority(Notification.PRIORITY_HIGH);
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            //Creates the heads up notification channel.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                String name = "Yay! New Event!";
+                //String description = getString(R.string.achDes);
+                int importance = NotificationManager.IMPORTANCE_HIGH; //Important for heads-up notification
+                NotificationChannel channel = new NotificationChannel("1", name, importance);
+                //channel.setDescription(description);
+                channel.setShowBadge(true);
+                channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+                NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                notificationManager.createNotificationChannel(channel);
+            }
+            //Creating the actual heads up notification.
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "1")
+                    .setSmallIcon(R.drawable.mountainicon)
+                    .setContentTitle("NEW EVENT AVAILABLE")
+                    //.setStyle(new NotificationCompat.BigTextStyle().bigText("Yay! New Event!"))
+                    .setContentText("You now have a new event available to explore!")
+                    .setDefaults(DEFAULT_SOUND | DEFAULT_VIBRATE) //Important for heads-up notification
+                    .setPriority(Notification.PRIORITY_MAX); //Important for heads-up notification
 
-            // notificationId is a unique int for each notification that you must define
-            notificationManager.notify(1, mBuilder.build());
+
+            Notification buildNotification = mBuilder.build();
+            NotificationManager mNotifyMgr = (NotificationManager) this.getSystemService(NOTIFICATION_SERVICE);
+            mNotifyMgr.notify(001, buildNotification);
+
 
             //* end onLocationChanged*//*
         }

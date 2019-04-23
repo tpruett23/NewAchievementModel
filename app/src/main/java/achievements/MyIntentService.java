@@ -33,14 +33,6 @@ import trailsystem.Trail;
  */
 public class MyIntentService extends Service {
     Context context;
-   /* *//**
-     * Creates an IntentService.  Invoked by your subclass's constructor.
-     *
-     * @param name Used to name the worker thread, important only for debugging.
-     *//*
-    public MyIntentService(String name) {
-        super(name);
-    }*/
 
     /**
      * Starts the service every 30 sec to check for new achievements.

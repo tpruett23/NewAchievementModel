@@ -264,6 +264,10 @@ public class AchievementXMLHandler extends DefaultHandler {
 
 
     }//========================================================================
+
+    /**
+     * Checks all achievements to see if any new achievements have been met.
+     */
     public static void checkAll(){
 
             for (int i = 0; i < temp2.getAllAchievements().size(); i++) {
