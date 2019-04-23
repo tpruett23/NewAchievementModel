@@ -17,7 +17,7 @@
         <waypoint>
            <latitude>35.311947</latitude>
             <longitude>-83.179825</longitude>
-            <story>character2_4</story>
+            <story>character1_1</story>
         </waypoint>
         <waypoint>
             <latitude>35.31196</latitude>
@@ -26,6 +26,7 @@
         <waypoint>
             <latitude>35.311974</latitude>
             <longitude>-83.17986</longitude>
+            <story>character1_2</story>
         </waypoint>
         <waypoint>
             <latitude>35.311974</latitude>
@@ -34,6 +35,7 @@
         <waypoint>
             <latitude>35.311985</latitude>
             <longitude>-83.17988</longitude>
+            <story>character1_3</story>
         </waypoint>
         <waypoint>
             <latitude>35.311996</latitude>
@@ -42,6 +44,7 @@
         <waypoint>
             <latitude>35.312023</latitude>
             <longitude>-83.17991</longitude>
+            <story>character1_4</story>
         </waypoint>
         <waypoint>
             <latitude>35.312023</latitude>
@@ -50,15 +53,16 @@
         <waypoint>
             <latitude>35.31204</latitude>
             <longitude>-83.17993</longitude>
+            <story>character2_1</story>
         </waypoint>
         <waypoint>
             <latitude>35.31204</latitude>
             <longitude>-83.17993</longitude>
-            <story>character1_2</story>
         </waypoint>
         <waypoint>
             <latitude>35.31204</latitude>
             <longitude>-83.17993</longitude>
+            <story>character2_2</story>
         </waypoint>
         <waypoint>
             <latitude>35.312046</latitude>
@@ -67,6 +71,7 @@
         <waypoint>
             <latitude>35.312046</latitude>
             <longitude>-83.179924</longitude>
+            <story>character2_3</story>
         </waypoint>
         <waypoint>
             <latitude>35.312054</latitude>
@@ -75,6 +80,7 @@
         <waypoint>
             <latitude>35.312054</latitude>
             <longitude>-83.17992</longitude>
+            <story>character2_4</story>
         </waypoint>
         <waypoint>
             <latitude>35.312057</latitude>
@@ -87,6 +93,7 @@
         <waypoint>
             <latitude>35.312057</latitude>
             <longitude>-83.1799</longitude>
+            <story>character3_1</story>
         </waypoint>
         <waypoint>
             <latitude>35.312057</latitude>
@@ -99,6 +106,7 @@
         <waypoint>
             <latitude>35.312054</latitude>
             <longitude>-83.179886</longitude>
+            <story>character3_2</story>
         </waypoint>
         <waypoint>
             <latitude>35.31205</latitude>
