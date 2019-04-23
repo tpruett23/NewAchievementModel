@@ -562,7 +562,7 @@ Facts fact = new Facts();
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
             Context context = getApplicationContext();
-            InputStream is = context.getResources().openRawResource(R.raw.demo);
+            InputStream is = context.getResources().openRawResource(R.raw.coffeeshop);
             saxParser.parse(is, handler);
 
 

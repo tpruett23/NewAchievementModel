@@ -61,6 +61,10 @@ public class QuestionEvent extends AppCompatActivity implements View.OnClickList
      */
     ArrayList<String> allQuestions = new ArrayList<>();
     /**
+     * Arraylist that holds all of answers that could be used.
+     */
+    ArrayList<String> allAnswers = new ArrayList<>();
+    /**
      * The arraylist that is full of the radiobuttons that correspond to the answers.
      */
     ArrayList<RadioButton> answerButtons = new ArrayList<>();
@@ -90,6 +94,16 @@ public class QuestionEvent extends AppCompatActivity implements View.OnClickList
         answerButtons.add(answer1);
         answerButtons.add(answer2);
         answerButtons.add(answer3);
+
+        allAnswers.add("Coffee Shop");
+        allAnswers.add("Corkscrew");
+        allAnswers.add("HHS Connector");
+        allAnswers.add("Catamount Gap");
+
+        answer0.setText(allAnswers.get(0));
+        answer1.setText(allAnswers.get(1));
+        answer2.setText(allAnswers.get(2));
+        answer3.setText(allAnswers.get(3));
 
         allQuestions.add("What trail are we currently on?");
 
@@ -155,6 +169,18 @@ public class QuestionEvent extends AppCompatActivity implements View.OnClickList
                 answerButtons.get(i).setEnabled(false);
             }
         }
+    }
+
+    public void setAnswers(String a, String b, String c, String d){
+        allAnswers.add(a);
+        allAnswers.add(b);
+        allAnswers.add(c);
+        allAnswers.add(d);
+
+        answer0.setText(a);
+        answer1.setText(b);
+        answer2.setText(c);
+        answer3.setText(d);
     }
 
 

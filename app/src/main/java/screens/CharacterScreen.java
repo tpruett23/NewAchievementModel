@@ -81,8 +81,8 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
             context.startActivity(intent);
 
         }else if(command.startsWith("question")){
-            String newSearch = command.substring(7);
-            Context context = this.getApplicationContext();
+            String newSearch = command.substring(9);
+            Context context = this;
             Intent intent = new Intent(context, QuestionEvent.class);
             context.startActivity(intent);
         }
