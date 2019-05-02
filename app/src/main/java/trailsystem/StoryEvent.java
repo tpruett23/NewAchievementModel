@@ -41,7 +41,7 @@ public class StoryEvent extends PointOfInterest {
     private LinkedList<String> dialogue;
 
     public StoryEvent(InputStream source) {
-        dialogue = new LinkedList<String>();
+        dialogue = new LinkedList<>();
         Scanner reader = new Scanner(source);
         while(reader.hasNext()){
             String line = reader.nextLine();
@@ -50,7 +50,7 @@ public class StoryEvent extends PointOfInterest {
     }
 
     public void startEvent(Context context){
-        Log.v("dialogue", dialogue.peek());
+
         CharacterScreen.dialogue = this.dialogue;
         Intent intent = new Intent(context, CharacterScreen.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

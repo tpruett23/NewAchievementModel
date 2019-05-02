@@ -86,8 +86,8 @@ public class CustomListAdapter extends ArrayAdapter<Achievements> {
 
 
         //Get the views from the list item XML
-        TextView bTitle = (TextView) v.findViewById(R.id.txtTitle);
-        ImageView iButton = (ImageView) v.findViewById(R.id.ImageButton);
+        TextView bTitle = v.findViewById(R.id.txtTitle);
+        ImageView iButton = v.findViewById(R.id.ImageButton);
 
 
         //Set texts on views

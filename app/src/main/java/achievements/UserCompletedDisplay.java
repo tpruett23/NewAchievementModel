@@ -37,7 +37,7 @@ public class UserCompletedDisplay extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usertrophycabinet);
         //completed = AchievementXMLHandler.getAchievements();
-        lv = (ListView) findViewById(R.id.list);
+        lv = findViewById(R.id.list);
         adapter = new CustomListAdapter(this, R.layout.userlist, R.layout.activity_list_view, completed);
         lv.setAdapter(adapter);
     }

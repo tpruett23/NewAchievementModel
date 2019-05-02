@@ -1,10 +1,12 @@
 package screens;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +19,9 @@ import achievements.QuestionEvent;
 import minigame.ColorBlobDetectionActivity;
 import trailsystem.Trail;
 
-public class CharacterScreen extends AppCompatActivity implements View.OnClickListener {
+import static screens.TrailMap.*;
+
+public class CharacterScreen extends Activity implements View.OnClickListener {
 
     ImageView imageView;
     TextView textView;
@@ -30,31 +34,42 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
+        Log.v("Andrew1","CCREATED!!!");
+
         setContentView(R.layout.character_screen);
         textView = findViewById(R.id.script);
         imageView = findViewById(R.id.imageView);
         textView.setOnClickListener(this);
         imageView.setOnClickListener(this);
-        textView.setText(dialogue.pop());
+        if(dialogue != null && dialogue.size() != 0) {
+            textView.setText(dialogue.pop());
+        }
 
-        wasPlaying = TrailMap.mediaPlayer.isPlaying();
+        if(TrailMap.mediaPlayer != null) {
+            wasPlaying = TrailMap.mediaPlayer.isPlaying();
+        }else{
+            wasPlaying = false;
+        }
 
-        if(TrailMap.mediaPlayer.isPlaying())
 
+        if(wasPlaying) {
             TrailMap.mediaPlayer.pause();
+        }
 
-            //TrailMap.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.lost_traveler);
+        //TrailMap.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.lost_traveler);
 
-            //TrailMap.mediaPlayer.start();
+        //TrailMap.mediaPlayer.start();
     }
 
     @Override
     public void onClick(View view) {
         if(view == textView) {
-            if (!dialogue.isEmpty()) {
+            if (dialogue != null && !dialogue.isEmpty()) {
                 parseLine(dialogue.pop());
             } else {
-                TrailMap.mediaPlayer.setVolume(1,1);
+                if(wasPlaying) {
+                    //TrailMap.mediaPlayer.setVolume(1, 1);
+                }
                 this.finish();
 
             }
@@ -70,22 +85,24 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
                 String newPicture = command.substring(7);
                 int id = getResource(newPicture, "drawable");
                 imageView.setImageResource(id);
+                parseLine(dialogue.pop());
             }else if(command.startsWith("voice")){
                 String newVoice = command.substring(6);
                 voicePlaying = getResource(newVoice, "raw");
                 playVoice();
+                parseLine(dialogue.pop());
             }else if(command.startsWith("search")){
-            String newSearch = command.substring(7);
-            Context context = this.getApplicationContext();
-            Intent intent = new Intent(context, ColorBlobDetectionActivity.class);
-            context.startActivity(intent);
+                String newSearch = command.substring(7);
+                Context context = this.textView.getContext();
+                Intent intent = new Intent(this.textView.getContext(), ColorBlobDetectionActivity.class);
+                //context.startActivity(intent);
 
-        }else if(command.startsWith("question")){
-            String newSearch = command.substring(9);
-            Context context = this;
-            Intent intent = new Intent(context, QuestionEvent.class);
-            context.startActivity(intent);
-        }
+            }else if(command.startsWith("question")){
+                String newSearch = command.substring(9);
+                Context context = this;
+                Intent intent = new Intent(context, QuestionEvent.class);
+                context.startActivity(intent);
+            }
         }else{
             textView.setText(line);
         }
@@ -104,8 +121,12 @@ public class CharacterScreen extends AppCompatActivity implements View.OnClickLi
             mediaPlayer.start();
             //TrailMap.mediaPlayer.setVolume(1,1);
         }else{
-            mediaPlayer = MediaPlayer.create(getApplicationContext(), voicePlaying);
-            mediaPlayer.start();
+            try {
+                mediaPlayer = MediaPlayer.create(getApplicationContext(), voicePlaying);
+                mediaPlayer.start();
+            }catch (Exception e){
+                //do nothing
+            }
         }
     }
 

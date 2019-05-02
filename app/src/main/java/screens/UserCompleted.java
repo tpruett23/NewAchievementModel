@@ -71,7 +71,7 @@ public class UserCompleted{
      */
     public void updateDistance(double distance) {
         /*TrailMap tm = new TrailMap();*/
-        this.distanceUser +=  distance;
+        distanceUser +=  distance;
 
 
     }
@@ -112,7 +112,7 @@ public class UserCompleted{
      * @return The total distance the user has traveled.
      */
     public double getDistanceUser(){
-        return this.distanceUser;
+        return distanceUser;
     }
 
 

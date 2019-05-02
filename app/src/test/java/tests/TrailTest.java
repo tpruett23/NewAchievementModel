@@ -59,11 +59,11 @@ public class TrailTest {
 
         //set up actual answers
         Collection<WayPoint> correct1 = new ArrayList<WayPoint>();
-        ((ArrayList<WayPoint>) correct1).add(new WayPoint (new LatLng(3.0, 3.0)));
+        correct1.add(new WayPoint (new LatLng(3.0, 3.0)));
         Collection<WayPoint> correct2 = new ArrayList<WayPoint>();
-        ((ArrayList<WayPoint>) correct2).add(new WayPoint(new LatLng(3.0, 3.0)));
-        ((ArrayList<WayPoint>) correct2).add(new WayPoint(new LatLng(4.0, 4.0)));
-        ((ArrayList<WayPoint>) correct2).add(new WayPoint(new LatLng(5.0, 5.0)));
+        correct2.add(new WayPoint(new LatLng(3.0, 3.0)));
+        correct2.add(new WayPoint(new LatLng(4.0, 4.0)));
+        correct2.add(new WayPoint(new LatLng(5.0, 5.0)));
 
         //run tests
         assertEquals(trail1, correct1);

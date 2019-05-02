@@ -5,6 +5,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import org.junit.Test;
 
+import achievements.AchievementDescriptor;
 import achievements.Challenges;
 import achievements.Distance;
 import achievements.Speed;
@@ -33,12 +34,12 @@ public class UnitTests {
 
     @Test
     public void checkCompleted(){
-        assertTrue(trails.checkCompleted(4));
-        assertTrue(speed.checkCompleted(11));
-        assertTrue(chall.checkCompleted(4));
-        assertTrue(dis.checkCompleted(6));
-        assertTrue(step.checkCompleted(400));
-        assertTrue(time.checkCompleted(11));
+        assertTrue(AchievementDescriptor.checkCompleted(4));
+        assertTrue(AchievementDescriptor.checkCompleted(11));
+        assertTrue(AchievementDescriptor.checkCompleted(4));
+        assertTrue(AchievementDescriptor.checkCompleted(6));
+        assertTrue(AchievementDescriptor.checkCompleted(400));
+        assertTrue(AchievementDescriptor.checkCompleted(11));
 
 }
 

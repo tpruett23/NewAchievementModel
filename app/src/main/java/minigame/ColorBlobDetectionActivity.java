@@ -1,6 +1,7 @@
 package minigame;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -92,6 +93,7 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.color_blob_detection_surface_view);
+        mOpenCVCameraView = (CameraBridgeViewBase) findViewById(R.id.color_blob_detection_surface_view);
         mOpenCVCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCVCameraView.setCvCameraViewListener(this);
     }
@@ -239,7 +241,7 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
             if(check == true){
                 //Toast.makeText(this, "Some green has been found", Toast.LENGTH_LONG).show();
                 Log.v("color-check", "green has been detected");
-                this.onDestroy();
+                //this.onDestroy();
             }
 
             List<MatOfPoint> contours = mDetector.getContours();
@@ -277,10 +279,7 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
         if(mBlobColorHsv.val[1] > 255 || mBlobColorHsv.val[1] < 100){
             return  false;
         }
-        if(mBlobColorHsv.val[2] > 255 || mBlobColorHsv.val[2] < 100){
-            return false;
-        }
-        return true;
+        return !(mBlobColorHsv.val[2] > 255) && !(mBlobColorHsv.val[2] < 100);
     }
 
     private Scalar convertScalarHsv2Rgba(Scalar hsvColor) {

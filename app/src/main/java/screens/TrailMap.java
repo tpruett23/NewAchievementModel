@@ -94,12 +94,12 @@ import static android.support.v4.app.NotificationCompat.VISIBILITY_PUBLIC;
  */
 public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        LocationListener, View.OnClickListener {
+        LocationListener{
 
     Context mContext = this;
 
     Toolbar mTopToolbar;
-Facts fact = new Facts();
+    Facts fact = new Facts();
 
     /** Google map which will display the trail system*/
     private static GoogleMap mGoogleMap;
@@ -153,8 +153,8 @@ Facts fact = new Facts();
      */
     @Override
     protected void onCreate(Bundle savedInstanceState){
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_maps2);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maps2);
             /*Settings set = new Settings();
             set.savePrefs();*/
 
@@ -177,8 +177,6 @@ Facts fact = new Facts();
         mediaPlayer.start();
 
         eventButton = findViewById(R.id.eventAvailable);
-
-        eventButton.setOnClickListener(this);
 
         AchievementXMLHandler.setCon(getApplicationContext());
 
@@ -272,6 +270,7 @@ Facts fact = new Facts();
         createLine();
 
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        assert locationManager != null;
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, this);
 
         //when the style is first declared, the light service should be running
@@ -318,7 +317,7 @@ Facts fact = new Facts();
     }
 
     private void lightServiceChange(){
-        if(lightSensorService == true){
+        if(lightSensorService){
             Log.v("lService", "let's start a service");
             startService(new Intent(this, LightService.class));
         }else{
@@ -338,7 +337,7 @@ Facts fact = new Facts();
                 .build();
         mGoogleApiClient.connect();
 
-    /* end buildGoogleApiClient*/
+        /* end buildGoogleApiClient*/
     }
 
     /**
@@ -351,10 +350,8 @@ Facts fact = new Facts();
     public void onLocationChanged(Location location) {
         setLightSensorService(Settings.lightSensor);
         lightServiceChange();
-
-
-        SharedPreferences prefs = getSharedPreferences("distance", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
+        //SharedPreferences prefs = getSharedPreferences("distance", MODE_PRIVATE);
+        //SharedPreferences.Editor editor = prefs.edit();
 
         Log.v("location:", "location has been changed");
         if (location != null & lastLocation != null) {
@@ -372,6 +369,7 @@ Facts fact = new Facts();
         }//end if
 
         //place current location marker
+        assert location != null;
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
@@ -385,13 +383,6 @@ Facts fact = new Facts();
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
 
-        Collection<LatLng> progress = trailParser.updateLocation(location);
-
-
-        if (progress != null) {
-            drawProgress(progress);
-        }//end if
-
         if (trailParser.getTrailSystem().checkEvent(new LatLng(location.getLatitude(), location.getLongitude()))) {
 
             //Makes the button for the event bounce.
@@ -404,23 +395,27 @@ Facts fact = new Facts();
                 {
                     StoryEvent storyEvent = trailParser.getTrailSystem().getEvent();
                     Log.v("event:", "starting...");
-                    storyEvent.startEvent(mContext);
+                    //storyEvent.startEvent(mContext);
 
 
                     Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        vib.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                        if(vib != null) {
+                            vib.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                        }
                     } else {
-                        vib.vibrate(10000);
+                        if(vib != null) {
+                            vib.vibrate(1000);
+                        }
                     }
 
                     storyEvent.startEvent(getApplicationContext());
                     //eventButton.setVisibility(View.GONE);
 
-            }
+                }
 
-             });
+            });
 
             //Creates the heads up notification channel.
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -432,6 +427,7 @@ Facts fact = new Facts();
                 channel.setShowBadge(true);
                 channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
                 NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                assert notificationManager != null;
                 notificationManager.createNotificationChannel(channel);
             }
             //Creating the actual heads up notification.
@@ -446,25 +442,14 @@ Facts fact = new Facts();
 
             Notification buildNotification = mBuilder.build();
             NotificationManager mNotifyMgr = (NotificationManager) this.getSystemService(NOTIFICATION_SERVICE);
-            mNotifyMgr.notify(001, buildNotification);
+            assert mNotifyMgr != null;
+            mNotifyMgr.notify(1, buildNotification);
 
 
             //* end onLocationChanged*//*
         }
-        }
-
-
-
-
-    /**
-     * Draw a polyline to signify progress achieved throughout the trail
-     * @param progress - LatLng collection containing points progressed during update
-     *                 of location
-     */
-    private void drawProgress(Collection<LatLng> progress){
-
-    /* end drawProgress()*/
     }
+
 
     /**
      * After calling connect(), this method will be invoked
@@ -498,10 +483,10 @@ Facts fact = new Facts();
                     }//end if
                 }//end for
 
-            /* end onLocationResult()*/
+                /* end onLocationResult()*/
             }
 
-        /* end locationCallback()*/
+            /* end locationCallback()*/
         };
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -509,7 +494,7 @@ Facts fact = new Facts();
             LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
         }//end if
 
-    /* end onConnected() */
+        /* end onConnected() */
     }
 
 
@@ -519,7 +504,7 @@ Facts fact = new Facts();
      */
     private void checkLocationPermission(){
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED){
+                != PackageManager.PERMISSION_GRANTED){
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)){
@@ -537,7 +522,7 @@ Facts fact = new Facts();
                                 //Prompt the user once explanation has been shown
                                 ActivityCompat.requestPermissions(TrailMap.this,
                                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                    PERMISSIONS_REQUEST_LOCATION);
+                                        PERMISSIONS_REQUEST_LOCATION);
                             }
                         })
                         .create()
@@ -553,7 +538,7 @@ Facts fact = new Facts();
 
         }//end if
 
-    /* end checkLocationPermission()*/
+        /* end checkLocationPermission()*/
     }
 
     /**
@@ -569,7 +554,7 @@ Facts fact = new Facts();
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull  String permissions[],
-                                          @NonNull int[] grantResults){
+                                           @NonNull int[] grantResults){
 
         switch (requestCode) {
             case PERMISSIONS_REQUEST_LOCATION: {
@@ -643,7 +628,7 @@ Facts fact = new Facts();
         path.addAll(latLngs);
         path.color(color);
 
-    /* end addTrailToLine()*/
+        /* end addTrailToLine()*/
     }
 
     /**
@@ -749,12 +734,9 @@ Facts fact = new Facts();
          * @param attributes - The attributes attached to the element. If
          *                   there are not attributes, it shall be an
          *                   empty Attributes object.
-         * @throws SAXException - Any SAX exception, possibly wrapping
-         *                      another exception
          */
         public void startElement(String uri, String localName,
-                                 String qName, Attributes attributes)
-            throws SAXException {
+                                 String qName, Attributes attributes) {
 
             //check for which element is being started
             if(qName.equalsIgnoreCase("trailsystem")){
@@ -775,7 +757,7 @@ Facts fact = new Facts();
                 trail = false;
             }
 
-        /* End startElement method*/
+            /* End startElement method*/
         }
 
         /**
@@ -792,13 +774,11 @@ Facts fact = new Facts();
          *                  performed
          * @param qName - The qualified name (with prefix), or the empty
          *              string if qualified names are not available.
-         * @throws SAXException - Any SAX exception, possibly wrapping another
-         *                      exception
          */
         public void endElement(String uri, String localName,
-                               String qName) throws SAXException{
+                               String qName) {
 
-        /* end endElement()*/
+            /* end endElement()*/
         }
 
         /**
@@ -811,11 +791,8 @@ Facts fact = new Facts();
          * @param start - The start position in the character array.
          * @param length - The number of characters to use from the character
          *               array
-         * @throws SAXException - Any SAX exception, possibly wrapping another
-         *                      exception.
          */
-        public void characters(char ch[], int start, int length) throws
-        SAXException{
+        public void characters(char ch[], int start, int length) {
             if(name){
                 trailParser.setTrailSystemName(new String(ch, start, length));
                 name = false;
@@ -841,38 +818,13 @@ Facts fact = new Facts();
                 Log.v("check", new String(ch, start, length));
                 trailName = false;
             }//end if-else
-        /* end characters()*/
         }
     };
 
-    @Override
-    public void onClick(View v) {
-
-    }
 
 
+    interface MyCustomObjectListener {
 
-    public interface MyCustomObjectListener {
-
-        // These methods are the different events and
-        // need to pass relevant arguments related to the event triggered
-        void onObjectReady(double distance);
-
-    }
-
-    // Assign the listener implementing events interface that will receive the events
-    public void setCustomObjectListener(MyCustomObjectListener listener) {
-        this.listener = listener;
-    }
-
-    public void loadDataAsync(double distance) {
-
-                if (listener != null)
-                    listener.onObjectReady(distance); // <---- fire listener here
-            }
-
-    public Context getmContext() {
-        return mContext;
     }
 
     @Override
@@ -888,7 +840,7 @@ Facts fact = new Facts();
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        Intent i = null;
+        Intent i;
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_rib) {
             i = new Intent(this,ListViewAchv.class);
