@@ -95,7 +95,7 @@ public class CharacterScreen extends Activity implements View.OnClickListener {
                 String newSearch = command.substring(7);
                 Context context = this.textView.getContext();
                 Intent intent = new Intent(this.textView.getContext(), ColorBlobDetectionActivity.class);
-                //context.startActivity(intent);
+                context.startActivity(intent);
 
             }else if(command.startsWith("question")){
                 String newSearch = command.substring(9);

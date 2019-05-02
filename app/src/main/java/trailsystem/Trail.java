@@ -197,7 +197,7 @@ public class Trail {
         if(measure(top, latLng) < 20){
             return true;
         }
-        return false;
+        return true; //change back to false
     }
 
     public StoryEvent getEvent(){

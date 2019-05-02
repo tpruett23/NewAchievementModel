@@ -1,9 +1,13 @@
+Begin! Tap to continue.
 It was a regular day... The trees fluttered and there wasn't a voice for miles. Until...
+<!voice run>
 [Running]
 <!screen character1_concept>
 <!voice character1_1_1>
 Unnamed Character: Hey you, Help! Help!
+<!voice thud>
 [Thud.]
 There he was. A teenage boy, no less than 16. Frightened - What could have happened?
 <!voice character1_1_2>
 Unnamed Character: Hi... Um... I need help. I'm not sure if you can help. My name is Holland
+End.

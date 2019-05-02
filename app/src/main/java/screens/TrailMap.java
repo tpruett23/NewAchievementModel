@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
@@ -24,7 +23,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
@@ -59,13 +57,11 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Random;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -84,7 +80,6 @@ import trailsystem.WayPoint;
 
 import static android.app.Notification.DEFAULT_SOUND;
 import static android.app.Notification.DEFAULT_VIBRATE;
-import static android.support.v4.app.NotificationCompat.VISIBILITY_PUBLIC;
 
 
 /**
@@ -271,7 +266,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         assert locationManager != null;
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, this);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20, 10, this);
 
         //when the style is first declared, the light service should be running
         lightSensorService = true;
@@ -347,7 +342,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      * @param location - The new location, as a Location object
      */
     @Override
-    public void onLocationChanged(Location location) {
+    public void onLocationChanged(Location location){
+
         setLightSensorService(Settings.lightSensor);
         lightServiceChange();
         //SharedPreferences prefs = getSharedPreferences("distance", MODE_PRIVATE);
@@ -388,7 +384,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             //Makes the button for the event bounce.
             eventButton.startAnimation(bounce);
             //eventButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-            eventButton.setTextColor(getResources().getColor(R.color.black));
+            eventButton.setTextColor(getResources().getColor(R.color.black,getTheme()));
             eventButton.setVisibility(View.VISIBLE);
             eventButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v)
@@ -406,7 +402,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
                         }
                     } else {
                         if(vib != null) {
-                            vib.vibrate(1000);
+                            vib.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
                         }
                     }
 
@@ -437,7 +433,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
                     //.setStyle(new NotificationCompat.BigTextStyle().bigText("Yay! New Event!"))
                     .setContentText("You now have a new event available to explore!")
                     .setDefaults(DEFAULT_SOUND | DEFAULT_VIBRATE) //Important for heads-up notification
-                    .setPriority(Notification.PRIORITY_MAX); //Important for heads-up notification
+                    .setPriority(DEFAULT_VIBRATE); //Important for heads-up notification
 
 
             Notification buildNotification = mBuilder.build();
@@ -553,7 +549,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
      *                     Never null.
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull  String permissions[],
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults){
 
         switch (requestCode) {
@@ -792,7 +788,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
          * @param length - The number of characters to use from the character
          *               array
          */
-        public void characters(char ch[], int start, int length) {
+        public void characters(char[] ch, int start, int length) {
             if(name){
                 trailParser.setTrailSystemName(new String(ch, start, length));
                 name = false;
