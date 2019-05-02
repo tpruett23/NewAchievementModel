@@ -1,6 +1,5 @@
 package trailsystem;
 
-import android.content.Context;
 import android.location.Location;
 import android.util.Log;
 
