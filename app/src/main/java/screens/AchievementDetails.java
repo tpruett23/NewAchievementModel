@@ -47,11 +47,11 @@ public class AchievementDetails extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detailacheivements);
 
-        achvImage = (ImageView)findViewById(R.id.detailimage1);
-        achvDetails = (TextView)findViewById(R.id.detailtextview1);
-        achvTitle = (TextView)findViewById(R.id.detailtitle);
-        points = (TextView)findViewById(R.id.pointtextview);
-        des1 = (TextView)findViewById(R.id.des1);
+        achvImage = findViewById(R.id.detailimage1);
+        achvDetails = findViewById(R.id.detailtextview1);
+        achvTitle = findViewById(R.id.detailtitle);
+        points = findViewById(R.id.pointtextview);
+        des1 = findViewById(R.id.des1);
 
         setImage();
     }

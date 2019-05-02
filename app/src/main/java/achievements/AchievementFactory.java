@@ -23,7 +23,7 @@ public class AchievementFactory {
      * @return the users completed achievements.
      */
     public ArrayList<Achievements> getAchievements(){
-    return this.achievements;
+    return achievements;
 }
 
     }

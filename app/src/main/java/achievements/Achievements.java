@@ -62,7 +62,7 @@ public class Achievements {
      * @return The arraylist of achievements.
      */
     public ArrayList<AchievementDescriptor> getAllAchievements() {
-        return this.allAchievements;
+        return allAchievements;
     }
 
     /**

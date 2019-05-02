@@ -51,11 +51,11 @@ public class MainMenu extends AppCompatActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        storyButton = (Button) findViewById(R.id.storyButton);
-        miniGameButton = (Button) findViewById(R.id.miniButton);
-        loadButton = (Button) findViewById(R.id.loadButton);
-        saveButton = (Button) findViewById(R.id.saveButton);
-        toolbar = (Toolbar) findViewById(R.id.toolbar1);
+        storyButton = findViewById(R.id.storyButton);
+        miniGameButton = findViewById(R.id.miniButton);
+        loadButton = findViewById(R.id.loadButton);
+        saveButton = findViewById(R.id.saveButton);
+        toolbar = findViewById(R.id.toolbar1);
         storyButton.setOnClickListener(this);
         miniGameButton.setOnClickListener(this);
         loadButton.setOnClickListener(this);

@@ -52,7 +52,7 @@ public class UserInfo {
      * @return The total number of point.
      */
     public int getTotalPoints() {
-        return this.totalPoints;
+        return totalPoints;
     }
 
     public static void setTotalPoints(int totalPoints1){
@@ -66,7 +66,7 @@ public class UserInfo {
      */
 
     public  double getTotalDistance() {
-        return this.totalDistance;
+        return totalDistance;
     }
 
     /**
@@ -93,7 +93,7 @@ public class UserInfo {
      * @return number of steps the user has taken.
      */
     public int getSteps() {
-        return this.steps;
+        return steps;
     }
 
     /**
@@ -102,7 +102,7 @@ public class UserInfo {
      * @return number of steps the user has taken.
      */
     public void setSteps(int stepz) {
-         this.steps = stepz;
+         steps = stepz;
     }
 
     /**

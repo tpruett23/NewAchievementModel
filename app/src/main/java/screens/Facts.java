@@ -28,7 +28,7 @@ public class Facts extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.facts = new ArrayList<>();
+        facts = new ArrayList<>();
 
         facts.add("The WCU Trail System contains a sculpture called Dirtmaker that " +
                 "replenishes minerals in the forest's soil. The sculpture was created in 2016.");

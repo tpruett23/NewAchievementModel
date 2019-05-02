@@ -62,14 +62,14 @@ public class ListViewAchv extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
-        totalPoints = (TextView) findViewById(R.id.pointtextview);
+        totalPoints = findViewById(R.id.pointtextview);
         totalPoints.setText("Total Points: " + UserInfo.totalPoints);
 
-        lv = (ListView) findViewById(R.id.list);
+        lv = findViewById(R.id.list);
 
         //achievements = AchievementXMLHandler.getAchievements();
        // achievements = AF.getAchievements();
-        achievements = AF.achievements;
+        achievements = AchievementFactory.achievements;
 
         adapter = new CustomListAdapter(this, R.layout.list_item, R.layout.activity_list_view, achievements);
 

@@ -105,7 +105,7 @@ public class QuestionEvent extends AppCompatActivity implements View.OnClickList
 
         allQuestions.add("What trail are we currently on?");
 
-        question = (TextView) findViewById(R.id.questions);
+        question = findViewById(R.id.questions);
         setQuestion(allQuestions.get(0));
 
 

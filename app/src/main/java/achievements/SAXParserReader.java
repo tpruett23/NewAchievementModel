@@ -81,7 +81,7 @@ public class SAXParserReader extends FragmentActivity {
 
     public void onCreate(Context context){
         this.context = context;
-        this.instance = this;
+        instance = this;
         filename = "achxmltester";
 
     }//end onCreate

@@ -85,11 +85,10 @@ public class ValidXMLHandler extends DefaultHandler {
      * @param localName The name of the xml tag opening i.e. marker
      * @param qName The fully qualified name of the tag opening i.e. xs:marker.
      * @param attributes Any attributes that happen to be with the tag.
-     * @throws SAXException  SAXException Any SaxException, possibly wrapping another exception
      */
     //=========================================================================
     @Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes)  throws SAXException {
+    public void startElement(String uri, String localName, String qName, Attributes attributes) {
 
         if(qName.equals("Valid") ) {//When marker found new tag is reached.
             validType = "";
@@ -116,12 +115,10 @@ public class ValidXMLHandler extends DefaultHandler {
      * @param uri
      * @param localName The name of the closing tag i.e. lat
      * @param qName The fully qualified name of the closing tag i.e. xs:lat
-     * @throws SAXException   SAXException Any SaxException, possibly wrapping another exception
      */
     //=========================================================================
     @Override
-    public void endElement(String uri, String localName, String qName)
-            throws SAXException {
+    public void endElement(String uri, String localName, String qName) {
         if (temp == null)
             temp = new Validation();
 
@@ -152,11 +149,10 @@ public class ValidXMLHandler extends DefaultHandler {
      * @param ch  An array of characters read.
      * @param start The start position of the character array.
      * @param length The number of characters to use from the array.
-     * @throws SAXException Any SaxException, possibly wrapping another exception.
      */
     //=========================================================================
     @Override
-    public void characters(char[] ch, int start, int length)  throws SAXException {
+    public void characters(char[] ch, int start, int length) {
 
         if (currentElement != null) {
             currentElement = currentElement + new String(ch, start, length);
