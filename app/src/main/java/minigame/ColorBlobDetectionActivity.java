@@ -120,7 +120,7 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
         super.onResume();
         if(!OpenCVLoader.initDebug()){
             Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
-            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION, this,mLoaderCallback);
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this,mLoaderCallback);
         }else{
             Log.d(TAG, "OpenCV library found inside package. Using it!");
             mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
@@ -240,7 +240,7 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
             if(check == true){
                 //Toast.makeText(this, "Some green has been found", Toast.LENGTH_LONG).show();
                 Log.v("color-check", "green has been detected");
-                this.onDestroy();
+                this.finish();
             }
 
             List<MatOfPoint> contours = mDetector.getContours();

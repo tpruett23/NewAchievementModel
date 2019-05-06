@@ -15,9 +15,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
-    <uses-feature
-        android:name="android.hardware.camera.any"
-        android:required="true" />
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
     <uses-feature
         android:name="android.hardware.camera.autofocus"
         android:required="true" />
@@ -30,18 +28,13 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true" />
-
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/mountainicon"
         android:label="CQ"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+        android:theme="@style/AppTheme">
 
         <activity
             android:name="achievements.QuestionEvent"
@@ -64,12 +57,9 @@
         </activity>
 
         <activity android:name="minigame.ColorBlobDetectionActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation">
         </activity>
 
         <activity android:name="screens.CharacterScreen" />
@@ -143,5 +133,11 @@
         </receiver>
 
     </application>
+
+    <supports-screens android:resizeable="true"
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:anyDensity="true"/>
 
 </manifest>
