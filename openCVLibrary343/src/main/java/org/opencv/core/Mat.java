@@ -36,7 +36,7 @@ public class Mat {
     public Mat(int rows, int cols, int type)
     {
 
-            nativeObj = n_Mat(rows, cols, type);
+        nativeObj = n_Mat(rows, cols, type);
 
         return;
     }

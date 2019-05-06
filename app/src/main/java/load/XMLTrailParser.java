@@ -106,15 +106,5 @@ public class XMLTrailParser {
         trailSystem.addEvent(is);
     }
 
-    /**
-     * Method to forward a new location from the user to check against the trail
-     * @param location - location received from the google map
-     */
-    public Collection<LatLng> updateLocation(Location location){
-        return trailSystem.updateLocation(location);
-        //TODO: when receiving the collection of LatLng, now we can
-        //TODO: send this Collection of progress achieved to a xml file to save progress.
-    /* end updateLocation() */
-    }
 
 }
