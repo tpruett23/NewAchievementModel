@@ -1,3 +1,9 @@
 /build
 *.iml
-
+*.apk
+*.ap_
+*.class
+bin/
+gen/
+.idea
+.idea/workspace.xml

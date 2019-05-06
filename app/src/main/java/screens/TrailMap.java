@@ -461,8 +461,8 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     @Override
     public void onConnected(@Nullable Bundle bundle){
         locationRequest = LocationRequest.create();
-        locationRequest.setInterval(1000);
-        locationRequest.setFastestInterval(1000);
+        locationRequest.setInterval(10); //change back to 1000
+        locationRequest.setFastestInterval(10); // change back to 1000
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
 

@@ -12,3 +12,9 @@
 /gradle.properties
 .idea/caches/
 .idea/encodings.xml
+*.apk
+*apk_
+*.class
+bin/
+gen/
+.idea
