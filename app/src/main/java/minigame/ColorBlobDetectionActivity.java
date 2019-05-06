@@ -1,7 +1,6 @@
 package minigame;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -27,16 +26,8 @@ import org.opencv.imgproc.Imgproc;
 
 import java.util.List;
 
-import static org.opencv.android.OpenCVLoader.initDebug;
-
 public class ColorBlobDetectionActivity extends Activity implements View.OnTouchListener, CameraBridgeViewBase.CvCameraViewListener2 {
-    private static final String TAG = "color detection";
-
-    static{
-        if(!initDebug()){
-            //Handle initialization error
-        }
-    }
+    private static final String TAG = "color-detection";
 
     /** boolean to check if a color is selected */
     private boolean mIsColorSelected = false;
@@ -58,7 +49,7 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
     private Scalar upperLimit;
 
     /** class implementing the interaction with Camera and OpenCV library*/
-    private CameraBridgeViewBase mOpenCVCameraView;
+    private static CameraBridgeViewBase mOpenCVCameraView;
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this ) {
         /**
@@ -70,7 +61,7 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
             switch (status){
                 case LoaderCallbackInterface.SUCCESS:
                 {
-                    Log.i(TAG, "OpenCV loaded successfully");
+                    Log.v(TAG, "OpenCV loaded successfully");
                     mOpenCVCameraView.enableView();
                     mOpenCVCameraView.setOnTouchListener(ColorBlobDetectionActivity.this);
                 } break;
@@ -94,12 +85,13 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
      */
     @Override
     public void onCreate(Bundle savedInstanceState){
-        Log.i(TAG, "called onCreate");
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "called onCreate");
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.color_blob_detection_surface_view);
+
         mOpenCVCameraView = findViewById(R.id.color_blob_detection_surface_view);
         mOpenCVCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCVCameraView.setCvCameraViewListener(this);
@@ -126,7 +118,7 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
     public void onResume(){
 
         super.onResume();
-        if(initDebug()){
+        if(!OpenCVLoader.initDebug()){
             Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
             OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this,mLoaderCallback);
         }else{
@@ -248,7 +240,7 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
             if(check == true){
                 //Toast.makeText(this, "Some green has been found", Toast.LENGTH_LONG).show();
                 Log.v("color-check", "green has been detected");
-                //this.onDestroy();
+                this.onDestroy();
             }
 
             List<MatOfPoint> contours = mDetector.getContours();
@@ -279,8 +271,8 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
     }
 
     private boolean checkGreen(){
-        double sensitivty = 30;
-        if(mBlobColorHsv.val[0] > 60 + sensitivty || mBlobColorHsv.val[0] < 60 - sensitivty){
+        double sensitivity = 40;
+        if(mBlobColorHsv.val[0] > 60 + sensitivity || mBlobColorHsv.val[0] < 60 - sensitivity){
             return false;
         }
         if(mBlobColorHsv.val[1] > 255 || mBlobColorHsv.val[1] < 100){

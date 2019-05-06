@@ -42,7 +42,7 @@ public class CharacterScreen extends Activity implements View.OnClickListener {
         textView.setOnClickListener(this);
         imageView.setOnClickListener(this);
         if(dialogue != null && dialogue.size() != 0) {
-            textView.setText(dialogue.pop());
+            onClick(textView);
         }
 
         if(TrailMap.mediaPlayer != null) {
