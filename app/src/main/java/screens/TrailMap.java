@@ -90,10 +90,17 @@ import static android.app.Notification.DEFAULT_VIBRATE;
 public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         LocationListener{
-
+    /**
+     * The context for this class that is used for various tasks.
+     */
     Context mContext = this;
-
+    /**
+     * The toolbar to hold the buttons.
+     */
     Toolbar mTopToolbar;
+    /**
+     * Facts instance used when wanting to display facts through this class.
+     */
     Facts fact = new Facts();
 
     /** Google map which will display the trail system*/
@@ -207,7 +214,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
 
 
     /**
-     *
+     * When the activity is paused this is called to resume and re-register recievers.
      */
     @Override
     public void onResume(){
@@ -216,7 +223,9 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
         LocalBroadcastManager.getInstance(this).registerReceiver(mLightReceiver,
                 new IntentFilter("light-number"));
     }
-
+    /**
+     * Called when the activity is paused to unregister receivers.
+     */
     @Override
     public void onPause(){
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mLightReceiver);
@@ -822,14 +831,22 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
     interface MyCustomObjectListener {
 
     }
-
+    /**
+     * Creates and inflates the toolbar layout.
+     * @param menu The menu to inflate.
+     * @return true or false if inflated.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.toolbar, menu);
         return true;
     }
-
+    /**
+     * This method is called when one of the buttons in the toolbar is clicked.
+     * @param item The item that was clicked.
+     * @return true if an item in the toolbar was clicked.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
