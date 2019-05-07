@@ -71,7 +71,10 @@ public class Question extends AchievementDescriptor {
     public void setPoints(int points){
         this.points = points;
     }
-
+    /**
+     * Gets the number of questions answered correctly.
+     * @param The points we are getting.
+     */
     @Override
     public int getQuestions(){
         return this.questionsCorrect;
