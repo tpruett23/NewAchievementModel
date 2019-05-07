@@ -10,12 +10,15 @@ import screens.UserCompleted;
  * @version 1.0
  */
 public class TrailNumCheck implements CheckAchievements {
+    /**
+     * UserCompleted instance to access certain values.
+     */
     UserCompleted UC = new UserCompleted();
 
     /**
      * Checks to see if the trail achievement has been met.
      * @param ach The achievement to check for and against.
-     * @return
+     * @return true if met, false if not.
      */
     @Override
     public boolean checkAchievement(Achievements ach) {
