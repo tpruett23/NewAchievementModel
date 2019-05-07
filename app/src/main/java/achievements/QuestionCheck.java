@@ -1,7 +1,11 @@
 package achievements;
 
 import screens.UserCompleted;
-
+/**
+ * The class checks to see if the question achievement has been completed.
+ * @author Tori Pruett
+ * @version 1.0
+ */
 public class QuestionCheck implements CheckAchievements {
     /**
      * The class checks to see if a question achievement has been completed.
