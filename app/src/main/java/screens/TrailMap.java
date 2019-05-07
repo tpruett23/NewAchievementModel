@@ -596,7 +596,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             for (Trail trail : trails) {
                 addTrailToLine(path, trail, R.color.dk_pink);
             }//end for
-            path.width(6);
+            path.width(10);
 
             line = mGoogleMap.addPolyline(path);
             Log.v("createLine", "finished polyline");
