@@ -15,7 +15,14 @@ import screens.UserCompleted;
  * @version 1.0
  */
 public class LocationService extends Service {
+    /**
+     * UserCompleted instance to access values from the class.
+     */
     UserCompleted userCompleted = new UserCompleted();
+    
+    /**
+     * The most recent distance the user has traveled.
+     */
     double recentDistance;
 
 
