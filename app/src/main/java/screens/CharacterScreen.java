@@ -20,7 +20,11 @@ import minigame.ColorBlobDetectionActivity;
 import trailsystem.Trail;
 
 import static screens.TrailMap.*;
-
+/**
+ * The class is the screen for the story events and manages the dialog.
+ * @author Melchor Dominguez
+ * @version 1.0
+ */
 public class CharacterScreen extends Activity implements View.OnClickListener {
 
     ImageView imageView;
@@ -29,7 +33,10 @@ public class CharacterScreen extends Activity implements View.OnClickListener {
     public static MediaPlayer mediaPlayer;
     public static int voicePlaying;
     public boolean wasPlaying;
-
+    
+    /**
+     * The method is called to create the activity and initialize values before it is started.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -60,7 +67,10 @@ public class CharacterScreen extends Activity implements View.OnClickListener {
 
         //TrailMap.mediaPlayer.start();
     }
-
+    /**
+     * When the text is clicked this method pops up the next text.
+     * @param view The view that is being checked to see if it is clicked.
+     */
     @Override
     public void onClick(View view) {
         if(view == textView) {
@@ -77,7 +87,11 @@ public class CharacterScreen extends Activity implements View.OnClickListener {
             playVoice();
         }
     }
-
+    
+    /**
+     * Parses through the xml file to get the correct dialog and display events correctly.
+     * @param line the line to parse.
+     */
     private void parseLine(String line){
         if(line.startsWith("<!")){
             String command = line.substring(2, line.length()-1);
@@ -108,12 +122,17 @@ public class CharacterScreen extends Activity implements View.OnClickListener {
         }
 
     }
-
+    /**
+     * Gets the resource.
+     * @return Returns the id of the resource.
+     */
     private int getResource(String tag, String  type){
         int id = getResources().getIdentifier(tag, type, getPackageName());
         return id;
     }
-
+    /**
+     * This method plays the voice of the characters.
+     */
     private void playVoice(){
         if(TrailMap.mediaPlayer.isPlaying()) {
             TrailMap.mediaPlayer.setVolume(Float.valueOf("0.2"), Float.valueOf("0.2"));
