@@ -47,7 +47,9 @@ import screens.UserCompleted;
  */
 public class Validation extends Activity {
 
-
+    /**
+     * The method is called to create the activity before it is started.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
