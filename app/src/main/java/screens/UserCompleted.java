@@ -20,9 +20,13 @@ import static android.provider.SyncStateContract.Columns.DATA;
 
 /**
  * The class holds the information for all of the tasks the user has completed.
+ * @author Tori Pruett
  */
 
 public class UserCompleted{
+    /**
+     * Context needed for this class.
+     */
     Context context;
 
     /**
@@ -54,13 +58,16 @@ public class UserCompleted{
 
 
 
-
+    /**
+     * The constructor for this class.
+     * @param The context to set the class context.
+     */
     public UserCompleted(Context context){
 
         this.context = context;
 
     }
-
+    
     public UserCompleted(){
 
     }
@@ -68,6 +75,7 @@ public class UserCompleted{
 
     /**
      * Updates the users distance after they have been traveling.
+     * @param distance The distance to add to the current distance.
      */
     public void updateDistance(double distance) {
         /*TrailMap tm = new TrailMap();*/
