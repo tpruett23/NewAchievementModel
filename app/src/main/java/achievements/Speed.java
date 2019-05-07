@@ -1,7 +1,11 @@
 package achievements;
 
 import achievements.AchievementDescriptor;
-
+/**
+ * The class is the achievement descriptor for the speed achievement.
+ * @author Tori Pruett
+ * @version 1.0
+ */
 public class Speed extends AchievementDescriptor {
     /**
      * The name of the achievement
