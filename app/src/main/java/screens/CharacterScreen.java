@@ -26,12 +26,29 @@ import static screens.TrailMap.*;
  * @version 1.0
  */
 public class CharacterScreen extends Activity implements View.OnClickListener {
-
+    /**
+     * The imageview that holds the character image.
+     */
     ImageView imageView;
+    /**
+     * The textview that holds the narration/dialog.
+     */
     TextView textView;
+    /**
+     * The linked list that holds all of the dialog strings.
+     */
     public static LinkedList<String> dialogue;
+    /**
+     * The media player to play the voices.
+     */
     public static MediaPlayer mediaPlayer;
+    /**
+     * int to play the voices of the characters.
+     */
     public static int voicePlaying;
+    /**
+     * boolean value to change when the voice is playing or if it is not.
+     */
     public boolean wasPlaying;
     
     /**
