@@ -101,7 +101,10 @@ public class XMLTrailParser {
         return trailSystem;
     /* end getTrailSystem */
     }
-
+    /**
+     * Adds an event using an InputStream.
+     * @param the InputStream
+     */
     public void addEvent(InputStream is){
         trailSystem.addEvent(is);
     }
