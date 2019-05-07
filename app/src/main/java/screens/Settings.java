@@ -40,9 +40,13 @@ public class Settings extends AppCompatActivity implements OnClickListener {
      * The lightsensor boolean to determine if the autolight service should be started.
      */
     public static boolean lightSensor;
-
+    /**
+     * Float value for the light quantity.
+     */
     static float mLightQuantity;
-
+    /** 
+     * Constructor
+     */
     public Settings() {
 
 
