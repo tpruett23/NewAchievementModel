@@ -30,9 +30,13 @@ public class MainMenu extends AppCompatActivity implements OnClickListener {
      * This button takes the user to the mini game screen.
      **/
     Button miniGameButton;
-
+    /**
+     * Button to load data.
+     */
     Button loadButton;
-
+    /**
+     * Button to save data.
+     */
     Button saveButton;
 
     /**
