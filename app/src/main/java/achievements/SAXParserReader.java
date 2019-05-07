@@ -45,7 +45,9 @@ public class SAXParserReader extends FragmentActivity {
      * Instance of the SaxParserReader.
      */
     private static SAXParserReader instance;
-
+    /**
+     * The achievement factory instance to get values from the class.
+     */
     AchievementFactory achievementFactory = new AchievementFactory();
 
     /**
@@ -56,8 +58,6 @@ public class SAXParserReader extends FragmentActivity {
     /**
      * The arraylist to hold all the achievements.
      */
-
-
     ArrayList<Achievements> achievements = achievementFactory.getAchievements();
 
     /**
@@ -78,7 +78,9 @@ public class SAXParserReader extends FragmentActivity {
     public SAXParserReader(){
 
     }
-
+    /**
+     * This is called to create the activity before it is started and initializes values.
+     */
     public void onCreate(Context context){
         this.context = context;
         instance = this;
