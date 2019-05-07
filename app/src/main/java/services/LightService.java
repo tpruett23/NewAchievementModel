@@ -21,7 +21,8 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import screens.TrailMap;
 
 /**
- *
+ * The class is a service to detect the surrounding light using the ambient light sensor.
+ * @author Melchor Dominguez 
  */
 public class LightService extends Service {
 
@@ -109,12 +110,16 @@ public class LightService extends Service {
 
         return START_STICKY;
     }
-
+`   /**
+     * The method is called when the service is destroyed.
+     */
     public void onDestroy(){
         Log.v("lService", "service stopping");
         super.onDestroy();
     }
-
+    /**
+     * The method is called to send a message through an intent.
+     */
     private void sendMessage(){
         Log.v ("lService", "sending a message");
         Intent intent = new Intent("light-number");
