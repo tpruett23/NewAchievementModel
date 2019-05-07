@@ -32,6 +32,9 @@ import trailsystem.Trail;
  * The class is a service that checks for new achievements.
  */
 public class MyIntentService extends Service {
+    /**
+     * The context for this class.
+     */
     Context context;
 
     /**
