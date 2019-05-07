@@ -18,6 +18,7 @@ import achievements.Achievements;
 
 /**
  *@author Tori Pruett.
+ *@version 1.0
  */
 public class AchievementXMLHandler extends DefaultHandler {
 
@@ -29,7 +30,6 @@ public class AchievementXMLHandler extends DefaultHandler {
     private static ArrayList<Achievements> tempAchievements;
     /**
      * A temp achievement built to get each marker element
-     *
      */
    Achievements temp;
     /**
@@ -315,7 +315,10 @@ public class AchievementXMLHandler extends DefaultHandler {
         }
 
     }//=========================================================================
-
+    /**
+     * Sets a different context if needed for this class.
+     * @param context The context the activity is being set to.
+     */
     public static void setCon(Context context){
         con = context;
     }
