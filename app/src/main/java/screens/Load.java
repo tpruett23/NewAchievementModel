@@ -29,9 +29,15 @@ import trailsystem.StoryEvent;
  * @version 2.0
  */
 public class Load extends AppCompatActivity {
-
+    
+    /**
+     * The request-code for the alarm.
+     */
     public static final int REQUEST_CODE = (int) new Date().getTime();
-
+    
+    /**
+     * This method is called to create the activity before it is started.
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +82,9 @@ public class Load extends AppCompatActivity {
 
     }
 
-
+    /**
+     * The method schedules an alarm to send an intent after a certain period of time.
+     */
     public void scheduleAlarm()
     {
         // Construct an intent that will execute the AlarmReceiver

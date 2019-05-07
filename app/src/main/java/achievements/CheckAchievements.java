@@ -13,6 +13,9 @@ import screens.UserCompleted;
  * Interface that is inherited by some classes that check for certain achievements.
  */
 public interface CheckAchievements {
+    /**
+     * Context that can be set for this class.
+     */
     Context context = null;
 /**
  * Method to check to see if that achievement has been met.

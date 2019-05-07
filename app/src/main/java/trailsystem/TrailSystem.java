@@ -181,18 +181,28 @@ public class TrailSystem {
         return null;
     /* end updateLocation()*/
     }
-
+    /**
+     * Adds an event using an inputstream.
+     * @param inputstream the input stream.
+     */
     public void addEvent(InputStream inputStream){
         currentTrail.addEvent(inputStream);
     }
-
+    /**
+     * Checks to see if the location is an event.
+     * @param latLng the location to check.
+     * @return Returns true if it is an event, false otherwise.
+     */
     public boolean checkEvent(LatLng latLng){
         Log.v("begin checkEvent:", "checking event...");
         boolean check = currentTrail.checkEvent(latLng);
         Log.v("end checkEvent: ", String.valueOf(check));
         return check;
     }
-
+    /**
+     * Gets a story event.
+     * @return the storyevent to return.
+     */
     public StoryEvent getEvent(){
         return currentTrail.getEvent();
     }

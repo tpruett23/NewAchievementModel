@@ -20,7 +20,7 @@ public class WayPoint {
     /** Collection of events for different game-modes
      * -- This may later be changed into a key-value pair -- */
     private Collection<PointOfInterest> pOIs;
-
+    /** StoryEvent class instance.*/
     private StoryEvent event;
 
     /**
@@ -109,11 +109,17 @@ public class WayPoint {
         }//end removePOI
         return false;
     }//end removePOI
-
+    /**
+     * Adds a story event using an inputstream.
+     * @param inputSream The inputstream used.
+     */
     public void addEvent(InputStream inputStream){
         event = new StoryEvent(inputStream);
     }
-
+    /**
+     * Gets a storyEvent.
+     * @return Returns the storyevent.
+     */
     public StoryEvent getEvent(){
         return event;
     }

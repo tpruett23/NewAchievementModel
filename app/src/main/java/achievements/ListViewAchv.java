@@ -39,7 +39,9 @@ public class ListViewAchv extends AppCompatActivity {
      * The listview to display all of the achievements
      **/
     private ListView lv;
-
+    /**
+     * The total points the user has received.
+     */
     static TextView totalPoints;
     /**
      * The adapter to put the arraylist in the listview.
@@ -67,8 +69,6 @@ public class ListViewAchv extends AppCompatActivity {
 
         lv = findViewById(R.id.list);
 
-        //achievements = AchievementXMLHandler.getAchievements();
-       // achievements = AF.getAchievements();
         achievements = AchievementFactory.achievements;
 
         adapter = new CustomListAdapter(this, R.layout.list_item, R.layout.activity_list_view, achievements);
@@ -104,6 +104,10 @@ public class ListViewAchv extends AppCompatActivity {
         });
 
     }
+    /**
+     * Method to set the total points the user has.
+     * @param text the points we are setting total points to.
+     */
     public static void setTotalPoints(String text){
        totalPoints.setText(text);
     }

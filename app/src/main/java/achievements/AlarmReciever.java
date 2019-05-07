@@ -3,7 +3,11 @@ package achievements;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
+/**
+ * The class receives messages then starts a service.
+ *@author Tori Pruett
+ *@version 1.0
+ */
 public class AlarmReciever extends BroadcastReceiver {
 
 

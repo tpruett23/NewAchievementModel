@@ -39,7 +39,9 @@ public class Distance extends AchievementDescriptor {
         this.distance = distance;
         this.description  = description;
     }
-
+    /**
+     * Empty constructor for this class.
+     */
     public Distance(){
 
     }

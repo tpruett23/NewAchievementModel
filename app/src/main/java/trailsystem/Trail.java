@@ -27,7 +27,7 @@ public class Trail {
     private WayPoint end;
     /** The progress achieved of the trail*/
     private TrailProgress progress;
-
+    /** LinkedList of all waypoints with story events associated with them.*/
     private LinkedList<WayPoint> events;
 
     /**
@@ -183,13 +183,20 @@ public class Trail {
         return null;
     /* end checkProgress */
     }
-
+    /**
+     * Adds an event with an inputstream.
+     * @param inputStream the inputstream used to add the event.
+     */
     public void addEvent(InputStream inputStream){
         end.addEvent(inputStream);
         events.add(end);
 
     }
-
+    /**
+     * Checks to see if the location point is a story event.
+     * @param latLng the point to check.
+     * @return true if true, false if the event collection is empty.
+     */
     public boolean checkEvent(LatLng latLng){
         if(events.isEmpty())
             return false;
@@ -203,7 +210,13 @@ public class Trail {
     public StoryEvent getEvent(){
         return events.pop().getEvent();
     }
-
+`   /**
+     * Measures how far away the traveler is from a trail point to see it is picked up they
+     * are on the trail.
+     * @param first The first location.
+     * @param compare The location the first point is being compared to.
+     * @return The measurement
+     */
     private double measure(LatLng first, LatLng compare){
         double R = 6378.137; // Radius of earth in KM
         double dLat = compare.latitude * Math.PI/180 - first.latitude * Math.PI/180;

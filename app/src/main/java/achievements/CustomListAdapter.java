@@ -60,8 +60,6 @@ public class CustomListAdapter extends ArrayAdapter<Achievements> {
         this.achievements = achievements;
         viewSource = tvri;
         viewSource2 = tvri2;
-        //positions_to_disable.add(0);
-       // positions_to_disable.add(2);
 
     }
 
@@ -101,7 +99,7 @@ public class CustomListAdapter extends ArrayAdapter<Achievements> {
     /**
      * Not implemented yet, but method to disable achievements not been completed.
      * @param position The position of the disabled achievement.
-     * @return
+     * @return boolean returns true if the position is enabled, false if not.
      */
     @Override
     public boolean isEnabled(int position) {

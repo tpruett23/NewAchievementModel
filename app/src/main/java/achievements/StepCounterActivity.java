@@ -25,17 +25,33 @@ import com.example.toripruett.newachievementmodel.R;
 import screens.TrailMap;
 import screens.UserCompleted;
 import trailsystem.Trail;
-
+/**
+ * This class counts and detects steps the traveler takes.
+ * @author Tori Pruett
+ * @version 1.1
+ */
 public class StepCounterActivity extends Service implements SensorEventListener {
-
+    /**
+     * The sensor manager that works with the light sensor.
+     */
     private static SensorManager mSensorManager;
-
+   
+    /**
+     * The sensor that counts the steps.
+     */
     private static Sensor mStepCounterSensor;
-
+    /**
+     * The step dector sensor.
+     */
     private static Sensor mStepDetectorSensor;
+    /**
+     * The userinfo instance to store the steps the user takes.
+     */
     UserInfo ui = new UserInfo();
 
-
+    /**
+     * Used to create the class and initialize values on start up.
+     */
     public void onCreate() {
 
         mSensorManager = (SensorManager)
@@ -54,7 +70,10 @@ public class StepCounterActivity extends Service implements SensorEventListener 
                 SensorManager.SENSOR_DELAY_FASTEST);
     }
 
-
+    /**
+     * Detects the steps when the sensor detects a change.
+     * @param event The sensorEvent to detect change with the sensor.
+     */
     public void onSensorChanged(SensorEvent event) {
 
 
@@ -80,12 +99,18 @@ public class StepCounterActivity extends Service implements SensorEventListener 
         }
 
     }
-
+    /**
+     * Detects changes in accuracy.
+     * @param sensor Detects the change with this sensor.
+     * @param accuracy The new accuracy.
+     */
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
-
+    /**
+     * Called when the class is destroyed to unregister listeners.
+     */
     public void onDestroy() {
         super.onDestroy();
         mSensorManager.unregisterListener(this, mStepCounterSensor);

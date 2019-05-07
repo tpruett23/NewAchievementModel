@@ -24,7 +24,9 @@ public class Facts extends AppCompatActivity{
      */
     NotificationManager mNotificationManager;
 
-
+    /**
+     * This method is called to create the activity before it is started.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

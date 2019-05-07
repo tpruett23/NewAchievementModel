@@ -21,15 +21,18 @@ import achievements.TimeCheck;
 import achievements.TrailNumCheck;
 import achievements.Trails;
 import achievements.Validation;
-
+/**
+ * This class was going to be used as an xml handler but was never used.
+ * @author Tori Pruett
+ * @version 1.0
+ */
 public class ValidXMLHandler extends DefaultHandler {
     String validname;
     String validType;
     /** A global list of achievements **/
     private  static ArrayList<Validation> valid;
+ 
     /**
-     d
-     /**
      * A temp achievement built to get each marker element
      *
      */
