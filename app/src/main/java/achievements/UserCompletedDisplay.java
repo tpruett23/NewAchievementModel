@@ -36,12 +36,14 @@ public class UserCompletedDisplay extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usertrophycabinet);
-        //completed = AchievementXMLHandler.getAchievements();
         lv = findViewById(R.id.list);
         adapter = new CustomListAdapter(this, R.layout.userlist, R.layout.activity_list_view, completed);
         lv.setAdapter(adapter);
     }
-
+    /**
+     * Gets all of the completed achievements arraylist.
+     * @return The arraylist of achievements.
+     */
     public ArrayList<Achievements> getCompleted() {
         return this.completed;
     }
