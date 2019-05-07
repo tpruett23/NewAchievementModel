@@ -1,28 +1,29 @@
 package achievements;
-
+/**
+ * @author Tori Pruett
+ * @version 1.0
+ */
 public abstract class AchievementDescriptor {
     /**
      * The name of the Achievement.
      **/
     private String name;
-
     /**
      * How many points the achievement is worth.
      **/
     private int points;
-
     /**
      * The distance associated with the achievement.
      **/
     private double distance;
-
+    /**
+     * The amount of questions the user has been asked.
+     */
     private int questions;
-
     /**
      * The speed of the user traveling.
      */
     private int speed;
-
     /**
      * The amount of steps the user has traveled.
      */
