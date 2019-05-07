@@ -283,14 +283,15 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
      * @return true if green.
      */
     private boolean checkGreen(){
-        double sensitivity = 40;
+        double sensitivity = 40; //sensitivity to determine how strict checks for color will be
+                                // higher sensitivity = less strict
         if(mBlobColorHsv.val[0] > 60 + sensitivity || mBlobColorHsv.val[0] < 60 - sensitivity){
             return false;
         }
         if(mBlobColorHsv.val[1] > 255 || mBlobColorHsv.val[1] < 100){
             return  false;
         }
-        return !(mBlobColorHsv.val[2] > 255) && !(mBlobColorHsv.val[2] < 100);
+        return !(mBlobColorHsv.val[2] > 255) && !(mBlobColorHsv.val[2] < 100); // only allow clear colors to be accepted
     }
     /**
      * Converts rgba to a new Scalar value.

@@ -416,7 +416,7 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
                     }
 
                     storyEvent.startEvent(getApplicationContext());
-                    //eventButton.setVisibility(View.GONE);
+                    //eventButton.setVisibility(View.GONE); //TODO: uncomment to have events show correctly
 
                 }
 
@@ -867,7 +867,6 @@ public class TrailMap extends AppCompatActivity implements OnMapReadyCallback,
             startActivity(i);
             //Toast.makeText(this, "Action clicked", Toast.LENGTH_LONG).show();
             setLightSensorService(Settings.lightSensor);
-            lightServiceChange();
             return true;
         }
         if (id == R.id.action_story) {

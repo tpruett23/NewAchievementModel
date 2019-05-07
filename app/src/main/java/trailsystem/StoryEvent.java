@@ -36,10 +36,17 @@ import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ * Class which will hold story events
+ * @author - Melchor Dominguez
+ */
 public class StoryEvent extends PointOfInterest {
     private String data;
     private LinkedList<String> dialogue;
 
+    /** Receives the sorce for the story event from a file
+     * @param source - source for the event
+     */
     public StoryEvent(InputStream source) {
         dialogue = new LinkedList<>();
         Scanner reader = new Scanner(source);
@@ -49,6 +56,10 @@ public class StoryEvent extends PointOfInterest {
         }
     }
 
+    /**
+     * Will start the event
+     * @param context - context where the event will be started
+     */
     public void startEvent(Context context){
 
         CharacterScreen.dialogue = this.dialogue;

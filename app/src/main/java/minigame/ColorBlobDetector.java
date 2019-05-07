@@ -11,28 +11,37 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Detector for all colors to be processed
+ * @author Melchor Dominguez
+ */
 public class ColorBlobDetector {
-    // Lower and Upper bounds for range checking in HSV color space
+    /** Lower and Upper bounds for range checking in HSV color space **/
     private Scalar mLowerBound = new Scalar(0);
     private Scalar mUpperBound = new Scalar(0);
-    // Minimum contour area in percent for contours filtering
+    /** Minimum contour area in percent for contours filtering */
     private static double mMinContourArea = 0.1;
-    // Color radius for range checking in HSV color space
+    /** Color radius for range checking in HSV color space */
     private Scalar mColorRadius = new Scalar(25,50,50,0);
     private Mat mSpectrum = new Mat();
     private List<MatOfPoint> mContours = new ArrayList<MatOfPoint>();
 
-    // Cache
+    /** Cache */
     Mat mPyrDownMat = new Mat();
     Mat mHsvMat = new Mat();
     Mat mMask = new Mat();
     Mat mDilatedMask = new Mat();
     Mat mHierarchy = new Mat();
 
+    /** Sets a color radius if only expecting a certain color */
     public void setColorRadius(Scalar radius) {
         mColorRadius = radius;
     }
 
+    /**
+     * Determine the hsv value for the color
+     * @param hsvColor - scalar which will become the new hsv values
+     */
     public void setHsvColor(Scalar hsvColor) {
         double minH = (hsvColor.val[0] >= mColorRadius.val[0]) ? hsvColor.val[0]-mColorRadius.val[0] : 0;
         double maxH = (hsvColor.val[0]+mColorRadius.val[0] <= 255) ? hsvColor.val[0]+mColorRadius.val[0] : 255;
@@ -59,14 +68,26 @@ public class ColorBlobDetector {
         Imgproc.cvtColor(spectrumHsv, mSpectrum, Imgproc.COLOR_HSV2RGB_FULL, 4);
     }
 
+    /**
+     * Receive the entire spectrum of colors detected
+     * @return - spectrum
+     */
     public Mat getSpectrum() {
         return mSpectrum;
     }
 
+    /**
+     * Set the minimum area to evaluate contours
+     * @param area - double holding the area
+     */
     public void setMinContourArea(double area) {
         mMinContourArea = area;
     }
 
+    /**
+     * process the given image
+     * @param rgbaImage - current image given by outside source
+     */
     public void process(Mat rgbaImage) {
         Imgproc.pyrDown(rgbaImage, mPyrDownMat);
         Imgproc.pyrDown(mPyrDownMat, mPyrDownMat);
@@ -102,6 +123,10 @@ public class ColorBlobDetector {
         }
     }
 
+    /**
+     * Get all contours evaluated
+     * @return - contours
+     */
     public List<MatOfPoint> getContours() {
         return mContours;
     }

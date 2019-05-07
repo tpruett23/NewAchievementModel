@@ -99,7 +99,6 @@ public class MainMenu extends AppCompatActivity implements OnClickListener {
                 startActivity(i);
                 return true;
            /* case R.id.action_cam:
-                i = new Intent(this, QRScan.class);
                 startActivity(i);*/
                 //return true;
             case R.id.Settings:

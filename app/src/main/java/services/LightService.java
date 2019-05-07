@@ -110,7 +110,7 @@ public class LightService extends Service {
 
         return START_STICKY;
     }
-`   /**
+   /**
      * The method is called when the service is destroyed.
      */
     public void onDestroy(){

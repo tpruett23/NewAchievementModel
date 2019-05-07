@@ -183,7 +183,7 @@ public class TrailSystem {
     }
     /**
      * Adds an event using an inputstream.
-     * @param inputstream the input stream.
+     * @param inputStream the input stream.
      */
     public void addEvent(InputStream inputStream){
         currentTrail.addEvent(inputStream);

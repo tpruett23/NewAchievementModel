@@ -201,16 +201,21 @@ public class Trail {
         if(events.isEmpty())
             return false;
         LatLng top = events.peek().getPoint();
-        if(measure(top, latLng) < 20){
+        if(measure(top, latLng) < 20){ //checks if within 20 meters
             return true;
         }
-        return true; //change back to false
+        return true; //TODO: change back to false for correct check
     }
 
+    /**
+     * Will return the next story event
+     * @return - story event
+     */
     public StoryEvent getEvent(){
         return events.pop().getEvent();
     }
-`   /**
+
+   /**
      * Measures how far away the traveler is from a trail point to see it is picked up they
      * are on the trail.
      * @param first The first location.
