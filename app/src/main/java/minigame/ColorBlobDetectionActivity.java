@@ -25,7 +25,10 @@ import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 import java.util.List;
-
+/**
+ * The class is an activity that detects what color is on the screen.
+ * @author Melchor Dominguez
+ */
 public class ColorBlobDetectionActivity extends Activity implements View.OnTouchListener, CameraBridgeViewBase.CvCameraViewListener2 {
     private static final String TAG = "color-detection";
 
@@ -256,12 +259,18 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
 
         return mRgba;
     }
-
+    /**
+     * Sets limits on what scalar value is the upper and lower limit.
+     * @param lowerLimit The lowerLimit
+     * @param upperLimit The upperLimit
+     */
     private void setLimits(Scalar lowerLimit, Scalar upperLimit){
         this.lowerLimit = lowerLimit;
         this.upperLimit = upperLimit;
     }
-
+    /**
+     * Checks the blob color against the limits.
+     */
     private boolean checkLimit(){
         for(int i = 0; i< mBlobColorHsv.val.length; i++){
             if(mBlobColorHsv.val[i] > upperLimit.val[i] || mBlobColorHsv.val[i] < lowerLimit.val[i])
@@ -269,7 +278,10 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
         }
         return true;
     }
-
+    /**
+     * Checks the values for the color green.
+     * @return true if green.
+     */
     private boolean checkGreen(){
         double sensitivity = 40;
         if(mBlobColorHsv.val[0] > 60 + sensitivity || mBlobColorHsv.val[0] < 60 - sensitivity){
@@ -280,7 +292,9 @@ public class ColorBlobDetectionActivity extends Activity implements View.OnTouch
         }
         return !(mBlobColorHsv.val[2] > 255) && !(mBlobColorHsv.val[2] < 100);
     }
-
+    /**
+     * Converts rgba to a new Scalar value.
+     */
     private Scalar convertScalarHsv2Rgba(Scalar hsvColor) {
         Mat pointMatRgba = new Mat();
         Mat pointMatHsv = new Mat(1, 1, CvType.CV_8UC3, hsvColor);
